@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '/config/size_config.dart';
+import '/domain/parse_pc_parts.dart';
 
 void main() {
   runApp(const MyApp());
@@ -56,7 +57,9 @@ class parts_cell extends StatelessWidget {
     return Column(
       children: [
         GestureDetector(
-            onTap: () {},
+            onTap: () {
+              //BaseParser().fetchPartsList('https://kakaku.com/search_results/%83O%83%89%83t%83B%83b%83N%83%7B%81%5B%83h/?category=0001');
+            },
             child: Container(
               padding: EdgeInsets.all(SizeConfig.blockSizeHorizontal * 1,),
               height: 160,
