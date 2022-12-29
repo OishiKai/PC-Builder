@@ -1,20 +1,24 @@
 class Pcparts {
   final String maker;
-  final bool is_new;
+  final bool isNew;
   final String title;
-  final int evaluation;
-  final int number_of_rated;
-  final int price;
-  final int ranked;
+  final int? star;
+  final String? evaluation;
+  final String price;
+  final String ranked;
+  final String image;
+  final String detailUrl;
 
   Pcparts(
       this.maker,
-      this.is_new,
+      this.isNew,
       this.title,
+      this.star,
       this.evaluation,
-      this.number_of_rated,
       this.price,
       this.ranked,
+      this.image,
+      this.detailUrl,
       );
 }
 
