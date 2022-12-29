@@ -1,3 +1,4 @@
+import 'package:custom_pc/views/parts_detail.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -6,10 +7,10 @@ import '../models/pc_parts.dart';
 
 class partsListCell extends StatelessWidget {
   partsListCell(this.parts, {Key? key}) : super(key: key);
-  Pcparts parts;
+  PcParts parts;
   List<Icon> stars = [];
 
-  List<Icon> describeStars (Pcparts parts){
+  List<Icon> describeStars (PcParts parts){
     const fullStar = Icon(
       Icons.star,
       color: Colors.orange,
@@ -60,8 +61,16 @@ class partsListCell extends StatelessWidget {
     return Column(
       children: [
         GestureDetector(
-            onTap: () {
-
+            onTap: () async {
+              final bool? selected = await Navigator.push(
+                  context,
+                  PageRouteBuilder(
+                    pageBuilder: (context, animation, secondaryAnimation) => DetailPartsPage(parts),
+                    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                      return CupertinoPageTransition(primaryRouteAnimation: animation, secondaryRouteAnimation: secondaryAnimation, linearTransition: false, child: child);
+                    }
+                  ),
+              );
             },
             child: Container(
               padding: EdgeInsets.all(SizeConfig.blockSizeHorizontal * 1,),

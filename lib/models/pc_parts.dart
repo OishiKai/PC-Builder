@@ -1,4 +1,4 @@
-class Pcparts {
+class PcParts {
   final String maker;
   final bool isNew;
   final String title;
@@ -9,7 +9,7 @@ class Pcparts {
   final String image;
   final String detailUrl;
 
-  Pcparts(
+  PcParts(
       this.maker,
       this.isNew,
       this.title,
