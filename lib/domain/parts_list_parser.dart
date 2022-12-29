@@ -38,15 +38,21 @@ class PartsListParser extends BaseParser {
   // 詳細ページURL
   static const _detailUrlSelector = 'div.c-positioning_cell.p-result_item_cell-1 > div.c-positioning.s-biggerlink.is-biggerlinkHot.p-item > p > a';
 
-  final String tergetUrl;
+  final String targetUrl;
+  Document? document;
 
-  PartsListParser(this.tergetUrl);
+  PartsListParser._(this.targetUrl);
 
-  Future<List<Pcparts>> setUpViews() async {
-    final document = await super.fetchDocument(tergetUrl);
-    final elementList = document.querySelectorAll(_listSelector);
+   static Future<PartsListParser> create(String url) async {
+     final self = PartsListParser._(url);
+     self.document = await self.fetchDocument(url);
+     return self;
+  }
 
-    List<Pcparts> partsList = [];
+  List<PcParts> setUpViews() {
+    final elementList = document!.querySelectorAll(_listSelector);
+
+    List<PcParts> partsList = [];
     for (var element in elementList) {
       final maker = element.querySelectorAll(_makerSelector)[0].text;
 
@@ -70,13 +76,8 @@ class PartsListParser extends BaseParser {
       final image = _trimImageUrl(element.querySelectorAll(_imageUrlSelector)[0].text);
       final detailUrl = element.querySelectorAll(_detailUrlSelector)[0].attributes['href'];
 
-      partsList.add(Pcparts(maker,isNew,title,star,eva,price!,rank!,image,detailUrl!));
+      partsList.add(PcParts(maker,isNew,title,star,eva,price!,rank!,image,detailUrl!));
     }
-
-    print(partsList.length);
-    partsList.forEach((element) {
-      print(element.detailUrl);
-    });
 
     return partsList;
   }
@@ -99,7 +100,6 @@ class PartsListParser extends BaseParser {
     }
 
     if (star == null && evaluation == null) { return null; }
-    
     return {'star':star, 'evaluation':evaluation!.trim()};
   }
 
