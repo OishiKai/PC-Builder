@@ -1,8 +1,8 @@
-import 'package:custom_pc/domain/parse_partsList.dart';
+import 'package:custom_pc/domain/parts_list_parser.dart';
 import 'package:custom_pc/views/parts_list_cell.dart';
 import 'package:flutter/material.dart';
 import '/config/size_config.dart';
-import '../models/pc_parts.dart';
+import 'models/pc_parts.dart';
 
 void main() {
   runApp(const MyApp());
@@ -28,11 +28,11 @@ class scrapeParts extends StatefulWidget {
 
 class _scrapePartsState extends State<scrapeParts> {
   String partsListUrl = 'https://kakaku.com/search_results/%83O%83%89%83t%83B%83b%83N%83%7B%81%5B%83h/?category=0001%2C0028&act=Suggest';
-  List<Pcparts> partsList = [];
+  List<PcParts> partsList = [];
 
   Future<void> fetchPartsList(String url) async{
-    final parser = PartsListParser(url);
-    partsList = await parser.setUpViews();
+    final parser = await PartsListParser.create(url);
+    partsList = parser.setUpViews();
     setState(() {});
   }
 
@@ -49,14 +49,7 @@ class _scrapePartsState extends State<scrapeParts> {
 
     return Scaffold(
       
-      appBar: AppBar(
-        title: TextFormField(
-          decoration: InputDecoration(
-            fillColor: Colors.white,
-            filled: true,
-          ),
-        ),
-      ),
+      appBar: AppBar(),
 
       body: ListView.builder(
           padding: EdgeInsets.all(SizeConfig.blockSizeHorizontal * 1,),
