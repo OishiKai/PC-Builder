@@ -1,3 +1,4 @@
+import 'package:custom_pc/domain/detail_parser.dart';
 import 'package:custom_pc/views/parts_detail.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -62,10 +63,11 @@ class partsListCell extends StatelessWidget {
       children: [
         GestureDetector(
             onTap: () async {
+              final detail = await DetailParser.create(parts);
               final bool? selected = await Navigator.push(
                   context,
                   PageRouteBuilder(
-                    pageBuilder: (context, animation, secondaryAnimation) => DetailPartsPage(parts),
+                    pageBuilder: (context, animation, secondaryAnimation) => DetailPartsPage(parts, detail),
                     transitionsBuilder: (context, animation, secondaryAnimation, child) {
                       return CupertinoPageTransition(primaryRouteAnimation: animation, secondaryRouteAnimation: secondaryAnimation, linearTransition: false, child: child);
                     }
