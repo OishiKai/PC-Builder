@@ -76,7 +76,7 @@ class partsListCell extends StatelessWidget {
             },
             child: Container(
               padding: EdgeInsets.all(SizeConfig.blockSizeHorizontal * 1,),
-              height: 140,
+              height: 142,
               decoration: BoxDecoration(
                 color: Colors.white,
               ),
