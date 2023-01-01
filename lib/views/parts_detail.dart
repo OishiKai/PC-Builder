@@ -36,7 +36,7 @@ class _DetailPartsPageState extends State<DetailPartsPage> {
                       color: Colors.grey[200],
                     ),
                     alignment: Alignment.centerLeft,
-                    padding: EdgeInsets.only(left: 16),
+                    padding: const EdgeInsets.only(left: 16),
                     child: Row(
                       children: [
                         Text(
@@ -68,20 +68,64 @@ class _DetailPartsPageState extends State<DetailPartsPage> {
                   ),
                   Container(
                     width: double.infinity,
-                    height: 60,
-                    decoration: BoxDecoration(
+                    height: 40,
+                    padding: const EdgeInsets.only(left: 16),
+                    decoration: const BoxDecoration(
                       color: Colors.white10,
                     ),
-                    alignment: Alignment.centerRight,
-                    padding: EdgeInsets.all(16),
-                    child: Text(
-                        '¥155,999',
-                      style: TextStyle(
-                        color: Colors.red,
-                        fontSize: 32
-                      ),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Text(
+                            '¥155,999',
+                          style: TextStyle(
+                            color: Colors.red,
+                            fontSize: 32
+                          ),
+                        ),
+                        const SizedBox(width: 10,),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text('(最安値)'),
+                            Row(
+                              children: [
+                                Text(
+                                  '前週比：',
+                                  style: TextStyle(
+                                      fontSize: 12
+                                  ),
+                                ),
+                                Text(
+                                  '-151円↓',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: Colors.red,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
                   ),
+                  Container(
+                    width: double.infinity,
+                    height: 80,
+                    decoration: BoxDecoration(
+                      color: Colors.red,
+                    ),
+                    padding: EdgeInsets.all(Sizecon),
+                    child: Row(
+                      children: [
+                        Container(
+                          width: SizeConfig.blockSizeHorizontal * ,
+                        )
+                      ],
+                    ),
+                  )
                 ],
             ),
         ),
