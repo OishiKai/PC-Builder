@@ -6,13 +6,13 @@ class DetailParser extends BaseParser {
   static const _fullScaleImageSelector = '#main > div.alignC > div > table > tbody > tr > td > a > img';
   PcParts targetParts;
   Document? document;
-  List<String>? fullScaleimages;
+  List<String> fullScaleImages = [];
 
   DetailParser._(this.targetParts);
 
   static Future<DetailParser> create(PcParts parts) async {
     final self = DetailParser._(parts);
-    self.fullScaleimages = await self._getFullScaleImageUrls(self.targetParts.detailUrl);
+    self.fullScaleImages = (await self._getFullScaleImageUrls(parts.detailUrl))!;
     return self;
   }
 
@@ -20,7 +20,7 @@ class DetailParser extends BaseParser {
     List<String> imageUrls = [];
     final baseImageUrl = detailUrl.replaceFirst('?lid=pc_ksearch_kakakuitem', 'images/');
     final multiImageUrl = '${baseImageUrl}page=ka_';
-    int ite = 1;
+    int ite = 0;
 
     while (true) {
       //　1枚目だけURLが異なる為分岐
