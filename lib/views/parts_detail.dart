@@ -5,6 +5,7 @@ import 'package:custom_pc/models/pc_parts_detail.dart';
 import 'package:custom_pc/views/full_scale_image_slider.dart';
 import 'package:flutter/material.dart';
 
+import '../config/size_config.dart';
 import '../models/pc_parts.dart';
 
 class DetailPartsPage extends StatefulWidget {
@@ -28,7 +29,53 @@ class _DetailPartsPageState extends State<DetailPartsPage> {
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  FullScaleImageSlider(widget.parser),
+                  Stack(
+                      children: [
+                        FullScaleImageSlider(widget.parser),
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: Column(
+                            children: [
+                              SizedBox(height: 8,),
+                              Row(
+                                children: [
+                                  SizedBox(width: 8,),
+                                  Container(
+                                    height: 30,
+                                    alignment: Alignment.topLeft,
+                                    child: ElevatedButton(
+                                      onPressed: (){},
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: Colors.orange,
+                                      ),
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        children: [
+                                          const Icon(
+                                            Icons.leaderboard_rounded,
+                                            color: Colors.white,
+                                            size: 20,
+                                          ),
+                                          SizedBox(width: 8,),
+                                          Text(
+                                            '${widget.targetParts.ranked}位',
+                                            style: const TextStyle(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white,
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                  ),
                   Container(
                     width: double.infinity,
                     height: 30,
@@ -40,31 +87,27 @@ class _DetailPartsPageState extends State<DetailPartsPage> {
                     child: Row(
                       children: [
                         Text(
-                          'ASRock',
+                          widget.targetParts.maker,
                         ),
                       ],
                     ),
                   ),
                   Container(
                     width: double.infinity,
-                    height: 112,
-                    padding: EdgeInsets.all(16),
+                    padding: EdgeInsets.only(top: 8,left: 16, right: 16,bottom: 8),
                     decoration: BoxDecoration(
                       color: Colors.grey[100],
+                      //color: Colors.red,
                     ),
                     alignment: Alignment.center,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          'PowerColor Red Devil AMD Radeon RX 7900 XTX 24GB GDDR6 Limited Edition RX7900XTX 24G-E/OC/LIMITED [PCIExp 24GB]',
+                    child: Text(
+                          widget.targetParts.title,
+                          maxLines: 3,
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                      ],
-                    ),
                   ),
                   Container(
                     width: double.infinity,
@@ -77,8 +120,8 @@ class _DetailPartsPageState extends State<DetailPartsPage> {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         Text(
-                            '¥155,999',
-                          style: TextStyle(
+                            widget.targetParts.price.replaceFirst(' ～', ''),
+                          style: const TextStyle(
                             color: Colors.red,
                             fontSize: 32
                           ),
@@ -90,7 +133,7 @@ class _DetailPartsPageState extends State<DetailPartsPage> {
                           children: [
                             const Text('(最安値)'),
                             Row(
-                              children: [
+                              children: const [
                                 Text(
                                   '前週比：',
                                   style: TextStyle(
@@ -111,26 +154,9 @@ class _DetailPartsPageState extends State<DetailPartsPage> {
                       ],
                     ),
                   ),
-                  Container(
-                    width: double.infinity,
-                    height: 80,
-                    decoration: BoxDecoration(
-                      color: Colors.red,
-                    ),
-                    padding: EdgeInsets.all(Sizecon),
-                    child: Row(
-                      children: [
-                        Container(
-                          width: SizeConfig.blockSizeHorizontal * ,
-                        )
-                      ],
-                    ),
-                  )
                 ],
             ),
         ),
       );
   }
-
-
 }
