@@ -4,6 +4,8 @@ import 'package:html/dom.dart';
 import '../models/pc_parts.dart';
 class DetailParser extends BaseParser {
   static const _fullScaleImageSelector = '#main > div.alignC > div > table > tbody > tr > td > a > img';
+  static const _fullScaleFirstImageSelector = '#main > div.alignC > div > table > tbody > tr > td > img';
+
   PcParts targetParts;
   Document? document;
   List<String> fullScaleImages = [];
@@ -13,6 +15,7 @@ class DetailParser extends BaseParser {
   static Future<DetailParser> create(PcParts parts) async {
     final self = DetailParser._(parts);
     self.fullScaleImages = (await self._getFullScaleImageUrls(parts.detailUrl))!;
+    self.document = await self.fetchDocument(parts.detailUrl);
     return self;
   }
 
@@ -25,10 +28,15 @@ class DetailParser extends BaseParser {
     while (true) {
       //　1枚目だけURLが異なる為分岐
       if (ite == 0) {
-        final firstImageDoc = await fetchDocument(baseImageUrl);
-        final firstImage = firstImageDoc.querySelectorAll(_fullScaleImageSelector);
 
-        if (firstImage.isEmpty) { return null; }
+        final firstImageDoc = await fetchDocument(baseImageUrl);
+        List<Element> firstImage = firstImageDoc.querySelectorAll(_fullScaleFirstImageSelector);
+
+        if (firstImage.isEmpty) {
+          firstImage = firstImageDoc.querySelectorAll(_fullScaleImageSelector);
+          if (firstImage.isEmpty) { return null; }
+        }
+
         imageUrls.add(firstImage[0].attributes['src']!);
         ite += 1;
         continue;
@@ -47,5 +55,7 @@ class DetailParser extends BaseParser {
     });
     return imageUrls;
   }
+
+
 
 }
