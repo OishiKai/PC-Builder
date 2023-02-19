@@ -123,6 +123,10 @@ final partsListFutureProvider = FutureProvider(
     }
 );
 
+final partsListProvider = StateProvider((ref) {
+  return ref.watch(partsListFutureProvider).value;
+});
+
 
 class PartsListPage extends ConsumerWidget {
   const PartsListPage(this.partsListUrl);
@@ -146,8 +150,8 @@ class PartsListPage extends ConsumerWidget {
           padding: EdgeInsets.all(SizeConfig.blockSizeHorizontal * 1,),
           itemCount: partsList.length,
           itemBuilder: (BuildContext context, int index) {
-            final cell = partsListCell(partsList[index]);
-            cell.stars = cell.describeStars(cell.parts);
+            final cell = partsListCell(index);
+            cell.stars = cell.describeStars(ref.watch(partsListFutureProvider).value![index]);
             return cell;
           }
       ),

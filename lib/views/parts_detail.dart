@@ -1,29 +1,31 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:custom_pc/domain/base_parser.dart';
 import 'package:custom_pc/domain/detail_parser.dart';
+import 'package:custom_pc/main.dart';
 import 'package:custom_pc/models/pc_parts_detail.dart';
 import 'package:custom_pc/views/full_scale_image_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../config/size_config.dart';
 import '../models/pc_parts.dart';
 
-class DetailPartsPage extends StatefulWidget {
-  DetailPartsPage(this.targetParts, this.parser, {Key? key}) : super(key: key);
-  PcParts targetParts;
-  DetailParser parser;
-
-  @override
-  State<DetailPartsPage> createState() => _DetailPartsPageState();
-}
-
-class _DetailPartsPageState extends State<DetailPartsPage> {
+class DetailPartsPage extends ConsumerWidget {
+  DetailPartsPage(this.partsListIndex, {Key? key}) : super(key: key);
+  //PcParts targetParts;
+  int partsListIndex;
+  //DetailParser parser;
   int activeIndex = 0;
 
   @override
-  Widget build(BuildContext context) {
-    setState(() {});
+  Widget build(BuildContext context, WidgetRef ref) {
+    SizeConfig().init(context);
+    final listProvider = ref.watch(partsListProvider);
+    if (listProvider == null) {
+      return Scaffold();
+    }
+    final targetParts = listProvider[partsListIndex];
     return Scaffold(
         appBar: AppBar(),
         body: SingleChildScrollView(
@@ -33,7 +35,7 @@ class _DetailPartsPageState extends State<DetailPartsPage> {
                   children: [
                     Stack(
                         children: [
-                          FullScaleImageSlider(widget.parser),
+                          FullScaleImageSlider(targetParts.fullScaleImages!),
                           Align(
                             alignment: Alignment.topLeft,
                             child: Column(
@@ -60,7 +62,7 @@ class _DetailPartsPageState extends State<DetailPartsPage> {
                                             ),
                                             SizedBox(width: 8,),
                                             Text(
-                                              '${widget.targetParts.ranked}位',
+                                              '${targetParts.ranked}位',
                                               style: const TextStyle(
                                                 fontSize: 20,
                                                 fontWeight: FontWeight.bold,
@@ -89,7 +91,7 @@ class _DetailPartsPageState extends State<DetailPartsPage> {
                       child: Row(
                         children: [
                           Text(
-                            widget.targetParts.maker,
+                            targetParts.maker,
                           ),
                         ],
                       ),
@@ -103,7 +105,7 @@ class _DetailPartsPageState extends State<DetailPartsPage> {
                       ),
                       alignment: Alignment.center,
                       child: Text(
-                            widget.targetParts.title,
+                            targetParts.title,
                             maxLines: 4,
                             style: TextStyle(
                               fontSize: 20,
@@ -122,7 +124,7 @@ class _DetailPartsPageState extends State<DetailPartsPage> {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           Text(
-                              widget.targetParts.price.replaceFirst(' ～', ''),
+                              targetParts.price.replaceFirst(' ～', ''),
                             style: const TextStyle(
                               color: Colors.red,
                               fontSize: 32

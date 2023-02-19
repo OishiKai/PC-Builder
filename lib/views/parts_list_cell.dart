@@ -1,14 +1,16 @@
 import 'package:custom_pc/domain/detail_parser.dart';
+import 'package:custom_pc/main.dart';
 import 'package:custom_pc/views/parts_detail.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../config/size_config.dart';
 import '../models/pc_parts.dart';
 
-class partsListCell extends StatelessWidget {
-  partsListCell(this.parts, {Key? key}) : super(key: key);
-  PcParts parts;
+class partsListCell extends ConsumerWidget {
+  partsListCell(this.partsListIndex, {Key? key}) : super(key: key);
+  int partsListIndex;
   List<Icon> stars = [];
 
   List<Icon> describeStars (PcParts parts){
@@ -58,17 +60,32 @@ class partsListCell extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     SizeConfig().init(context);
+    PcParts? parts;
+    final listProvider = ref.watch(partsListProvider);
+    if (listProvider == null) {
+      return Scaffold();
+    }
+
+    parts = listProvider[partsListIndex];
+    describeIdentity(parts);
     return Column(
       children: [
         GestureDetector(
             onTap: () async {
-              final detail = await DetailParser.create(parts);
+              if (parts!.dataFiled == FilledDataProgress.filledForList) {
+                final detail = await DetailParser.create(parts);
+                parts.fullScaleImages = detail.fullScaleImages;
+                parts.dataFiled = FilledDataProgress.filledForDetail;
+                listProvider[partsListIndex] = parts;
+                ref.watch(partsListProvider.notifier).update((state) => listProvider);
+              }
+
               final bool? selected = await Navigator.push(
                   context,
                   PageRouteBuilder(
-                    pageBuilder: (context, animation, secondaryAnimation) => DetailPartsPage(parts, detail),
+                    pageBuilder: (context, animation, secondaryAnimation) => DetailPartsPage(partsListIndex),
                     transitionsBuilder: (context, animation, secondaryAnimation, child) {
                       return CupertinoPageTransition(primaryRouteAnimation: animation, secondaryRouteAnimation: secondaryAnimation, linearTransition: false, child: child);
                     }
