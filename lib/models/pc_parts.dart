@@ -1,4 +1,6 @@
 class PcParts {
+  FilledDataProgress dataFiled = FilledDataProgress.filledForList;
+
   final String maker;
   final bool isNew;
   final String title;
@@ -8,6 +10,8 @@ class PcParts {
   final String ranked;
   final String image;
   final String detailUrl;
+
+  List<String>? fullScaleImages;
 
   PcParts(
       this.maker,
@@ -20,6 +24,16 @@ class PcParts {
       this.image,
       this.detailUrl,
       );
+
+  void updateProgress() {
+    if (fullScaleImages != null) {
+      dataFiled = FilledDataProgress.filledForDetail;
+    }
+  }
 }
 
+enum FilledDataProgress {
+  filledForList,
+  filledForDetail,
+}
 

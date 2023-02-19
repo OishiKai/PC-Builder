@@ -1,11 +1,13 @@
 import 'package:custom_pc/domain/parts_list_parser.dart';
 import 'package:custom_pc/views/parts_list_cell.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '/config/size_config.dart';
 import 'models/pc_parts.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -14,41 +16,130 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: scrapeParts(),
+      home: RootPage(),
     );
   }
 }
 
-class scrapeParts extends StatefulWidget {
-  const scrapeParts({Key? key}) : super(key: key);
+// final partsListProvider = StateProvider((ref)  {
+//   List<PcParts> partsList = [];
+//   return partsList;
+// });
+//
+//
+// class scrapeParts extends StatefulWidget {
+//   const scrapeParts({Key? key}) : super(key: key);
+//
+//   @override
+//   State<scrapeParts> createState() => _scrapePartsState();
+// }
+//
+// class _scrapePartsState extends State<scrapeParts> {
+//   String partsListUrl = 'https://kakaku.com/search_results/%83O%83%89%83t%83B%83b%83N%83%7B%81%5B%83h/?category=0001%2C0028&act=Suggest';
+//   List<PcParts> partsList = [];
+//   Future<void> fetchPartsList(String url) async{
+//     final parser = await PartsListParser.create(url);
+//     partsList = parser.setUpViews();
+//   }
+//
+//   @override
+//   void initState() {
+//     super.initState();
+//     fetchPartsList(partsListUrl);
+//   }
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return PartsList(partsList);
+//   }
+// }
+//
+// class PartsList extends ConsumerWidget {
+//   final List<PcParts> fetchedPartsList;
+//   PartsList(this.fetchedPartsList);
+//
+//   @override
+//   Widget build(BuildContext context, WidgetRef ref) {
+//     SizeConfig().init(context);
+//     final partsList = ref.watch(partsListProvider);
+//     final partsListStateController = ref.read(partsListProvider.notifier);
+//
+//     partsListStateController.update((state) => fetchedPartsList);
+//     return Scaffold(
+//
+//       appBar: AppBar(),
+//
+//       body: ListView.builder(
+//           padding: EdgeInsets.all(SizeConfig.blockSizeHorizontal * 1,),
+//           itemCount: partsList.length,
+//           itemBuilder: (BuildContext context, int index) {
+//             final cell = partsListCell(partsList[index]);
+//             cell.stars = cell.describeStars(cell.parts);
+//             return cell;
+//           }
+//       ),
+//     );
+//   }
+// }
+class RootPage extends ConsumerWidget {
+  const RootPage({Key? key}) : super(key: key);
 
   @override
-  State<scrapeParts> createState() => _scrapePartsState();
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Scaffold(
+
+      appBar: AppBar(),
+
+      body: ElevatedButton(
+        onPressed: () async {
+          final partsListUrl = 'https://kakaku.com/search_results/%83O%83%89%83t%83B%83b%83N%83%7B%81%5B%83h/?category=0001%2C0028&act=Suggest';
+          final tergetUrlProviderController = ref.watch(targetUrlProvider.notifier);
+          tergetUrlProviderController.update((state) => partsListUrl);
+          final bool? selected = await Navigator.push(
+            context,
+            PageRouteBuilder(
+                pageBuilder: (context, animation, secondaryAnimation) => PartsListPage(partsListUrl),
+                transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                  return CupertinoPageTransition(primaryRouteAnimation: animation, secondaryRouteAnimation: secondaryAnimation, linearTransition: false, child: child);
+                }
+            ),
+          );
+        },
+        child: Text("検索する"),
+      ),
+    );
+  }
 }
 
-class _scrapePartsState extends State<scrapeParts> {
-  String partsListUrl = 'https://kakaku.com/search_results/%83O%83%89%83t%83B%83b%83N%83%7B%81%5B%83h/?category=0001%2C0028&act=Suggest';
-  List<PcParts> partsList = [];
+final targetUrlProvider = StateProvider((ref) {
+  return "";
+});
 
-  Future<void> fetchPartsList(String url) async{
-    final parser = await PartsListParser.create(url);
-    partsList = parser.setUpViews();
-    setState(() {});
-  }
+final partsListFutureProvider = FutureProvider(
+    (ref) async {
+      final parser = await PartsListParser.create(ref.watch(targetUrlProvider));
+      final fetchdPartsList = parser.setUpViews();
+      return fetchdPartsList;
+    }
+);
+
+
+class PartsListPage extends ConsumerWidget {
+  const PartsListPage(this.partsListUrl);
+  final String partsListUrl;
 
   @override
-  void initState() {
-    super.initState();
-    fetchPartsList(partsListUrl);
-    print(partsList.length);
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     SizeConfig().init(context);
+    List<PcParts> partsList = [];
+    final partsListProvider = ref.watch(partsListFutureProvider);
+    if (partsListProvider.value != null) {
+      partsList = partsListProvider.value!;
+    }
+
 
     return Scaffold(
-      
+
       appBar: AppBar(),
 
       body: ListView.builder(
@@ -63,4 +154,3 @@ class _scrapePartsState extends State<scrapeParts> {
     );
   }
 }
-

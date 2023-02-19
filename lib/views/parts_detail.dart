@@ -3,6 +3,7 @@ import 'package:custom_pc/domain/base_parser.dart';
 import 'package:custom_pc/domain/detail_parser.dart';
 import 'package:custom_pc/models/pc_parts_detail.dart';
 import 'package:custom_pc/views/full_scale_image_slider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../config/size_config.dart';
@@ -25,137 +26,224 @@ class _DetailPartsPageState extends State<DetailPartsPage> {
     setState(() {});
     return Scaffold(
         appBar: AppBar(),
-        body: Center(
-            child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Stack(
-                      children: [
-                        FullScaleImageSlider(widget.parser),
-                        Align(
-                          alignment: Alignment.topLeft,
-                          child: Column(
-                            children: [
-                              SizedBox(height: 8,),
-                              Row(
-                                children: [
-                                  SizedBox(width: 8,),
-                                  Container(
-                                    height: 30,
-                                    alignment: Alignment.topLeft,
-                                    child: ElevatedButton(
-                                      onPressed: (){},
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: Colors.orange,
-                                      ),
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.start,
-                                        children: [
-                                          const Icon(
-                                            Icons.leaderboard_rounded,
-                                            color: Colors.white,
-                                            size: 20,
-                                          ),
-                                          SizedBox(width: 8,),
-                                          Text(
-                                            '${widget.targetParts.ranked}位',
-                                            style: const TextStyle(
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.bold,
+        body: SingleChildScrollView(
+          child: Center(
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Stack(
+                        children: [
+                          FullScaleImageSlider(widget.parser),
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Column(
+                              children: [
+                                SizedBox(height: 8,),
+                                Row(
+                                  children: [
+                                    SizedBox(width: 8,),
+                                    Container(
+                                      height: 30,
+                                      alignment: Alignment.topLeft,
+                                      child: ElevatedButton(
+                                        onPressed: (){},
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: Colors.orange,
+                                        ),
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          children: [
+                                            const Icon(
+                                              Icons.leaderboard_rounded,
                                               color: Colors.white,
+                                              size: 20,
                                             ),
-                                          )
-                                        ],
+                                            SizedBox(width: 8,),
+                                            Text(
+                                              '${widget.targetParts.ranked}位',
+                                              style: const TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.white,
+                                              ),
+                                            )
+                                          ],
+                                        ),
                                       ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                    ),
+                    Container(
+                      width: double.infinity,
+                      height: 30,
+                      decoration: BoxDecoration(
+                        color: Colors.grey[200],
+                      ),
+                      alignment: Alignment.centerLeft,
+                      padding: const EdgeInsets.only(left: 16),
+                      child: Row(
+                        children: [
+                          Text(
+                            widget.targetParts.maker,
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      width: double.infinity,
+                      padding: EdgeInsets.only(top: 8,left: 16, right: 16,bottom: 8),
+                      decoration: BoxDecoration(
+                        color: Colors.grey[100],
+                        //color: Colors.red,
+                      ),
+                      alignment: Alignment.center,
+                      child: Text(
+                            widget.targetParts.title,
+                            maxLines: 4,
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                    ),
+                    Container(
+                      width: double.infinity,
+                      height: 40,
+                      padding: const EdgeInsets.only(left: 16),
+                      decoration: const BoxDecoration(
+                        color: Colors.white10,
+                      ),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Text(
+                              widget.targetParts.price.replaceFirst(' ～', ''),
+                            style: const TextStyle(
+                              color: Colors.red,
+                              fontSize: 32
+                            ),
+                          ),
+                          const SizedBox(width: 10,),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text('(最安値)'),
+                              Row(
+                                children: const [
+                                  Text(
+                                    '前週比：',
+                                    style: TextStyle(
+                                        fontSize: 12
+                                    ),
+                                  ),
+                                  Text(
+                                    '-151円↓',
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      color: Colors.red,
                                     ),
                                   ),
                                 ],
                               ),
                             ],
                           ),
-                        )
-                      ],
-                  ),
-                  Container(
-                    width: double.infinity,
-                    height: 30,
-                    decoration: BoxDecoration(
-                      color: Colors.grey[200],
+                        ],
+                      ),
                     ),
-                    alignment: Alignment.centerLeft,
-                    padding: const EdgeInsets.only(left: 16),
-                    child: Row(
-                      children: [
-                        Text(
-                          widget.targetParts.maker,
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    width: double.infinity,
-                    padding: EdgeInsets.only(top: 8,left: 16, right: 16,bottom: 8),
-                    decoration: BoxDecoration(
-                      color: Colors.grey[100],
-                      //color: Colors.red,
-                    ),
-                    alignment: Alignment.center,
-                    child: Text(
-                          widget.targetParts.title,
-                          maxLines: 3,
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                  ),
-                  Container(
-                    width: double.infinity,
-                    height: 40,
-                    padding: const EdgeInsets.only(left: 16),
-                    decoration: const BoxDecoration(
-                      color: Colors.white10,
-                    ),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Text(
-                            widget.targetParts.price.replaceFirst(' ～', ''),
-                          style: const TextStyle(
-                            color: Colors.red,
-                            fontSize: 32
-                          ),
-                        ),
-                        const SizedBox(width: 10,),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                    Container(
+                      width: double.infinity,
+                      padding: EdgeInsets.all(8),
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
                           children: [
-                            const Text('(最安値)'),
-                            Row(
-                              children: const [
-                                Text(
-                                  '前週比：',
-                                  style: TextStyle(
-                                      fontSize: 12
+                            for (var i = 0; i < 10; i++)
+                              i.isEven ? Container(
+                                width: SizeConfig.blockSizeHorizontal * 2,
+                                height: 52,
+                              ) : GestureDetector(
+                                onTap: (){
+                                  print('onTap');
+                                },
+                                child: Container(
+                                  //width: SizeConfig.blockSizeHorizontal * 50,
+                                  height: 52,
+                                  decoration: BoxDecoration(
+                                    color: Colors.grey[100],
+                                    borderRadius: BorderRadius.circular(10),
+                                    border: Border.all(color: Colors.grey),
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                          // decoration: BoxDecoration(
+                                          //   color: Colors.grey[200],
+                                          //   borderRadius: BorderRadius.circular(10),
+                                          // ),
+                                        height: 25,
+                                        child: Row(
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          children: [
+                                            SizedBox(width: 16),
+                                            Text(
+                                              'ソフマップ.com',
+                                              style: TextStyle(
+                                                color: CupertinoColors.link,
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                            SizedBox(width: 16,)
+                                          ],
+                                        ),
+                                      ),
+                                      Container(
+                                        height: 24,
+                                        decoration: BoxDecoration(
+                                          color: Colors.grey[200],
+                                          borderRadius: BorderRadius.circular(10),
+                                        ),
+                                        child: Row(
+                                          //mainAxisAlignment: MainAxisAlignment.start,
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          children: [
+                                            SizedBox(width: 8,),
+                                            Text(
+                                              '¥146,000',
+                                              style: TextStyle(
+                                                fontSize: 24,
+                                                color: Colors.red,
+                                              ),
+                                            ),
+                                            SizedBox(width: 2,),
+                                            Text('(+ 200)'),
+                                            SizedBox(width: 8,),
+                                        ]
+                                        ),
+                                      )
+                                    ],
                                   ),
                                 ),
-                                Text(
-                                  '-151円↓',
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    color: Colors.red,
-                                  ),
-                                ),
-                              ],
-                            ),
+                              )
                           ],
                         ),
-                      ],
+                      ),
                     ),
-                  ),
-                ],
-            ),
+                    Container(
+                      padding: EdgeInsets.all(8),
+                      child: Column(
+
+                      ),
+                    )
+                  ],
+              ),
+          ),
         ),
       );
   }

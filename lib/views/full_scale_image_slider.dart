@@ -22,6 +22,7 @@ class _FullScaleImageSliderState extends State<FullScaleImageSlider> {
             initialPage: 0,
             viewportFraction: 1,
             enlargeCenterPage: true,
+            enableInfiniteScroll: false,
             onPageChanged: (index, reason) => setState(() {
               activeIndex = index;
             }),
