@@ -93,8 +93,8 @@ class RootPage extends ConsumerWidget {
       body: ElevatedButton(
         onPressed: () async {
           final partsListUrl = 'https://kakaku.com/search_results/%83O%83%89%83t%83B%83b%83N%83%7B%81%5B%83h/?category=0001%2C0028&act=Suggest';
-          final tergetUrlProviderController = ref.watch(targetUrlProvider.notifier);
-          tergetUrlProviderController.update((state) => partsListUrl);
+          final targetUrlProviderController = ref.watch(targetUrlProvider.notifier);
+          targetUrlProviderController.update((state) => partsListUrl);
           final bool? selected = await Navigator.push(
             context,
             PageRouteBuilder(
@@ -118,8 +118,8 @@ final targetUrlProvider = StateProvider((ref) {
 final partsListFutureProvider = FutureProvider(
     (ref) async {
       final parser = await PartsListParser.create(ref.watch(targetUrlProvider));
-      final fetchdPartsList = parser.setUpViews();
-      return fetchdPartsList;
+      final fetchedPartsList = parser.partsList;
+      return fetchedPartsList;
     }
 );
 

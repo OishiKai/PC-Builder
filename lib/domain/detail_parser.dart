@@ -1,8 +1,7 @@
-import 'package:custom_pc/domain/base_parser.dart';
-import 'package:custom_pc/models/pc_parts_detail.dart';
+import 'package:custom_pc/domain/document_repository.dart';
 import 'package:html/dom.dart';
 import '../models/pc_parts.dart';
-class DetailParser extends BaseParser {
+class DetailParser {
   static const _fullScaleImageSelector = '#main > div.alignC > div > table > tbody > tr > td > a > img';
   static const _fullScaleFirstImageSelector = '#main > div.alignC > div > table > tbody > tr > td > img';
 
@@ -10,12 +9,15 @@ class DetailParser extends BaseParser {
   Document? document;
   List<String> fullScaleImages = [];
 
+  /*
+  コンストラクタをプライベートとし、createでオブジェクトを生成。
+  オブジェクト生成時に該当ページのDocumentのフェッチ、パースを完了させる。
+   */
   DetailParser._(this.targetParts);
-
   static Future<DetailParser> create(PcParts parts) async {
     final self = DetailParser._(parts);
     self.fullScaleImages = (await self._getFullScaleImageUrls(parts.detailUrl))!;
-    self.document = await self.fetchDocument(parts.detailUrl);
+    self.document = await DocumentRepository.fetchDocument(parts.detailUrl);
     return self;
   }
 
@@ -29,7 +31,7 @@ class DetailParser extends BaseParser {
       //　1枚目だけURLが異なる為分岐
       if (ite == 0) {
 
-        final firstImageDoc = await fetchDocument(baseImageUrl);
+        final firstImageDoc = await DocumentRepository.fetchDocument(baseImageUrl);
         List<Element> firstImage = firstImageDoc.querySelectorAll(_fullScaleFirstImageSelector);
 
         if (firstImage.isEmpty) {
@@ -42,7 +44,7 @@ class DetailParser extends BaseParser {
         continue;
       }
 
-      final imageDoc = await fetchDocument('$multiImageUrl$ite');
+      final imageDoc = await DocumentRepository.fetchDocument('$multiImageUrl$ite');
       final image = imageDoc.querySelectorAll(_fullScaleImageSelector);
       ite += 1;
 
@@ -55,7 +57,4 @@ class DetailParser extends BaseParser {
     });
     return imageUrls;
   }
-
-
-
 }

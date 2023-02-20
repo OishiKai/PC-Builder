@@ -1,5 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:custom_pc/domain/base_parser.dart';
+import 'package:custom_pc/domain/document_repository.dart';
 import 'package:custom_pc/domain/detail_parser.dart';
 import 'package:custom_pc/main.dart';
 import 'package:custom_pc/models/pc_parts_detail.dart';

@@ -1,8 +1,8 @@
-import 'package:custom_pc/domain/base_parser.dart';
+import 'package:custom_pc/domain/document_repository.dart';
 import 'package:custom_pc/models/pc_parts.dart';
 import 'package:html/dom.dart';
 
-class PartsListParser extends BaseParser {
+class PartsListParser {
   // 商品のリスト化
   static const _listSelector = '#default > div.l-c.l-c-2column.l-c-2column-reverse > div.l-c_cont.l-c-2column_cont.p-cont.p-cont-wide > div > div.p-result_list_wrap > div > div';
   // メーカー名
@@ -40,29 +40,39 @@ class PartsListParser extends BaseParser {
 
   final String targetUrl;
   Document? document;
+  List<PcParts>? partsList;
 
+  /*
+  コンストラクタをプライベートとし、createでオブジェクトを生成。
+  オブジェクト生成時に該当ページのDocumentのフェッチ、パースを完了させ、
+  .partsListを参照してパーツリストを取り出す。
+   */
   PartsListParser._(this.targetUrl);
-
-   static Future<PartsListParser> create(String url) async {
+  static Future<PartsListParser> create(String url) async {
      final self = PartsListParser._(url);
-     self.document = await self.fetchDocument(url);
+     self.document = await DocumentRepository.fetchDocument(url);
+     self.partsList = self._parsePartsList();
      return self;
   }
 
-  List<PcParts> setUpViews() {
+  List<PcParts> _parsePartsList() {
+    // オブジェクト生成時には必ずdocumentが入る為nullではない
     final elementList = document!.querySelectorAll(_listSelector);
 
     List<PcParts> partsList = [];
     for (var element in elementList) {
+      // メーカ名取得
       final maker = element.querySelectorAll(_makerSelector)[0].text;
-
+      // 商品名取得
       final title = element.querySelectorAll(_titleSelector)[0].text;
 
+      // 新商品かどうか判定
       bool isNew = false;
       if (element.querySelectorAll(_newTitleSelector).isNotEmpty) {
         isNew = true;
       }
 
+      // 星の数、評価数取得
       int? star;
       String? eva;
       Map<String,dynamic>? specified = _specificEvaluation(element);
@@ -87,6 +97,13 @@ class PartsListParser extends BaseParser {
     int? star;
     String? evaluation;
 
+    /*
+    評価(星の数)を特定、取得する。
+    星の数は0~5の0.5刻み10段階であり、星5の場合は '$_starSelector50' というセレクターで評価数を取得できる。
+    末尾の数字を50から5刻みで下げ、パース結果がヒットしたものを評価として採用。
+    取得完了後は
+    評価星3.5の場合 -> star = 35, evaluation = 3.5(1) という形式となる(かっこの数はレビュー数) 。
+     */
     while (ratingSelector != 0) {
       final parsed = element.querySelectorAll('$_starSelector$ratingSelector');
 
