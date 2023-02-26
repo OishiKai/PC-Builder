@@ -86,26 +86,34 @@ class RootPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+
     return Scaffold(
 
-      appBar: AppBar(),
+        appBar: AppBar(),
 
-      body: ElevatedButton(
-        onPressed: () async {
-          final partsListUrl = 'https://kakaku.com/search_results/%83O%83%89%83t%83B%83b%83N%83%7B%81%5B%83h/?category=0001%2C0028&act=Suggest';
-          final targetUrlProviderController = ref.watch(targetUrlProvider.notifier);
-          targetUrlProviderController.update((state) => partsListUrl);
-          final bool? selected = await Navigator.push(
-            context,
-            PageRouteBuilder(
-                pageBuilder: (context, animation, secondaryAnimation) => PartsListPage(partsListUrl),
-                transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                  return CupertinoPageTransition(primaryRouteAnimation: animation, secondaryRouteAnimation: secondaryAnimation, linearTransition: false, child: child);
-                }
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            ElevatedButton(
+              onPressed: () async {
+                final partsListUrl = 'https://kakaku.com/search_results/%83O%83%89%83t%83B%83b%83N%83%7B%81%5B%83h/?category=0001%2C0028&act=Suggest';
+                final targetUrlProviderController = ref.watch(targetUrlProvider.notifier);
+                targetUrlProviderController.update((state) => partsListUrl);
+                final bool? selected = await Navigator.push(
+                  context,
+                  PageRouteBuilder(
+                      pageBuilder: (context, animation, secondaryAnimation) => PartsListPage(partsListUrl),
+                      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                        return CupertinoPageTransition(primaryRouteAnimation: animation, secondaryRouteAnimation: secondaryAnimation, linearTransition: false, child: child);
+                      }
+                  ),
+                );
+              },
+              child: Text("検索する"),
             ),
-          );
-        },
-        child: Text("検索する"),
+          ],
+        ),
       ),
     );
   }

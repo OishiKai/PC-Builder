@@ -30,9 +30,6 @@ class DetailParser {
   // パーツのスペックテーブル行
   static const _partsSpecLineSelector = '#mainLeft > table > tbody > tr';
 
-  //#mainLeft > table > tbody > tr:nth-child(4) > td:nth-child(4)
-  //#mainLeft > table > tbody > tr:nth-child(2) > td:nth-child(4)
-  //#mainLeft > table > tbody > tr:nth-child(2) > td:nth-child(2)
   PcParts targetParts;
   Document? document;
   List<String> fullScaleImages = [];
@@ -102,20 +99,20 @@ class DetailParser {
     また、販売店が11件以上ある場合は10件おきに2つの店舗情報ではないノードが入る為、adjustIndexでパース対象を調整する。
      */
     final numberOfNode = listElements.length;
-    int count = 0;
+    int parsedShopCount = 0;
     int adjustIndex = 2;
     while (true) {
-      final shopNodeIndex = count + adjustIndex;
+      final shopNodeIndex = parsedShopCount + adjustIndex;
       final rank = listElements[shopNodeIndex].querySelectorAll(_partsShopRankSelector)[0].text;
       final price = listElements[shopNodeIndex].querySelectorAll(_partsShopPriceSelector)[0].text;
       final diff = listElements[shopNodeIndex].querySelectorAll(_partsShopBestPriceDiffSelector)[0].text;
       final shopName = listElements[shopNodeIndex].querySelectorAll(_partsShopNameSelector)[0].text;
       final shopPageUrl = listElements[shopNodeIndex].querySelectorAll(_partsShopPageUrlSelector)[0].attributes['href'];
       partsShopList.add(PartsShop(rank, price, diff, shopName, shopPageUrl!));
-      count++;
-      if ( count + adjustIndex == numberOfNode) { break; }
+      parsedShopCount++;
+      if ( parsedShopCount + adjustIndex == numberOfNode) { break; }
       // 販売店10件おきに2つ、店舗情報ではないノードが入る為、indexを調整
-      if ( count % 10 == 0) {  adjustIndex += 2; }
+      if ( parsedShopCount % 10 == 0) {  adjustIndex += 2; }
     }
     return partsShopList;
   }
