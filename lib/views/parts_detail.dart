@@ -160,79 +160,81 @@ class DetailPartsPage extends ConsumerWidget {
                     ),
                     Container(
                       width: double.infinity,
-                      padding: EdgeInsets.all(8),
+                      padding: EdgeInsets.only(top:8, left: 8),
                       child: SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
                         child: Row(
                           children: [
-                            for (var i = 0; i < 10; i++)
-                              i.isEven ? Container(
-                                width: SizeConfig.blockSizeHorizontal * 2,
-                                height: 52,
-                              ) : GestureDetector(
-                                onTap: (){
-                                  print('onTap');
-                                },
-                                child: Container(
-                                  //width: SizeConfig.blockSizeHorizontal * 50,
-                                  height: 52,
-                                  decoration: BoxDecoration(
-                                    color: Colors.grey[100],
-                                    borderRadius: BorderRadius.circular(10),
-                                    border: Border.all(color: Colors.grey),
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                          // decoration: BoxDecoration(
-                                          //   color: Colors.grey[200],
-                                          //   borderRadius: BorderRadius.circular(10),
-                                          // ),
-                                        height: 25,
-                                        child: Row(
-                                          crossAxisAlignment: CrossAxisAlignment.center,
-                                          children: [
-                                            SizedBox(width: 16),
-                                            Text(
-                                              'ソフマップ.com',
-                                              style: TextStyle(
-                                                color: CupertinoColors.link,
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                            SizedBox(width: 16,)
-                                          ],
-                                        ),
+                            for (var i = 0; i < targetParts.shops!.length; i++)
+                              Row(
+                                children: [
+                                  GestureDetector(
+                                    onTap: (){
+                                      print('onTap');
+                                    },
+                                    child: Container(
+                                      //width: SizeConfig.blockSizeHorizontal * 50,
+                                      height: 52,
+                                      decoration: BoxDecoration(
+                                        color: Colors.grey[100],
+                                        borderRadius: BorderRadius.circular(10),
+                                        border: Border.all(color: Colors.grey),
                                       ),
-                                      Container(
-                                        height: 24,
-                                        decoration: BoxDecoration(
-                                          color: Colors.grey[200],
-                                          borderRadius: BorderRadius.circular(10),
-                                        ),
-                                        child: Row(
-                                          //mainAxisAlignment: MainAxisAlignment.start,
-                                          crossAxisAlignment: CrossAxisAlignment.center,
-                                          children: [
-                                            SizedBox(width: 8,),
-                                            Text(
-                                              '¥146,000',
-                                              style: TextStyle(
-                                                fontSize: 24,
-                                                color: Colors.red,
-                                              ),
+                                      child: Column(
+                                        children: [
+                                          Container(
+                                              // decoration: BoxDecoration(
+                                              //   color: Colors.grey[200],
+                                              //   borderRadius: BorderRadius.circular(10),
+                                              // ),
+                                            height: 25,
+                                            child: Row(
+                                              crossAxisAlignment: CrossAxisAlignment.center,
+                                              children: [
+                                                SizedBox(width: 16),
+                                                Text(
+                                                  targetParts.shops![i].shopName,
+                                                  style: TextStyle(
+                                                    color: CupertinoColors.link,
+                                                    fontSize: 16,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                                SizedBox(width: 16,)
+                                              ],
                                             ),
-                                            SizedBox(width: 2,),
-                                            Text('(+ 200)'),
-                                            SizedBox(width: 8,),
-                                        ]
-                                        ),
-                                      )
-                                    ],
+                                          ),
+                                          Container(
+                                            height: 24,
+                                            decoration: BoxDecoration(
+                                              color: Colors.grey[200],
+                                              borderRadius: BorderRadius.circular(10),
+                                            ),
+                                            child: Row(
+                                              //mainAxisAlignment: MainAxisAlignment.start,
+                                              crossAxisAlignment: CrossAxisAlignment.center,
+                                              children: [
+                                                SizedBox(width: 8,),
+                                                Text(
+                                                  targetParts.shops![i].price,
+                                                  style: TextStyle(
+                                                    fontSize: 24,
+                                                    color: Colors.red,
+                                                  ),
+                                                ),
+                                                SizedBox(width: 2,),
+                                                Text(targetParts.shops![i].bestPriceDiff),
+                                                SizedBox(width: 8,),
+                                            ]
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ),
                                   ),
-                                ),
-                              )
+                                  SizedBox(width: 8,)
+                                ],
+                              ),
                           ],
                         ),
                       ),
@@ -240,7 +242,6 @@ class DetailPartsPage extends ConsumerWidget {
                     Container(
                       padding: EdgeInsets.all(8),
                       child: Column(
-
                       ),
                     )
                   ],

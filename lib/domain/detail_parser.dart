@@ -80,10 +80,6 @@ class DetailParser {
       if (image.isEmpty) { break; }
       imageUrls.add(image[0].attributes['src']!);
     }
-
-    imageUrls.forEach((element) {
-      print(element);
-    });
     return imageUrls;
   }
 

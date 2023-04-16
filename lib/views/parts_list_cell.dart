@@ -77,6 +77,7 @@ class partsListCell extends ConsumerWidget {
               if (parts!.dataFiled == FilledDataProgress.filledForList) {
                 final detail = await DetailParser.create(parts);
                 parts.fullScaleImages = detail.fullScaleImages;
+                parts.shops = detail.partsShops;
                 parts.dataFiled = FilledDataProgress.filledForDetail;
                 listProvider[partsListIndex] = parts;
                 ref.watch(partsListProvider.notifier).update((state) => listProvider);

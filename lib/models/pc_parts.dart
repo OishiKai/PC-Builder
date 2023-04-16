@@ -1,3 +1,5 @@
+import 'package:custom_pc/models/parts_shop.dart';
+
 class PcParts {
   FilledDataProgress dataFiled = FilledDataProgress.filledForList;
 
@@ -11,6 +13,7 @@ class PcParts {
   final String image;
   final String detailUrl;
 
+  List<PartsShop>? shops;
   List<String>? fullScaleImages;
 
   PcParts(
