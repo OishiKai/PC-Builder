@@ -14,6 +14,7 @@ class PcParts {
   final String detailUrl;
 
   List<PartsShop>? shops;
+  Map<String, String?>? specs;
   List<String>? fullScaleImages;
 
   PcParts(
