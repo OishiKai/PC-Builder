@@ -1,5 +1,4 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:custom_pc/domain/detail_parser.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -37,7 +36,9 @@ class _FullScaleImageSliderState extends State<FullScaleImageSlider> {
           alignment: Alignment.center,
           child: Column(
             children: [
-              SizedBox(height: 300,),
+              SizedBox(
+                height: 300,
+              ),
               buildIndicator(),
             ],
           ),
@@ -47,22 +48,22 @@ class _FullScaleImageSliderState extends State<FullScaleImageSlider> {
   }
 
   Widget buildImage(path, index) => Container(
-    //画像間の隙間
-    margin: EdgeInsets.symmetric(horizontal: 10),
-    color: Colors.white,
-    child: Image.network(
-      path,
-      fit: BoxFit.contain,
-    ),
-  );
+        //画像間の隙間
+        margin: EdgeInsets.symmetric(horizontal: 10),
+        color: Colors.white,
+        child: Image.network(
+          path,
+          fit: BoxFit.contain,
+        ),
+      );
 
   Widget buildIndicator() => AnimatedSmoothIndicator(
-    activeIndex: activeIndex,
-    count: widget.imageUrlList.length ?? 0,
-    effect: const JumpingDotEffect(
-        dotHeight: 10,
-        dotWidth: 10,
-        activeDotColor: Colors.grey,
-        dotColor: Colors.black12),
-  );
+        activeIndex: activeIndex,
+        count: widget.imageUrlList.length ?? 0,
+        effect: const JumpingDotEffect(
+            dotHeight: 10,
+            dotWidth: 10,
+            activeDotColor: Color(0xFF4C53A5),
+            dotColor: Colors.black12),
+      );
 }

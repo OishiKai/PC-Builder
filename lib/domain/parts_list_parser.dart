@@ -4,16 +4,20 @@ import 'package:html/dom.dart';
 
 class PartsListParser {
   // 商品のリスト化
-  static const _listSelector = '#default > div.l-c.l-c-2column.l-c-2column-reverse > div.l-c_cont.l-c-2column_cont.p-cont.p-cont-wide > div > div.p-result_list_wrap > div > div';
+  static const _listSelector =
+      '#default > div.l-c.l-c-2column.l-c-2column-reverse > div.l-c_cont.l-c-2column_cont.p-cont.p-cont-wide > div > div.p-result_list_wrap > div > div';
   // メーカー名
-  static const _makerSelector = 'div.c-positioning_cell.p-result_item_cell-1 > div.c-positioning.s-biggerlink.is-biggerlinkHot.p-item > div > p.p-item_maker';
+  static const _makerSelector =
+      'div.c-positioning_cell.p-result_item_cell-1 > div.c-positioning.s-biggerlink.is-biggerlinkHot.p-item > div > p.p-item_maker';
 
   /*
   商品名
   新商品の場合のみ_newTitleSelectorでも商品名を取得できる為、新商品かどうかの判定に利用する
    */
-  static const _titleSelector = 'div.c-positioning_cell.p-result_item_cell-1 > div.c-positioning.s-biggerlink.is-biggerlinkHot.p-item > div > p.p-item_name.s-biggerlinkHover_underline';
-  static const _newTitleSelector = 'div.c-positioning_cell.p-result_item_cell-1 > div.c-positioning.s-biggerlink.is-biggerlinkHot.p-item > div > p.p-item_name.s-biggerlinkHover_underline.c-box-menuBox_new';
+  static const _titleSelector =
+      'div.c-positioning_cell.p-result_item_cell-1 > div.c-positioning.s-biggerlink.is-biggerlinkHot.p-item > div > p.p-item_name.s-biggerlinkHover_underline';
+  static const _newTitleSelector =
+      'div.c-positioning_cell.p-result_item_cell-1 > div.c-positioning.s-biggerlink.is-biggerlinkHot.p-item > div > p.p-item_name.s-biggerlinkHover_underline.c-box-menuBox_new';
 
   /*
   評価(星の数)
@@ -21,22 +25,27 @@ class PartsListParser {
   星5評価の場合 'p-item_star-50', 星3.5評価の場合'p-item_star-35'と5刻みでクラス分けされている
   商品が評価されている場合、評価の数値とレビュー数(例: 5.00(1))が取得でき、評価されていない場合、取得に失敗する
    */
-  static const _starSelector = 'div.c-positioning_cell.p-result_item_cell-1 > div.c-positioning.s-biggerlink.is-biggerlinkHot.p-item > div > div.p-item_rate > p.p-item_star.p-item_star-';
+  static const _starSelector =
+      'div.c-positioning_cell.p-result_item_cell-1 > div.c-positioning.s-biggerlink.is-biggerlinkHot.p-item > div > div.p-item_rate > p.p-item_star.p-item_star-';
 
   // 価格
-  static const _priceSelector = 'div.c-positioning_cell.p-result_item_cell-2 > div > p.p-item_price > span';
+  static const _priceSelector =
+      'div.c-positioning_cell.p-result_item_cell-2 > div > p.p-item_price > span';
 
   // 順位 圏外の場合'-'
-  static const _rankSelector = 'div.c-positioning_cell.p-result_item_cell-1 > div.c-positioning.s-biggerlink.is-biggerlinkHot.p-item > div > div.p-item_rate > p.p-item_rank > span';
+  static const _rankSelector =
+      'div.c-positioning_cell.p-result_item_cell-1 > div.c-positioning.s-biggerlink.is-biggerlinkHot.p-item > div > div.p-item_rate > p.p-item_rank > span';
 
   /*
   商品画像URL
   imgタグごと取得してしまう為、不要な部分を除く必要あり
    */
-  static const _imageUrlSelector = 'div.c-positioning_cell.p-result_item_cell-1 > div.c-positioning.s-biggerlink.is-biggerlinkHot.p-item > p > a > noscript';
+  static const _imageUrlSelector =
+      'div.c-positioning_cell.p-result_item_cell-1 > div.c-positioning.s-biggerlink.is-biggerlinkHot.p-item > p > a > noscript';
 
   // 詳細ページURL
-  static const _detailUrlSelector = 'div.c-positioning_cell.p-result_item_cell-1 > div.c-positioning.s-biggerlink.is-biggerlinkHot.p-item > p > a';
+  static const _detailUrlSelector =
+      'div.c-positioning_cell.p-result_item_cell-1 > div.c-positioning.s-biggerlink.is-biggerlinkHot.p-item > p > a';
 
   final String targetUrl;
   Document? document;
@@ -49,10 +58,10 @@ class PartsListParser {
    */
   PartsListParser._(this.targetUrl);
   static Future<PartsListParser> create(String url) async {
-     final self = PartsListParser._(url);
-     self.document = await DocumentRepository.fetchDocument(url);
-     self.partsList = self._parsePartsList();
-     return self;
+    final self = PartsListParser._(url);
+    self.document = await DocumentRepository.fetchDocument(url);
+    self.partsList = self._parsePartsList();
+    return self;
   }
 
   List<PcParts> _parsePartsList() {
@@ -62,7 +71,12 @@ class PartsListParser {
     List<PcParts> partsList = [];
     for (var element in elementList) {
       // メーカ名取得
-      final maker = element.querySelectorAll(_makerSelector)[0].text;
+      final maker = element
+          .querySelectorAll(_makerSelector)[0]
+          .text
+          .replaceFirst('[', '')
+          .replaceFirst(']', '');
+
       // 商品名取得
       final title = element.querySelectorAll(_titleSelector)[0].text;
 
@@ -75,7 +89,7 @@ class PartsListParser {
       // 星の数、評価数取得
       int? star;
       String? eva;
-      Map<String,dynamic>? specified = _specificEvaluation(element);
+      Map<String, dynamic>? specified = _specificEvaluation(element);
       if (specified != null) {
         star = specified['star'];
         eva = specified['evaluation'];
@@ -83,16 +97,19 @@ class PartsListParser {
 
       final price = element.querySelectorAll(_priceSelector)[0].text;
       final rank = element.querySelectorAll(_rankSelector)[0].text;
-      final image = _trimImageUrl(element.querySelectorAll(_imageUrlSelector)[0].text);
-      final detailUrl = element.querySelectorAll(_detailUrlSelector)[0].attributes['href'];
+      final image =
+          _trimImageUrl(element.querySelectorAll(_imageUrlSelector)[0].text);
+      final detailUrl =
+          element.querySelectorAll(_detailUrlSelector)[0].attributes['href'];
 
-      partsList.add(PcParts(maker,isNew,title,star,eva,price!,rank!,image,detailUrl!));
+      partsList.add(PcParts(
+          maker, isNew, title, star, eva, price!, rank!, image, detailUrl!));
     }
 
     return partsList;
   }
 
-  Map<String,dynamic>? _specificEvaluation(Element element) {
+  Map<String, dynamic>? _specificEvaluation(Element element) {
     int ratingSelector = 50;
     int? star;
     String? evaluation;
@@ -116,8 +133,10 @@ class PartsListParser {
       ratingSelector -= 5;
     }
 
-    if (star == null && evaluation == null) { return null; }
-    return {'star':star, 'evaluation':evaluation!.trim()};
+    if (star == null && evaluation == null) {
+      return null;
+    }
+    return {'star': star, 'evaluation': evaluation!.trim()};
   }
 
   String _trimImageUrl(String target) {

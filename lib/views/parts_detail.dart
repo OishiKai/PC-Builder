@@ -209,7 +209,7 @@ class DetailPartsPage extends ConsumerWidget {
                                             decoration: BoxDecoration(
                                               color: Colors.grey[200],
                                               borderRadius: BorderRadius.circular(10),
-                                            ),
+                                             ),
                                             child: Row(
                                               //mainAxisAlignment: MainAxisAlignment.start,
                                               crossAxisAlignment: CrossAxisAlignment.center,

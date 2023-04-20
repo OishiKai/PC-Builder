@@ -1,6 +1,6 @@
 import 'package:custom_pc/domain/detail_parser.dart';
 import 'package:custom_pc/main.dart';
-import 'package:custom_pc/views/parts_detail.dart';
+import 'package:custom_pc/views/desined_detail_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -13,7 +13,7 @@ class partsListCell extends ConsumerWidget {
   int partsListIndex;
   List<Icon> stars = [];
 
-  List<Icon> describeStars (PcParts parts){
+  List<Icon> describeStars(PcParts parts) {
     const fullStar = Icon(
       Icons.star,
       color: Colors.orange,
@@ -81,21 +81,30 @@ class partsListCell extends ConsumerWidget {
                 parts.specs = detail.specs;
                 parts.dataFiled = FilledDataProgress.filledForDetail;
                 listProvider[partsListIndex] = parts;
-                ref.watch(partsListProvider.notifier).update((state) => listProvider);
+                ref
+                    .watch(partsListProvider.notifier)
+                    .update((state) => listProvider);
               }
-
+              ref.watch(detailPageProvider.notifier).update((state) => 0);
               final bool? selected = await Navigator.push(
-                  context,
-                  PageRouteBuilder(
-                    pageBuilder: (context, animation, secondaryAnimation) => DetailPartsPage(partsListIndex),
-                    transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                      return CupertinoPageTransition(primaryRouteAnimation: animation, secondaryRouteAnimation: secondaryAnimation, linearTransition: false, child: child);
-                    }
-                  ),
+                context,
+                PageRouteBuilder(
+                    pageBuilder: (context, animation, secondaryAnimation) =>
+                        PartsDetailPage(partsListIndex, stars),
+                    transitionsBuilder:
+                        (context, animation, secondaryAnimation, child) {
+                      return CupertinoPageTransition(
+                          primaryRouteAnimation: animation,
+                          secondaryRouteAnimation: secondaryAnimation,
+                          linearTransition: false,
+                          child: child);
+                    }),
               );
             },
             child: Container(
-              padding: EdgeInsets.all(SizeConfig.blockSizeHorizontal * 1,),
+              padding: EdgeInsets.all(
+                SizeConfig.blockSizeHorizontal * 1,
+              ),
               height: 142,
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -108,10 +117,7 @@ class partsListCell extends ConsumerWidget {
                       Container(
                           width: SizeConfig.blockSizeHorizontal * 45,
                           height: 160 - SizeConfig.blockSizeHorizontal * 0.5,
-                          child: Image.network(
-                              parts.image
-                          )
-                      ),
+                          child: Image.network(parts.image)),
                       Align(
                         alignment: Alignment.topLeft,
                         child: Container(
@@ -124,7 +130,9 @@ class partsListCell extends ConsumerWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              SizedBox(width: 4,),
+                              SizedBox(
+                                width: 4,
+                              ),
                               Icon(
                                 Icons.local_mall_outlined,
                                 color: Colors.orangeAccent,
@@ -145,9 +153,13 @@ class partsListCell extends ConsumerWidget {
                       )
                     ],
                   ),
-                  SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
+                  SizedBox(
+                    width: SizeConfig.blockSizeHorizontal * 1,
+                  ),
                   Container(
-                    padding: EdgeInsets.all(SizeConfig.blockSizeHorizontal * 1,),
+                    padding: EdgeInsets.all(
+                      SizeConfig.blockSizeHorizontal * 1,
+                    ),
                     width: SizeConfig.blockSizeHorizontal * 50,
                     decoration: BoxDecoration(
                       color: Color.fromRGBO(245, 245, 245, 1),
@@ -167,7 +179,9 @@ class partsListCell extends ConsumerWidget {
                                   color: Colors.blueGrey,
                                 ),
                               ),
-                              SizedBox(width: 8,),
+                              SizedBox(
+                                width: 8,
+                              ),
                               Visibility(
                                 visible: parts.isNew,
                                 child: Container(
@@ -191,14 +205,16 @@ class partsListCell extends ConsumerWidget {
                             ],
                           ),
                         ),
-                        SizedBox(height: 2,),
+                        SizedBox(
+                          height: 2,
+                        ),
                         Container(
                           height: 50,
                           width: double.infinity,
                           alignment: Alignment.centerLeft,
                           decoration: BoxDecoration(
-                            //color: Colors.red,
-                          ),
+                              //color: Colors.red,
+                              ),
                           child: Text(
                             parts.title,
                             maxLines: 3,
@@ -212,8 +228,8 @@ class partsListCell extends ConsumerWidget {
                           height: 26,
                           alignment: Alignment.centerLeft,
                           decoration: BoxDecoration(
-                            //color: Colors.blue,
-                          ),
+                              //color: Colors.blue,
+                              ),
                           child: Row(
                             children: [
                               Row(
@@ -223,13 +239,14 @@ class partsListCell extends ConsumerWidget {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  SizedBox(width: 2,),
+                                  SizedBox(
+                                    width: 2,
+                                  ),
                                   Text(
                                     parts.evaluation ?? '-',
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        color: Colors.blue
-                                    ),
+                                        color: Colors.blue),
                                   )
                                 ],
                               ),
@@ -240,15 +257,13 @@ class partsListCell extends ConsumerWidget {
                           height: 30,
                           width: double.infinity,
                           decoration: BoxDecoration(
-                            //olor: Colors.red,
-                          ),
+                              //olor: Colors.red,
+                              ),
                           child: Text(
                             parts.price,
                             textAlign: TextAlign.left,
                             style: TextStyle(
-                                fontSize: 24,
-                                color: Colors.redAccent
-                            ),
+                                fontSize: 24, color: Colors.redAccent),
                           ),
                         ),
                       ],
@@ -256,9 +271,10 @@ class partsListCell extends ConsumerWidget {
                   )
                 ],
               ),
-            )
+            )),
+        SizedBox(
+          height: 8,
         ),
-        SizedBox(height: 8,),
       ],
     );
   }
