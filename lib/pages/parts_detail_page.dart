@@ -10,6 +10,7 @@ import '../main.dart';
 import '../widgets/parts_detail/detail_bottom_bar.dart';
 import '../widgets/parts_detail/full_scale_image_slider.dart';
 
+// 販売店 or 詳細スペック の表示状態 (デフォルトは 0)
 final detailPageProvider = StateProvider<int>((ref) {
   return 0;
 });

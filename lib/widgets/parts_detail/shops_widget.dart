@@ -30,7 +30,7 @@ class ShopsWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     width: 8,
                   ),
                   Icon(
@@ -38,7 +38,7 @@ class ShopsWidget extends StatelessWidget {
                     color: mainColor,
                     size: 30,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 8,
                   ),
                   Text(
@@ -50,10 +50,10 @@ class ShopsWidget extends StatelessWidget {
                       color: mainColor,
                     ),
                   ),
-                  Expanded(child: SizedBox()),
+                  const Expanded(child: SizedBox()),
                   Text(
                     shops[i].price,
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                         color: Colors.redAccent),

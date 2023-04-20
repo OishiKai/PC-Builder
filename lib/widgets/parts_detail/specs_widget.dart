@@ -5,7 +5,7 @@ class SpecsWidgets extends StatelessWidget {
   final Map<String, String?> specs;
   final mainColor = const Color.fromRGBO(60, 130, 80, 1);
 
-  List<Container> setUpWidgets() {
+  List<Container> _setUpWidgets() {
     List<Container> widgets = [];
     specs.forEach((key, value) {
       if (value != null && value != '　') {
@@ -58,8 +58,9 @@ class SpecsWidgets extends StatelessWidget {
     return widgets;
   }
 
+  // 先頭2件のスペック情報のみ返す
   Column generalSpecs() {
-    final widgets = setUpWidgets();
+    final widgets = _setUpWidgets();
     return Column(
       children: [
         widgets[0],
@@ -68,9 +69,10 @@ class SpecsWidgets extends StatelessWidget {
     );
   }
 
+  // 先頭3件以降のスペックのみ返す
   @override
   Widget build(BuildContext context) {
-    final widgets = setUpWidgets();
+    final widgets = _setUpWidgets();
     return Column(
       children: [
         for (int i = 2; i < widgets.length; i++) widgets[i],
