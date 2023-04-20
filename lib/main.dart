@@ -1,10 +1,11 @@
 import 'package:custom_pc/domain/parts_list_parser.dart';
-import 'package:custom_pc/views/parts_list_cell.dart';
+import 'package:custom_pc/pages/parts_list_cell.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import '/config/size_config.dart';
 import 'models/pc_parts.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
@@ -86,28 +87,32 @@ class RootPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
     return Scaffold(
-
-        appBar: AppBar(),
-
+      appBar: AppBar(),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
             ElevatedButton(
               onPressed: () async {
-                final partsListUrl = 'https://kakaku.com/search_results/%83O%83%89%83t%83B%83b%83N%83%7B%81%5B%83h/?category=0001%2C0028&act=Suggest';
-                final targetUrlProviderController = ref.watch(targetUrlProvider.notifier);
+                final partsListUrl =
+                    'https://kakaku.com/search_results/%83O%83%89%83t%83B%83b%83N%83%7B%81%5B%83h/?category=0001%2C0028&act=Suggest';
+                final targetUrlProviderController =
+                    ref.watch(targetUrlProvider.notifier);
                 targetUrlProviderController.update((state) => partsListUrl);
                 final bool? selected = await Navigator.push(
                   context,
                   PageRouteBuilder(
-                      pageBuilder: (context, animation, secondaryAnimation) => PartsListPage(partsListUrl),
-                      transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                        return CupertinoPageTransition(primaryRouteAnimation: animation, secondaryRouteAnimation: secondaryAnimation, linearTransition: false, child: child);
-                      }
-                  ),
+                      pageBuilder: (context, animation, secondaryAnimation) =>
+                          PartsListPage(partsListUrl),
+                      transitionsBuilder:
+                          (context, animation, secondaryAnimation, child) {
+                        return CupertinoPageTransition(
+                            primaryRouteAnimation: animation,
+                            secondaryRouteAnimation: secondaryAnimation,
+                            linearTransition: false,
+                            child: child);
+                      }),
                 );
               },
               child: Text("検索する"),
@@ -123,18 +128,15 @@ final targetUrlProvider = StateProvider((ref) {
   return "";
 });
 
-final partsListFutureProvider = FutureProvider(
-    (ref) async {
-      final parser = await PartsListParser.create(ref.watch(targetUrlProvider));
-      final fetchedPartsList = parser.partsList;
-      return fetchedPartsList;
-    }
-);
+final partsListFutureProvider = FutureProvider((ref) async {
+  final parser = await PartsListParser.create(ref.watch(targetUrlProvider));
+  final fetchedPartsList = parser.partsList;
+  return fetchedPartsList;
+});
 
 final partsListProvider = StateProvider((ref) {
   return ref.watch(partsListFutureProvider).value;
 });
-
 
 class PartsListPage extends ConsumerWidget {
   const PartsListPage(this.partsListUrl);
@@ -149,20 +151,19 @@ class PartsListPage extends ConsumerWidget {
       partsList = partsListProvider.value!;
     }
 
-
     return Scaffold(
-
       appBar: AppBar(),
-
       body: ListView.builder(
-          padding: EdgeInsets.all(SizeConfig.blockSizeHorizontal * 1,),
+          padding: EdgeInsets.all(
+            SizeConfig.blockSizeHorizontal * 1,
+          ),
           itemCount: partsList.length,
           itemBuilder: (BuildContext context, int index) {
             final cell = partsListCell(index);
-            cell.stars = cell.describeStars(ref.watch(partsListFutureProvider).value![index]);
+            cell.stars = cell.describeStars(
+                ref.watch(partsListFutureProvider).value![index]);
             return cell;
-          }
-      ),
+          }),
     );
   }
 }
