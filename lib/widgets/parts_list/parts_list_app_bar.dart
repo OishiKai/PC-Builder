@@ -9,15 +9,14 @@ final searchTextProvider = StateProvider<String>((ref) {
 });
 
 class PartsListAppBar extends ConsumerWidget implements PreferredSizeWidget {
-  const PartsListAppBar({super.key});
+  PartsListAppBar({super.key});
 
   @override
   Size get preferredSize => const Size.fromHeight(70);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final controller =
-        TextEditingController(text: ref.watch(searchTextProvider));
+    final controller = TextEditingController(text: ref.watch(searchTextProvider));
     return WillPopScope(
       onWillPop: () async {
         ref.read(searchTextProvider.notifier).update((state) => '');
@@ -58,12 +57,9 @@ class PartsListAppBar extends ConsumerWidget implements PreferredSizeWidget {
                     if (trimText == '' || trimText == '　') {
                       return;
                     }
-                    final url = UrlBuilder.searchPartsList(
-                        Category.graphicsCard, trimText);
+                    final url = UrlBuilder.searchPartsList(Category.graphicsCard, trimText);
                     ref.read(targetUrlProvider.notifier).update((state) => url);
-                    ref
-                        .read(searchTextProvider.notifier)
-                        .update((state) => text);
+                    ref.read(searchTextProvider.notifier).update((state) => text);
                   },
                 ),
               ),

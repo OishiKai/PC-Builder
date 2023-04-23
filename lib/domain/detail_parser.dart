@@ -5,10 +5,8 @@ import 'package:html/dom.dart';
 import '../models/pc_parts.dart';
 
 class DetailParser {
-  static const _fullScaleImageSelector =
-      '#main > div.alignC > div > table > tbody > tr > td > a > img';
-  static const _fullScaleFirstImageSelector =
-      '#main > div.alignC > div > table > tbody > tr > td > img';
+  static const _fullScaleImageSelector = '#main > div.alignC > div > table > tbody > tr > td > a > img';
+  static const _fullScaleFirstImageSelector = '#main > div.alignC > div > table > tbody > tr > td > img';
 
   // 店舗情報のリスト
   static const _partsShopListSelector = '#mainLeft > table > tbody > tr';
@@ -17,23 +15,19 @@ class DetailParser {
   static const _partsShopRankSelector = 'td:nth-child(1) > span';
 
   // 店舗の販売価格
-  static const _partsShopPriceSelector =
-      'td.p-priceTable_col.p-priceTable_col-priceBG > div > p.p-PTPrice_price';
+  static const _partsShopPriceSelector = 'td.p-priceTable_col.p-priceTable_col-priceBG > div > p.p-PTPrice_price';
 
   /*
   最安値と店舗の販売価格の差
   最安値で販売している場合は '(最安)'と取得される
    */
-  static const _partsShopBestPriceDiffSelector =
-      'td.p-priceTable_col.p-priceTable_col-priceBG > div > p.p-PTPrice_sub';
+  static const _partsShopBestPriceDiffSelector = 'td.p-priceTable_col.p-priceTable_col-priceBG > div > p.p-PTPrice_sub';
 
   // 店舗名
-  static const _partsShopNameSelector =
-      'td.p-priceTable_col.p-priceTable_col-shopInfo > div.p-PTShop > div.p-PTShop_info > div > p.p-PTShopData_name > a';
+  static const _partsShopNameSelector = 'td.p-priceTable_col.p-priceTable_col-shopInfo > div.p-PTShop > div.p-PTShop_info > div > p.p-PTShopData_name > a';
 
   // 店舗の販売ページ
-  static const _partsShopPageUrlSelector =
-      'td.p-priceTable_col.p-priceTable_col-shopInfo > div.p-PTShop > div.p-PTShop_btn > a';
+  static const _partsShopPageUrlSelector = 'td.p-priceTable_col.p-priceTable_col-shopInfo > div.p-PTShop > div.p-PTShop_btn > a';
 
   // パーツのスペックテーブル行
   static const _partsSpecLineSelector = '#mainLeft > table > tbody > tr';
@@ -50,8 +44,7 @@ class DetailParser {
   DetailParser._(this.targetParts);
   static Future<DetailParser> create(PcParts parts) async {
     final self = DetailParser._(parts);
-    self.fullScaleImages =
-        (await self._getFullScaleImageUrls(parts.detailUrl))!;
+    self.fullScaleImages = (await self._getFullScaleImageUrls(parts.detailUrl))!;
     self.document = await DocumentRepository.fetchDocument(parts.detailUrl);
     self.partsShops = self._getPartsShops(self.document!);
     self.specs = await self._getSpecs(parts.detailUrl);
@@ -60,18 +53,15 @@ class DetailParser {
 
   Future<List<String>?> _getFullScaleImageUrls(String detailUrl) async {
     List<String> imageUrls = [];
-    final baseImageUrl =
-        detailUrl.replaceFirst('?lid=pc_ksearch_kakakuitem', 'images/');
+    final baseImageUrl = detailUrl.replaceFirst('?lid=pc_ksearch_kakakuitem', 'images/');
     final multiImageUrl = '${baseImageUrl}page=ka_';
     int imageCount = 0;
 
     while (true) {
       //　1枚目だけURLが異なる為分岐
       if (imageCount == 0) {
-        final firstImageDoc =
-            await DocumentRepository.fetchDocument(baseImageUrl);
-        List<Element> firstImage =
-            firstImageDoc.querySelectorAll(_fullScaleFirstImageSelector);
+        final firstImageDoc = await DocumentRepository.fetchDocument(baseImageUrl);
+        List<Element> firstImage = firstImageDoc.querySelectorAll(_fullScaleFirstImageSelector);
 
         if (firstImage.isEmpty) {
           firstImage = firstImageDoc.querySelectorAll(_fullScaleImageSelector);
@@ -85,8 +75,7 @@ class DetailParser {
         continue;
       }
 
-      final imageDoc =
-          await DocumentRepository.fetchDocument('$multiImageUrl$imageCount');
+      final imageDoc = await DocumentRepository.fetchDocument('$multiImageUrl$imageCount');
       final image = imageDoc.querySelectorAll(_fullScaleImageSelector);
       imageCount += 1;
 
@@ -116,21 +105,11 @@ class DetailParser {
     int adjustIndex = 2;
     while (true) {
       final shopNodeIndex = parsedShopCount + adjustIndex;
-      final rank = listElements[shopNodeIndex]
-          .querySelectorAll(_partsShopRankSelector)[0]
-          .text;
-      final price = listElements[shopNodeIndex]
-          .querySelectorAll(_partsShopPriceSelector)[0]
-          .text;
-      final diff = listElements[shopNodeIndex]
-          .querySelectorAll(_partsShopBestPriceDiffSelector)[0]
-          .text;
-      final shopName = listElements[shopNodeIndex]
-          .querySelectorAll(_partsShopNameSelector)[0]
-          .text;
-      final shopPageUrl = listElements[shopNodeIndex]
-          .querySelectorAll(_partsShopPageUrlSelector)[0]
-          .attributes['href'];
+      final rank = listElements[shopNodeIndex].querySelectorAll(_partsShopRankSelector)[0].text;
+      final price = listElements[shopNodeIndex].querySelectorAll(_partsShopPriceSelector)[0].text;
+      final diff = listElements[shopNodeIndex].querySelectorAll(_partsShopBestPriceDiffSelector)[0].text;
+      final shopName = listElements[shopNodeIndex].querySelectorAll(_partsShopNameSelector)[0].text;
+      final shopPageUrl = listElements[shopNodeIndex].querySelectorAll(_partsShopPageUrlSelector)[0].attributes['href'];
       partsShopList.add(PartsShop(rank, price, diff, shopName, shopPageUrl!));
       parsedShopCount++;
       if (parsedShopCount + adjustIndex == numberOfNode) {
