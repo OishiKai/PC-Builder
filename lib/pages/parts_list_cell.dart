@@ -13,6 +13,8 @@ class partsListCell extends ConsumerWidget {
   int partsListIndex;
   List<Icon> stars = [];
 
+  final mainColor = const Color.fromRGBO(60, 130, 80, 1);
+
   List<Icon> describeStars(PcParts parts) {
     const fullStar = Icon(
       Icons.star,
@@ -102,171 +104,150 @@ class partsListCell extends ConsumerWidget {
               );
             },
             child: Container(
-              padding: EdgeInsets.all(
-                SizeConfig.blockSizeHorizontal * 1,
-              ),
-              height: 142,
+              // padding: EdgeInsets.all(
+              //   SizeConfig.blockSizeHorizontal * 1,
+              // ),
+              height: 150,
+              width: SizeConfig.blockSizeHorizontal * 98,
               decoration: BoxDecoration(
-                color: Colors.white,
-              ),
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(
+                    color: const Color(0xFFEDECF2),
+                    width: 1,
+                  )),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Stack(
-                    children: [
-                      Container(
-                          width: SizeConfig.blockSizeHorizontal * 45,
-                          height: 160 - SizeConfig.blockSizeHorizontal * 0.5,
-                          child: Image.network(parts.image)),
-                      Align(
-                        alignment: Alignment.topLeft,
-                        child: Container(
-                          width: 55,
-                          height: 18,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                width: 4,
-                              ),
-                              Icon(
-                                Icons.local_mall_outlined,
-                                color: Colors.orangeAccent,
-                                size: 16,
-                              ),
-                              Text(
-                                '${parts.ranked}位',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.orange,
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      )
-                    ],
+                  Padding(
+                    padding: EdgeInsets.all(
+                      SizeConfig.blockSizeHorizontal * 1,
+                    ),
+                    child: Stack(
+                      children: [
+                        Container(
+                            width: SizeConfig.blockSizeHorizontal * 45,
+                            height: 160 - SizeConfig.blockSizeHorizontal * 0.5,
+                            child: Image.network(parts.image)),
+                      ],
+                    ),
                   ),
                   SizedBox(
                     width: SizeConfig.blockSizeHorizontal * 1,
                   ),
-                  Container(
-                    padding: EdgeInsets.all(
-                      SizeConfig.blockSizeHorizontal * 1,
-                    ),
-                    width: SizeConfig.blockSizeHorizontal * 50,
-                    decoration: BoxDecoration(
-                      color: Color.fromRGBO(245, 245, 245, 1),
-                    ),
-                    child: Column(
-                      children: [
-                        Container(
-                          height: 16,
-                          width: double.infinity,
-                          child: Row(
-                            children: [
-                              Text(
-                                parts.maker,
-                                textAlign: TextAlign.left,
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  color: Colors.blueGrey,
-                                ),
-                              ),
-                              SizedBox(
-                                width: 8,
-                              ),
-                              Visibility(
-                                visible: parts.isNew,
-                                child: Container(
-                                  padding: EdgeInsets.all(2),
-                                  height: 14,
-                                  width: 30,
-                                  decoration: BoxDecoration(
-                                    color: Colors.red,
-                                    borderRadius: BorderRadius.circular(10),
+                  Expanded(
+                    child: Container(
+                      padding: EdgeInsets.all(
+                        SizeConfig.blockSizeHorizontal * 2,
+                      ),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFEDECF2),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Column(
+                        children: [
+                          Container(
+                            height: 16,
+                            width: double.infinity,
+                            child: Row(
+                              children: [
+                                Text(
+                                  parts.maker,
+                                  textAlign: TextAlign.left,
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.bold,
+                                    color: mainColor,
                                   ),
-                                  child: Text(
-                                    'NEW',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontSize: 10,
-                                      color: Colors.white,
+                                ),
+                                SizedBox(
+                                  width: 8,
+                                ),
+                                Visibility(
+                                  visible: parts.isNew,
+                                  child: Container(
+                                    padding: EdgeInsets.all(2),
+                                    height: 14,
+                                    width: 30,
+                                    decoration: BoxDecoration(
+                                      color: Colors.red,
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    child: Text(
+                                      'NEW',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        fontSize: 10,
+                                        color: Colors.white,
+                                      ),
                                     ),
                                   ),
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          height: 2,
-                        ),
-                        Container(
-                          height: 50,
-                          width: double.infinity,
-                          alignment: Alignment.centerLeft,
-                          decoration: BoxDecoration(
-                              //color: Colors.red,
-                              ),
-                          child: Text(
-                            parts.title,
-                            maxLines: 3,
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
+                                )
+                              ],
                             ),
                           ),
-                        ),
-                        Container(
-                          height: 26,
-                          alignment: Alignment.centerLeft,
-                          decoration: BoxDecoration(
-                              //color: Colors.blue,
+                          Container(
+                            height: 60,
+                            width: double.infinity,
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              parts.title,
+                              maxLines: 3,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: mainColor,
                               ),
-                          child: Row(
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: stars,
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  SizedBox(
-                                    width: 2,
-                                  ),
-                                  Text(
-                                    parts.evaluation ?? '-',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.blue),
-                                  )
-                                ],
-                              ),
-                            ],
+                            ),
                           ),
-                        ),
-                        Container(
-                          height: 30,
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                              //olor: Colors.red,
-                              ),
-                          child: Text(
-                            parts.price,
-                            textAlign: TextAlign.left,
-                            style: TextStyle(
-                                fontSize: 24, color: Colors.redAccent),
+                          Container(
+                            height: 26,
+                            alignment: Alignment.centerLeft,
+                            decoration: BoxDecoration(
+                                //color: Colors.blue,
+                                ),
+                            child: Row(
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: stars,
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    SizedBox(
+                                      width: 2,
+                                    ),
+                                    Text(
+                                      parts.evaluation ?? '-',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: mainColor),
+                                    )
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
+                          Padding(
+                            padding: const EdgeInsets.only(left: 3),
+                            child: Container(
+                              height: 30,
+                              width: double.infinity,
+                              child: Text(
+                                parts.price,
+                                textAlign: TextAlign.left,
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.redAccent,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   )
                 ],
