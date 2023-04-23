@@ -83,23 +83,15 @@ class partsListCell extends ConsumerWidget {
                 parts.specs = detail.specs;
                 parts.dataFiled = FilledDataProgress.filledForDetail;
                 listProvider[partsListIndex] = parts;
-                ref
-                    .watch(partsListProvider.notifier)
-                    .update((state) => listProvider);
+                ref.watch(partsListProvider.notifier).update((state) => listProvider);
               }
               ref.watch(detailPageProvider.notifier).update((state) => 0);
               final bool? selected = await Navigator.push(
                 context,
                 PageRouteBuilder(
-                    pageBuilder: (context, animation, secondaryAnimation) =>
-                        PartsDetailPage(partsListIndex, stars),
-                    transitionsBuilder:
-                        (context, animation, secondaryAnimation, child) {
-                      return CupertinoPageTransition(
-                          primaryRouteAnimation: animation,
-                          secondaryRouteAnimation: secondaryAnimation,
-                          linearTransition: false,
-                          child: child);
+                    pageBuilder: (context, animation, secondaryAnimation) => PartsDetailPage(partsListIndex, stars),
+                    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                      return CupertinoPageTransition(primaryRouteAnimation: animation, secondaryRouteAnimation: secondaryAnimation, linearTransition: false, child: child);
                     }),
               );
             },
@@ -125,10 +117,7 @@ class partsListCell extends ConsumerWidget {
                     ),
                     child: Stack(
                       children: [
-                        Container(
-                            width: SizeConfig.blockSizeHorizontal * 45,
-                            height: 160 - SizeConfig.blockSizeHorizontal * 0.5,
-                            child: Image.network(parts.image)),
+                        Container(width: SizeConfig.blockSizeHorizontal * 45, height: 160 - SizeConfig.blockSizeHorizontal * 0.5, child: Image.network(parts.image)),
                       ],
                     ),
                   ),
@@ -221,9 +210,7 @@ class partsListCell extends ConsumerWidget {
                                     ),
                                     Text(
                                       parts.evaluation ?? '-',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          color: mainColor),
+                                      style: TextStyle(fontWeight: FontWeight.bold, color: mainColor),
                                     )
                                   ],
                                 ),
@@ -233,7 +220,7 @@ class partsListCell extends ConsumerWidget {
                           Padding(
                             padding: const EdgeInsets.only(left: 3),
                             child: Container(
-                              height: 30,
+                              height: 25,
                               width: double.infinity,
                               child: Text(
                                 parts.price,

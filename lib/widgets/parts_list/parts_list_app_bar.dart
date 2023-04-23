@@ -17,6 +17,9 @@ class PartsListAppBar extends ConsumerWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final controller = TextEditingController(text: ref.watch(searchTextProvider));
+    controller.selection = TextSelection.fromPosition(
+      TextPosition(offset: controller.text.length),
+    );
     return WillPopScope(
       onWillPop: () async {
         ref.read(searchTextProvider.notifier).update((state) => '');

@@ -3,12 +3,16 @@ import 'package:custom_pc/pages/parts_list_cell.dart';
 import 'package:custom_pc/pages/parts_list_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '/config/size_config.dart';
 import 'models/pc_parts.dart';
 
 void main() {
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    statusBarColor: Colors.transparent,
+  ));
   runApp(const ProviderScope(child: MyApp()));
 }
 
@@ -97,23 +101,15 @@ class RootPage extends ConsumerWidget {
           children: [
             ElevatedButton(
               onPressed: () async {
-                final partsListUrl =
-                    'https://kakaku.com/search_results/%83O%83%89%83t%83B%83b%83N%83%7B%81%5B%83h/?category=0001%2C0028&act=Suggest';
-                final targetUrlProviderController =
-                    ref.watch(targetUrlProvider.notifier);
+                final partsListUrl = 'https://kakaku.com/search_results/%83O%83%89%83t%83B%83b%83N%83%7B%81%5B%83h/?category=0001%2C0028&act=Suggest';
+                final targetUrlProviderController = ref.watch(targetUrlProvider.notifier);
                 targetUrlProviderController.update((state) => partsListUrl);
                 final bool? selected = await Navigator.push(
                   context,
                   PageRouteBuilder(
-                      pageBuilder: (context, animation, secondaryAnimation) =>
-                          PartsListPage(partsListUrl),
-                      transitionsBuilder:
-                          (context, animation, secondaryAnimation, child) {
-                        return CupertinoPageTransition(
-                            primaryRouteAnimation: animation,
-                            secondaryRouteAnimation: secondaryAnimation,
-                            linearTransition: false,
-                            child: child);
+                      pageBuilder: (context, animation, secondaryAnimation) => PartsListPage(partsListUrl),
+                      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                        return CupertinoPageTransition(primaryRouteAnimation: animation, secondaryRouteAnimation: secondaryAnimation, linearTransition: false, child: child);
                       }),
                 );
               },
@@ -164,8 +160,7 @@ class _PartsListPage extends ConsumerWidget {
             itemCount: partsList.length,
             itemBuilder: (BuildContext context, int index) {
               final cell = partsListCell(index);
-              cell.stars = cell.describeStars(
-                  ref.watch(partsListFutureProvider).value![index]);
+              cell.stars = cell.describeStars(ref.watch(partsListFutureProvider).value![index]);
               return cell;
             }),
       ),
