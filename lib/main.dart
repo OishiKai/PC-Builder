@@ -1,5 +1,6 @@
 import 'package:custom_pc/domain/parts_list_parser.dart';
 import 'package:custom_pc/pages/parts_list_cell.dart';
+import 'package:custom_pc/pages/parts_list_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -17,6 +18,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: RootPage(),
     );
   }
@@ -138,8 +140,8 @@ final partsListProvider = StateProvider((ref) {
   return ref.watch(partsListFutureProvider).value;
 });
 
-class PartsListPage extends ConsumerWidget {
-  const PartsListPage(this.partsListUrl);
+class _PartsListPage extends ConsumerWidget {
+  const _PartsListPage(this.partsListUrl);
   final String partsListUrl;
 
   @override
@@ -153,17 +155,20 @@ class PartsListPage extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(),
-      body: ListView.builder(
-          padding: EdgeInsets.all(
-            SizeConfig.blockSizeHorizontal * 1,
-          ),
-          itemCount: partsList.length,
-          itemBuilder: (BuildContext context, int index) {
-            final cell = partsListCell(index);
-            cell.stars = cell.describeStars(
-                ref.watch(partsListFutureProvider).value![index]);
-            return cell;
-          }),
+      body: Scaffold(
+        backgroundColor: Colors.white,
+        body: ListView.builder(
+            padding: EdgeInsets.all(
+              SizeConfig.blockSizeHorizontal * 1,
+            ),
+            itemCount: partsList.length,
+            itemBuilder: (BuildContext context, int index) {
+              final cell = partsListCell(index);
+              cell.stars = cell.describeStars(
+                  ref.watch(partsListFutureProvider).value![index]);
+              return cell;
+            }),
+      ),
     );
   }
 }
