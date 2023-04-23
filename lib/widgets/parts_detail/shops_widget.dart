@@ -41,13 +41,18 @@ class ShopsWidget extends StatelessWidget {
                   const SizedBox(
                     width: 8,
                   ),
-                  Text(
-                    shops[i].shopName,
-                    softWrap: false,
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: mainColor,
+                  Container(
+                    width: 170,
+                    child: Text(
+                      shops[i].shopName,
+                      softWrap: false,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: mainColor,
+                      ),
                     ),
                   ),
                   const Expanded(child: SizedBox()),

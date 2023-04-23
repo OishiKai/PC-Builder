@@ -18,16 +18,16 @@ class PcParts {
   List<String>? fullScaleImages;
 
   PcParts(
-      this.maker,
-      this.isNew,
-      this.title,
-      this.star,
-      this.evaluation,
-      this.price,
-      this.ranked,
-      this.image,
-      this.detailUrl,
-      );
+    this.maker,
+    this.isNew,
+    this.title,
+    this.star,
+    this.evaluation,
+    this.price,
+    this.ranked,
+    this.image,
+    this.detailUrl,
+  );
 
   void updateProgress() {
     if (fullScaleImages != null) {
@@ -41,3 +41,19 @@ enum FilledDataProgress {
   filledForDetail,
 }
 
+enum Category {
+  cpu('CPU', '2C0027'),
+  cpuCooler('CPUクーラー', '2C0030'),
+  memory('メモリー', '2C0033'),
+  motherBoard('マザーボード', '2C0036'),
+  graphicsCard('グラフィックボード・ビデオカード', '2C0028'),
+  ssd('SSD', '2C0070'),
+  pcCase('PCケース', '2C0032'),
+  powerUnit('電源ユニット', '2C0035'),
+  caseFan('ケースファン', '2C0089'),
+  monitor('PCモニター・液晶ディスプレイ', '2C0015');
+
+  final String categoryName;
+  final String categoryParameter;
+  const Category(this.categoryName, this.categoryParameter);
+}
