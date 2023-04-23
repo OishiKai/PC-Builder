@@ -44,6 +44,7 @@ dependencies:
   flutter_riverpod: ^2.2.0
   clippy_flutter: ^2.0.0-nullsafety.0
   material_segmented_control: ^4.1.1
+  euc: ^1.0.6+8
 
 dev_dependencies:
   flutter_test:
