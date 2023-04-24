@@ -1,5 +1,5 @@
-import 'package:custom_pc/pages/parts_list_cell.dart';
 import 'package:custom_pc/widgets/parts_list/parts_list_app_bar.dart';
+import 'package:custom_pc/widgets/parts_list/parts_list_cell.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -8,9 +8,7 @@ import '../main.dart';
 import '../models/pc_parts.dart';
 
 class PartsListPage extends ConsumerWidget {
-  PartsListPage(this.partsListUrl, {super.key});
-
-  final String partsListUrl;
+  const PartsListPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -32,8 +30,7 @@ class PartsListPage extends ConsumerWidget {
           itemCount: partsList.length,
           itemBuilder: (BuildContext context, int index) {
             final cell = partsListCell(index);
-            cell.stars = cell.describeStars(
-                ref.watch(partsListFutureProvider).value![index]);
+            cell.stars = cell.describeStars(ref.watch(partsListFutureProvider).value![index]);
             return cell;
           }),
     );
