@@ -1,4 +1,5 @@
 import 'package:custom_pc/domain/parts_list_parser.dart';
+import 'package:custom_pc/pages/category_home_page.dart';
 import 'package:custom_pc/widgets/parts_list/parts_list_cell.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

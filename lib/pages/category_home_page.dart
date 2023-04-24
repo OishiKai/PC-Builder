@@ -1,0 +1,105 @@
+import 'package:custom_pc/models/pc_parts.dart';
+import 'package:flutter/material.dart';
+
+class CategoryHomePage extends StatelessWidget {
+  CategoryHomePage(
+    this.category, {
+    super.key,
+  });
+
+  final Category category;
+  final _controller = TextEditingController();
+  final _mainColor = const Color.fromRGBO(60, 130, 80, 1);
+  final _subColor = const Color(0xFFEDECF2);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: _mainColor,
+      body: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: () => FocusScope.of(context).unfocus(),
+        child: ListView(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 16),
+              child: Container(
+                width: double.infinity,
+                height: 1000,
+                decoration: BoxDecoration(
+                  color: _subColor,
+                  borderRadius: BorderRadius.circular(40),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 30, right: 16),
+                      child: Row(children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 16, right: 16),
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
+                            child: Icon(
+                              Icons.arrow_back_ios,
+                              size: 30,
+                              color: _mainColor,
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: _mainColor,
+                              borderRadius: BorderRadius.circular(40),
+                            ),
+                            child: TextField(
+                              controller: _controller,
+                              decoration: const InputDecoration(
+                                hintText: 'Search',
+                                hintStyle: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
+                                prefixIcon: Icon(
+                                  Icons.search,
+                                  color: Colors.white,
+                                ),
+                                contentPadding: EdgeInsets.only(top: 14, left: 8.0),
+                                enabledBorder: InputBorder.none,
+                                focusedBorder: InputBorder.none,
+                                isDense: true,
+                              ),
+                              onSubmitted: (text) {},
+                            ),
+                          ),
+                        ),
+                      ]),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Container(
+                        height: 60,
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          category.categoryName,
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: _mainColor,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
