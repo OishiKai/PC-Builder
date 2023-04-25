@@ -1,3 +1,4 @@
+import 'package:custom_pc/domain/category_home_page/graphics_card_home_parser.dart';
 import 'package:custom_pc/domain/parts_list_parser.dart';
 import 'package:custom_pc/pages/category_home_page.dart';
 import 'package:custom_pc/widgets/parts_list/parts_list_cell.dart';
@@ -44,6 +45,8 @@ class RootPage extends ConsumerWidget {
                 final partsListUrl = 'https://kakaku.com/search_results/%83O%83%89%83t%83B%83b%83N%83%7B%81%5B%83h/?category=0001%2C0028&act=Suggest';
                 final targetUrlProviderController = ref.watch(targetUrlProvider.notifier);
                 targetUrlProviderController.update((state) => partsListUrl);
+
+                GraphicsCardHomeParser.fetchAndParse();
                 final bool? selected = await Navigator.push(
                   context,
                   PageRouteBuilder(
