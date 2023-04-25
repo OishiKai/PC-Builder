@@ -17,7 +17,7 @@ class CategoryHomeData {
 class GraphicsCardHome {
   final List<String> nvidiaChips;
   final List<String> amdChips;
-  final List<PcParts> recommendParts;
+  final List<PcParts> popularParts;
 
-  GraphicsCardHome(this.nvidiaChips, this.amdChips, this.recommendParts);
+  GraphicsCardHome(this.nvidiaChips, this.amdChips, this.popularParts);
 }
