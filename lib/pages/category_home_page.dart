@@ -1,7 +1,14 @@
 import 'package:custom_pc/models/pc_parts.dart';
+import 'package:custom_pc/pages/parts_list_page.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class CategoryHomePage extends StatelessWidget {
+import '../domain/url_builder.dart';
+import '../main.dart';
+import '../widgets/parts_list/parts_list_app_bar.dart';
+
+class CategoryHomePage extends ConsumerWidget {
   CategoryHomePage(
     this.category, {
     super.key,
@@ -12,7 +19,7 @@ class CategoryHomePage extends StatelessWidget {
   final _mainColor = const Color.fromRGBO(60, 130, 80, 1);
   final _subColor = const Color(0xFFEDECF2);
 
-  List<String> urls = [
+  final List<String> urls = [
     "https://img1.kakaku.k-img.com/images/productimage/fullscale/K0001529514.jpg",
     "https://img1.kakaku.k-img.com/images/productimage/fullscale/K0001529513.jpg",
     "https://img1.kakaku.k-img.com/images/productimage/fullscale/K0001391662.jpg",
@@ -20,7 +27,22 @@ class CategoryHomePage extends StatelessWidget {
   ];
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    searchToPartsListPage(String text) async {
+      final url = UrlBuilder.searchPartsList(Category.graphicsCard, text);
+      ref.read(targetUrlProvider.notifier).update((state) => url);
+      ref.read(searchTextProvider.notifier).update((state) => text);
+
+      Navigator.push(
+        context,
+        PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) => const PartsListPage(),
+            transitionsBuilder: (context, animation, secondaryAnimation, child) {
+              return CupertinoPageTransition(primaryRouteAnimation: animation, secondaryRouteAnimation: secondaryAnimation, linearTransition: false, child: child);
+            }),
+      );
+    }
+
     return Scaffold(
       backgroundColor: _mainColor,
       body: GestureDetector(
@@ -63,6 +85,10 @@ class CategoryHomePage extends StatelessWidget {
                             ),
                             child: TextField(
                               controller: _controller,
+                              cursorColor: Colors.white,
+                              style: const TextStyle(
+                                color: Colors.white,
+                              ),
                               decoration: const InputDecoration(
                                 hintText: 'Search',
                                 hintStyle: TextStyle(
@@ -78,7 +104,13 @@ class CategoryHomePage extends StatelessWidget {
                                 focusedBorder: InputBorder.none,
                                 isDense: true,
                               ),
-                              onSubmitted: (text) {},
+                              onSubmitted: (text) {
+                                final trim = text.trim();
+                                if (text == '') {
+                                  return;
+                                }
+                                searchToPartsListPage(trim);
+                              },
                             ),
                           ),
                         ),
@@ -113,7 +145,7 @@ class CategoryHomePage extends StatelessWidget {
                                 size: 24,
                                 color: _mainColor,
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 16,
                               ),
                               Text(
@@ -145,7 +177,36 @@ class CategoryHomePage extends StatelessWidget {
                           scrollDirection: Axis.horizontal,
                           child: Row(
                             children: [
-                              SizedBox(
+                              const SizedBox(
+                                width: 16,
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  searchToPartsListPage('Geforce RTX 4090');
+                                },
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(40),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          'Geforce RTX 4090',
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold,
+                                            color: _mainColor,
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(
                                 width: 16,
                               ),
                               Container(
@@ -169,31 +230,7 @@ class CategoryHomePage extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              SizedBox(
-                                width: 16,
-                              ),
-                              Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(40),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Row(
-                                    children: [
-                                      Text(
-                                        'Geforce RTX 4090',
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold,
-                                          color: _mainColor,
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 16,
                               ),
                               Container(
@@ -245,24 +282,29 @@ class CategoryHomePage extends StatelessWidget {
                               const SizedBox(
                                 width: 16,
                               ),
-                              Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(40),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Row(
-                                    children: [
-                                      Text(
-                                        'Radeon RX 7900 XTX',
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold,
-                                          color: _mainColor,
-                                        ),
-                                      )
-                                    ],
+                              InkWell(
+                                onTap: () {
+                                  searchToPartsListPage('Radeon RX 7900 XTX');
+                                },
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(40),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          'Radeon RX 7900 XTX',
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold,
+                                            color: _mainColor,
+                                          ),
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
@@ -290,7 +332,7 @@ class CategoryHomePage extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 16,
                               ),
                               Container(
@@ -348,7 +390,7 @@ class CategoryHomePage extends StatelessWidget {
                           padding: const EdgeInsets.only(left: 16),
                           child: GridView.count(
                             childAspectRatio: 0.7,
-                            physics: NeverScrollableScrollPhysics(),
+                            physics: const NeverScrollableScrollPhysics(),
                             crossAxisCount: 2,
                             shrinkWrap: true,
                             children: [
@@ -366,7 +408,7 @@ class CategoryHomePage extends StatelessWidget {
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         Container(
-                                          margin: EdgeInsets.all(8),
+                                          margin: const EdgeInsets.all(8),
                                           child: Image.network(
                                             urls[i],
                                           ),
@@ -382,7 +424,7 @@ class CategoryHomePage extends StatelessWidget {
                                           ),
                                         ),
                                         Container(
-                                          padding: EdgeInsets.only(bottom: 6),
+                                          padding: const EdgeInsets.only(bottom: 6),
                                           alignment: Alignment.centerLeft,
                                           child: Text(
                                             "GeForce RTX 3060 VENTUS 2X 12G OC V2 [PCIExp 12GB] パソコン工房限定モデル",
@@ -395,10 +437,10 @@ class CategoryHomePage extends StatelessWidget {
                                             ),
                                           ),
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 6,
                                         ),
-                                        Text(
+                                        const Text(
                                           '¥99,000',
                                           style: TextStyle(
                                             fontSize: 20,
@@ -414,6 +456,9 @@ class CategoryHomePage extends StatelessWidget {
                           ),
                         )
                       ],
+                    ),
+                    const SizedBox(
+                      height: 16,
                     ),
                   ],
                 ),
