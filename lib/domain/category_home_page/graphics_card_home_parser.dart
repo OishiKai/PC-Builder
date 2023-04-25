@@ -17,16 +17,28 @@ class GraphicsCardHomeParser {
   // 売れ筋ランキングのリスト
   static const _popularPartsListSelector = '#ct087 > div.contMain > div.contMainIn > ol > li';
 
-  // パーツの画像
+  // 売れ筋ランキングのパーツの画像
   static const _partsImageSelector = 'div > div.itemImg > img';
 
+  // 売れ筋ランキングのメーカー名
   static const _makerSelector = 'div > div.itemIn2 > p.makerName';
+
+  // 売れ筋ランキングの商品名
   static const _titleSelector = 'div > div.itemIn2 > p:nth-child(3)';
+
+  // 売れ筋ランキングの価格
   static const _priceSelector = 'div > div.itemIn3 > p.itemPrice';
+
+  // 売れ筋ランキングの星の数 "5.00" のような形式
   static const _starSelector = 'div > div.itemIn3 > p.starRate > span.num1';
+
+  // 売れ筋ランキングの評価数 "（2人）"のような形式
   static const _evaluationSelector = 'div > div.itemIn3 > p.starRate > span.num2';
-  static const _detailUrlSecelctor = 'div > div.itemIn2 > p:nth-child(3) > a';
-  //#ct087 > div.contMain > div.contMainIn > ol > li:nth-child(1) > div > div.itemIn2 > p.itemName.is-ellipsis
+
+  // 詳細画面へのURL
+  static const _detailUrlSelector = 'div > div.itemIn2 > p:nth-child(3) > a';
+
+  // 検索ホーム画面での人気製品の表示数　偶数にすべし
   static const _popularPartsRequired = 4;
 
   static Document? _document;
@@ -35,7 +47,7 @@ class GraphicsCardHomeParser {
     final nvidiaChips = _parseNvidiaChips();
     final amdChips = _parseAmdChips();
     final partsList = _parsePopularPats();
-
+    // 同メソッド内で _document に代入している為、ここのnullは握りつぶす
     return GraphicsCardHome(nvidiaChips!, amdChips!, partsList!);
   }
 
@@ -77,11 +89,17 @@ class GraphicsCardHomeParser {
       final maker = element.querySelectorAll(_makerSelector)[0].text;
       final title = element.querySelectorAll(_titleSelector)[0].text;
       final price = element.querySelectorAll(_priceSelector)[0].text;
+
+      // 取得時の形式は "4.95" のようなかたち　PcPartsオブジェクトに渡す際は　"49"のようなかたちにする
       final tempStar = element.querySelectorAll(_starSelector)[0].text;
+
+      // 取得時の形式は "（2人）"のようなかたち　PcPartsオブジェクトには "4.95(5)" のようなかたちで渡す為、tempStarと組み合わせる
       final evaluation = '$tempStar${element.querySelectorAll(_evaluationSelector)[0].text.replaceFirst('人', '').replaceFirst('（', '(').replaceFirst('）', ')')}';
-      final detailUrl = element.querySelectorAll(_detailUrlSecelctor)[0].attributes['href'];
+      final detailUrl = element.querySelectorAll(_detailUrlSelector)[0].attributes['href'];
+
       int? star;
       if (tempStar != '—') {
+        // "4.95" -> "49" に変換
         final doubleStar = double.parse(tempStar);
         star = doubleStar * 100 ~/ 10;
       }
