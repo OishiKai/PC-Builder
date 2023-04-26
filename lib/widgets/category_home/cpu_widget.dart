@@ -2,7 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../config/size_config.dart';
+import '../../domain/detail_parser.dart';
+import '../../domain/url_builder.dart';
 import '../../main.dart';
+import '../../models/pc_parts.dart';
+import '../../pages/parts_detail_page.dart';
+import '../../pages/parts_list_page.dart';
+import '../parts_list/parts_list_app_bar.dart';
 
 class CpuWidget extends ConsumerWidget {
   const CpuWidget({super.key});
@@ -12,7 +18,16 @@ class CpuWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     SizeConfig().init(context);
     final categoryHomeData = ref.watch(categoryHomeDataProvider);
-    final homeData = categoryHomeData.graphicsCard!;
+    final homeData = categoryHomeData.cpu!;
+
+    searchToPartsListPage(String text) async {
+      final searchText = text.replaceFirst('シリーズ', '');
+      final url = UrlBuilder.searchPartsList(Category.cpu, searchText);
+      ref.read(targetUrlProvider.notifier).update((state) => url);
+      ref.read(searchTextProvider.notifier).update((state) => searchText);
+
+      Navigator.push(context, MaterialPageRoute(builder: (context) => PartsListPage()));
+    }
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -32,7 +47,7 @@ class CpuWidget extends ConsumerWidget {
                 width: 16,
               ),
               Text(
-                '搭載チップ',
+                '世代',
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: _mainColor),
               ),
             ],
@@ -44,7 +59,7 @@ class CpuWidget extends ConsumerWidget {
         Padding(
           padding: const EdgeInsets.only(left: 16),
           child: Text(
-            'NVIDIA',
+            'intel',
             textAlign: TextAlign.start,
             style: TextStyle(
               fontSize: 30,
@@ -63,12 +78,12 @@ class CpuWidget extends ConsumerWidget {
               const SizedBox(
                 width: 16,
               ),
-              for (int i = 0; i < homeData.nvidiaChips.length; i++)
+              for (int i = 0; i < homeData.intelChips.length; i++)
                 Row(
                   children: [
                     InkWell(
                       onTap: () {
-                        searchToPartsListPage(homeData.nvidiaChips[i]);
+                        searchToPartsListPage(homeData.intelChips[i]);
                       },
                       child: Container(
                         decoration: BoxDecoration(
@@ -80,7 +95,7 @@ class CpuWidget extends ConsumerWidget {
                           child: Row(
                             children: [
                               Text(
-                                homeData.nvidiaChips[i],
+                                homeData.intelChips[i],
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
@@ -206,7 +221,7 @@ class CpuWidget extends ConsumerWidget {
                       homeData.popularParts[i].shops = detail.partsShops;
                       homeData.popularParts[i].specs = detail.specs;
                       homeData.popularParts[i].dataFiled = FilledDataProgress.filledForDetail;
-                      categoryHomeData.graphicsCard = homeData;
+                      categoryHomeData.cpu = homeData;
 
                       ref.read(categoryHomeDataProvider.notifier).update((state) => categoryHomeData);
                     }
@@ -223,9 +238,16 @@ class CpuWidget extends ConsumerWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Container(
-                          margin: const EdgeInsets.all(8),
-                          child: Image.network(
-                            homeData.popularParts[i].image,
+                          margin: const EdgeInsets.only(top: 8, bottom: 8),
+                          child: Row(
+                            children: [
+                              Spacer(),
+                              Image.network(
+                                homeData.popularParts[i].image,
+                                height: 110,
+                              ),
+                              Spacer(),
+                            ],
                           ),
                         ),
                         Text(
