@@ -1,13 +1,12 @@
 import 'package:custom_pc/domain/category_home_page/graphics_card_home_parser.dart';
 import 'package:custom_pc/domain/parts_list_parser.dart';
+import 'package:custom_pc/models/category_home_data.dart';
 import 'package:custom_pc/pages/category_home_page.dart';
-import 'package:custom_pc/widgets/parts_list/parts_list_cell.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '/config/size_config.dart';
 import 'models/pc_parts.dart';
 
 void main() {
@@ -46,11 +45,13 @@ class RootPage extends ConsumerWidget {
                 final targetUrlProviderController = ref.watch(targetUrlProvider.notifier);
                 targetUrlProviderController.update((state) => partsListUrl);
 
-                GraphicsCardHomeParser.fetchAndParse();
+                final latestHomeData = ref.read(categoryHomeDataProvider);
+                latestHomeData.graphicsCard = await GraphicsCardHomeParser.fetchAndParse();
+                ref.read(categoryHomeDataProvider.notifier).update((state) => latestHomeData);
                 final bool? selected = await Navigator.push(
                   context,
                   PageRouteBuilder(
-                      pageBuilder: (context, animation, secondaryAnimation) => CategoryHomePage(Category.graphicsCard),
+                      pageBuilder: (context, animation, secondaryAnimation) => CategoryHomePage(Category.cpu),
                       transitionsBuilder: (context, animation, secondaryAnimation, child) {
                         return CupertinoPageTransition(primaryRouteAnimation: animation, secondaryRouteAnimation: secondaryAnimation, linearTransition: false, child: child);
                       }),
@@ -65,6 +66,10 @@ class RootPage extends ConsumerWidget {
   }
 }
 
+final categoryHomeDataProvider = StateProvider<CategoryHomeData>((ref) {
+  return CategoryHomeData();
+});
+
 final targetUrlProvider = StateProvider((ref) {
   return "";
 });
@@ -78,35 +83,3 @@ final partsListFutureProvider = FutureProvider((ref) async {
 final partsListProvider = StateProvider((ref) {
   return ref.watch(partsListFutureProvider).value;
 });
-
-class _PartsListPage extends ConsumerWidget {
-  const _PartsListPage(this.partsListUrl);
-  final String partsListUrl;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    SizeConfig().init(context);
-    List<PcParts> partsList = [];
-    final partsListProvider = ref.watch(partsListFutureProvider);
-    if (partsListProvider.value != null) {
-      partsList = partsListProvider.value!;
-    }
-
-    return Scaffold(
-      appBar: AppBar(),
-      body: Scaffold(
-        backgroundColor: Colors.white,
-        body: ListView.builder(
-            padding: EdgeInsets.all(
-              SizeConfig.blockSizeHorizontal * 1,
-            ),
-            itemCount: partsList.length,
-            itemBuilder: (BuildContext context, int index) {
-              final cell = partsListCell(index);
-              cell.stars = cell.describeStars(ref.watch(partsListFutureProvider).value![index]);
-              return cell;
-            }),
-      ),
-    );
-  }
-}

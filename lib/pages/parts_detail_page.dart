@@ -1,12 +1,13 @@
 import 'package:clippy_flutter/arc.dart';
 import 'package:custom_pc/config/size_config.dart';
+import 'package:custom_pc/models/pc_parts.dart';
 import 'package:custom_pc/widgets/parts_detail/shops_widget.dart';
 import 'package:custom_pc/widgets/parts_detail/specs_widget.dart';
+import 'package:custom_pc/widgets/parts_detail/star_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_segmented_control/material_segmented_control.dart';
 
-import '../main.dart';
 import '../widgets/parts_detail/detail_bottom_bar.dart';
 import '../widgets/parts_detail/full_scale_image_slider.dart';
 
@@ -16,28 +17,18 @@ final detailPageProvider = StateProvider<int>((ref) {
 });
 
 class PartsDetailPage extends ConsumerWidget {
-  PartsDetailPage(this.partsListIndex, this.stars, {Key? key})
-      : super(key: key);
-
-  final int partsListIndex;
-
+  PartsDetailPage(this.parts, {Key? key}) : super(key: key);
+  final PcParts parts;
   final Map<int, Widget> _children = {
     0: const Text('販売店'),
     1: const Text("　詳細スペック  　"),
   };
 
   final mainColor = const Color.fromRGBO(60, 130, 80, 1);
-  final List<Icon> stars;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     SizeConfig().init(context);
-    final listProvider = ref.watch(partsListProvider);
-    if (listProvider == null) {
-      return const Scaffold();
-    }
-    final targetParts = listProvider[partsListIndex];
-
     return Scaffold(
       backgroundColor: Colors.white,
       body: ListView(
@@ -74,7 +65,7 @@ class PartsDetailPage extends ConsumerWidget {
           ),
           Padding(
             padding: const EdgeInsets.only(left: 16),
-            child: FullScaleImageSlider(targetParts.fullScaleImages!),
+            child: FullScaleImageSlider(parts.fullScaleImages!),
           ),
           Arc(
             edge: Edge.TOP,
@@ -91,11 +82,8 @@ class PartsDetailPage extends ConsumerWidget {
                     Container(
                       padding: const EdgeInsets.only(top: 50),
                       child: Text(
-                        targetParts.maker,
-                        style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: mainColor),
+                        parts.maker,
+                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: mainColor),
                       ),
                     ),
                     Padding(
@@ -104,11 +92,8 @@ class PartsDetailPage extends ConsumerWidget {
                         children: [
                           Flexible(
                             child: Text(
-                              targetParts.title,
-                              style: TextStyle(
-                                  fontSize: 28,
-                                  fontWeight: FontWeight.bold,
-                                  color: mainColor),
+                              parts.title,
+                              style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: mainColor),
                             ),
                           ),
                         ],
@@ -119,13 +104,11 @@ class PartsDetailPage extends ConsumerWidget {
                       children: [
                         Padding(
                           padding: const EdgeInsets.only(bottom: 2),
-                          child: Row(
-                            children: stars,
-                          ),
+                          child: StarWidget(45),
                         ),
                         const Expanded(child: SizedBox()),
                         Text(
-                          targetParts.price.replaceFirst(' ～', ''),
+                          parts.price.replaceFirst(' ～', ''),
                           style: const TextStyle(
                             fontSize: 30,
                             fontWeight: FontWeight.bold,
@@ -137,7 +120,7 @@ class PartsDetailPage extends ConsumerWidget {
                     const SizedBox(
                       height: 8,
                     ),
-                    SpecsWidgets(targetParts.specs!).generalSpecs(),
+                    SpecsWidgets(parts.specs!).generalSpecs(),
                     const SizedBox(
                       height: 16,
                     ),
@@ -166,19 +149,15 @@ class PartsDetailPage extends ConsumerWidget {
                         ),
                         unselectedColor: Colors.grey,
                         onSegmentChosen: (index) {
-                          ref
-                              .read(detailPageProvider.notifier)
-                              .update((state) => index);
+                          ref.read(detailPageProvider.notifier).update((state) => index);
                         },
                       ),
                     ),
                     const SizedBox(
                       height: 16,
                     ),
-                    if (ref.watch(detailPageProvider) == 0)
-                      ShopsWidget(targetParts.shops!),
-                    if (ref.watch(detailPageProvider) == 1)
-                      SpecsWidgets(targetParts.specs!),
+                    if (ref.watch(detailPageProvider) == 0) ShopsWidget(parts.shops!),
+                    if (ref.watch(detailPageProvider) == 1) SpecsWidgets(parts.specs!),
                     const SizedBox(
                       height: 50,
                     ),

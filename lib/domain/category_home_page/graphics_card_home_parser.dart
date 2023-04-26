@@ -39,7 +39,7 @@ class GraphicsCardHomeParser {
   static const _detailUrlSelector = 'div > div.itemIn2 > p:nth-child(3) > a';
 
   // 検索ホーム画面での人気製品の表示数　偶数にすべし
-  static const _popularPartsRequired = 4;
+  static const _popularPartsRequired = 8;
 
   static Document? _document;
   static Future<GraphicsCardHome?> fetchAndParse() async {
@@ -95,16 +95,21 @@ class GraphicsCardHomeParser {
 
       // 取得時の形式は "（2人）"のようなかたち　PcPartsオブジェクトには "4.95(5)" のようなかたちで渡す為、tempStarと組み合わせる
       final evaluation = '$tempStar${element.querySelectorAll(_evaluationSelector)[0].text.replaceFirst('人', '').replaceFirst('（', '(').replaceFirst('）', ')')}';
-      final detailUrl = element.querySelectorAll(_detailUrlSelector)[0].attributes['href'];
+
+      // 取得時、末尾に "?lid=20190108pricemenu_ranking_1" のようなパラメータがつくので除き、PartsListPageでの取得時の形式に整形する
+      final detailUrl = '${element.querySelectorAll(_detailUrlSelector)[0].attributes['href']!.split('?lid')[0]}?lid=pc_ksearch_kakakuitem';
 
       int? star;
       if (tempStar != '—') {
         // "4.95" -> "49" に変換
-        final doubleStar = double.parse(tempStar);
-        star = doubleStar * 100 ~/ 10;
+        if (double.tryParse(tempStar) != null) {
+          final doubleStar = double.parse(tempStar);
+          star = doubleStar * 100 ~/ 10;
+        }
       }
 
       partsList.add(PcParts(maker, false, title, star, evaluation, price, '$i', imageUrl!, detailUrl!));
     }
+    return partsList;
   }
 }
