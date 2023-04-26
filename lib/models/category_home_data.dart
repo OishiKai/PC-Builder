@@ -4,10 +4,19 @@ class CategoryHomeData {
   CategoryHomeData();
 
   CpuHome? cpu;
+  CpuCoolerHome? cpuCooler;
   GraphicsCardHome? graphicsCard;
 
   bool isCpuFilled() {
     if (cpu == null) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  bool isCpuCooler() {
+    if (cpuCooler == null) {
       return false;
     } else {
       return true;
@@ -29,6 +38,13 @@ class CpuHome {
   final List<PcParts> popularParts;
 
   CpuHome(this.intelChips, this.amdChips, this.popularParts);
+}
+
+class CpuCoolerHome {
+  final List<String> makers;
+  final List<PcParts> popularParts;
+
+  CpuCoolerHome(this.makers, this.popularParts);
 }
 
 class GraphicsCardHome {
