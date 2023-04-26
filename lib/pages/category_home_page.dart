@@ -1,6 +1,7 @@
 import 'package:custom_pc/config/size_config.dart';
 import 'package:custom_pc/models/pc_parts.dart';
 import 'package:custom_pc/pages/parts_list_page.dart';
+import 'package:custom_pc/widgets/category_home/cpu_cooler_widget.dart';
 import 'package:custom_pc/widgets/category_home/graphics_card_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -24,6 +25,40 @@ class CategoryHomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     SizeConfig().init(context);
+
+    Widget? categoryHomeWidget() {
+      switch (category) {
+        case Category.cpu:
+          return const CpuWidget();
+        case Category.cpuCooler:
+          return const CpuCoolerWidget();
+        case Category.memory:
+          // TODO: Handle this case.
+          break;
+        case Category.motherBoard:
+          // TODO: Handle this case.
+          break;
+        case Category.graphicsCard:
+          return const GraphicsCardWidget();
+          break;
+        case Category.ssd:
+          // TODO: Handle this case.
+          break;
+        case Category.pcCase:
+          // TODO: Handle this case.
+          break;
+        case Category.powerUnit:
+          // TODO: Handle this case.
+          break;
+        case Category.caseFan:
+          // TODO: Handle this case.
+          break;
+        case Category.monitor:
+          // TODO: Handle this case.
+          break;
+      }
+      return null;
+    }
 
     return Scaffold(
       backgroundColor: _mainColor,
@@ -117,8 +152,7 @@ class CategoryHomePage extends ConsumerWidget {
                         ),
                       ),
                     ),
-                    if (category == Category.cpu) const CpuWidget(),
-                    if (category == Category.graphicsCard) const GraphicsCardWidget(),
+                    categoryHomeWidget()!,
                     const SizedBox(
                       height: 16,
                     ),
