@@ -24,8 +24,6 @@ class CategoryHomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     SizeConfig().init(context);
-    final categoryHomeData = ref.watch(categoryHomeDataProvider);
-    final homeData = categoryHomeData.graphicsCard!;
 
     return Scaffold(
       backgroundColor: _mainColor,
@@ -93,7 +91,7 @@ class CategoryHomePage extends ConsumerWidget {
                                 if (text == '') {
                                   return;
                                 }
-                                final url = UrlBuilder.searchPartsList(Category.graphicsCard, trim);
+                                final url = UrlBuilder.searchPartsList(category, trim);
                                 ref.read(targetUrlProvider.notifier).update((state) => url);
                                 ref.read(searchTextProvider.notifier).update((state) => text);
 

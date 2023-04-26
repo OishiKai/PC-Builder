@@ -1,4 +1,4 @@
-import 'package:custom_pc/domain/category_home_page/graphics_card_home_parser.dart';
+import 'package:custom_pc/domain/category_home_page/cpu_home_parser.dart';
 import 'package:custom_pc/domain/parts_list_parser.dart';
 import 'package:custom_pc/models/category_home_data.dart';
 import 'package:custom_pc/pages/category_home_page.dart';
@@ -46,8 +46,9 @@ class RootPage extends ConsumerWidget {
                 targetUrlProviderController.update((state) => partsListUrl);
 
                 final latestHomeData = ref.read(categoryHomeDataProvider);
-                latestHomeData.graphicsCard = await GraphicsCardHomeParser.fetchAndParse();
+                latestHomeData.cpu = await CpuHomeParser.fetchAndParse();
                 ref.read(categoryHomeDataProvider.notifier).update((state) => latestHomeData);
+
                 final bool? selected = await Navigator.push(
                   context,
                   PageRouteBuilder(

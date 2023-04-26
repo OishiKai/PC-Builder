@@ -44,7 +44,7 @@ class DetailParser {
   DetailParser._(this.targetParts);
   static Future<DetailParser> create(PcParts parts) async {
     final self = DetailParser._(parts);
-    self.fullScaleImages = (await self._getFullScaleImageUrls(parts.detailUrl))!;
+    self.fullScaleImages = (await self._getFullScaleImageUrls(parts.detailUrl)) ?? [parts.image];
     self.document = await DocumentRepository.fetchDocument(parts.detailUrl);
     self.partsShops = self._getPartsShops(self.document!);
     self.specs = await self._getSpecs(parts.detailUrl);
