@@ -1,14 +1,14 @@
 import 'package:custom_pc/config/size_config.dart';
 import 'package:custom_pc/models/pc_parts.dart';
 import 'package:custom_pc/pages/parts_list_page.dart';
-import 'package:custom_pc/widgets/category_home/cpu_cooler_widget.dart';
-import 'package:custom_pc/widgets/category_home/graphics_card_widget.dart';
+import 'package:custom_pc/widgets/category_home/category_wigets/cpu_cooler_widget.dart';
+import 'package:custom_pc/widgets/category_home/category_wigets/graphics_card_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../domain/url_builder.dart';
 import '../main.dart';
-import '../widgets/category_home/cpu_widget.dart';
+import '../widgets/category_home/category_wigets/cpu_widget.dart';
 import '../widgets/parts_list/parts_list_app_bar.dart';
 
 class CategoryHomePage extends ConsumerWidget {

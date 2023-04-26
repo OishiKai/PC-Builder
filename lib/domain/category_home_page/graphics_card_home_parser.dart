@@ -42,7 +42,7 @@ class GraphicsCardHomeParser {
   static const _popularPartsRequired = 8;
 
   static Document? _document;
-  static Future<GraphicsCardHome?> fetchAndParse() async {
+  static Future<GraphicsCardHome> fetchAndParse() async {
     _document = await DocumentRepository.fetchDocument(_pageUrl);
     final nvidiaChips = _parseNvidiaChips();
     final amdChips = _parseAmdChips();
