@@ -5,31 +5,9 @@ class CategoryHomeData {
 
   CpuHome? cpu;
   CpuCoolerHome? cpuCooler;
+  MemoryHome? memoryHome;
+  MotherBoardHome? motherBoardHome;
   GraphicsCardHome? graphicsCard;
-
-  bool isCpuFilled() {
-    if (cpu == null) {
-      return false;
-    } else {
-      return true;
-    }
-  }
-
-  bool isCpuCooler() {
-    if (cpuCooler == null) {
-      return false;
-    } else {
-      return true;
-    }
-  }
-
-  bool isGraphicsCardFilled() {
-    if (graphicsCard == null) {
-      return false;
-    } else {
-      return true;
-    }
-  }
 }
 
 class CpuHome {
@@ -45,6 +23,21 @@ class CpuCoolerHome {
   final List<PcParts> popularParts;
 
   CpuCoolerHome(this.makers, this.popularParts);
+}
+
+class MemoryHome {
+  final Map<String, List<String>> memoryTypes;
+  final List<PcParts> popularParts;
+
+  MemoryHome(this.memoryTypes, this.popularParts);
+}
+
+class MotherBoardHome {
+  final List<String> intelSocket;
+  final List<String> amdSocket;
+  final List<PcParts> popularParts;
+
+  MotherBoardHome(this.intelSocket, this.amdSocket, this.popularParts);
 }
 
 class GraphicsCardHome {

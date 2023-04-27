@@ -3,6 +3,7 @@ import 'package:custom_pc/models/pc_parts.dart';
 import 'package:custom_pc/pages/parts_list_page.dart';
 import 'package:custom_pc/widgets/category_home/category_wigets/cpu_cooler_widget.dart';
 import 'package:custom_pc/widgets/category_home/category_wigets/graphics_card_widget.dart';
+import 'package:custom_pc/widgets/category_home/category_wigets/mother_board_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -36,7 +37,7 @@ class CategoryHomePage extends ConsumerWidget {
           // TODO: Handle this case.
           break;
         case Category.motherBoard:
-          // TODO: Handle this case.
+          return const MotherBoardWidget();
           break;
         case Category.graphicsCard:
           return const GraphicsCardWidget();
