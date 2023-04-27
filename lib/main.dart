@@ -1,4 +1,3 @@
-import 'package:custom_pc/domain/category_home_page/mother_board_home_parser.dart';
 import 'package:custom_pc/domain/parts_list_parser.dart';
 import 'package:custom_pc/models/category_home_data.dart';
 import 'package:custom_pc/pages/category_home_page.dart';
@@ -7,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'domain/category_home_page/ssd_home_parser.dart';
 import 'models/pc_parts.dart';
 
 void main() {
@@ -46,13 +46,13 @@ class RootPage extends ConsumerWidget {
                 targetUrlProviderController.update((state) => partsListUrl);
 
                 final latestHomeData = ref.read(categoryHomeDataProvider);
-                latestHomeData.motherBoardHome = await MotherBoardHomeParser.fetchAndParse();
+                latestHomeData.ssd = await SsdHomeParser.fetchAndParse();
                 ref.read(categoryHomeDataProvider.notifier).update((state) => latestHomeData);
-                MotherBoardHomeParser.fetchAndParse();
+
                 final bool? selected = await Navigator.push(
                   context,
                   PageRouteBuilder(
-                      pageBuilder: (context, animation, secondaryAnimation) => CategoryHomePage(Category.motherBoard),
+                      pageBuilder: (context, animation, secondaryAnimation) => CategoryHomePage(Category.ssd),
                       transitionsBuilder: (context, animation, secondaryAnimation, child) {
                         return CupertinoPageTransition(primaryRouteAnimation: animation, secondaryRouteAnimation: secondaryAnimation, linearTransition: false, child: child);
                       }),

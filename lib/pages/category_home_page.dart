@@ -4,6 +4,7 @@ import 'package:custom_pc/pages/parts_list_page.dart';
 import 'package:custom_pc/widgets/category_home/category_wigets/cpu_cooler_widget.dart';
 import 'package:custom_pc/widgets/category_home/category_wigets/graphics_card_widget.dart';
 import 'package:custom_pc/widgets/category_home/category_wigets/mother_board_widget.dart';
+import 'package:custom_pc/widgets/category_home/category_wigets/ssd_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -43,7 +44,7 @@ class CategoryHomePage extends ConsumerWidget {
           return const GraphicsCardWidget();
           break;
         case Category.ssd:
-          // TODO: Handle this case.
+          return const SsdWidget();
           break;
         case Category.pcCase:
           // TODO: Handle this case.

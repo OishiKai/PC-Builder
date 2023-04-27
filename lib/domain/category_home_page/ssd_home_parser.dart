@@ -1,18 +1,12 @@
+import 'package:custom_pc/domain/document_repository.dart';
+import 'package:custom_pc/models/category_home_data.dart';
 import 'package:html/dom.dart';
 
-import '../../models/category_home_data.dart';
 import '../../models/pc_parts.dart';
-import '../document_repository.dart';
 
-class MotherBoardHomeParser {
+class SsdHomeParser {
   // パース対象のURL
-  static const _pageUrl = 'https://kakaku.com/pc/motherboard/';
-
-  // intelソケット情報
-  static const _socketIntelSelector = '#menu > div:nth-child(21) > div > div:nth-child(9) > ul > li';
-
-  // intelソケット情報
-  static const _socketAmdSelector = '#menu > div:nth-child(21) > div > div:nth-child(11) > ul > li';
+  static const _pageUrl = 'https://kakaku.com/pc/ssd/';
 
   // 売れ筋ランキングのリスト
   static const _popularPartsListSelector = '#ct087 > div.contMain > div.contMainIn > ol > li';
@@ -42,40 +36,11 @@ class MotherBoardHomeParser {
   static const _popularPartsRequired = 8;
 
   static Document? _document;
-  static Future<MotherBoardHome?> fetchAndParse() async {
+  static Future<SsdHome?> fetchAndParse() async {
     _document = await DocumentRepository.fetchDocument(_pageUrl);
-    final intelSockets = _parseIntelSockets()!;
-    final amdSockets = _parseAmdSockets()!;
-    final parts = _parsePopularPats()!;
 
     // 同メソッド内で _document に代入している為、ここのnullは握りつぶす
-    return MotherBoardHome(intelSockets, amdSockets, parts);
-  }
-
-  static List<String>? _parseIntelSockets() {
-    if (_document == null) {
-      return null;
-    }
-
-    final List<String> sockets = [];
-    final partsListElement = _document!.querySelectorAll(_socketIntelSelector);
-    for (var element in partsListElement) {
-      sockets.add(element.text.split('(')[0]);
-    }
-    return sockets;
-  }
-
-  static List<String>? _parseAmdSockets() {
-    if (_document == null) {
-      return null;
-    }
-
-    final List<String> sockets = [];
-    final partsListElement = _document!.querySelectorAll(_socketAmdSelector);
-    for (var element in partsListElement) {
-      sockets.add(element.text.split('(')[0]);
-    }
-    return sockets;
+    return SsdHome(_parsePopularPats()!);
   }
 
   static List<PcParts>? _parsePopularPats() {

@@ -11,19 +11,19 @@ import '../../../pages/parts_list_page.dart';
 import '../../parts_list/parts_list_app_bar.dart';
 import '../popular_parts_list.dart';
 
-class MotherBoardWidget extends ConsumerWidget {
-  const MotherBoardWidget({super.key});
+class SsdWidget extends ConsumerWidget {
+  const SsdWidget({super.key});
 
   final _mainColor = const Color.fromRGBO(60, 130, 80, 1);
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     SizeConfig().init(context);
     final categoryHomeData = ref.watch(categoryHomeDataProvider);
-    final homeData = categoryHomeData.motherBoard!;
+    final homeData = categoryHomeData.ssd!;
 
     // 検索バー入力時、キーワードタップ時の画面遷移
     searchToPartsListPage(String text) async {
-      final url = UrlBuilder.searchPartsList(Category.motherBoard, text);
+      final url = UrlBuilder.searchPartsList(Category.ssd, text);
       ref.read(targetUrlProvider.notifier).update((state) => url);
       ref.read(searchTextProvider.notifier).update((state) => text);
 
@@ -48,25 +48,10 @@ class MotherBoardWidget extends ConsumerWidget {
                 width: 16,
               ),
               Text(
-                'CPUソケット',
+                '容量',
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: _mainColor),
               ),
             ],
-          ),
-        ),
-        const SizedBox(
-          height: 8,
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left: 16),
-          child: Text(
-            'intel',
-            textAlign: TextAlign.start,
-            style: TextStyle(
-              fontSize: 30,
-              fontWeight: FontWeight.bold,
-              color: _mainColor,
-            ),
           ),
         ),
         const SizedBox(
@@ -79,12 +64,12 @@ class MotherBoardWidget extends ConsumerWidget {
               const SizedBox(
                 width: 16,
               ),
-              for (int i = 0; i < homeData.intelSocket.length; i++)
+              for (int i = 0; i < homeData.capacityList.length; i++)
                 Row(
                   children: [
                     InkWell(
                       onTap: () {
-                        searchToPartsListPage(homeData.intelSocket[i]);
+                        searchToPartsListPage(homeData.capacityList[i]);
                       },
                       child: Container(
                         decoration: BoxDecoration(
@@ -96,7 +81,7 @@ class MotherBoardWidget extends ConsumerWidget {
                           child: Row(
                             children: [
                               Text(
-                                homeData.intelSocket[i],
+                                homeData.capacityList[i],
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
@@ -121,18 +106,24 @@ class MotherBoardWidget extends ConsumerWidget {
         ),
         Padding(
           padding: const EdgeInsets.only(left: 16),
-          child: Text(
-            'AMD',
-            textAlign: TextAlign.start,
-            style: TextStyle(
-              fontSize: 30,
-              fontWeight: FontWeight.bold,
-              color: _mainColor,
-            ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.search_outlined,
+                size: 24,
+                color: _mainColor,
+              ),
+              const SizedBox(
+                width: 16,
+              ),
+              Text(
+                '規格',
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: _mainColor),
+              ),
+            ],
           ),
-        ),
-        const SizedBox(
-          height: 8,
         ),
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
@@ -141,12 +132,12 @@ class MotherBoardWidget extends ConsumerWidget {
               const SizedBox(
                 width: 16,
               ),
-              for (int i = 0; i < homeData.amdSocket.length; i++)
+              for (int i = 0; i < homeData.typeList.length; i++)
                 Row(
                   children: [
                     InkWell(
                       onTap: () {
-                        searchToPartsListPage(homeData.amdSocket[i]);
+                        searchToPartsListPage(homeData.typeList[i]);
                       },
                       child: Container(
                         decoration: BoxDecoration(
@@ -158,7 +149,7 @@ class MotherBoardWidget extends ConsumerWidget {
                           child: Row(
                             children: [
                               Text(
-                                homeData.amdSocket[i],
+                                homeData.typeList[i],
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
@@ -222,7 +213,7 @@ class MotherBoardWidget extends ConsumerWidget {
                       homeData.popularParts[i].shops = detail.partsShops;
                       homeData.popularParts[i].specs = detail.specs;
                       homeData.popularParts[i].dataFiled = FilledDataProgress.filledForDetail;
-                      categoryHomeData.motherBoard = homeData;
+                      categoryHomeData.ssd = homeData;
 
                       ref.read(categoryHomeDataProvider.notifier).update((state) => categoryHomeData);
                     }

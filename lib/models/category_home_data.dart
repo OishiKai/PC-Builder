@@ -5,9 +5,10 @@ class CategoryHomeData {
 
   CpuHome? cpu;
   CpuCoolerHome? cpuCooler;
-  MemoryHome? memoryHome;
-  MotherBoardHome? motherBoardHome;
+  MemoryHome? memory;
+  MotherBoardHome? motherBoard;
   GraphicsCardHome? graphicsCard;
+  SsdHome? ssd;
 }
 
 class CpuHome {
@@ -46,4 +47,12 @@ class GraphicsCardHome {
   final List<PcParts> popularParts;
 
   GraphicsCardHome(this.nvidiaChips, this.amdChips, this.popularParts);
+}
+
+class SsdHome {
+  final List<String> capacityList = ['2000GB', '1000GB', '512GB', '256GB'];
+  final List<String> typeList = ['M.2', '2.5インチ'];
+  final List<PcParts> popularParts;
+
+  SsdHome(this.popularParts);
 }
