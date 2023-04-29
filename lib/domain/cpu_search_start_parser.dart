@@ -12,7 +12,7 @@ class CpuSearchParameter extends CategorySearchParameter{
   CpuSearchParameter(this.makers, this.processors, this.series, this.sockets);
 }
 
-class CpuSearchStartParser {
+class CpuSearchParser {
   static const String standardPage = 'https://kakaku.com/pc/cpu/itemlist.aspx';
   static const String _makerSelector = '#menu > div.searchspec > div:nth-child(13) > ul > li';
   static const String _specsSelector = '#menu > div.searchspec > div:nth-child(17)';
