@@ -23,11 +23,11 @@ class PartsSearchListParser {
   .partsListを参照してパーツリストを取り出す。
    */
   PartsSearchListParser._(this.targetUrl);
-  static Future<PartsSearchListParser?> create(String url) async {
+  static Future<PartsSearchListParser> create(String url) async {
     final self = PartsSearchListParser._(url);
     self.document = await DocumentRepository.fetchDocument(url);
-    self._parsePartsList();
-    return null;
+    self.partsList = self._parsePartsList();
+    return self;
   }
 
   List<PcParts> _parsePartsList() {

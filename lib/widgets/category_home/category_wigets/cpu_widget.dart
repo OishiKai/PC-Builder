@@ -1,3 +1,4 @@
+import 'package:custom_pc/domain/cpu_search_start_parser.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -18,14 +19,13 @@ class CpuWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     SizeConfig().init(context);
-    final categoryHomeData = ref.watch(categoryHomeDataProvider);
-    final homeData = categoryHomeData.cpu!;
-
-    searchToPartsListPage(String text) async {
-      final searchText = text.replaceFirst('シリーズ', '');
-      final url = UrlBuilder.searchPartsList(Category.cpu, searchText);
+    final categoryHomeData = ref.watch(searchParameterProvider);
+    final CpuSearchParameter homeData = categoryHomeData as CpuSearchParameter;
+    final partsList = ref.watch(partsListProvider) ?? [];
+    searchToPartsListPage(String parameter) async {
+      final url = UrlBuilder.buildSearchUrl(Category.cpu, parameter);
       ref.read(targetUrlProvider.notifier).update((state) => url);
-      ref.read(searchTextProvider.notifier).update((state) => searchText);
+      //ref.read(searchTextProvider.notifier).update((state) => searchText);
 
       Navigator.push(context, MaterialPageRoute(builder: (context) => PartsListPage()));
     }
@@ -79,12 +79,12 @@ class CpuWidget extends ConsumerWidget {
               const SizedBox(
                 width: 16,
               ),
-              for (int i = 0; i < homeData.intelChips.length; i++)
+              for (var data in homeData.series.entries)
                 Row(
                   children: [
                     InkWell(
                       onTap: () {
-                        searchToPartsListPage(homeData.intelChips[i]);
+                        searchToPartsListPage(data.value);
                       },
                       child: Container(
                         decoration: BoxDecoration(
@@ -96,7 +96,7 @@ class CpuWidget extends ConsumerWidget {
                           child: Row(
                             children: [
                               Text(
-                                homeData.intelChips[i],
+                                data.key,
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
@@ -141,12 +141,12 @@ class CpuWidget extends ConsumerWidget {
               const SizedBox(
                 width: 16,
               ),
-              for (int i = 0; i < homeData.amdChips.length; i++)
+              for (var data in homeData.sockets.entries)
                 Row(
                   children: [
                     InkWell(
                       onTap: () {
-                        searchToPartsListPage(homeData.amdChips[i]);
+                        searchToPartsListPage(data.value);
                       },
                       child: Container(
                         decoration: BoxDecoration(
@@ -158,7 +158,7 @@ class CpuWidget extends ConsumerWidget {
                           child: Row(
                             children: [
                               Text(
-                                homeData.amdChips[i],
+                                data.key,
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
@@ -213,22 +213,20 @@ class CpuWidget extends ConsumerWidget {
             crossAxisCount: 2,
             shrinkWrap: true,
             children: [
-              for (int i = 0; i < homeData.popularParts.length; i++)
+              for (int i = 0; i < partsList.length; i++)
                 InkWell(
                   onTap: () async {
-                    if (homeData.popularParts[i].dataFiled == FilledDataProgress.filledForList) {
-                      final detail = await DetailParser.create(homeData.popularParts[i]);
-                      homeData.popularParts[i].fullScaleImages = detail.fullScaleImages;
-                      homeData.popularParts[i].shops = detail.partsShops;
-                      homeData.popularParts[i].specs = detail.specs;
-                      homeData.popularParts[i].dataFiled = FilledDataProgress.filledForDetail;
-                      categoryHomeData.cpu = homeData;
-
-                      ref.read(categoryHomeDataProvider.notifier).update((state) => categoryHomeData);
+                    if (partsList[i].dataFiled == FilledDataProgress.filledForList) {
+                      final detail = await DetailParser.create(partsList[i]);
+                      partsList[i].fullScaleImages = detail.fullScaleImages;
+                      partsList[i].shops = detail.partsShops;
+                      partsList[i].specs = detail.specs;
+                      partsList[i].dataFiled = FilledDataProgress.filledForDetail;
+                      ref.read(partsListProvider.notifier).update((state) => partsList);
                     }
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => PartsDetailPage(homeData.popularParts[i])));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => PartsDetailPage(partsList[i])));
                   },
-                  child: PopularPartsList(homeData.popularParts[i]),
+                  child: PopularPartsList(partsList[i]),
                 )
             ],
           ),

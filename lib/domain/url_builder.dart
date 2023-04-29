@@ -13,4 +13,10 @@ class UrlBuilder {
     final url = 'https://kakaku.com/search_results/$percent/?category=0001%${category.categoryParameter}';
     return url;
   }
+
+  static String buildSearchUrl(Category category, String parameter) {
+    final url = 'https://kakaku.com/pc/${category.categoryParameter}/itemlist.aspx?${parameter}';
+    return url;
+  }
 }
+ 

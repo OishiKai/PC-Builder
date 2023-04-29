@@ -125,7 +125,9 @@ class DetailParser {
 
   Future<Map<String, String?>> _getSpecs(String url) async {
     Map<String, String?> specMap = {};
-    final specUrl = url.replaceFirst('/?lid=pc_ksearch_kakakuitem', '/spec');
+    final tempUrl = url.replaceFirst('/?lid=pc_ksearch_kakakuitem', '');
+    final specUrl = '${tempUrl}spec/';
+    print(specUrl);
     final doc = await DocumentRepository.fetchDocument(specUrl);
     final specElements = doc.querySelectorAll(_partsSpecLineSelector);
     final elementLength = specElements.length;

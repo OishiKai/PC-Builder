@@ -42,7 +42,7 @@ enum FilledDataProgress {
 }
 
 enum Category {
-  cpu('CPU', '2C0027'),
+  cpu('CPU', 'cpu'),
   cpuCooler('CPUクーラー', '2C0030'),
   memory('メモリー', '2C0033'),
   motherBoard('マザーボード', '2C0036'),

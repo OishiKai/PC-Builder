@@ -1,8 +1,9 @@
 
 import 'package:custom_pc/domain/document_repository.dart';
+import 'package:custom_pc/models/category_search_parameter.dart';
 import 'package:html/dom.dart';
 
-class CpuSearchParameter {
+class CpuSearchParameter extends CategorySearchParameter{
   final Map<String, String> makers;
   final Map<String, String> processors;
   final Map<String, String> series;
@@ -18,13 +19,14 @@ class CpuSearchStartParser {
 
   static Document? _document;
 
-  static Future<CpuSearchParameter?> fetchSearchParameter() async {
+  static Future<CpuSearchParameter> fetchSearchParameter() async {
     _document = await DocumentRepository.fetchDocument(standardPage);
-    _parseMakerList();
-    _parseProcessorList();
-    _parseSeriesList();
-    _parseSocketList();
-    return null;
+    final makers = _parseMakerList()!;
+    final processors = _parseProcessorList()!;
+    final series = _parseSeriesList()!;
+    final sockets = _parseSocketList();
+
+    return CpuSearchParameter(makers, processors, series, sockets);
   }
 
   static Map<String, String>? _parseMakerList() {
@@ -68,7 +70,6 @@ class CpuSearchStartParser {
         // atagが存在する場合のみ処理を行う
         if (processorParameterAtag.isNotEmpty) {
           final processorParameter = processorParameterAtag[0].attributes['href']!.split('?')[1];
-          processorList[processorName] = processorParameter;
           processorList[processorName] = processorParameter;
         }
       }
@@ -120,7 +121,7 @@ class CpuSearchStartParser {
         seriesList[seriesName] = seriesParameter;
       }
     }
-    
+    return seriesList;
   } 
 
   static Map<String, String> _parseSocketList() {
