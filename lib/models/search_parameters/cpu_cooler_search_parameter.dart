@@ -1,4 +1,4 @@
-import 'package:custom_pc/domain/cpu_cooler_start_parser.dart';
+import 'package:custom_pc/domain/cpu_cooler_search_parameter_parser.dart';
 
 import '../category_search_parameter.dart';
 

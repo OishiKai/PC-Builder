@@ -1,4 +1,5 @@
-import 'package:custom_pc/domain/cpu_cooler_start_parser.dart';
+import 'package:custom_pc/domain/cpu_cooler_search_parameter_parser.dart';
+import 'package:custom_pc/domain/memory_search_parameter_parser.dart';
 import 'package:custom_pc/domain/parts_search_list_parser.dart';
 import 'package:custom_pc/models/category_home_data.dart';
 import 'package:custom_pc/models/category_search_parameter.dart';
@@ -8,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'domain/cpu_search_start_parser.dart';
+import 'domain/cpu_search_search_parameter_parser.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
@@ -34,6 +35,7 @@ class RootPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    MemorySearchParameterParser.fetchSearchParameter();
     return Scaffold(
       appBar: AppBar(),
       body: Padding(
@@ -80,6 +82,28 @@ class RootPage extends ConsumerWidget {
                 );
               },
               child: Text("CPUクーラーを検索する"),
+            ),
+            SizedBox(
+              height: 16,
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                const partsListUrl = MemorySearchParameterParser.standardPage;
+                final targetUrlProviderController = ref.watch(targetUrlProvider.notifier);
+                targetUrlProviderController.update((state) => partsListUrl);
+                final parameter = await MemorySearchParameterParser.fetchSearchParameter();
+                ref.read(searchParameterProvider.notifier).state = parameter;
+
+                final bool? selected = await Navigator.push(
+                  context,
+                  PageRouteBuilder(
+                      pageBuilder: (context, animation, secondaryAnimation) => PartsListPage(),
+                      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                        return CupertinoPageTransition(primaryRouteAnimation: animation, secondaryRouteAnimation: secondaryAnimation, linearTransition: false, child: child);
+                      }),
+                );
+              },
+              child: Text("メモリを検索する"),
             ),
           ],
         ),
