@@ -23,7 +23,7 @@ class GraphicsCardWidget extends ConsumerWidget {
 
     // 検索バー入力時、キーワードタップ時の画面遷移
     searchToPartsListPage(String text) async {
-      final url = UrlBuilder.searchPartsList(Category.graphicsCard, text);
+      final url = UrlBuilder.searchPartsList(PartsCategory.graphicsCard, text);
       ref.read(targetUrlProvider.notifier).update((state) => url);
       ref.read(searchTextProvider.notifier).update((state) => text);
 

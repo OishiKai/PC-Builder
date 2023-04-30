@@ -53,7 +53,7 @@ class DetailParser {
 
   Future<List<String>?> _getFullScaleImageUrls(String detailUrl) async {
     List<String> imageUrls = [];
-    final baseImageUrl = detailUrl.replaceFirst('?lid=pc_ksearch_kakakuitem', 'images/');
+    final baseImageUrl = '${detailUrl.replaceFirst('?lid=pc_ksearch_kakakuitem', '')}images/';
     final multiImageUrl = '${baseImageUrl}page=ka_';
     int imageCount = 0;
 

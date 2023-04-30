@@ -43,9 +43,13 @@ class PartsSearchListParser {
       // 商品名を直接取得できず、"{メーカー名} {商品名}"という形式で取得し、"{メーカー名} "を除く
       final combined = partsListElement[i].querySelectorAll(_partsCombinedMakerAndTitleSelector)[0].text;
       final title = combined.replaceFirst(maker, '');
-
       final isNew = partsListElement[i].querySelectorAll(_partsNewSelector).isNotEmpty;
-      final imageUrl = partsListElement[i + 1].querySelectorAll(_partsImageUrlSelector)[0].attributes['src'];
+      var imageUrl = partsListElement[i + 1].querySelectorAll(_partsImageUrlSelector)[0].attributes['src']!.replaceFirst('/m/', '/ll/');
+
+      // if (imageUrl!.contains('https://img1.kakaku.k-img.com/images/productimage/m/')) {
+      //   imageUrl.replaceFirst('m/', 'll/');
+      // }
+
       final detailUrl = partsListElement[i + 1].querySelectorAll(_partsDetailUrlSelector)[0].attributes['href'];
       final price = partsListElement[i + 1].querySelectorAll(_partsPriceSelector)[0].text;
       final ranked = partsListElement[i + 1].querySelectorAll(_patsRankedSelector)[0].text;

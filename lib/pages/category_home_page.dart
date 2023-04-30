@@ -19,7 +19,7 @@ class CategoryHomePage extends ConsumerWidget {
     super.key,
   });
 
-  final Category category;
+  final PartsCategory category;
   final _controller = TextEditingController();
   final _mainColor = const Color.fromRGBO(60, 130, 80, 1);
   final _subColor = const Color(0xFFEDECF2);
@@ -30,32 +30,32 @@ class CategoryHomePage extends ConsumerWidget {
 
     Widget? categoryHomeWidget() {
       switch (category) {
-        case Category.cpu:
+        case PartsCategory.cpu:
           return const CpuWidget();
-        case Category.cpuCooler:
+        case PartsCategory.cpuCooler:
           return const CpuCoolerWidget();
-        case Category.memory:
+        case PartsCategory.memory:
           // TODO: Handle this case.
           break;
-        case Category.motherBoard:
+        case PartsCategory.motherBoard:
           return const MotherBoardWidget();
           break;
-        case Category.graphicsCard:
+        case PartsCategory.graphicsCard:
           return const GraphicsCardWidget();
           break;
-        case Category.ssd:
+        case PartsCategory.ssd:
           return const SsdWidget();
           break;
-        case Category.pcCase:
+        case PartsCategory.pcCase:
           // TODO: Handle this case.
           break;
-        case Category.powerUnit:
+        case PartsCategory.powerUnit:
           // TODO: Handle this case.
           break;
-        case Category.caseFan:
+        case PartsCategory.caseFan:
           // TODO: Handle this case.
           break;
-        case Category.monitor:
+        case PartsCategory.monitor:
           // TODO: Handle this case.
           break;
       }

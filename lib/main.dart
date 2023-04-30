@@ -1,13 +1,12 @@
-import 'package:custom_pc/domain/parts_list_parser.dart';
+import 'package:custom_pc/domain/cpu_cooler_start_parser.dart';
+import 'package:custom_pc/domain/parts_search_list_parser.dart';
 import 'package:custom_pc/models/category_home_data.dart';
-import 'package:custom_pc/pages/category_home_page.dart';
+import 'package:custom_pc/models/category_search_parameter.dart';
+import 'package:custom_pc/pages/parts_list_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import 'domain/category_home_page/ssd_home_parser.dart';
-import 'models/pc_parts.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
@@ -41,18 +40,16 @@ class RootPage extends ConsumerWidget {
           children: [
             ElevatedButton(
               onPressed: () async {
-                final partsListUrl = 'https://kakaku.com/search_results/%83O%83%89%83t%83B%83b%83N%83%7B%81%5B%83h/?category=0001%2C0028&act=Suggest';
+                final partsListUrl = CpuCoolerSearchParser.standardPage;
                 final targetUrlProviderController = ref.watch(targetUrlProvider.notifier);
                 targetUrlProviderController.update((state) => partsListUrl);
-
-                final latestHomeData = ref.read(categoryHomeDataProvider);
-                latestHomeData.ssd = await SsdHomeParser.fetchAndParse();
-                ref.read(categoryHomeDataProvider.notifier).update((state) => latestHomeData);
+                final parameter = await CpuCoolerSearchParser.fetchSearchParameter();
+                ref.read(searchParameterProvider.notifier).state = parameter;
 
                 final bool? selected = await Navigator.push(
                   context,
                   PageRouteBuilder(
-                      pageBuilder: (context, animation, secondaryAnimation) => CategoryHomePage(Category.ssd),
+                      pageBuilder: (context, animation, secondaryAnimation) => PartsListPage(),
                       transitionsBuilder: (context, animation, secondaryAnimation, child) {
                         return CupertinoPageTransition(primaryRouteAnimation: animation, secondaryRouteAnimation: secondaryAnimation, linearTransition: false, child: child);
                       }),
@@ -67,6 +64,10 @@ class RootPage extends ConsumerWidget {
   }
 }
 
+final searchParameterProvider = StateProvider<CategorySearchParameter?>((ref) {
+  return null;
+});
+
 final categoryHomeDataProvider = StateProvider<CategoryHomeData>((ref) {
   return CategoryHomeData();
 });
@@ -76,7 +77,7 @@ final targetUrlProvider = StateProvider((ref) {
 });
 
 final partsListFutureProvider = FutureProvider((ref) async {
-  final parser = await PartsListParser.create(ref.watch(targetUrlProvider));
+  final parser = await PartsSearchListParser.create(ref.watch(targetUrlProvider));
   final fetchedPartsList = parser.partsList;
   return fetchedPartsList;
 });

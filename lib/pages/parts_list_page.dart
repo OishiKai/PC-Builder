@@ -8,9 +8,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../config/size_config.dart';
 import '../main.dart';
+import '../widgets/parts_list/parameter_select_modal.dart';
 
 class PartsListPage extends ConsumerWidget {
   const PartsListPage({super.key});
+  final _mainColor = const Color.fromRGBO(60, 130, 80, 1);
+  //final PartsCategory category;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -25,28 +28,84 @@ class PartsListPage extends ConsumerWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: PartsListAppBar(),
-      body: ListView(
-        padding: const EdgeInsets.only(
-          top: 16,
-        ),
+      body: Column(
         children: [
-          for (int i = 0; i < partsList.length; i++)
-            GestureDetector(
-              onTap: () async {
-                if (partsList[i].dataFiled == FilledDataProgress.filledForList) {
-                  // 詳細画面用のデータ取得
-                  final detail = await DetailParser.create(partsList[i]);
-                  partsList[i].fullScaleImages = detail.fullScaleImages;
-                  partsList[i].shops = detail.partsShops;
-                  partsList[i].specs = detail.specs;
-                  partsList[i].dataFiled = FilledDataProgress.filledForDetail;
-                  // プロバイダーを更新
-                  ref.read(partsListProvider.notifier).update((state) => partsList);
-                }
-                Navigator.push(context, MaterialPageRoute(builder: (context) => PartsDetailPage(partsList[i])));
+          const SizedBox(
+            height: 16,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 16, right: 16),
+            child: ElevatedButton(
+              onPressed: () {
+                showModalBottomSheet(
+                  backgroundColor: Colors.transparent,
+                  context: context,
+                  builder: (BuildContext context) {
+                    return ParameterSelectModal();
+                  },
+                );
               },
-              child: PartsListCell(partsList[i]),
-            )
+              style: ElevatedButton.styleFrom(
+                padding: EdgeInsets.zero,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(40),
+                ),
+                primary: _mainColor,
+              ),
+              child: Row(
+                children: const [
+                  SizedBox(
+                    width: 8,
+                  ),
+                  Icon(
+                    Icons.arrow_drop_down_outlined,
+                    size: 24,
+                    color: Colors.white,
+                  ),
+                  SizedBox(
+                    width: 8,
+                  ),
+                  Text(
+                    '絞り込み',
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          const SizedBox(
+            height: 8,
+          ),
+          Expanded(
+            child: ListView(
+              padding: const EdgeInsets.only(
+                top: 16,
+              ),
+              children: [
+                for (int i = 0; i < partsList.length; i++)
+                  GestureDetector(
+                    onTap: () async {
+                      if (partsList[i].dataFiled == FilledDataProgress.filledForList) {
+                        // 詳細画面用のデータ取得
+                        final detail = await DetailParser.create(partsList[i]);
+                        partsList[i].fullScaleImages = detail.fullScaleImages;
+                        partsList[i].shops = detail.partsShops;
+                        partsList[i].specs = detail.specs;
+                        partsList[i].dataFiled = FilledDataProgress.filledForDetail;
+                        // プロバイダーを更新
+                        ref.read(partsListProvider.notifier).update((state) => partsList);
+                      }
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => PartsDetailPage(partsList[i])));
+                    },
+                    child: PartsListCell(partsList[i]),
+                  )
+              ],
+            ),
+          ),
         ],
       ),
     );

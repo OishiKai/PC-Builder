@@ -1,14 +1,13 @@
-
 import 'package:custom_pc/domain/document_repository.dart';
 import 'package:custom_pc/models/category_search_parameter.dart';
 import 'package:html/dom.dart';
 
-class CpuSearchParameter extends CategorySearchParameter{
+class CpuSearchParameter extends CategorySearchParameter {
   final Map<String, String> makers;
   final Map<String, String> processors;
   final Map<String, String> series;
   final Map<String, String> sockets;
-  
+
   CpuSearchParameter(this.makers, this.processors, this.series, this.sockets);
 }
 
@@ -35,9 +34,9 @@ class CpuSearchParser {
     }
     Map<String, String> makerList = {};
     final makerListElement = _document!.querySelectorAll(_makerSelector);
-    
-    makerListElement.forEach((element) { 
-      final makerName = element.text.split('(')[0];
+
+    makerListElement.forEach((element) {
+      final makerName = element.text.split('（')[0];
       final makerParameter = element.querySelectorAll('a')[0].attributes['href']!.split('?')[1];
 
       // メーカー名が 'インテル' の場合は 'intel' に変換する
@@ -56,7 +55,7 @@ class CpuSearchParser {
     }
     Map<String, String> processorList = {};
     final processorListElement = _document!.querySelectorAll(_specsSelector);
-    final openProcessorElement= processorListElement[0].querySelectorAll('ul.check.ultop');
+    final openProcessorElement = processorListElement[0].querySelectorAll('ul.check.ultop');
 
     // プロセッサー情報は先頭8件とそれ以降で取得するindexが異なる為、分けて取得する
 
@@ -74,7 +73,7 @@ class CpuSearchParser {
         }
       }
     }
-    
+
     //それ以降
     final afterProcessorElement = openProcessorElement[1].querySelectorAll('li');
     for (var element in afterProcessorElement) {
@@ -97,7 +96,7 @@ class CpuSearchParser {
     }
     Map<String, String> seriesList = {};
     final processorListElement = _document!.querySelectorAll(_specsSelector);
-    final openProcessorElement= processorListElement[0].querySelectorAll('ul.check');
+    final openProcessorElement = processorListElement[0].querySelectorAll('ul.check');
 
     // 世代の情報があるindexを探す
     int seriesNodeIndex = 0;
@@ -122,7 +121,7 @@ class CpuSearchParser {
       }
     }
     return seriesList;
-  } 
+  }
 
   static Map<String, String> _parseSocketList() {
     if (_document == null) {
@@ -142,13 +141,13 @@ class CpuSearchParser {
         break;
       }
     }
-    
+
     // ソケット情報は先頭5件とそれ以降で取得するindexが異なる為、分けて取得する
 
     // 先頭5件
     final firstSocketElement = openSocketElement[seriesNodeIndex].querySelectorAll('li');
 
-    firstSocketElement.forEach((element) { 
+    firstSocketElement.forEach((element) {
       if (!element.text.contains('ソケット形状')) {
         final socketName = element.text.split('（')[0];
         final socketParameterAtag = element.querySelectorAll('a');
@@ -163,7 +162,7 @@ class CpuSearchParser {
 
     //それ以降
     final afterSocketElement = openSocketElement[seriesNodeIndex + 1].querySelectorAll('li');
-    afterSocketElement.forEach((element) { 
+    afterSocketElement.forEach((element) {
       final socketName = element.text.split('（')[0];
       final socketParameterAtag = element.querySelectorAll('a');
       // atagが存在する場合のみ処理を行う
@@ -177,4 +176,3 @@ class CpuSearchParser {
     return socketList;
   }
 }
-

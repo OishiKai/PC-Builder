@@ -60,7 +60,7 @@ class PartsListAppBar extends ConsumerWidget implements PreferredSizeWidget {
                     if (trimText == '' || trimText == '　') {
                       return;
                     }
-                    final url = UrlBuilder.searchPartsList(Category.graphicsCard, trimText);
+                    final url = UrlBuilder.searchPartsList(PartsCategory.graphicsCard, trimText);
                     ref.read(targetUrlProvider.notifier).update((state) => url);
                     ref.read(searchTextProvider.notifier).update((state) => text);
                   },

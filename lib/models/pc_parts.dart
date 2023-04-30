@@ -41,7 +41,7 @@ enum FilledDataProgress {
   filledForDetail,
 }
 
-enum Category {
+enum PartsCategory {
   cpu('CPU', 'cpu'),
   cpuCooler('CPUクーラー', '2C0030'),
   memory('メモリー', '2C0033'),
@@ -55,5 +55,5 @@ enum Category {
 
   final String categoryName;
   final String categoryParameter;
-  const Category(this.categoryName, this.categoryParameter);
+  const PartsCategory(this.categoryName, this.categoryParameter);
 }

@@ -9,7 +9,6 @@ import '../../../main.dart';
 import '../../../models/pc_parts.dart';
 import '../../../pages/parts_detail_page.dart';
 import '../../../pages/parts_list_page.dart';
-import '../../parts_list/parts_list_app_bar.dart';
 import '../popular_parts_list.dart';
 
 class CpuWidget extends ConsumerWidget {
@@ -19,11 +18,11 @@ class CpuWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     SizeConfig().init(context);
-    final categoryHomeData = ref.watch(searchParameterProvider);
+    final categoryHomeData = ref.watch(categoryHomeDataProvider);
     final CpuSearchParameter homeData = categoryHomeData as CpuSearchParameter;
     final partsList = ref.watch(partsListProvider) ?? [];
     searchToPartsListPage(String parameter) async {
-      final url = UrlBuilder.buildSearchUrl(Category.cpu, parameter);
+      final url = UrlBuilder.buildSearchUrl(PartsCategory.cpu, parameter);
       ref.read(targetUrlProvider.notifier).update((state) => url);
       //ref.read(searchTextProvider.notifier).update((state) => searchText);
 

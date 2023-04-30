@@ -23,7 +23,7 @@ class MotherBoardWidget extends ConsumerWidget {
 
     // 検索バー入力時、キーワードタップ時の画面遷移
     searchToPartsListPage(String text) async {
-      final url = UrlBuilder.searchPartsList(Category.motherBoard, text);
+      final url = UrlBuilder.searchPartsList(PartsCategory.motherBoard, text);
       ref.read(targetUrlProvider.notifier).update((state) => url);
       ref.read(searchTextProvider.notifier).update((state) => text);
 
