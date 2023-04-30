@@ -4,6 +4,8 @@ import 'package:custom_pc/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../models/search_parameters/cpu_cooler_search_parameter.dart';
+
 class CpuCoolerParameterModal extends ConsumerStatefulWidget {
   const CpuCoolerParameterModal({super.key});
 

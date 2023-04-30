@@ -9,6 +9,18 @@ class CpuSearchParameter extends CategorySearchParameter {
   final Map<String, String> sockets;
 
   CpuSearchParameter(this.makers, this.processors, this.series, this.sockets);
+
+  @override
+  CategorySearchParameter clearSelectedParameter() {
+    // TODO: implement clearSelectedParameter
+    throw UnimplementedError();
+  }
+
+  @override
+  List<String> selectedParameters() {
+    // TODO: implement selectedParameters
+    throw UnimplementedError();
+  }
 }
 
 class CpuSearchParser {
@@ -35,7 +47,7 @@ class CpuSearchParser {
     Map<String, String> makerList = {};
     final makerListElement = _document!.querySelectorAll(_makerSelector);
 
-    makerListElement.forEach((element) {
+    for (var element in makerListElement) {
       final makerName = element.text.split('（')[0];
       final makerParameter = element.querySelectorAll('a')[0].attributes['href']!.split('?')[1];
 
@@ -45,7 +57,7 @@ class CpuSearchParser {
       } else {
         makerList[makerName] = makerParameter;
       }
-    });
+    }
     return makerList;
   }
 

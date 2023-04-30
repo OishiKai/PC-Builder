@@ -1,4 +1,4 @@
-import 'package:custom_pc/widgets/parts_list/parts_category_parameter_select_modal/cpu_cooler_parameter.dart';
+import 'package:custom_pc/widgets/parts_list/parts_category_parameter_select_modal/cpu_cooler_parameter_modal.dart';
 import 'package:flutter/material.dart';
 
 import '../../config/size_config.dart';
