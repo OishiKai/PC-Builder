@@ -8,6 +8,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'domain/search_parameter_parser/cpu_search_search_parameter_parser.dart';
 import 'domain/search_parameter_parser/mother_board_search_parameter_parser.dart';
 
@@ -35,7 +36,6 @@ class RootPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    MotherBoardSearchParameterParser.fetchSearchParameter();
     return Scaffold(
       appBar: AppBar(),
       body: Padding(
@@ -104,6 +104,28 @@ class RootPage extends ConsumerWidget {
                 );
               },
               child: Text("メモリを検索する"),
+            ),
+            SizedBox(
+              height: 16,
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                const partsListUrl = MotherBoardSearchParameterParser.standardPage;
+                final targetUrlProviderController = ref.watch(targetUrlProvider.notifier);
+                targetUrlProviderController.update((state) => partsListUrl);
+                final parameter = await MotherBoardSearchParameterParser.fetchSearchParameter();
+                ref.read(searchParameterProvider.notifier).state = parameter;
+
+                final bool? selected = await Navigator.push(
+                  context,
+                  PageRouteBuilder(
+                      pageBuilder: (context, animation, secondaryAnimation) => PartsListPage(),
+                      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                        return CupertinoPageTransition(primaryRouteAnimation: animation, secondaryRouteAnimation: secondaryAnimation, linearTransition: false, child: child);
+                      }),
+                );
+              },
+              child: Text("マザーボードを検索する"),
             ),
           ],
         ),

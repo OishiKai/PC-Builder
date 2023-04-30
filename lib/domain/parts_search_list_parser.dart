@@ -12,7 +12,7 @@ class PartsSearchListParser {
   static const _partsDetailUrlSelector = 'td.alignC > a';
   static const _partsPriceSelector = 'td.td-price > ul > li.pryen > a';
   static const _patsRankedSelector = 'td.swrank2 > span';
-
+  //#compTblList > tbody > tr:nth-child(5) > td:nth-child(5)
   final String targetUrl;
   Document? document;
   List<PcParts>? partsList;
@@ -56,8 +56,18 @@ class PartsSearchListParser {
 
       // レビュー、評価数はセレクターでうまくパースできなかった為、改行ごとに区切って6つ目の要素を取得する
       // evaluate は 取得時 "4.95(15件)" という形式なので、"件"を除く
-      final evaluation = partsListElement[i + 1].text.split('\n')[5].replaceAll('件', '');
-      final strStar = evaluation.split('(')[0];
+      var evaluation = '';
+      var strStar = '';
+
+      // 4つ目の要素に入っている場合もあったので、分岐して対応
+      final evas = partsListElement[i + 1].text.split('\n');
+      if (evas[5].contains('件')) {
+        evaluation = evas[5].replaceAll('件', '');
+      } else {
+        final evaluations = evas[3].split('位');
+        evaluation = evaluations[evaluations.length - 1].replaceAll('件', '');
+      }
+      strStar = evaluation.split('(')[0];
 
       int? star;
       if (strStar != '—') {
@@ -67,6 +77,8 @@ class PartsSearchListParser {
           star = doubleStar * 100 ~/ 10;
         }
       }
+      print(partsListElement[i + 1].text.split('\n'));
+      //print(star);
       partsList.add(PcParts(maker, isNew, title, star, evaluation, price, ranked, imageUrl!, detailUrl!));
     }
     return partsList;

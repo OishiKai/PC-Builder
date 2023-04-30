@@ -17,12 +17,17 @@ class SearchParameterModal extends ConsumerStatefulWidget {
 
 class _SearchParameterModalState extends ConsumerState<SearchParameterModal> {
   double adjustFontSize(String text) {
-    if (text.contains('\n')) {
-      return 14;
-    }
-    if (text.length > 4) {
-      return 11.3;
-    }
+    // if (text.contains('\n')) {
+    //   final over = text.split('\n')[0];
+    //   final under = text.split('\n')[1];
+    //   if (over.length > 4 || under.length > 4) {
+    //     return 9.2;
+    //   }
+    //   return 14;
+    // }
+    // if (text.length > 4) {
+    //   return 11.3;
+    // }
     return 14;
   }
 

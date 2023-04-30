@@ -1,3 +1,4 @@
+import 'package:custom_pc/domain/search_parameter_parser/mother_board_search_parameter_parser.dart';
 import 'package:custom_pc/models/category_search_parameter.dart';
 
 class MotherBoardSearchParameter extends CategorySearchParameter {
@@ -8,12 +9,11 @@ class MotherBoardSearchParameter extends CategorySearchParameter {
 
   MotherBoardSearchParameter(this.intelSockets, this.amdSockets, this.formFactors, this.memoryType);
 
-
   @override
   List<Map<String, List<PartsSearchParameter>>> alignParameters() {
     return [
-      {'CPUソケット\n(intel)': intelSockets},
-      {'CPUソケット\n(AMD)': amdSockets},
+      {'CPU\nソケット\n(intel)': intelSockets},
+      {'CPU\nソケット\n(AMD)': amdSockets},
       {'フォーム\nファクタ': formFactors},
       {'メモリ\nタイプ': memoryType},
     ];
@@ -73,18 +73,17 @@ class MotherBoardSearchParameter extends CategorySearchParameter {
 
   @override
   String standardPage() {
-    // TODO: implement standardPage
-    throw UnimplementedError();
+    return MotherBoardSearchParameterParser.standardPage;
   }
 
   @override
   CategorySearchParameter toggleParameterSelect(String paramName, int index) {
     switch (paramName) {
-      case 'CPUソケット\n(intel)':
+      case 'CPU\nソケット\n(intel)':
         var toggleIntelSockets = intelSockets;
         toggleIntelSockets[index].isSelect = !intelSockets[index].isSelect;
         return MotherBoardSearchParameter(toggleIntelSockets, amdSockets, formFactors, memoryType);
-      case 'CPUソケット\n(AMD)':
+      case 'CPU\nソケット\n(AMD)':
         var toggleAmdSockets = amdSockets;
         toggleAmdSockets[index].isSelect = !amdSockets[index].isSelect;
         return MotherBoardSearchParameter(intelSockets, toggleAmdSockets, formFactors, memoryType);
@@ -100,5 +99,4 @@ class MotherBoardSearchParameter extends CategorySearchParameter {
         return this;
     }
   }
-
 }
