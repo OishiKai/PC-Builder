@@ -43,17 +43,17 @@ class MemorySearchParameter extends CategorySearchParameter {
     List<String> params = [];
     for (var element in volume) {
       if (element.isSelect) {
-        params.add(element.value);
+        params.add(element.parameter);
       }
     }
     for (var element in interface) {
       if (element.isSelect) {
-        params.add(element.value);
+        params.add(element.parameter);
       }
     }
     for (var element in type) {
       if (element.isSelect) {
-        params.add(element.value);
+        params.add(element.parameter);
       }
     }
     return params;

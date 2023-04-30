@@ -83,7 +83,7 @@ class CpuWidget extends ConsumerWidget {
                   children: [
                     InkWell(
                       onTap: () {
-                        searchToPartsListPage(data.value);
+                        searchToPartsListPage(data.parameter);
                       },
                       child: Container(
                         decoration: BoxDecoration(
@@ -95,7 +95,7 @@ class CpuWidget extends ConsumerWidget {
                           child: Row(
                             children: [
                               Text(
-                                data.key,
+                                data.name,
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
@@ -145,7 +145,7 @@ class CpuWidget extends ConsumerWidget {
                   children: [
                     InkWell(
                       onTap: () {
-                        searchToPartsListPage(data.value);
+                        searchToPartsListPage(data.parameter);
                       },
                       child: Container(
                         decoration: BoxDecoration(
@@ -157,7 +157,7 @@ class CpuWidget extends ConsumerWidget {
                           child: Row(
                             children: [
                               Text(
-                                data.key,
+                                data.name,
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,

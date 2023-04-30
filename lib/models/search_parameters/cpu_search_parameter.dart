@@ -39,22 +39,22 @@ class CpuSearchParameter extends CategorySearchParameter {
     List<String> params = [];
     for (var element in makers) {
       if (element.isSelect) {
-        params.add(element.value);
+        params.add(element.parameter);
       }
     }
     for (var element in processors) {
       if (element.isSelect) {
-        params.add(element.value);
+        params.add(element.parameter);
       }
     }
     for (var element in series) {
       if (element.isSelect) {
-        params.add(element.value);
+        params.add(element.parameter);
       }
     }
     for (var element in sockets) {
       if (element.isSelect) {
-        params.add(element.value);
+        params.add(element.parameter);
       }
     }
     return params;

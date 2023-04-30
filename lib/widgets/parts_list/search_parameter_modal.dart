@@ -116,7 +116,7 @@ class _SearchParameterModalState extends ConsumerState<SearchParameterModal> {
                                     width: 16,
                                   ),
                                   Text(
-                                    parseParams(i)[j].key,
+                                    parseParams(i)[j].name,
                                     style: const TextStyle(
                                       fontWeight: FontWeight.bold,
                                     ),

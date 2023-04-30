@@ -8,8 +8,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import 'domain/cpu_search_search_parameter_parser.dart';
+import 'domain/search_parameter_parser/cpu_search_search_parameter_parser.dart';
+import 'domain/search_parameter_parser/mother_board_search_parameter_parser.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
@@ -35,7 +35,7 @@ class RootPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    MemorySearchParameterParser.fetchSearchParameter();
+    MotherBoardSearchParameterParser.fetchSearchParameter();
     return Scaffold(
       appBar: AppBar(),
       body: Padding(

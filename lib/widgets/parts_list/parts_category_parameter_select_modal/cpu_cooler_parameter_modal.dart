@@ -115,7 +115,7 @@ class _CpuCoolerParameterModal extends ConsumerState<CpuCoolerParameterModal> {
                                 width: 16,
                               ),
                               Text(
-                                params.makers[i].key,
+                                params.makers[i].name,
                                 style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -157,7 +157,7 @@ class _CpuCoolerParameterModal extends ConsumerState<CpuCoolerParameterModal> {
                                 width: 16,
                               ),
                               Text(
-                                params.intelSockets[i].key,
+                                params.intelSockets[i].name,
                                 style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -199,7 +199,7 @@ class _CpuCoolerParameterModal extends ConsumerState<CpuCoolerParameterModal> {
                                 width: 16,
                               ),
                               Text(
-                                params.amdSockets[i].key,
+                                params.amdSockets[i].name,
                                 style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -241,7 +241,7 @@ class _CpuCoolerParameterModal extends ConsumerState<CpuCoolerParameterModal> {
                                 width: 16,
                               ),
                               Text(
-                                params.type[i].key,
+                                params.type[i].name,
                                 style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                 ),

@@ -15,22 +15,22 @@ class CpuCoolerSearchParameter extends CategorySearchParameter {
     List<String> params = [];
     for (var element in makers) {
       if (element.isSelect) {
-        params.add(element.value);
+        params.add(element.parameter);
       }
     }
     for (var element in intelSockets) {
       if (element.isSelect) {
-        params.add(element.value);
+        params.add(element.parameter);
       }
     }
     for (var element in amdSockets) {
       if (element.isSelect) {
-        params.add(element.value);
+        params.add(element.parameter);
       }
     }
     for (var element in type) {
       if (element.isSelect) {
-        params.add(element.value);
+        params.add(element.parameter);
       }
     }
     return params;

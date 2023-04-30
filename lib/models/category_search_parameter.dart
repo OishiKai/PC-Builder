@@ -7,8 +7,8 @@ abstract class CategorySearchParameter {
 }
 
 class PartsSearchParameter {
-  final String key;
-  final String value;
+  final String name;
+  final String parameter;
   bool isSelect = false;
-  PartsSearchParameter(this.key, this.value);
+  PartsSearchParameter(this.name, this.parameter);
 }
