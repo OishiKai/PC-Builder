@@ -2,7 +2,7 @@ import 'package:custom_pc/domain/document_repository.dart';
 import 'package:custom_pc/models/category_search_parameter.dart';
 import 'package:html/dom.dart';
 
-import '../models/search_parameters/cpu_search_parameter.dart';
+import '../../models/search_parameters/cpu_search_parameter.dart';
 
 class CpuSearchParameterParser {
   static const String standardPage = 'https://kakaku.com/pc/cpu/itemlist.aspx';

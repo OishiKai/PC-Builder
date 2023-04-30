@@ -1,4 +1,4 @@
-import 'package:custom_pc/domain/memory_search_parameter_parser.dart';
+import 'package:custom_pc/domain/search_parameter_parser/memory_search_parameter_parser.dart';
 import 'package:custom_pc/models/category_search_parameter.dart';
 
 class MemorySearchParameter extends CategorySearchParameter {

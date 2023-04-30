@@ -2,7 +2,7 @@ import 'package:custom_pc/domain/document_repository.dart';
 import 'package:custom_pc/models/category_search_parameter.dart';
 import 'package:html/dom.dart';
 
-import '../models/search_parameters/memory_search_parameter.dart';
+import '../../models/search_parameters/memory_search_parameter.dart';
 
 class MemorySearchParameterParser {
   static const String standardPage = 'https://kakaku.com/pc/pc-memory/itemlist.aspx';
@@ -26,7 +26,7 @@ class MemorySearchParameterParser {
     // 容量のリストは3番目の div の中の 1番目の ul にある
     final specListElement = _document!.querySelectorAll(_parameterSelector)[4].querySelectorAll('ul')[0];
     final volumeListElement = specListElement.querySelectorAll('li');
-    
+
     for (var element in volumeListElement) {
       if (element.text.contains('メモリ容量')) {
         continue;
@@ -49,7 +49,7 @@ class MemorySearchParameterParser {
     // インターフェースのリストは3番目の div の中の 2番目の ul にある
     final specListElement = _document!.querySelectorAll(_parameterSelector)[4].querySelectorAll('ul')[2];
     final interfaceListElement = specListElement.querySelectorAll('li');
- 
+
     for (var element in interfaceListElement) {
       if (element.text.contains('メモリインターフェース')) {
         continue;
@@ -72,7 +72,7 @@ class MemorySearchParameterParser {
     // タイプのリストは3番目の div の中の 3番目の ul にある
     final specListElement = _document!.querySelectorAll(_parameterSelector)[4].querySelectorAll('ul')[3];
     final typeListElement = specListElement.querySelectorAll('li');
- 
+
     for (var element in typeListElement) {
       if (element.text.contains('メモリタイプ')) {
         continue;

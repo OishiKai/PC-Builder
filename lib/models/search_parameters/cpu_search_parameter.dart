@@ -1,4 +1,4 @@
-import '../../domain/cpu_search_search_parameter_parser.dart';
+import '../../domain/search_parameter_parser/cpu_search_search_parameter_parser.dart';
 import '../category_search_parameter.dart';
 
 class CpuSearchParameter extends CategorySearchParameter {

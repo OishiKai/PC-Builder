@@ -1,6 +1,6 @@
-import 'package:custom_pc/domain/cpu_cooler_search_parameter_parser.dart';
-import 'package:custom_pc/domain/memory_search_parameter_parser.dart';
 import 'package:custom_pc/domain/parts_search_list_parser.dart';
+import 'package:custom_pc/domain/search_parameter_parser/cpu_cooler_search_parameter_parser.dart';
+import 'package:custom_pc/domain/search_parameter_parser/memory_search_parameter_parser.dart';
 import 'package:custom_pc/models/category_home_data.dart';
 import 'package:custom_pc/models/category_search_parameter.dart';
 import 'package:custom_pc/pages/parts_list_page.dart';
