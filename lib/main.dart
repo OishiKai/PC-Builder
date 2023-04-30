@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'domain/cpu_search_start_parser.dart';
+
 void main() {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
@@ -40,7 +42,29 @@ class RootPage extends ConsumerWidget {
           children: [
             ElevatedButton(
               onPressed: () async {
-                final partsListUrl = CpuCoolerSearchParameterParser.standardPage;
+                final partsListUrl = CpuSearchParameterParser.standardPage;
+                final targetUrlProviderController = ref.watch(targetUrlProvider.notifier);
+                targetUrlProviderController.update((state) => partsListUrl);
+                final parameter = await CpuSearchParameterParser.fetchSearchParameter();
+                ref.read(searchParameterProvider.notifier).state = parameter;
+
+                final bool? selected = await Navigator.push(
+                  context,
+                  PageRouteBuilder(
+                      pageBuilder: (context, animation, secondaryAnimation) => PartsListPage(),
+                      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                        return CupertinoPageTransition(primaryRouteAnimation: animation, secondaryRouteAnimation: secondaryAnimation, linearTransition: false, child: child);
+                      }),
+                );
+              },
+              child: Text("CPUを検索する"),
+            ),
+            SizedBox(
+              height: 16,
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                const partsListUrl = CpuCoolerSearchParameterParser.standardPage;
                 final targetUrlProviderController = ref.watch(targetUrlProvider.notifier);
                 targetUrlProviderController.update((state) => partsListUrl);
                 final parameter = await CpuCoolerSearchParameterParser.fetchSearchParameter();
@@ -55,7 +79,7 @@ class RootPage extends ConsumerWidget {
                       }),
                 );
               },
-              child: Text("検索する"),
+              child: Text("CPUクーラーを検索する"),
             ),
           ],
         ),

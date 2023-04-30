@@ -1,5 +1,7 @@
 import 'package:custom_pc/domain/detail_parser.dart';
 import 'package:custom_pc/models/pc_parts.dart';
+import 'package:custom_pc/models/search_parameters/cpu_cooler_search_parameter.dart';
+import 'package:custom_pc/models/search_parameters/cpu_search_parameter.dart';
 import 'package:custom_pc/pages/parts_detail_page.dart';
 import 'package:custom_pc/widgets/parts_list/parts_list_app_bar.dart';
 import 'package:custom_pc/widgets/parts_list/parts_list_cell.dart';
@@ -41,7 +43,19 @@ class PartsListPage extends ConsumerWidget {
                   backgroundColor: Colors.transparent,
                   context: context,
                   builder: (BuildContext context) {
-                    return ParameterSelectModal();
+                    PartsCategory? category;
+                    if (ref.read(searchParameterProvider) is CpuSearchParameter) {
+                      category = PartsCategory.cpu;
+                    }
+                    final parameterProvider = ref.read(searchParameterProvider)!;
+                    switch (parameterProvider.runtimeType) {
+                      case CpuSearchParameter:
+                        return const ParameterSelectModal(PartsCategory.cpu);
+                      case CpuCoolerSearchParameter:
+                        return const ParameterSelectModal(PartsCategory.cpuCooler);
+                      default:
+                        return const ParameterSelectModal(PartsCategory.cpuCooler);
+                    }
                   },
                 );
               },
