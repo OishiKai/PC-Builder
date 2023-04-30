@@ -15,8 +15,8 @@ class CpuCoolerSearchParameterParser {
     final makers = _parseMakerList()!;
     final intelSockets = _parseIntelSocketList()!;
     final amdSockets = _parseAmdSocketList()!;
-
-    return CpuCoolerSearchParameter(makers, intelSockets, amdSockets);
+    final type = [PartsSearchParameter('トップフロー型', 'pdf_Spec101=1'), PartsSearchParameter('サイドフロー型', 'pdf_Spec101=2'), PartsSearchParameter('水冷型', 'pdf_Spec101=3')];
+    return CpuCoolerSearchParameter(makers, intelSockets, amdSockets, type);
   }
 
   static List<PartsSearchParameter>? _parseMakerList() {
@@ -70,8 +70,6 @@ class CpuCoolerSearchParameterParser {
       if (amdSocketParameterAtag.isNotEmpty) {
         final amdSocketParameter = amdSocketParameterAtag[0].attributes['href']!.split('?')[1];
         amdSocketList.add(PartsSearchParameter(amdSocketName, amdSocketParameter));
-
-        print(amdSocketName);
       }
     }
     return amdSocketList;

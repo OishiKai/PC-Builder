@@ -1,16 +1,14 @@
 import 'package:custom_pc/domain/detail_parser.dart';
 import 'package:custom_pc/models/pc_parts.dart';
-import 'package:custom_pc/models/search_parameters/cpu_cooler_search_parameter.dart';
-import 'package:custom_pc/models/search_parameters/cpu_search_parameter.dart';
 import 'package:custom_pc/pages/parts_detail_page.dart';
 import 'package:custom_pc/widgets/parts_list/parts_list_app_bar.dart';
 import 'package:custom_pc/widgets/parts_list/parts_list_cell.dart';
+import 'package:custom_pc/widgets/parts_list/search_parameter_modal.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../config/size_config.dart';
 import '../main.dart';
-import '../widgets/parts_list/parameter_select_modal.dart';
 
 class PartsListPage extends ConsumerWidget {
   const PartsListPage({super.key});
@@ -43,19 +41,7 @@ class PartsListPage extends ConsumerWidget {
                   backgroundColor: Colors.transparent,
                   context: context,
                   builder: (BuildContext context) {
-                    PartsCategory? category;
-                    if (ref.read(searchParameterProvider) is CpuSearchParameter) {
-                      category = PartsCategory.cpu;
-                    }
-                    final parameterProvider = ref.read(searchParameterProvider)!;
-                    switch (parameterProvider.runtimeType) {
-                      case CpuSearchParameter:
-                        return const ParameterSelectModal(PartsCategory.cpu);
-                      case CpuCoolerSearchParameter:
-                        return const ParameterSelectModal(PartsCategory.cpuCooler);
-                      default:
-                        return const ParameterSelectModal(PartsCategory.cpuCooler);
-                    }
+                    return SearchParameterModal();
                   },
                 );
               },

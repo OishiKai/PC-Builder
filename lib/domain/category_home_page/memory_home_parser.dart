@@ -81,10 +81,6 @@ class MemoryHomeParser {
 
       partsList.add(PcParts(maker, false, title, star, evaluation, price, '$i', imageUrl!, detailUrl!));
     }
-
-    partsList.forEach((element) {
-      print(element.title);
-    });
     return partsList;
   }
 }

@@ -1,12 +1,14 @@
+import 'package:custom_pc/domain/cpu_cooler_start_parser.dart';
+
 import '../category_search_parameter.dart';
 
 class CpuCoolerSearchParameter extends CategorySearchParameter {
   final List<PartsSearchParameter> makers;
   final List<PartsSearchParameter> intelSockets;
   final List<PartsSearchParameter> amdSockets;
-  final List<PartsSearchParameter> type = [PartsSearchParameter('トップフロー型', 'pdf_Spec101=1'), PartsSearchParameter('サイドフロー型', 'pdf_Spec101=2'), PartsSearchParameter('水冷型', 'pdf_Spec101=3')];
+  final List<PartsSearchParameter> type;
 
-  CpuCoolerSearchParameter(this.makers, this.intelSockets, this.amdSockets);
+  CpuCoolerSearchParameter(this.makers, this.intelSockets, this.amdSockets, this.type);
 
   @override
   List<String> selectedParameters() {
@@ -47,16 +49,55 @@ class CpuCoolerSearchParameter extends CategorySearchParameter {
       clearIntelSocket.add(element);
     }
     final List<PartsSearchParameter> clearAmdSocket = [];
-    for (var element in makers) {
+    for (var element in amdSockets) {
       element.isSelect = false;
       clearAmdSocket.add(element);
     }
     final List<PartsSearchParameter> clearType = [];
-    for (var element in makers) {
+    for (var element in type) {
       element.isSelect = false;
       clearType.add(element);
     }
 
-    return CpuCoolerSearchParameter(clearMaker, clearIntelSocket, clearType);
+    return CpuCoolerSearchParameter(clearMaker, clearIntelSocket, clearType, clearType);
+  }
+
+  @override
+  List<Map<String, List<PartsSearchParameter>>> alignParameters() {
+    return [
+      {'メーカー': makers},
+      {'intel\nソケット': intelSockets},
+      {'AMD\nソケット': amdSockets},
+      {'タイプ': type},
+    ];
+  }
+
+  @override
+  CategorySearchParameter toggleParameterSelect(String paramName, int index) {
+    switch (paramName) {
+      case 'メーカー':
+        var toggleMaker = makers;
+        toggleMaker[index].isSelect = !makers[index].isSelect;
+        return CpuCoolerSearchParameter(toggleMaker, intelSockets, amdSockets, type);
+      case 'intel\nソケット':
+        var toggleIntelSockets = intelSockets;
+        toggleIntelSockets[index].isSelect = !intelSockets[index].isSelect;
+        return CpuCoolerSearchParameter(makers, toggleIntelSockets, amdSockets, type);
+      case 'AMD\nソケット':
+        var toggleAmdSockets = amdSockets;
+        toggleAmdSockets[index].isSelect = !amdSockets[index].isSelect;
+        return CpuCoolerSearchParameter(makers, intelSockets, toggleAmdSockets, type);
+      case 'タイプ':
+        var toggleType = type;
+        toggleType[index].isSelect = !type[index].isSelect;
+        return CpuCoolerSearchParameter(makers, intelSockets, amdSockets, toggleType);
+      default:
+        return this;
+    }
+  }
+
+  @override
+  String standardPage() {
+    return CpuCoolerSearchParameterParser.standardPage;
   }
 }

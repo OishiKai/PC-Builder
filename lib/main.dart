@@ -42,7 +42,7 @@ class RootPage extends ConsumerWidget {
           children: [
             ElevatedButton(
               onPressed: () async {
-                final partsListUrl = CpuSearchParameterParser.standardPage;
+                const partsListUrl = CpuSearchParameterParser.standardPage;
                 final targetUrlProviderController = ref.watch(targetUrlProvider.notifier);
                 targetUrlProviderController.update((state) => partsListUrl);
                 final parameter = await CpuSearchParameterParser.fetchSearchParameter();
