@@ -2,28 +2,9 @@ import 'package:custom_pc/domain/document_repository.dart';
 import 'package:custom_pc/models/category_search_parameter.dart';
 import 'package:html/dom.dart';
 
-class CpuSearchParameter extends CategorySearchParameter {
-  final Map<String, String> makers;
-  final Map<String, String> processors;
-  final Map<String, String> series;
-  final Map<String, String> sockets;
+import '../models/search_parameters/cpu_search_parameter.dart';
 
-  CpuSearchParameter(this.makers, this.processors, this.series, this.sockets);
-
-  @override
-  CategorySearchParameter clearSelectedParameter() {
-    // TODO: implement clearSelectedParameter
-    throw UnimplementedError();
-  }
-
-  @override
-  List<String> selectedParameters() {
-    // TODO: implement selectedParameters
-    throw UnimplementedError();
-  }
-}
-
-class CpuSearchParser {
+class CpuSearchParameterParser {
   static const String standardPage = 'https://kakaku.com/pc/cpu/itemlist.aspx';
   static const String _makerSelector = '#menu > div.searchspec > div:nth-child(13) > ul > li';
   static const String _specsSelector = '#menu > div.searchspec > div:nth-child(17)';
@@ -35,16 +16,16 @@ class CpuSearchParser {
     final makers = _parseMakerList()!;
     final processors = _parseProcessorList()!;
     final series = _parseSeriesList()!;
-    final sockets = _parseSocketList();
+    final sockets = _parseSocketList()!;
 
     return CpuSearchParameter(makers, processors, series, sockets);
   }
 
-  static Map<String, String>? _parseMakerList() {
+  static List<PartsSearchParameter>? _parseMakerList() {
     if (_document == null) {
       return null;
     }
-    Map<String, String> makerList = {};
+    List<PartsSearchParameter> makerList = [];
     final makerListElement = _document!.querySelectorAll(_makerSelector);
 
     for (var element in makerListElement) {
@@ -53,19 +34,19 @@ class CpuSearchParser {
 
       // メーカー名が 'インテル' の場合は 'intel' に変換する
       if (makerName == 'インテル') {
-        makerList['intel'] = makerParameter;
+        makerList.add(PartsSearchParameter('intel', makerParameter));
       } else {
-        makerList[makerName] = makerParameter;
+        makerList.add(PartsSearchParameter(makerName, makerParameter));
       }
     }
     return makerList;
   }
 
-  static Map<String, String>? _parseProcessorList() {
+  static List<PartsSearchParameter>? _parseProcessorList() {
     if (_document == null) {
       return null;
     }
-    Map<String, String> processorList = {};
+    List<PartsSearchParameter> processorList = [];
     final processorListElement = _document!.querySelectorAll(_specsSelector);
     final openProcessorElement = processorListElement[0].querySelectorAll('ul.check.ultop');
 
@@ -81,7 +62,7 @@ class CpuSearchParser {
         // atagが存在する場合のみ処理を行う
         if (processorParameterAtag.isNotEmpty) {
           final processorParameter = processorParameterAtag[0].attributes['href']!.split('?')[1];
-          processorList[processorName] = processorParameter;
+          processorList.add(PartsSearchParameter(processorName, processorParameter));
         }
       }
     }
@@ -95,18 +76,18 @@ class CpuSearchParser {
       if (processorParameterAtag.isNotEmpty) {
         // パラメーター取得
         final processorParameter = processorParameterAtag[0].attributes['href']!.split('?')[1];
-        processorList[processorName] = processorParameter;
+        processorList.add(PartsSearchParameter(processorName, processorParameter));
       }
     }
 
     return processorList;
   }
 
-  static Map<String, String>? _parseSeriesList() {
+  static List<PartsSearchParameter>? _parseSeriesList() {
     if (_document == null) {
       return null;
     }
-    Map<String, String> seriesList = {};
+    List<PartsSearchParameter> seriesList = [];
     final processorListElement = _document!.querySelectorAll(_specsSelector);
     final openProcessorElement = processorListElement[0].querySelectorAll('ul.check');
 
@@ -129,17 +110,17 @@ class CpuSearchParser {
       if (seriesParameterAtag.isNotEmpty) {
         // パラメーター取得
         final seriesParameter = seriesParameterAtag[0].attributes['href']!.split('?')[1];
-        seriesList[seriesName] = seriesParameter;
+        seriesList.add(PartsSearchParameter(seriesName, seriesParameter));
       }
     }
     return seriesList;
   }
 
-  static Map<String, String> _parseSocketList() {
+  static List<PartsSearchParameter>? _parseSocketList() {
     if (_document == null) {
-      return {};
+      return null;
     }
-    Map<String, String> socketList = {};
+    List<PartsSearchParameter> socketList = [];
     final socketListElement = _document!.querySelectorAll(_specsSelector);
     final openSocketElement = socketListElement[0].querySelectorAll('ul.check');
 
@@ -159,7 +140,7 @@ class CpuSearchParser {
     // 先頭5件
     final firstSocketElement = openSocketElement[seriesNodeIndex].querySelectorAll('li');
 
-    firstSocketElement.forEach((element) {
+    for (var element in firstSocketElement) {
       if (!element.text.contains('ソケット形状')) {
         final socketName = element.text.split('（')[0];
         final socketParameterAtag = element.querySelectorAll('a');
@@ -167,23 +148,23 @@ class CpuSearchParser {
         if (socketParameterAtag.isNotEmpty) {
           // パラメーター取得
           final socketParameter = socketParameterAtag[0].attributes['href']!.split('?')[1];
-          socketList[socketName] = socketParameter;
+          socketList.add(PartsSearchParameter(socketName, socketParameter));
         }
       }
-    });
+    }
 
     //それ以降
     final afterSocketElement = openSocketElement[seriesNodeIndex + 1].querySelectorAll('li');
-    afterSocketElement.forEach((element) {
+    for (var element in afterSocketElement) {
       final socketName = element.text.split('（')[0];
       final socketParameterAtag = element.querySelectorAll('a');
       // atagが存在する場合のみ処理を行う
       if (socketParameterAtag.isNotEmpty) {
         // パラメーター取得
         final socketParameter = socketParameterAtag[0].attributes['href']!.split('?')[1];
-        socketList[socketName] = socketParameter;
+        socketList.add(PartsSearchParameter(socketName, socketParameter));
       }
-    });
+    }
 
     return socketList;
   }

@@ -23,14 +23,14 @@ class _CpuCoolerParameterModal extends ConsumerState<CpuCoolerParameterModal> {
 
     // 条件選択時の処理
     void addParameter(CpuCoolerSearchParameter params) {
-      final url = UrlBuilder.createURLWithParameters(CpuCoolerSearchParser.standardPage, params.selectedParameters());
+      final url = UrlBuilder.createURLWithParameters(CpuCoolerSearchParameterParser.standardPage, params.selectedParameters());
       ref.read(targetUrlProvider.notifier).update((state) => url);
     }
 
     // 条件クリア時の処理
     void clearParameter() {
       ref.read(searchParameterProvider.notifier).update((state) => params.clearSelectedParameter());
-      ref.read(targetUrlProvider.notifier).update((state) => CpuCoolerSearchParser.standardPage);
+      ref.read(targetUrlProvider.notifier).update((state) => CpuCoolerSearchParameterParser.standardPage);
     }
 
     return DefaultTabController(

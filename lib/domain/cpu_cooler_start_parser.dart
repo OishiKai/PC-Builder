@@ -4,7 +4,7 @@ import 'package:html/dom.dart';
 import '../models/category_search_parameter.dart';
 import '../models/search_parameters/cpu_cooler_search_parameter.dart';
 
-class CpuCoolerSearchParser {
+class CpuCoolerSearchParameterParser {
   static const String standardPage = 'https://kakaku.com/pc/cpu-cooler/itemlist.aspx';
   static const String _parameterSelector = '#menu > div.searchspec > div';
 

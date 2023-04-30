@@ -1,4 +1,3 @@
-import 'package:custom_pc/domain/cpu_search_start_parser.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -7,6 +6,7 @@ import '../../../domain/detail_parser.dart';
 import '../../../domain/url_builder.dart';
 import '../../../main.dart';
 import '../../../models/pc_parts.dart';
+import '../../../models/search_parameters/cpu_search_parameter.dart';
 import '../../../pages/parts_detail_page.dart';
 import '../../../pages/parts_list_page.dart';
 import '../popular_parts_list.dart';
@@ -78,7 +78,7 @@ class CpuWidget extends ConsumerWidget {
               const SizedBox(
                 width: 16,
               ),
-              for (var data in homeData.series.entries)
+              for (var data in homeData.series)
                 Row(
                   children: [
                     InkWell(
@@ -140,7 +140,7 @@ class CpuWidget extends ConsumerWidget {
               const SizedBox(
                 width: 16,
               ),
-              for (var data in homeData.sockets.entries)
+              for (var data in homeData.sockets)
                 Row(
                   children: [
                     InkWell(
