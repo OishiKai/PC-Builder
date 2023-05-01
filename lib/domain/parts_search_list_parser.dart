@@ -77,7 +77,7 @@ class PartsSearchListParser {
           star = doubleStar * 100 ~/ 10;
         }
       }
-      partsList.add(PcParts(maker, isNew, title, star, evaluation, price, ranked, imageUrl!, detailUrl!));
+      partsList.add(PcParts(maker, isNew, title, star, evaluation, price, ranked, imageUrl, detailUrl!));
     }
     return partsList;
   }

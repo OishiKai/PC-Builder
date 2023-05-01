@@ -1,7 +1,6 @@
 import 'package:html/dom.dart';
 
 import '../../models/category_search_parameter.dart';
-import '../../models/search_parameters/memory_search_parameter.dart';
 import '../../models/search_parameters/mother_board_search_parameter.dart';
 import '../document_repository.dart';
 
