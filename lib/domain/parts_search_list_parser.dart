@@ -77,8 +77,6 @@ class PartsSearchListParser {
           star = doubleStar * 100 ~/ 10;
         }
       }
-      print(partsListElement[i + 1].text.split('\n'));
-      //print(star);
       partsList.add(PcParts(maker, isNew, title, star, evaluation, price, ranked, imageUrl!, detailUrl!));
     }
     return partsList;
