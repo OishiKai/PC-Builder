@@ -66,6 +66,12 @@ class UrlBuilder {
       urlBuffer.write(parameterStrings.join('&'));
     }
 
-    return urlBuffer.toString();
+    // PCケースの色を指定する場合、&pdf_co=0 を末尾に付加する
+    var url = urlBuffer.toString();
+    if (urlBuffer.toString().contains('Spec121')) {
+      url = url += '&pdf_co=0';
+    }
+
+    return url;
   }
 }
