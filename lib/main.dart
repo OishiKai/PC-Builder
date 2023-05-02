@@ -3,6 +3,7 @@ import 'package:custom_pc/domain/search_parameter_parser/cpu_cooler_search_param
 import 'package:custom_pc/domain/search_parameter_parser/graphics_card_search_parameter_parser.dart';
 import 'package:custom_pc/domain/search_parameter_parser/memory_search_parameter_parser.dart';
 import 'package:custom_pc/domain/search_parameter_parser/pc_case_search_parameter_parser.dart';
+import 'package:custom_pc/domain/search_parameter_parser/power_unit_search_parameter_parser.dart';
 import 'package:custom_pc/domain/search_parameter_parser/ssd_search_parameter_parser.dart';
 import 'package:custom_pc/models/category_home_data.dart';
 import 'package:custom_pc/models/category_search_parameter.dart';
@@ -39,7 +40,6 @@ class RootPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    PcCaseSearchParameterParser.fetchSearchParameter();
     return Scaffold(
       appBar: AppBar(),
       body: Padding(
@@ -196,6 +196,28 @@ class RootPage extends ConsumerWidget {
                 );
               },
               child: Text("PCケースを検索する"),
+            ),
+            SizedBox(
+              height: 16,
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                const partsListUrl = PowerUnitSearchParameterParser.standardPage;
+                final targetUrlProviderController = ref.watch(targetUrlProvider.notifier);
+                targetUrlProviderController.update((state) => partsListUrl);
+                final parameter = await PowerUnitSearchParameterParser.fetchSearchParameter();
+                ref.read(searchParameterProvider.notifier).state = parameter;
+
+                final bool? selected = await Navigator.push(
+                  context,
+                  PageRouteBuilder(
+                      pageBuilder: (context, animation, secondaryAnimation) => PartsListPage(),
+                      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                        return CupertinoPageTransition(primaryRouteAnimation: animation, secondaryRouteAnimation: secondaryAnimation, linearTransition: false, child: child);
+                      }),
+                );
+              },
+              child: Text("電源ユニットを検索する"),
             ),
           ],
         ),

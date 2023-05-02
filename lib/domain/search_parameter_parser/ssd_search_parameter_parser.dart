@@ -1,7 +1,3 @@
-
-
-import 'dart:math';
-
 import 'package:custom_pc/models/category_search_parameter.dart';
 import 'package:html/dom.dart';
 

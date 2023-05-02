@@ -168,7 +168,7 @@ class PartsDetailPage extends ConsumerWidget {
           )
         ],
       ),
-      bottomNavigationBar: DetailBottomBar(),
+      //bottomNavigationBar: DetailBottomBar(),
     );
   }
 }
