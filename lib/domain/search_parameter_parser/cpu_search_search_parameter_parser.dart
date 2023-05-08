@@ -3,6 +3,7 @@ import 'package:custom_pc/models/category_search_parameter.dart';
 import 'package:html/dom.dart';
 
 import '../../models/search_parameters/cpu_search_parameter.dart';
+import '../parts_list_search_parameter.dart';
 
 class CpuSearchParameterParser {
   static const String standardPage = 'https://kakaku.com/pc/cpu/itemlist.aspx';
@@ -13,81 +14,45 @@ class CpuSearchParameterParser {
 
   static Future<CpuSearchParameter> fetchSearchParameter() async {
     _document = await DocumentRepository.fetchDocument(standardPage);
-    final makers = _parseMakerList()!;
-    final processors = _parseProcessorList()!;
-    final series = _parseSeriesList()!;
-    final sockets = _parseSocketList()!;
+    final makers = _parseMakerList();
+    final processors = _parseProcessorList();
+    final series = _parseSeriesList();
+    final sockets = _parseSocketList();
 
     return CpuSearchParameter(makers, processors, series, sockets);
   }
 
-  static List<PartsSearchParameter>? _parseMakerList() {
-    if (_document == null) {
-      return null;
-    }
+  static List<PartsSearchParameter> _parseMakerList() {
     List<PartsSearchParameter> makerList = [];
+
+    // fetchSearchParameter() で _document に値が入っていることを保証しているので、nullチェックは不要
     final makerListElement = _document!.querySelectorAll(_makerSelector);
-
-    for (var element in makerListElement) {
-      final makerName = element.text.split('（')[0];
-      final makerParameter = element.querySelectorAll('a')[0].attributes['href']!.split('?')[1];
-
-      // メーカー名が 'インテル' の場合は 'intel' に変換する
-      if (makerName == 'インテル') {
-        makerList.add(PartsSearchParameter('intel', makerParameter));
-      } else {
-        makerList.add(PartsSearchParameter(makerName, makerParameter));
-      }
-    }
+    makerList.addAll(PartsListSearchParameter.takeOutParameters(makerListElement));
     return makerList;
   }
 
-  static List<PartsSearchParameter>? _parseProcessorList() {
-    if (_document == null) {
-      return null;
-    }
+  static List<PartsSearchParameter> _parseProcessorList() {
     List<PartsSearchParameter> processorList = [];
+
     final processorListElement = _document!.querySelectorAll(_specsSelector);
     final openProcessorElement = processorListElement[0].querySelectorAll('ul.check.ultop');
 
-    // プロセッサー情報は先頭8件とそれ以降で取得するindexが異なる為、分けて取得する
+    // プロセッサー情報は先頭8件がデフォルトで表示されており、それ以降は「もっと見る」を押すことで表示される
 
     // 先頭8件
     final firstProcessorElement = openProcessorElement[0].querySelectorAll('li');
-
-    for (var element in firstProcessorElement) {
-      if (element.text != 'プロセッサ名') {
-        final processorName = element.text.split('（')[0];
-        final processorParameterAtag = element.querySelectorAll('a');
-        // atagが存在する場合のみ処理を行う
-        if (processorParameterAtag.isNotEmpty) {
-          final processorParameter = processorParameterAtag[0].attributes['href']!.split('?')[1];
-          processorList.add(PartsSearchParameter(processorName, processorParameter));
-        }
-      }
-    }
+    processorList.addAll(PartsListSearchParameter.takeOutParameters(firstProcessorElement));
 
     //それ以降
     final afterProcessorElement = openProcessorElement[1].querySelectorAll('li');
-    for (var element in afterProcessorElement) {
-      final processorName = element.text.split('（')[0];
-      final processorParameterAtag = element.querySelectorAll('a');
-      // atagが存在する場合のみ処理を行う
-      if (processorParameterAtag.isNotEmpty) {
-        // パラメーター取得
-        final processorParameter = processorParameterAtag[0].attributes['href']!.split('?')[1];
-        processorList.add(PartsSearchParameter(processorName, processorParameter));
-      }
-    }
+    processorList.addAll(PartsListSearchParameter.takeOutParameters(afterProcessorElement));
 
     return processorList;
   }
 
-  static List<PartsSearchParameter>? _parseSeriesList() {
-    if (_document == null) {
-      return null;
-    }
+  static List<PartsSearchParameter> _parseSeriesList() {
     List<PartsSearchParameter> seriesList = [];
+
     final processorListElement = _document!.querySelectorAll(_specsSelector);
     final openProcessorElement = processorListElement[0].querySelectorAll('ul.check');
 
@@ -103,23 +68,11 @@ class CpuSearchParameterParser {
     }
 
     final seriesElement = openProcessorElement[seriesNodeIndex].querySelectorAll('li');
-    for (var element in seriesElement) {
-      final seriesName = element.text.split('（')[0];
-      final seriesParameterAtag = element.querySelectorAll('a');
-      // atagが存在する場合のみ処理を行う
-      if (seriesParameterAtag.isNotEmpty) {
-        // パラメーター取得
-        final seriesParameter = seriesParameterAtag[0].attributes['href']!.split('?')[1];
-        seriesList.add(PartsSearchParameter(seriesName, seriesParameter));
-      }
-    }
+    seriesList.addAll(PartsListSearchParameter.takeOutParameters(seriesElement));
     return seriesList;
   }
 
-  static List<PartsSearchParameter>? _parseSocketList() {
-    if (_document == null) {
-      return null;
-    }
+  static List<PartsSearchParameter> _parseSocketList() {
     List<PartsSearchParameter> socketList = [];
     final socketListElement = _document!.querySelectorAll(_specsSelector);
     final openSocketElement = socketListElement[0].querySelectorAll('ul.check');
@@ -135,36 +88,15 @@ class CpuSearchParameterParser {
       }
     }
 
-    // ソケット情報は先頭5件とそれ以降で取得するindexが異なる為、分けて取得する
+    // ソケット情報は先頭5件がデフォルトで表示されており、それ以降は「もっと見る」を押すことで表示される
 
     // 先頭5件
     final firstSocketElement = openSocketElement[seriesNodeIndex].querySelectorAll('li');
-
-    for (var element in firstSocketElement) {
-      if (!element.text.contains('ソケット形状')) {
-        final socketName = element.text.split('（')[0];
-        final socketParameterAtag = element.querySelectorAll('a');
-        // atagが存在する場合のみ処理を行う
-        if (socketParameterAtag.isNotEmpty) {
-          // パラメーター取得
-          final socketParameter = socketParameterAtag[0].attributes['href']!.split('?')[1];
-          socketList.add(PartsSearchParameter(socketName, socketParameter));
-        }
-      }
-    }
+    socketList.addAll(PartsListSearchParameter.takeOutParameters(firstSocketElement));
 
     //それ以降
     final afterSocketElement = openSocketElement[seriesNodeIndex + 1].querySelectorAll('li');
-    for (var element in afterSocketElement) {
-      final socketName = element.text.split('（')[0];
-      final socketParameterAtag = element.querySelectorAll('a');
-      // atagが存在する場合のみ処理を行う
-      if (socketParameterAtag.isNotEmpty) {
-        // パラメーター取得
-        final socketParameter = socketParameterAtag[0].attributes['href']!.split('?')[1];
-        socketList.add(PartsSearchParameter(socketName, socketParameter));
-      }
-    }
+    socketList.addAll(PartsListSearchParameter.takeOutParameters(afterSocketElement));
 
     return socketList;
   }

@@ -59,7 +59,7 @@ class CpuCoolerSearchParameter extends CategorySearchParameter {
       clearType.add(element);
     }
 
-    return CpuCoolerSearchParameter(clearMaker, clearIntelSocket, clearType, clearType);
+    return CpuCoolerSearchParameter(clearMaker, clearIntelSocket, clearAmdSocket, clearType);
   }
 
   @override

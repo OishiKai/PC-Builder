@@ -4,6 +4,7 @@ import 'package:html/dom.dart';
 
 import '../../models/search_parameters/graphics_card_search_parameter.dart';
 import '../document_repository.dart';
+import '../parts_list_search_parameter.dart';
 
 class GraphicsCardSearchParameterParser {
   static const String standardPage = 'https://kakaku.com/pc/videocard/itemlist.aspx';
@@ -13,47 +14,29 @@ class GraphicsCardSearchParameterParser {
   
   static Future<GraphicsCardSearchParameter?> fetchSearchParameter() async {
     _document = await DocumentRepository.fetchDocument(standardPage);
-    final nvidiaChips = _parseNvidiaChipList()!;
-    final amdChips = _parseAmdChips()!;
+    final nvidiaChips = _parseNvidiaChipList();
+    final amdChips = _parseAmdChips();
     return GraphicsCardSearchParameter(nvidiaChips, amdChips);
   }
 
-  static List<PartsSearchParameter>? _parseNvidiaChipList() {
-    if (_document == null) {
-      return null;
-    }
+  static List<PartsSearchParameter> _parseNvidiaChipList() {
     List<PartsSearchParameter> nvidiaChipList = [];
     // NVIDIAチップのリストは3番目の div にある
+
+    // fetchSearchParameter() で _document に値が入っていることを保証しているので、nullチェックは不要
     final nvidiaChipListElement = _document!.querySelectorAll(_parameterSelector)[4].querySelectorAll('ul');
     
     // NVIDIAチップのリストは1番目と2番目 div にある
     final headNvidiaChipList = nvidiaChipListElement[0].querySelectorAll('li');
     final tailNvidiaChipList = nvidiaChipListElement[1].querySelectorAll('li');
 
-    headNvidiaChipList.forEach((element) { 
-      final nvidiaChipName = element.text.split('（')[0];
-      final nvidiaChipParameterAtag = element.querySelectorAll('a');
-      if (nvidiaChipParameterAtag.isNotEmpty) {
-        final nvidiaChipParameter = nvidiaChipParameterAtag[0].attributes['href']!.split('?')[1];
-        nvidiaChipList.add(PartsSearchParameter(nvidiaChipName, nvidiaChipParameter));
-      } 
-    });
-    
-    tailNvidiaChipList.forEach((element) { 
-      final nvidiaChipName = element.text.split('（')[0];
-      final nvidiaChipParameterAtag = element.querySelectorAll('a');
-      if (nvidiaChipParameterAtag.isNotEmpty) {
-        final nvidiaChipParameter = nvidiaChipParameterAtag[0].attributes['href']!.split('?')[1];
-        nvidiaChipList.add(PartsSearchParameter(nvidiaChipName, nvidiaChipParameter));
-      } 
-    });
+    nvidiaChipList.addAll(PartsListSearchParameter.takeOutParameters(headNvidiaChipList));
+    nvidiaChipList.addAll(PartsListSearchParameter.takeOutParameters(tailNvidiaChipList));
+
     return nvidiaChipList;
   }
 
-  static List<PartsSearchParameter>? _parseAmdChips() {
-    if (_document == null) {
-      return null;
-    }
+  static List<PartsSearchParameter> _parseAmdChips() {
     List<PartsSearchParameter> amdChipList = [];
     // AMDチップのリストは3番目の div にある
     final amdChipListElement = _document!.querySelectorAll(_parameterSelector)[4].querySelectorAll('ul');
@@ -62,23 +45,9 @@ class GraphicsCardSearchParameterParser {
     final headAmdChipList = amdChipListElement[2].querySelectorAll('li');
     final tailAmdChipList = amdChipListElement[3].querySelectorAll('li');
 
-    headAmdChipList.forEach((element) { 
-      final amdChipName = element.text.split('（')[0];
-      final amdChipParameterAtag = element.querySelectorAll('a');
-      if (amdChipParameterAtag.isNotEmpty) {
-        final amdChipParameter = amdChipParameterAtag[0].attributes['href']!.split('?')[1];
-        amdChipList.add(PartsSearchParameter(amdChipName, amdChipParameter));
-      } 
-    });
-    
-    tailAmdChipList.forEach((element) { 
-      final amdChipName = element.text.split('（')[0];
-      final amdChipParameterAtag = element.querySelectorAll('a');
-      if (amdChipParameterAtag.isNotEmpty) {
-        final amdChipParameter = amdChipParameterAtag[0].attributes['href']!.split('?')[1];
-        amdChipList.add(PartsSearchParameter(amdChipName, amdChipParameter));
-      } 
-    });
+    amdChipList.addAll(PartsListSearchParameter.takeOutParameters(headAmdChipList));
+    amdChipList.addAll(PartsListSearchParameter.takeOutParameters(tailAmdChipList));
+
     return amdChipList;
   }
 }

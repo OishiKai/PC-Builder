@@ -16,6 +16,7 @@ class PartsListSearchParameter {
       final makerName = elem.text.split('（')[0];
       // パラメータは <a> か <span> に入っている
       if (elem.querySelectorAll('a').isNotEmpty) {
+        // aタグに入っている場合は href 内のパラメータを取得する
         final makerParameter = elem.querySelectorAll('a')[0].attributes['href']!.split('?')[1];
         params.add(PartsSearchParameter(makerName, makerParameter));
       } else if (elem.querySelectorAll('span').isNotEmpty) {
