@@ -9,6 +9,7 @@ import 'package:custom_pc/domain/search_parameter_parser/ssd_search_parameter_pa
 import 'package:custom_pc/models/category_home_data.dart';
 import 'package:custom_pc/models/category_search_parameter.dart';
 import 'package:custom_pc/models/search_parameters/case_fan_search_parameter.dart';
+import 'package:custom_pc/pages/create_custom_page.dart';
 import 'package:custom_pc/pages/parts_list_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -48,201 +49,211 @@ class RootPage extends ConsumerWidget {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            ElevatedButton(
-              onPressed: () async {
-                const partsListUrl = CpuSearchParameterParser.standardPage;
-                final targetUrlProviderController = ref.watch(targetUrlProvider.notifier);
-                targetUrlProviderController.update((state) => partsListUrl);
-                final parameter = await CpuSearchParameterParser.fetchSearchParameter();
-                ref.read(searchParameterProvider.notifier).state = parameter;
+            ElevatedButton(onPressed: () {
+              Navigator.push(
+                context,
+                PageRouteBuilder(
+                    pageBuilder: (context, animation, secondaryAnimation) => CreateCustomPage(),
+                    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                      return CupertinoPageTransition(primaryRouteAnimation: animation, secondaryRouteAnimation: secondaryAnimation, linearTransition: false, child: child);
+                    }),
+              );
+              }, child: const Text('見積もりを作成する'))
+            // ElevatedButton(
+            //   onPressed: () async {
+            //     const partsListUrl = CpuSearchParameterParser.standardPage;
+            //     final targetUrlProviderController = ref.watch(targetUrlProvider.notifier);
+            //     targetUrlProviderController.update((state) => partsListUrl);
+            //     final parameter = await CpuSearchParameterParser.fetchSearchParameter();
+            //     ref.read(searchParameterProvider.notifier).state = parameter;
 
-                final bool? selected = await Navigator.push(
-                  context,
-                  PageRouteBuilder(
-                      pageBuilder: (context, animation, secondaryAnimation) => PartsListPage(),
-                      transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                        return CupertinoPageTransition(primaryRouteAnimation: animation, secondaryRouteAnimation: secondaryAnimation, linearTransition: false, child: child);
-                      }),
-                );
-              },
-              child: Text("CPUを検索する"),
-            ),
-            SizedBox(
-              height: 16,
-            ),
-            ElevatedButton(
-              onPressed: () async {
-                const partsListUrl = CpuCoolerSearchParameterParser.standardPage;
-                final targetUrlProviderController = ref.watch(targetUrlProvider.notifier);
-                targetUrlProviderController.update((state) => partsListUrl);
-                final parameter = await CpuCoolerSearchParameterParser.fetchSearchParameter();
-                ref.read(searchParameterProvider.notifier).state = parameter;
+            //     final bool? selected = await Navigator.push(
+            //       context,
+            //       PageRouteBuilder(
+            //           pageBuilder: (context, animation, secondaryAnimation) => PartsListPage(),
+            //           transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            //             return CupertinoPageTransition(primaryRouteAnimation: animation, secondaryRouteAnimation: secondaryAnimation, linearTransition: false, child: child);
+            //           }),
+            //     );
+            //   },
+            //   child: Text("CPUを検索する"),
+            // ),
+            // SizedBox(
+            //   height: 16,
+            // ),
+            // ElevatedButton(
+            //   onPressed: () async {
+            //     const partsListUrl = CpuCoolerSearchParameterParser.standardPage;
+            //     final targetUrlProviderController = ref.watch(targetUrlProvider.notifier);
+            //     targetUrlProviderController.update((state) => partsListUrl);
+            //     final parameter = await CpuCoolerSearchParameterParser.fetchSearchParameter();
+            //     ref.read(searchParameterProvider.notifier).state = parameter;
 
-                final bool? selected = await Navigator.push(
-                  context,
-                  PageRouteBuilder(
-                      pageBuilder: (context, animation, secondaryAnimation) => PartsListPage(),
-                      transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                        return CupertinoPageTransition(primaryRouteAnimation: animation, secondaryRouteAnimation: secondaryAnimation, linearTransition: false, child: child);
-                      }),
-                );
-              },
-              child: Text("CPUクーラーを検索する"),
-            ),
-            SizedBox(
-              height: 16,
-            ),
-            ElevatedButton(
-              onPressed: () async {
-                const partsListUrl = MemorySearchParameterParser.standardPage;
-                final targetUrlProviderController = ref.watch(targetUrlProvider.notifier);
-                targetUrlProviderController.update((state) => partsListUrl);
-                final parameter = await MemorySearchParameterParser.fetchSearchParameter();
-                ref.read(searchParameterProvider.notifier).state = parameter;
+            //     final bool? selected = await Navigator.push(
+            //       context,
+            //       PageRouteBuilder(
+            //           pageBuilder: (context, animation, secondaryAnimation) => PartsListPage(),
+            //           transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            //             return CupertinoPageTransition(primaryRouteAnimation: animation, secondaryRouteAnimation: secondaryAnimation, linearTransition: false, child: child);
+            //           }),
+            //     );
+            //   },
+            //   child: Text("CPUクーラーを検索する"),
+            // ),
+            // SizedBox(
+            //   height: 16,
+            // ),
+            // ElevatedButton(
+            //   onPressed: () async {
+            //     const partsListUrl = MemorySearchParameterParser.standardPage;
+            //     final targetUrlProviderController = ref.watch(targetUrlProvider.notifier);
+            //     targetUrlProviderController.update((state) => partsListUrl);
+            //     final parameter = await MemorySearchParameterParser.fetchSearchParameter();
+            //     ref.read(searchParameterProvider.notifier).state = parameter;
 
-                final bool? selected = await Navigator.push(
-                  context,
-                  PageRouteBuilder(
-                      pageBuilder: (context, animation, secondaryAnimation) => PartsListPage(),
-                      transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                        return CupertinoPageTransition(primaryRouteAnimation: animation, secondaryRouteAnimation: secondaryAnimation, linearTransition: false, child: child);
-                      }),
-                );
-              },
-              child: Text("メモリを検索する"),
-            ),
-            SizedBox(
-              height: 16,
-            ),
-            ElevatedButton(
-              onPressed: () async {
-                const partsListUrl = MotherBoardSearchParameterParser.standardPage;
-                final targetUrlProviderController = ref.watch(targetUrlProvider.notifier);
-                targetUrlProviderController.update((state) => partsListUrl);
-                final parameter = await MotherBoardSearchParameterParser.fetchSearchParameter();
-                ref.read(searchParameterProvider.notifier).state = parameter;
+            //     final bool? selected = await Navigator.push(
+            //       context,
+            //       PageRouteBuilder(
+            //           pageBuilder: (context, animation, secondaryAnimation) => PartsListPage(),
+            //           transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            //             return CupertinoPageTransition(primaryRouteAnimation: animation, secondaryRouteAnimation: secondaryAnimation, linearTransition: false, child: child);
+            //           }),
+            //     );
+            //   },
+            //   child: Text("メモリを検索する"),
+            // ),
+            // SizedBox(
+            //   height: 16,
+            // ),
+            // ElevatedButton(
+            //   onPressed: () async {
+            //     const partsListUrl = MotherBoardSearchParameterParser.standardPage;
+            //     final targetUrlProviderController = ref.watch(targetUrlProvider.notifier);
+            //     targetUrlProviderController.update((state) => partsListUrl);
+            //     final parameter = await MotherBoardSearchParameterParser.fetchSearchParameter();
+            //     ref.read(searchParameterProvider.notifier).state = parameter;
 
-                final bool? selected = await Navigator.push(
-                  context,
-                  PageRouteBuilder(
-                      pageBuilder: (context, animation, secondaryAnimation) => PartsListPage(),
-                      transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                        return CupertinoPageTransition(primaryRouteAnimation: animation, secondaryRouteAnimation: secondaryAnimation, linearTransition: false, child: child);
-                      }),
-                );
-              },
-              child: Text("マザーボードを検索する"),
-            ),
-            SizedBox(
-              height: 16,
-            ),
-            ElevatedButton(
-              onPressed: () async {
-                const partsListUrl = GraphicsCardSearchParameterParser.standardPage;
-                final targetUrlProviderController = ref.watch(targetUrlProvider.notifier);
-                targetUrlProviderController.update((state) => partsListUrl);
+            //     final bool? selected = await Navigator.push(
+            //       context,
+            //       PageRouteBuilder(
+            //           pageBuilder: (context, animation, secondaryAnimation) => PartsListPage(),
+            //           transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            //             return CupertinoPageTransition(primaryRouteAnimation: animation, secondaryRouteAnimation: secondaryAnimation, linearTransition: false, child: child);
+            //           }),
+            //     );
+            //   },
+            //   child: Text("マザーボードを検索する"),
+            // ),
+            // SizedBox(
+            //   height: 16,
+            // ),
+            // ElevatedButton(
+            //   onPressed: () async {
+            //     const partsListUrl = GraphicsCardSearchParameterParser.standardPage;
+            //     final targetUrlProviderController = ref.watch(targetUrlProvider.notifier);
+            //     targetUrlProviderController.update((state) => partsListUrl);
             
-                final parameter = await GraphicsCardSearchParameterParser.fetchSearchParameter();
-                ref.read(searchParameterProvider.notifier).state = parameter;
+            //     final parameter = await GraphicsCardSearchParameterParser.fetchSearchParameter();
+            //     ref.read(searchParameterProvider.notifier).state = parameter;
 
-                final bool? selected = await Navigator.push(
-                  context,
-                  PageRouteBuilder(
-                      pageBuilder: (context, animation, secondaryAnimation) => PartsListPage(),
-                      transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                        return CupertinoPageTransition(primaryRouteAnimation: animation, secondaryRouteAnimation: secondaryAnimation, linearTransition: false, child: child);
-                      }),
-                );
-              },
-              child: Text("ビデオカードを検索する"),
-            ),
-            SizedBox(
-              height: 16,
-            ),
-            ElevatedButton(
-              onPressed: () async {
-                const partsListUrl = SsdSearchParameterParser.standardPage;
-                final targetUrlProviderController = ref.watch(targetUrlProvider.notifier);
-                targetUrlProviderController.update((state) => partsListUrl);
-                final parameter = await SsdSearchParameterParser.fetchSearchParameter();
-                ref.read(searchParameterProvider.notifier).state = parameter;
-                final bool? selected = await Navigator.push(
-                  context,
-                  PageRouteBuilder(
-                      pageBuilder: (context, animation, secondaryAnimation) => PartsListPage(),
-                      transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                        return CupertinoPageTransition(primaryRouteAnimation: animation, secondaryRouteAnimation: secondaryAnimation, linearTransition: false, child: child);
-                      }),
-                );
-              },
-              child: Text("SSDを検索する"),
-            ),
-            SizedBox(
-              height: 16,
-            ),
-            ElevatedButton(
-              onPressed: () async {
-                const partsListUrl = PcCaseSearchParameterParser.standardPage;
-                final targetUrlProviderController = ref.watch(targetUrlProvider.notifier);
-                targetUrlProviderController.update((state) => partsListUrl);
-                final parameter = await PcCaseSearchParameterParser.fetchSearchParameter();
-                ref.read(searchParameterProvider.notifier).state = parameter;
+            //     final bool? selected = await Navigator.push(
+            //       context,
+            //       PageRouteBuilder(
+            //           pageBuilder: (context, animation, secondaryAnimation) => PartsListPage(),
+            //           transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            //             return CupertinoPageTransition(primaryRouteAnimation: animation, secondaryRouteAnimation: secondaryAnimation, linearTransition: false, child: child);
+            //           }),
+            //     );
+            //   },
+            //   child: Text("ビデオカードを検索する"),
+            // ),
+            // SizedBox(
+            //   height: 16,
+            // ),
+            // ElevatedButton(
+            //   onPressed: () async {
+            //     const partsListUrl = SsdSearchParameterParser.standardPage;
+            //     final targetUrlProviderController = ref.watch(targetUrlProvider.notifier);
+            //     targetUrlProviderController.update((state) => partsListUrl);
+            //     final parameter = await SsdSearchParameterParser.fetchSearchParameter();
+            //     ref.read(searchParameterProvider.notifier).state = parameter;
+            //     final bool? selected = await Navigator.push(
+            //       context,
+            //       PageRouteBuilder(
+            //           pageBuilder: (context, animation, secondaryAnimation) => PartsListPage(),
+            //           transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            //             return CupertinoPageTransition(primaryRouteAnimation: animation, secondaryRouteAnimation: secondaryAnimation, linearTransition: false, child: child);
+            //           }),
+            //     );
+            //   },
+            //   child: Text("SSDを検索する"),
+            // ),
+            // SizedBox(
+            //   height: 16,
+            // ),
+            // ElevatedButton(
+            //   onPressed: () async {
+            //     const partsListUrl = PcCaseSearchParameterParser.standardPage;
+            //     final targetUrlProviderController = ref.watch(targetUrlProvider.notifier);
+            //     targetUrlProviderController.update((state) => partsListUrl);
+            //     final parameter = await PcCaseSearchParameterParser.fetchSearchParameter();
+            //     ref.read(searchParameterProvider.notifier).state = parameter;
                 
-                final bool? selected = await Navigator.push(
-                  context,
-                  PageRouteBuilder(
-                      pageBuilder: (context, animation, secondaryAnimation) => PartsListPage(),
-                      transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                        return CupertinoPageTransition(primaryRouteAnimation: animation, secondaryRouteAnimation: secondaryAnimation, linearTransition: false, child: child);
-                      }),
-                );
-              },
-              child: Text("PCケースを検索する"),
-            ),
-            SizedBox(
-              height: 16,
-            ),
-            ElevatedButton(
-              onPressed: () async {
-                const partsListUrl = PowerUnitSearchParameterParser.standardPage;
-                final targetUrlProviderController = ref.watch(targetUrlProvider.notifier);
-                targetUrlProviderController.update((state) => partsListUrl);
-                final parameter = await PowerUnitSearchParameterParser.fetchSearchParameter();
-                ref.read(searchParameterProvider.notifier).state = parameter;
+            //     final bool? selected = await Navigator.push(
+            //       context,
+            //       PageRouteBuilder(
+            //           pageBuilder: (context, animation, secondaryAnimation) => PartsListPage(),
+            //           transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            //             return CupertinoPageTransition(primaryRouteAnimation: animation, secondaryRouteAnimation: secondaryAnimation, linearTransition: false, child: child);
+            //           }),
+            //     );
+            //   },
+            //   child: Text("PCケースを検索する"),
+            // ),
+            // SizedBox(
+            //   height: 16,
+            // ),
+            // ElevatedButton(
+            //   onPressed: () async {
+            //     const partsListUrl = PowerUnitSearchParameterParser.standardPage;
+            //     final targetUrlProviderController = ref.watch(targetUrlProvider.notifier);
+            //     targetUrlProviderController.update((state) => partsListUrl);
+            //     final parameter = await PowerUnitSearchParameterParser.fetchSearchParameter();
+            //     ref.read(searchParameterProvider.notifier).state = parameter;
 
-                final bool? selected = await Navigator.push(
-                  context,
-                  PageRouteBuilder(
-                      pageBuilder: (context, animation, secondaryAnimation) => PartsListPage(),
-                      transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                        return CupertinoPageTransition(primaryRouteAnimation: animation, secondaryRouteAnimation: secondaryAnimation, linearTransition: false, child: child);
-                      }),
-                );
-              },
-              child: Text("電源ユニットを検索する"),
-            ),
-            SizedBox(
-              height: 16,
-            ),
-            ElevatedButton(
-              onPressed: () async {
-                const partsListUrl = CaseFanSearchParameterParser.standardPage;
-                final targetUrlProviderController = ref.watch(targetUrlProvider.notifier);
-                targetUrlProviderController.update((state) => partsListUrl);
-                final parameter = await CaseFanSearchParameterParser.fetchSearchParameter();
-                ref.read(searchParameterProvider.notifier).state = parameter;
+            //     final bool? selected = await Navigator.push(
+            //       context,
+            //       PageRouteBuilder(
+            //           pageBuilder: (context, animation, secondaryAnimation) => PartsListPage(),
+            //           transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            //             return CupertinoPageTransition(primaryRouteAnimation: animation, secondaryRouteAnimation: secondaryAnimation, linearTransition: false, child: child);
+            //           }),
+            //     );
+            //   },
+            //   child: Text("電源ユニットを検索する"),
+            // ),
+            // SizedBox(
+            //   height: 16,
+            // ),
+            // ElevatedButton(
+            //   onPressed: () async {
+            //     const partsListUrl = CaseFanSearchParameterParser.standardPage;
+            //     final targetUrlProviderController = ref.watch(targetUrlProvider.notifier);
+            //     targetUrlProviderController.update((state) => partsListUrl);
+            //     final parameter = await CaseFanSearchParameterParser.fetchSearchParameter();
+            //     ref.read(searchParameterProvider.notifier).state = parameter;
 
-                final bool? selected = await Navigator.push(
-                  context,
-                  PageRouteBuilder(
-                      pageBuilder: (context, animation, secondaryAnimation) => PartsListPage(),
-                      transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                        return CupertinoPageTransition(primaryRouteAnimation: animation, secondaryRouteAnimation: secondaryAnimation, linearTransition: false, child: child);
-                      }),
-                );
-              },
-              child: Text("ケースファンを検索する"),
-            ),
+            //     final bool? selected = await Navigator.push(
+            //       context,
+            //       PageRouteBuilder(
+            //           pageBuilder: (context, animation, secondaryAnimation) => PartsListPage(),
+            //           transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            //             return CupertinoPageTransition(primaryRouteAnimation: animation, secondaryRouteAnimation: secondaryAnimation, linearTransition: false, child: child);
+            //           }),
+            //     );
+            //   },
+            //   child: Text("ケースファンを検索する"),
+            // ),
           ],
         ),
       ),
