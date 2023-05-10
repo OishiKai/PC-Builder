@@ -130,6 +130,6 @@ class CustomNotifier extends StateNotifier<Custom> {
   }
 }
 
-final customNotifierProvider = StateNotifierProvider<CustomNotifier, Custom>((ref) {
+final customProvider = StateNotifierProvider<CustomNotifier, Custom>((ref) {
   return CustomNotifier(Custom.create());
 });

@@ -23,9 +23,12 @@ class PartsScrollWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     SizeConfig().init(context);
-    final custom = ref.watch(customNotifierProvider);
+    final custom = ref.watch(customProvider);
 
     setupToPartsListPage(PartsCategory category) async {
+      // ここで検索中を始めるパーツカテゴリを設定する
+      ref.read(searchingCategoryProvider.notifier).update((state) => category);
+      // カテゴリに合わせて検索URL、パラメータを設定する
       switch (category) {
         case PartsCategory.cpu:
           ref.read(targetUrlProvider.notifier).update((state) => CpuSearchParameterParser.standardPage);
@@ -75,78 +78,92 @@ class PartsScrollWidget extends ConsumerWidget {
       }
     }
 
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        children: [
-          SizedBox(
-            width: SizeConfig.blockSizeHorizontal * 4,
-          ),
-          for (int i = 0; i < PartsCategory.values.length; i++)
-            Padding(
-              padding: EdgeInsets.only(right: SizeConfig.blockSizeHorizontal * 4),
-              child: InkWell(
-                onTap: () async {
-                  setupToPartsListPage(PartsCategory.values[i]);
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => const PartsListPage()));
-                },
-                child: Container(
-                  // 4%, 28%, 4%, 28%, 4%, 28%, 4% の横幅で表示する
-                  width: SizeConfig.blockSizeHorizontal * 28,
-                  // 横幅の1.3倍の縦幅とする
-                  height: SizeConfig.blockSizeHorizontal * 28 * 1.3,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      const SizedBox(
-                        height: 2,
-                      ),
-                      FittedBox(
-                        fit: BoxFit.fitWidth,
-                        child: Text(
-                          _shortName(PartsCategory.values[i]),
-                          style: TextStyle(
-                            //fontSize: 16,
-                            fontWeight: FontWeight.bold,
+    return NotificationListener<OverscrollIndicatorNotification>(
+      onNotification: (OverscrollIndicatorNotification notification) {
+        notification.disallowGlow();
+        return false;
+      },
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        primary: false,
+        child: Row(
+          children: [
+            SizedBox(
+              width: SizeConfig.blockSizeHorizontal * 4,
+            ),
+            for (int i = 0; i < PartsCategory.values.length; i++)
+              Padding(
+                padding: EdgeInsets.only(right: SizeConfig.blockSizeHorizontal * 4),
+                child: InkWell(
+                  onTap: () async {
+                    setupToPartsListPage(PartsCategory.values[i]);
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const PartsListPage()));
+                  },
+                  child: Container(
+                    // 4%, 28%, 4%, 28%, 4%, 28%, 4% の横幅で表示する
+                    width: SizeConfig.blockSizeHorizontal * 35,
+                    // 横幅の1.3倍の縦幅とする
+                    height: SizeConfig.blockSizeHorizontal * 35 * 1.3,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        const SizedBox(
+                          height: 2,
+                        ),
+                        FittedBox(
+                          fit: BoxFit.fitWidth,
+                          child: Text(
+                            _shortName(PartsCategory.values[i]),
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: _mainColor,
+                            ),
+                          ),
+                        ),
+                        const Spacer(),
+                        if (custom.get(PartsCategory.values[i]) != null)
+                          Image.network(
+                            custom.get(PartsCategory.values[i])!.image,
+                            width: SizeConfig.blockSizeHorizontal * 30,
+                            height: SizeConfig.blockSizeHorizontal * 30,
+                            fit: BoxFit.contain,
+                          ),
+                        if (custom.get(PartsCategory.values[i]) == null)
+                          Icon(
+                            Icons.add_circle,
+                            size: 38,
                             color: _mainColor,
                           ),
-                        ),
-                      ),
-                      const Spacer(),
-                      if (custom.get(PartsCategory.values[i]) != null) Image.network(custom.get(PartsCategory.values[i])!.image),
-                      if (custom.get(PartsCategory.values[i]) == null)
-                        Icon(
-                          Icons.add_circle,
-                          size: 30,
-                          color: _mainColor,
-                        ),
-                      const Spacer(),
-                      if (custom.get(PartsCategory.values[i]) != null)
-                        Text(
-                          custom.get(PartsCategory.values[i])!.price,
-                          style: const TextStyle(
-                            fontSize: 18,
-                            color: Colors.redAccent,
+                        const Spacer(),
+                        if (custom.get(PartsCategory.values[i]) != null)
+                          Text(
+                            custom.get(PartsCategory.values[i])!.price,
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.redAccent,
+                            ),
                           ),
+                        if (custom.get(PartsCategory.values[i]) == null)
+                          const Text(
+                            '¥-',
+                            style: TextStyle(fontSize: 18, color: Colors.grey),
+                          ),
+                        const SizedBox(
+                          height: 2,
                         ),
-                      if (custom.get(PartsCategory.values[i]) == null)
-                        const Text(
-                          '¥-',
-                          style: TextStyle(fontSize: 18, color: Colors.grey),
-                        ),
-                      const SizedBox(
-                        height: 2,
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            )
-        ],
+              )
+          ],
+        ),
       ),
     );
   }

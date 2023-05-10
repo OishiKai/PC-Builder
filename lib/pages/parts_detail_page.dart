@@ -1,5 +1,7 @@
 import 'package:clippy_flutter/arc.dart';
 import 'package:custom_pc/config/size_config.dart';
+import 'package:custom_pc/main.dart';
+import 'package:custom_pc/models/custom.dart';
 import 'package:custom_pc/models/pc_parts.dart';
 import 'package:custom_pc/widgets/parts_detail/shops_widget.dart';
 import 'package:custom_pc/widgets/parts_detail/specs_widget.dart';
@@ -8,7 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_segmented_control/material_segmented_control.dart';
 
-import '../widgets/parts_detail/detail_bottom_bar.dart';
 import '../widgets/parts_detail/full_scale_image_slider.dart';
 
 // 販売店 or 詳細スペック の表示状態 (デフォルトは 0)
@@ -168,7 +169,74 @@ class PartsDetailPage extends ConsumerWidget {
           )
         ],
       ),
-      //bottomNavigationBar: DetailBottomBar(),
+      bottomNavigationBar: BottomAppBar(
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+          height: 80,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  final category = ref.read(searchingCategoryProvider);
+                  switch (category) {
+                    case PartsCategory.cpu:
+                      ref.read(customProvider.notifier).setCpu(parts);
+                      break;
+                    case PartsCategory.cpuCooler:
+                      ref.read(customProvider.notifier).setCpuCooler(parts);
+                      break;
+                    case PartsCategory.memory:
+                      ref.read(customProvider.notifier).setMemory(parts);
+                      break;
+                    case PartsCategory.motherBoard:
+                      ref.read(customProvider.notifier).setMotherBoard(parts);
+                      break;
+                    case PartsCategory.graphicsCard:
+                      ref.read(customProvider.notifier).setGraphicsCard(parts);
+                      break;
+                    case PartsCategory.ssd:
+                      ref.read(customProvider.notifier).setSsd(parts);
+                      break;
+                    case PartsCategory.pcCase:
+                      ref.read(customProvider.notifier).setPcCase(parts);
+                      break;
+                    case PartsCategory.powerUnit:
+                      ref.read(customProvider.notifier).setPowerUnit(parts);
+                      break;
+                    case PartsCategory.caseFan:
+                      ref.read(customProvider.notifier).setCaseFan(parts);
+                      break;
+                  }
+                  int count = 0;
+                  Navigator.popUntil(context, (_) => count++ >= 2);
+                },
+                style: ElevatedButton.styleFrom(
+                  padding: EdgeInsets.zero,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(40),
+                  ),
+                  primary: Color.fromRGBO(60, 130, 80, 1),
+                ),
+                child: Row(
+                  children: const [
+                    Spacer(),
+                    Text(
+                      "このパーツを選択する",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                    Spacer(),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
