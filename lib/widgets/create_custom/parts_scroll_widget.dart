@@ -129,8 +129,8 @@ class PartsScrollWidget extends ConsumerWidget {
                         if (custom.get(PartsCategory.values[i]) != null)
                           Image.network(
                             custom.get(PartsCategory.values[i])!.image,
-                            width: SizeConfig.blockSizeHorizontal * 30,
-                            height: SizeConfig.blockSizeHorizontal * 30,
+                            width: SizeConfig.blockSizeHorizontal * 24,
+                            height: SizeConfig.blockSizeHorizontal * 24,
                             fit: BoxFit.contain,
                           ),
                         if (custom.get(PartsCategory.values[i]) == null)
@@ -140,6 +140,21 @@ class PartsScrollWidget extends ConsumerWidget {
                             color: _mainColor,
                           ),
                         const Spacer(),
+                        if (custom.get(PartsCategory.values[i]) != null)
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 2),
+                            child: Text(
+                              custom.get(PartsCategory.values[i])!.title,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: _mainColor,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
                         if (custom.get(PartsCategory.values[i]) != null)
                           Text(
                             custom.get(PartsCategory.values[i])!.price,
