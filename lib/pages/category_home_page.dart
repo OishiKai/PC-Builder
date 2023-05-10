@@ -55,9 +55,6 @@ class CategoryHomePage extends ConsumerWidget {
         case PartsCategory.caseFan:
           // TODO: Handle this case.
           break;
-        case PartsCategory.monitor:
-          // TODO: Handle this case.
-          break;
       }
       return null;
     }

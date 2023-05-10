@@ -50,8 +50,7 @@ enum PartsCategory {
   ssd('SSD', '2C0070'),
   pcCase('PCケース', '2C0032'),
   powerUnit('電源ユニット', '2C0035'),
-  caseFan('ケースファン', '2C0089'),
-  monitor('PCモニター・液晶ディスプレイ', '2C0015');
+  caseFan('ケースファン', '2C0089');
 
   final String categoryName;
   final String categoryParameter;
