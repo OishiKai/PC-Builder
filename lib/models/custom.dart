@@ -30,36 +30,72 @@ class CustomNotifier extends StateNotifier<Custom> {
     state = state.copyWith(cpu: cpu);
   }
 
+  void deleteCpu() {
+    state = state.copyWith(cpu: null);
+  }
+
   void setCpuCooler(PcParts cpuCooler) {
     state = state.copyWith(cpuCooler: cpuCooler);
+  }
+
+  void deleteCpuCooler() {
+    state = state.copyWith(cpuCooler: null);
   }
 
   void setMemory(PcParts memory) {
     state = state.copyWith(memory: memory);
   }
 
+  void deleteMemory() {
+    state = state.copyWith(memory: null);
+  }
+
   void setMotherBoard(PcParts motherBoard) {
     state = state.copyWith(motherBoard: motherBoard);
+  }
+
+  void deleteMotherBoard() {
+    state = state.copyWith(motherBoard: null);
   }
 
   void setGraphicsCard(PcParts graphicsCard) {
     state = state.copyWith(graphicsCard: graphicsCard);
   }
 
+  void deleteGraphicsCard() {
+    state = state.copyWith(graphicsCard: null);
+  }
+
   void setSsd(PcParts ssd) {
     state = state.copyWith(ssd: ssd);
+  }
+
+  void deleteSsd() {
+    state = state.copyWith(ssd: null);
   }
 
   void setPcCase(PcParts pcCase) {
     state = state.copyWith(pcCase: pcCase);
   }
 
+  void deletePcCase() {
+    state = state.copyWith(pcCase: null);
+  }
+
   void setPowerUnit(PcParts powerUnit) {
     state = state.copyWith(powerUnit: powerUnit);
   }
 
+  void deletePowerUnit() {
+    state = state.copyWith(powerUnit: null);
+  }
+
   void setCaseFan(PcParts caseFan) {
     state = state.copyWith(caseFan: caseFan);
+  }
+
+  void deleteCaseFan() {
+    state = state.copyWith(caseFan: null);
   }
 
   void reset() {
@@ -71,6 +107,6 @@ class CustomNotifier extends StateNotifier<Custom> {
   }
 }
 
-
-
-
+final customNotifierProvider = StateNotifierProvider<CustomNotifier, Custom>((ref) {
+  return CustomNotifier(Custom.create());
+});
