@@ -21,6 +21,29 @@ class Custom {
   Custom copyWith({PcParts? cpu, PcParts? cpuCooler, PcParts? memory, PcParts? motherBoard, PcParts? graphicsCard, PcParts? ssd, PcParts? pcCase, PcParts? powerUnit, PcParts? caseFan}) {
     return Custom._(cpu ?? this.cpu, cpuCooler ?? this.cpuCooler, memory ?? this.memory, motherBoard ?? this.motherBoard, graphicsCard ?? this.graphicsCard, ssd ?? this.ssd, pcCase ?? this.pcCase, powerUnit ?? this.powerUnit, caseFan ?? this.caseFan);
   }
+
+  PcParts? get(PartsCategory category) {
+    switch (category) {
+      case PartsCategory.cpu:
+        return cpu;
+      case PartsCategory.cpuCooler:
+        return cpuCooler;
+      case PartsCategory.memory:
+        return memory;
+      case PartsCategory.motherBoard:
+        return motherBoard;
+      case PartsCategory.graphicsCard:
+        return graphicsCard;
+      case PartsCategory.ssd:
+        return ssd;
+      case PartsCategory.pcCase:
+        return pcCase;
+      case PartsCategory.powerUnit:
+        return powerUnit;
+      case PartsCategory.caseFan:
+        return caseFan;
+    }
+  }
 }
 
 class CustomNotifier extends StateNotifier<Custom> {

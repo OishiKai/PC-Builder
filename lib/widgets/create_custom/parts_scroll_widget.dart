@@ -1,4 +1,5 @@
 import 'package:custom_pc/main.dart';
+import 'package:custom_pc/models/custom.dart';
 import 'package:custom_pc/models/pc_parts.dart';
 import 'package:custom_pc/pages/parts_list_page.dart';
 import 'package:flutter/material.dart';
@@ -16,12 +17,13 @@ import '../../domain/search_parameter_parser/power_unit_search_parameter_parser.
 import '../../domain/search_parameter_parser/ssd_search_parameter_parser.dart';
 
 class PartsScrollWidget extends ConsumerWidget {
-  PartsScrollWidget({super.key});
+  const PartsScrollWidget({super.key});
   final _mainColor = const Color.fromRGBO(60, 130, 80, 1);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     SizeConfig().init(context);
+    final custom = ref.watch(customNotifierProvider);
 
     setupToPartsListPage(PartsCategory category) async {
       switch (category) {
@@ -86,7 +88,7 @@ class PartsScrollWidget extends ConsumerWidget {
               child: InkWell(
                 onTap: () async {
                   setupToPartsListPage(PartsCategory.values[i]);
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => PartsListPage()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const PartsListPage()));
                 },
                 child: Container(
                   // 4%, 28%, 4%, 28%, 4%, 28%, 4% の横幅で表示する
@@ -115,16 +117,27 @@ class PartsScrollWidget extends ConsumerWidget {
                         ),
                       ),
                       const Spacer(),
-                      Icon(
-                        Icons.add_circle,
-                        size: 30,
-                        color: _mainColor,
-                      ),
+                      if (custom.get(PartsCategory.values[i]) != null) Image.network(custom.get(PartsCategory.values[i])!.image),
+                      if (custom.get(PartsCategory.values[i]) == null)
+                        Icon(
+                          Icons.add_circle,
+                          size: 30,
+                          color: _mainColor,
+                        ),
                       const Spacer(),
-                      const Text(
-                        '¥-',
-                        style: TextStyle(fontSize: 18, color: Colors.grey),
-                      ),
+                      if (custom.get(PartsCategory.values[i]) != null)
+                        Text(
+                          custom.get(PartsCategory.values[i])!.price,
+                          style: const TextStyle(
+                            fontSize: 18,
+                            color: Colors.redAccent,
+                          ),
+                        ),
+                      if (custom.get(PartsCategory.values[i]) == null)
+                        const Text(
+                          '¥-',
+                          style: TextStyle(fontSize: 18, color: Colors.grey),
+                        ),
                       const SizedBox(
                         height: 2,
                       ),
