@@ -25,9 +25,13 @@ class TotalPriceWidget extends ConsumerWidget {
     final custom = ref.watch(customProvider);
     return Container(
       width: SizeConfig.blockSizeHorizontal * 92,
-      height: 300,
+      //height: 300,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+      ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Padding(
             padding: EdgeInsets.symmetric(vertical: 8, horizontal: SizeConfig.blockSizeHorizontal * 4),
@@ -35,7 +39,7 @@ class TotalPriceWidget extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
-                  '総計',
+                  'Total',
                   style: TextStyle(
                     fontSize: 32,
                     fontWeight: FontWeight.bold,
@@ -69,6 +73,49 @@ class TotalPriceWidget extends ConsumerWidget {
                       )
                 ],
               )),
+          SizedBox(
+            height: 8,
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 4, horizontal: SizeConfig.blockSizeHorizontal * 4),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                for (int i = 0; i < PartsCategory.values.length; i++)
+                  if (custom.get(PartsCategory.values[i]) != null)
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.circle,
+                          color: _ratingBarColors[i],
+                          size: 18,
+                        ),
+                        SizedBox(
+                          width: 8,
+                        ),
+                        Text(
+                          _shortName(PartsCategory.values[i]),
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.black,
+                          ),
+                        ),
+                        SizedBox(
+                          width: 8,
+                        ),
+                        Text(
+                          '${(parsePrice(custom.get(PartsCategory.values[i])!.price) / custom.calculateTotalPrice() * 100).toStringAsFixed(2)}%',
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.black,
+                          ),
+                        )
+                      ],
+                    )
+              ],
+            ),
+          )
         ],
       ),
     );
@@ -93,5 +140,28 @@ class TotalPriceWidget extends ConsumerWidget {
   int parsePrice(String price) {
     final normalizedPrice = price.replaceAll('¥', '').replaceAll(',', '');
     return int.parse(normalizedPrice);
+  }
+
+  String _shortName(PartsCategory category) {
+    switch (category) {
+      case PartsCategory.cpu:
+        return category.categoryName;
+      case PartsCategory.cpuCooler:
+        return 'CPUクーラー';
+      case PartsCategory.memory:
+        return 'メモリ';
+      case PartsCategory.motherBoard:
+        return 'マザボ';
+      case PartsCategory.graphicsCard:
+        return 'グラボ';
+      case PartsCategory.ssd:
+        return category.categoryName;
+      case PartsCategory.pcCase:
+        return category.categoryName;
+      case PartsCategory.powerUnit:
+        return '電源';
+      case PartsCategory.caseFan:
+        return category.categoryName;
+    }
   }
 }
