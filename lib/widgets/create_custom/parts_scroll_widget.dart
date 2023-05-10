@@ -149,7 +149,6 @@ class PartsScrollWidget extends ConsumerWidget {
                               overflow: TextOverflow.ellipsis,
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                fontSize: 16,
                                 color: _mainColor,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -159,7 +158,6 @@ class PartsScrollWidget extends ConsumerWidget {
                           Text(
                             custom.get(PartsCategory.values[i])!.price,
                             style: const TextStyle(
-                              fontSize: 18,
                               fontWeight: FontWeight.bold,
                               color: Colors.redAccent,
                             ),
