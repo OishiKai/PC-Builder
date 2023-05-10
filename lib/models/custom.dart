@@ -18,6 +18,45 @@ class Custom {
     return Custom._(null, null, null, null, null, null, null, null, null);
   }
 
+  int calculateTotalPrice() {
+    int totalPrice = 0;
+
+    if (cpu != null) {
+      totalPrice += parsePrice(cpu!.price);
+    }
+    if (cpuCooler != null) {
+      totalPrice += parsePrice(cpuCooler!.price);
+    }
+    if (memory != null) {
+      totalPrice += parsePrice(memory!.price);
+    }
+    if (motherBoard != null) {
+      totalPrice += parsePrice(motherBoard!.price);
+    }
+    if (graphicsCard != null) {
+      totalPrice += parsePrice(graphicsCard!.price);
+    }
+    if (ssd != null) {
+      totalPrice += parsePrice(ssd!.price);
+    }
+    if (pcCase != null) {
+      totalPrice += parsePrice(pcCase!.price);
+    }
+    if (powerUnit != null) {
+      totalPrice += parsePrice(powerUnit!.price);
+    }
+    if (caseFan != null) {
+      totalPrice += parsePrice(caseFan!.price);
+    }
+
+    return totalPrice;
+  }
+
+  int parsePrice(String price) {
+    final normalizedPrice = price.replaceAll('¥', '').replaceAll(',', '');
+    return int.parse(normalizedPrice);
+  }
+
   Custom copyWith({PcParts? cpu, PcParts? cpuCooler, PcParts? memory, PcParts? motherBoard, PcParts? graphicsCard, PcParts? ssd, PcParts? pcCase, PcParts? powerUnit, PcParts? caseFan}) {
     return Custom._(cpu ?? this.cpu, cpuCooler ?? this.cpuCooler, memory ?? this.memory, motherBoard ?? this.motherBoard, graphicsCard ?? this.graphicsCard, ssd ?? this.ssd, pcCase ?? this.pcCase, powerUnit ?? this.powerUnit, caseFan ?? this.caseFan);
   }

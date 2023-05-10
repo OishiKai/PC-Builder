@@ -1,5 +1,6 @@
 import 'package:custom_pc/models/custom.dart';
 import 'package:custom_pc/widgets/create_custom/parts_scroll_widget.dart';
+import 'package:custom_pc/widgets/create_custom/total_price_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -64,6 +65,7 @@ class CreateCustomPage extends ConsumerWidget {
           //     color: _mainColor,
           //   ),
           // ),
+          TotalPriceWidget(),
         ],
       ),
     );

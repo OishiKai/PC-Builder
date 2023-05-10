@@ -1,23 +1,13 @@
 import 'package:custom_pc/domain/parts_search_list_parser.dart';
 import 'package:custom_pc/domain/search_parameter_parser/case_fan_search_parameter_parser.dart';
-import 'package:custom_pc/domain/search_parameter_parser/cpu_cooler_search_parameter_parser.dart';
-import 'package:custom_pc/domain/search_parameter_parser/graphics_card_search_parameter_parser.dart';
-import 'package:custom_pc/domain/search_parameter_parser/memory_search_parameter_parser.dart';
-import 'package:custom_pc/domain/search_parameter_parser/pc_case_search_parameter_parser.dart';
-import 'package:custom_pc/domain/search_parameter_parser/power_unit_search_parameter_parser.dart';
-import 'package:custom_pc/domain/search_parameter_parser/ssd_search_parameter_parser.dart';
 import 'package:custom_pc/models/category_home_data.dart';
 import 'package:custom_pc/models/category_search_parameter.dart';
-import 'package:custom_pc/models/search_parameters/case_fan_search_parameter.dart';
+import 'package:custom_pc/models/pc_parts.dart';
 import 'package:custom_pc/pages/create_custom_page.dart';
-import 'package:custom_pc/pages/parts_list_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import 'domain/search_parameter_parser/cpu_search_search_parameter_parser.dart';
-import 'domain/search_parameter_parser/mother_board_search_parameter_parser.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
@@ -49,16 +39,18 @@ class RootPage extends ConsumerWidget {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            ElevatedButton(onPressed: () {
-              Navigator.push(
-                context,
-                PageRouteBuilder(
-                    pageBuilder: (context, animation, secondaryAnimation) => CreateCustomPage(),
-                    transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                      return CupertinoPageTransition(primaryRouteAnimation: animation, secondaryRouteAnimation: secondaryAnimation, linearTransition: false, child: child);
-                    }),
-              );
-              }, child: const Text('見積もりを作成する'))
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                        pageBuilder: (context, animation, secondaryAnimation) => CreateCustomPage(),
+                        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                          return CupertinoPageTransition(primaryRouteAnimation: animation, secondaryRouteAnimation: secondaryAnimation, linearTransition: false, child: child);
+                        }),
+                  );
+                },
+                child: const Text('見積もりを作成する'))
             // ElevatedButton(
             //   onPressed: () async {
             //     const partsListUrl = CpuSearchParameterParser.standardPage;
@@ -152,7 +144,7 @@ class RootPage extends ConsumerWidget {
             //     const partsListUrl = GraphicsCardSearchParameterParser.standardPage;
             //     final targetUrlProviderController = ref.watch(targetUrlProvider.notifier);
             //     targetUrlProviderController.update((state) => partsListUrl);
-            
+
             //     final parameter = await GraphicsCardSearchParameterParser.fetchSearchParameter();
             //     ref.read(searchParameterProvider.notifier).state = parameter;
 
@@ -198,7 +190,7 @@ class RootPage extends ConsumerWidget {
             //     targetUrlProviderController.update((state) => partsListUrl);
             //     final parameter = await PcCaseSearchParameterParser.fetchSearchParameter();
             //     ref.read(searchParameterProvider.notifier).state = parameter;
-                
+
             //     final bool? selected = await Navigator.push(
             //       context,
             //       PageRouteBuilder(
@@ -281,4 +273,8 @@ final partsListFutureProvider = FutureProvider((ref) async {
 
 final partsListProvider = StateProvider((ref) {
   return ref.watch(partsListFutureProvider).value;
+});
+
+final searchingCategoryProvider = StateProvider<PartsCategory>((ref) {
+  return PartsCategory.cpu;
 });
