@@ -18,6 +18,14 @@ class Custom {
     return Custom._(null, null, null, null, null, null, null, null, null);
   }
 
+  Custom copyWith({PcParts? cpu, PcParts? cpuCooler, PcParts? memory, PcParts? motherBoard, PcParts? graphicsCard, PcParts? ssd, PcParts? pcCase, PcParts? powerUnit, PcParts? caseFan}) {
+    return Custom._(cpu ?? this.cpu, cpuCooler ?? this.cpuCooler, memory ?? this.memory, motherBoard ?? this.motherBoard, graphicsCard ?? this.graphicsCard, ssd ?? this.ssd, pcCase ?? this.pcCase, powerUnit ?? this.powerUnit, caseFan ?? this.caseFan);
+  }
+
+  Custom deleteWith({PcParts? cpu, PcParts? cpuCooler, PcParts? memory, PcParts? motherBoard, PcParts? graphicsCard, PcParts? ssd, PcParts? pcCase, PcParts? powerUnit, PcParts? caseFan}) {
+    return Custom._(null, null, null, null, null, null, null, null, null);
+  }
+
   int calculateTotalPrice() {
     int totalPrice = 0;
 
@@ -53,12 +61,13 @@ class Custom {
   }
 
   int parsePrice(String price) {
-    final normalizedPrice = price.replaceAll('¥', '').replaceAll(',', '');
-    return int.parse(normalizedPrice);
+    final normalizedPrice = price.trim().replaceAll('¥', '').replaceAll(',', '');
+    return normalizedPrice.isEmpty ? 0 : int.parse(normalizedPrice);
   }
 
-  Custom copyWith({PcParts? cpu, PcParts? cpuCooler, PcParts? memory, PcParts? motherBoard, PcParts? graphicsCard, PcParts? ssd, PcParts? pcCase, PcParts? powerUnit, PcParts? caseFan}) {
-    return Custom._(cpu ?? this.cpu, cpuCooler ?? this.cpuCooler, memory ?? this.memory, motherBoard ?? this.motherBoard, graphicsCard ?? this.graphicsCard, ssd ?? this.ssd, pcCase ?? this.pcCase, powerUnit ?? this.powerUnit, caseFan ?? this.caseFan);
+
+  bool isEmpty() {
+    return cpu == null && cpuCooler == null && memory == null && motherBoard == null && graphicsCard == null && ssd == null && pcCase == null && powerUnit == null && caseFan == null;
   }
 
   PcParts? get(PartsCategory category) {

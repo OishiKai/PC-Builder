@@ -24,6 +24,7 @@ class TotalPriceWidget extends ConsumerWidget {
     SizeConfig().init(context);
     final custom = ref.watch(customProvider);
     return Container(
+      padding: const EdgeInsets.symmetric(vertical: 8),
       width: SizeConfig.blockSizeHorizontal * 92,
       //height: 300,
       decoration: BoxDecoration(
@@ -34,17 +35,14 @@ class TotalPriceWidget extends ConsumerWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 8, horizontal: SizeConfig.blockSizeHorizontal * 4),
+            padding: EdgeInsets.symmetric(horizontal: SizeConfig.blockSizeHorizontal * 4),
             child: Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text(
-                  'Total',
-                  style: TextStyle(
-                    fontSize: 32,
-                    fontWeight: FontWeight.bold,
-                    color: _mainColor,
-                  ),
+                Icon(
+                  Icons.scale_outlined,
+                  size: 32,
+                  color: _mainColor,
                 ),
                 const Spacer(),
                 Text(
@@ -58,64 +56,65 @@ class TotalPriceWidget extends ConsumerWidget {
               ],
             ),
           ),
-          Padding(
-              padding: EdgeInsets.symmetric(vertical: 2, horizontal: SizeConfig.blockSizeHorizontal * 4),
-              child: Row(
+          // 割合バー
+          if (!custom.isEmpty())
+            Padding(
+                padding: EdgeInsets.only(top: 8, right: SizeConfig.blockSizeHorizontal * 4, left: SizeConfig.blockSizeHorizontal * 4),
+                child: Row(
+                  children: [
+                    for (int i = 0; i < PartsCategory.values.length; i++)
+                      if (custom.get(PartsCategory.values[i]) != null)
+                        Container(
+                          width: SizeConfig.blockSizeHorizontal * 84 * (parsePrice(custom.get(PartsCategory.values[i])!.price) / custom.calculateTotalPrice()),
+                          height: 5,
+                          decoration: BoxDecoration(
+                            color: _ratingBarColors[i],
+                          ),
+                        )
+                  ],
+                )),
+          // パーツごとの配色・％表示
+          if (!custom.isEmpty())
+            Padding(
+              padding: EdgeInsets.only(top: 8, right: SizeConfig.blockSizeHorizontal * 4, left: SizeConfig.blockSizeHorizontal * 4),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   for (int i = 0; i < PartsCategory.values.length; i++)
                     if (custom.get(PartsCategory.values[i]) != null)
-                      Container(
-                        width: SizeConfig.blockSizeHorizontal * 84 * (parsePrice(custom.get(PartsCategory.values[i])!.price) / custom.calculateTotalPrice()),
-                        height: 5,
-                        decoration: BoxDecoration(
-                          color: _ratingBarColors[i],
-                        ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.circle,
+                            color: _ratingBarColors[i],
+                            size: 18,
+                          ),
+                          const SizedBox(
+                            width: 8,
+                          ),
+                          Text(
+                            PartsCategory.values[i].categoryName,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                              fontSize: 14,
+                              color: Colors.black,
+                            ),
+                          ),
+                          const Spacer(),
+                          Text(
+                            '${(parsePrice(custom.get(PartsCategory.values[i])!.price) / custom.calculateTotalPrice() * 100).toStringAsFixed(2)}%',
+                            style: const TextStyle(
+                              fontSize: 14,
+                              color: Colors.black,
+                            ),
+                          )
+                        ],
                       )
                 ],
-              )),
-          SizedBox(
-            height: 8,
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 4, horizontal: SizeConfig.blockSizeHorizontal * 4),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                for (int i = 0; i < PartsCategory.values.length; i++)
-                  if (custom.get(PartsCategory.values[i]) != null)
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.circle,
-                          color: _ratingBarColors[i],
-                          size: 18,
-                        ),
-                        SizedBox(
-                          width: 8,
-                        ),
-                        Text(
-                          _shortName(PartsCategory.values[i]),
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Colors.black,
-                          ),
-                        ),
-                        SizedBox(
-                          width: 8,
-                        ),
-                        Text(
-                          '${(parsePrice(custom.get(PartsCategory.values[i])!.price) / custom.calculateTotalPrice() * 100).toStringAsFixed(2)}%',
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Colors.black,
-                          ),
-                        )
-                      ],
-                    )
-              ],
-            ),
-          )
+              ),
+            )
         ],
       ),
     );
@@ -140,28 +139,5 @@ class TotalPriceWidget extends ConsumerWidget {
   int parsePrice(String price) {
     final normalizedPrice = price.replaceAll('¥', '').replaceAll(',', '');
     return int.parse(normalizedPrice);
-  }
-
-  String _shortName(PartsCategory category) {
-    switch (category) {
-      case PartsCategory.cpu:
-        return category.categoryName;
-      case PartsCategory.cpuCooler:
-        return 'CPUクーラー';
-      case PartsCategory.memory:
-        return 'メモリ';
-      case PartsCategory.motherBoard:
-        return 'マザボ';
-      case PartsCategory.graphicsCard:
-        return 'グラボ';
-      case PartsCategory.ssd:
-        return category.categoryName;
-      case PartsCategory.pcCase:
-        return category.categoryName;
-      case PartsCategory.powerUnit:
-        return '電源';
-      case PartsCategory.caseFan:
-        return category.categoryName;
-    }
   }
 }
