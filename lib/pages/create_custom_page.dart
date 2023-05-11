@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../config/size_config.dart';
+import '../widgets/create_custom/parts_compatibility_widget.dart';
 
 class CreateCustomPage extends ConsumerWidget {
   const CreateCustomPage({Key? key}) : super(key: key);
@@ -17,6 +18,7 @@ class CreateCustomPage extends ConsumerWidget {
     return Scaffold(
       backgroundColor: const Color(0xFFEDECF2),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
             padding: const EdgeInsets.only(top: 40, left: 16, right: 16),
@@ -58,14 +60,34 @@ class CreateCustomPage extends ConsumerWidget {
           const SizedBox(
             height: 16,
           ),
-          // Padding(
-          //   padding: const EdgeInsets.only(left: 16, right: 16),
-          //   child: Divider(
-          //     thickness: 1,
-          //     color: _mainColor,
-          //   ),
-          // ),
-          TotalPriceWidget(),
+
+          // 合計金額・割合ウィジェット
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: SizeConfig.blockSizeHorizontal * 4),
+            child: TotalPriceWidget(),
+          ),
+
+          const SizedBox(
+            height: 16,
+          ),
+
+          Padding(
+            padding: EdgeInsets.only(left: SizeConfig.blockSizeHorizontal * 4),
+            child: Text(
+              'Compatibility',
+              style: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+                color: _mainColor,
+              ),
+            ),
+          ),
+
+          const SizedBox(
+            height: 16,
+          ),
+
+          PartsCompatibilityWidget(),
         ],
       ),
     );
