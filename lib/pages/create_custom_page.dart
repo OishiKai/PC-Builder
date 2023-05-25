@@ -86,8 +86,7 @@ class CreateCustomPage extends ConsumerWidget {
           const SizedBox(
             height: 16,
           ),
-
-          PartsCompatibilityWidget(),
+          if (ref.watch(customProvider).compatibilities != null) PartsCompatibilityWidget(ref.read(customProvider).compatibilities![0]),
         ],
       ),
     );
