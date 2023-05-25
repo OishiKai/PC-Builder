@@ -32,6 +32,7 @@ class CompatibilityAnalyzer {
 
     return PartsCompatibility(
       [PartsCategory.cpu, PartsCategory.motherBoard],
+      [cpu.image, motherBoard.image],
       isCompatible: {
         'ソケット形状': isCompatibleSockets,
         'チップセット': isCompatibleChipsets,
