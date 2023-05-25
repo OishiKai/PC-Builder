@@ -87,7 +87,7 @@ class PartsCompatibilityWidget extends ConsumerWidget {
                         Row(
                           children: [
                             Icon(
-                              Icons.check_box,
+                              Icons.check_circle,
                               size: 16,
                               color: _mainColor,
                             ),
@@ -133,7 +133,7 @@ class PartsCompatibilityWidget extends ConsumerWidget {
                         Row(
                           children: [
                             Icon(
-                              Icons.help_outline_rounded,
+                              Icons.help,
                               size: 16,
                               color: Colors.grey,
                             ),

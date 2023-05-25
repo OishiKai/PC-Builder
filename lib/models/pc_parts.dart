@@ -1,8 +1,10 @@
 import 'package:custom_pc/models/parts_shop.dart';
 
 class PcParts {
+  // データ取得状況
   FilledDataProgress dataFiled = FilledDataProgress.filledForList;
 
+  // パーツ一覧画面表示に必要なデータ
   final String maker;
   final bool isNew;
   final String title;
@@ -13,6 +15,7 @@ class PcParts {
   final String image;
   final String detailUrl;
 
+  // パーツ詳細画面表示に必要なデータ
   List<PartsShop>? shops;
   Map<String, String?>? specs;
   List<String>? fullScaleImages;
@@ -42,17 +45,18 @@ enum FilledDataProgress {
 }
 
 enum PartsCategory {
-  cpu('CPU', 'cpu'),
-  cpuCooler('CPUクーラー', '2C0030'),
-  memory('メモリー', '2C0033'),
-  motherBoard('マザーボード', '2C0036'),
-  graphicsCard('グラフィックボード・ビデオカード', '2C0028'),
-  ssd('SSD', '2C0070'),
-  pcCase('PCケース', '2C0032'),
-  powerUnit('電源ユニット', '2C0035'),
-  caseFan('ケースファン', '2C0089');
+  cpu('CPU', 'CPU','cpu'),
+  cpuCooler('CPUクーラー', 'CPUクーラー','2C0030'),
+  memory('メモリー', 'メモリ','2C0033'),
+  motherBoard('マザーボード', 'マザボ','2C0036'),
+  graphicsCard('グラフィックボード・ビデオカード', 'グラボ','2C0028'),
+  ssd('SSD', 'SSD','2C0070'),
+  pcCase('PCケース', 'ケース','2C0032'),
+  powerUnit('電源ユニット', '電源','2C0035'),
+  caseFan('ケースファン', 'ケースファン','2C0089');
 
   final String categoryName;
+  final String categoryShortName;
   final String categoryParameter;
-  const PartsCategory(this.categoryName, this.categoryParameter);
+  const PartsCategory(this.categoryName, this.categoryShortName, this.categoryParameter);
 }

@@ -161,6 +161,10 @@ class DetailParser {
         break;
       }
     }
+    // specMap.forEach((key, value) { 
+    //   print('$key : $value');
+    // });
+
     return specMap;
   }
 }

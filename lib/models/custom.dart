@@ -1,3 +1,4 @@
+import 'package:custom_pc/models/parts_compatibility.dart';
 import 'package:custom_pc/models/pc_parts.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -12,18 +13,32 @@ class Custom {
   final PcParts? powerUnit;
   final PcParts? caseFan;
 
-  Custom._(this.cpu, this.cpuCooler, this.memory, this.motherBoard, this.graphicsCard, this.ssd, this.pcCase, this.powerUnit, this.caseFan);
+  final List<PartsCompatibility>? compatibilities;
+
+  Custom._(this.cpu, this.cpuCooler, this.memory, this.motherBoard, this.graphicsCard, this.ssd, this.pcCase, this.powerUnit, this.caseFan, this.compatibilities);
 
   static Custom create() {
-    return Custom._(null, null, null, null, null, null, null, null, null);
+    return Custom._(null, null, null, null, null, null, null, null, null, null);
   }
 
   Custom copyWith({PcParts? cpu, PcParts? cpuCooler, PcParts? memory, PcParts? motherBoard, PcParts? graphicsCard, PcParts? ssd, PcParts? pcCase, PcParts? powerUnit, PcParts? caseFan}) {
-    return Custom._(cpu ?? this.cpu, cpuCooler ?? this.cpuCooler, memory ?? this.memory, motherBoard ?? this.motherBoard, graphicsCard ?? this.graphicsCard, ssd ?? this.ssd, pcCase ?? this.pcCase, powerUnit ?? this.powerUnit, caseFan ?? this.caseFan);
+    return Custom._(cpu ?? this.cpu, cpuCooler ?? this.cpuCooler, memory ?? this.memory, motherBoard ?? this.motherBoard, graphicsCard ?? this.graphicsCard, ssd ?? this.ssd, pcCase ?? this.pcCase, powerUnit ?? this.powerUnit, caseFan ?? this.caseFan, compatibilities);
   }
 
   Custom deleteWith({PcParts? cpu, PcParts? cpuCooler, PcParts? memory, PcParts? motherBoard, PcParts? graphicsCard, PcParts? ssd, PcParts? pcCase, PcParts? powerUnit, PcParts? caseFan}) {
-    return Custom._(null, null, null, null, null, null, null, null, null);
+    return Custom._(null, null, null, null, null, null, null, null, null, null);
+  }
+
+  Custom addCompatibility(PartsCompatibility compatibility) {
+    final compatibilities = this.compatibilities ?? [];
+    // すでに同じカテゴリのペアがある場合は上書きする
+    final index = compatibilities.indexWhere((element) => element.pair == compatibility.pair);
+    if (index != -1) {
+      compatibilities[index] = compatibility;
+    } else {
+      compatibilities.add(compatibility);
+    }
+    return Custom._(cpu, cpuCooler, memory, motherBoard, graphicsCard, ssd, pcCase, powerUnit, caseFan, compatibilities);
   }
 
   int calculateTotalPrice() {
@@ -175,6 +190,10 @@ class CustomNotifier extends StateNotifier<Custom> {
 
   void setCustom(Custom custom) {
     state = custom;
+  }
+
+  void addCompatibility(PartsCompatibility compatibility) {
+    state = state.addCompatibility(compatibility);
   }
 }
 

@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_segmented_control/material_segmented_control.dart';
 
+import '../domain/compatibility_analyzer.dart';
 import '../widgets/parts_detail/full_scale_image_slider.dart';
 
 // 販売店 or 詳細スペック の表示状態 (デフォルトは 0)
@@ -30,6 +31,18 @@ class PartsDetailPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     SizeConfig().init(context);
+
+    void compatibilityCheck() {
+      final custom = ref.read(customProvider);
+      
+      // 互換性チェック
+      if (custom.cpu != null && custom.motherBoard != null) {
+        final compatibility = CompatibilityAnalyzer.analyzeCpuMotherAndBoard(cpu: custom.cpu!, motherBoard: custom.motherBoard!);
+        print(compatibility.isCompatible);
+        ref.read(customProvider.notifier).addCompatibility(compatibility);
+      }
+    }
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: ListView(
@@ -209,6 +222,7 @@ class PartsDetailPage extends ConsumerWidget {
                       break;
                   }
                   int count = 0;
+                  compatibilityCheck();
                   Navigator.popUntil(context, (_) => count++ >= 2);
                 },
                 style: ElevatedButton.styleFrom(
