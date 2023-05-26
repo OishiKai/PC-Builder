@@ -30,15 +30,22 @@ class Custom {
   }
 
   Custom addCompatibility(PartsCompatibility compatibility) {
-    final compatibilities = this.compatibilities ?? [];
-    // すでに同じカテゴリのペアがある場合は上書きする
-    final index = compatibilities.indexWhere((element) => element.pair == compatibility.pair);
-    if (index != -1) {
-      compatibilities[index] = compatibility;
-    } else {
-      compatibilities.add(compatibility);
+    // 互換性のリストがnullの場合は新規作成
+    if (compatibilities == null) {
+      return Custom._(cpu, cpuCooler, memory, motherBoard, graphicsCard, ssd, pcCase, powerUnit, caseFan, [compatibility]);
     }
-    return Custom._(cpu, cpuCooler, memory, motherBoard, graphicsCard, ssd, pcCase, powerUnit, caseFan, compatibilities);
+
+    // 互換性のリストがnullでなく、すでに同じパーツの互換性情報がある場合は上書き
+    final storedComps = compatibilities!;
+    for(var i = 0; i < storedComps.length; i++) {
+      if (storedComps[i].pair[0] == compatibility.pair[0] && storedComps[i].pair[1] == compatibility.pair[1]) {
+        storedComps[i] = compatibility;
+        return Custom._(cpu, cpuCooler, memory, motherBoard, graphicsCard, ssd, pcCase, powerUnit, caseFan, storedComps);
+      }
+    }
+    // 互換性のリストがnullでなく、同じパーツの互換性情報がない場合は追加
+    storedComps.add(compatibility);
+    return Custom._(cpu, cpuCooler, memory, motherBoard, graphicsCard, ssd, pcCase, powerUnit, caseFan, storedComps);
   }
 
   int calculateTotalPrice() {

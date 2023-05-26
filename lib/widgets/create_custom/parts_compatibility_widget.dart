@@ -90,81 +90,88 @@ class PartsCompatibilityWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: SizeConfig.blockSizeHorizontal * 4),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(20)),
-            child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 8, horizontal: SizeConfig.blockSizeHorizontal * 2),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+    return Column(
+      children: [
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: SizeConfig.blockSizeHorizontal * 4),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(20)),
+                child: Padding(
+                  padding: EdgeInsets.symmetric(vertical: 8, horizontal: SizeConfig.blockSizeHorizontal * 2),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Text(
-                        compatibility.pair[0].categoryShortName,
-                        style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.bold,
-                          color: _mainColor,
-                        ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            compatibility.pair[0].categoryShortName,
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                              color: _mainColor,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 2,
+                          ),
+                          Image.network(
+                            compatibility.imageUrls[0],
+                            width: SizeConfig.blockSizeHorizontal * 14,
+                            //height: SizeConfig.blockSizeHorizontal * 14,
+                            fit: BoxFit.contain,
+                          ),
+                        ],
                       ),
-                      const SizedBox(
-                        height: 2,
+                      Icon(
+                        Icons.multiple_stop_outlined,
+                        size: 20,
+                        color: _mainColor,
                       ),
-                      Image.network(
-                        compatibility.imageUrls[0],
-                        width: SizeConfig.blockSizeHorizontal * 14,
-                        //height: SizeConfig.blockSizeHorizontal * 14,
-                        fit: BoxFit.contain,
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            compatibility.pair[1].categoryShortName,
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                              color: _mainColor,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 2,
+                          ),
+                          Image.network(
+                            compatibility.imageUrls[1],
+                            width: SizeConfig.blockSizeHorizontal * 14,
+                            height: SizeConfig.blockSizeHorizontal * 14,
+                            fit: BoxFit.contain,
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        width: SizeConfig.blockSizeHorizontal * 2,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: _compatibilityTexts(),
                       ),
                     ],
                   ),
-                  Icon(
-                    Icons.multiple_stop_outlined,
-                    size: 20,
-                    color: _mainColor,
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        compatibility.pair[0].categoryShortName,
-                        style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.bold,
-                          color: _mainColor,
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 2,
-                      ),
-                      Image.network(
-                        compatibility.imageUrls[1],
-                        width: SizeConfig.blockSizeHorizontal * 14,
-                        //height: SizeConfig.blockSizeHorizontal * 14,
-                        fit: BoxFit.contain,
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    width: SizeConfig.blockSizeHorizontal * 2,
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: _compatibilityTexts(),
-                  ),
-                ],
+                ),
               ),
-            ),
+            ],
           ),
-        ],
-      ),
+        ),
+        const SizedBox(
+          height: 8,
+        )
+      ],
     );
   }
 }
