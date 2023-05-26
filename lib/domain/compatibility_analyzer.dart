@@ -87,4 +87,52 @@ class CompatibilityAnalyzer {
       },
     );    
   }
+
+  static PartsCompatibility analyzeMemoryAndMotherBoard({required PcParts memory, required PcParts motherBoard}) {
+    // メモリの規格の比較
+    String? memoryStandard = _extractSpec(memory.specs!, 'メモリ規格');
+    String? motherBoardStandard = _extractSpec(motherBoard.specs!, '詳細メモリタイプ');
+
+    bool? isCompatibleStandards;
+    
+    if (memoryStandard != null && motherBoardStandard != null) {
+      // "DDR4 SDRAM" -> "DDR4" に変換
+      memoryStandard = memoryStandard.split(' ')[0];
+      if (motherBoardStandard.contains(memoryStandard)) {
+        isCompatibleStandards = true;
+      } else {
+        isCompatibleStandards = false;
+      }
+    }
+
+    // メモリの枚数の比較
+    String? numberOfMemory = _extractSpec(memory.specs!, '枚数');
+    String? numberOfMemorySlots = _extractSpec(motherBoard.specs!, 'メモリスロット数');
+
+    bool? isCompatibleSlots;
+
+    if (numberOfMemory != null && numberOfMemorySlots != null) {
+      // メモリ枚数、メモリスロット数を数値に変換
+      final numberOfMemoryInt = int.tryParse(numberOfMemory.replaceAll('枚', ''));
+      final numberOfMemorySlotsInt = int.tryParse(numberOfMemorySlots);
+      
+      if (numberOfMemoryInt != null && numberOfMemorySlotsInt != null) {
+        // メモリ枚数がメモリスロット数以下であれば互換性あり
+        if (numberOfMemoryInt <= numberOfMemorySlotsInt) {
+          isCompatibleSlots = true;
+        } else {
+          isCompatibleSlots = false;
+        }
+      }
+    }
+
+    return PartsCompatibility(
+      [PartsCategory.memory, PartsCategory.motherBoard],
+      [memory.image, motherBoard.image],
+      isCompatible: {
+        '規格': isCompatibleStandards,
+        'メモリスロット数': isCompatibleSlots,
+      },
+    );
+  }
 }

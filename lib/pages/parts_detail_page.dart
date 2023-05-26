@@ -45,6 +45,11 @@ class PartsDetailPage extends ConsumerWidget {
         final compatibility = CompatibilityAnalyzer.analyzeCpuCoolerAndMotherBoard(cpuCooler: custom.cpuCooler!, motherBoard: custom.motherBoard!);
         ref.read(customProvider.notifier).addCompatibility(compatibility);
       }
+
+      if (custom.memory != null && custom.motherBoard != null) {
+        final compatibility = CompatibilityAnalyzer.analyzeMemoryAndMotherBoard(memory: custom.memory!, motherBoard: custom.motherBoard!);
+        ref.read(customProvider.notifier).addCompatibility(compatibility);
+      }
     }
 
     return Scaffold(
