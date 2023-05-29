@@ -37,7 +37,7 @@ void main() {
   };
 
   test('test', () {
-    final compatibility = CompatibilityAnalyzer.analyzeCpuMotherAndBoard(cpu: cpu, motherBoard: motherboad);
+    final compatibility = CompatibilityAnalyzer.analyzeCpuAndMotherBoard(cpu: cpu, motherBoard: motherboad);
     expect(compatibility.isCompatible['ソケット形状'], isTrue);
   });
 }

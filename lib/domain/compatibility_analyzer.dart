@@ -12,7 +12,7 @@ class CompatibilityAnalyzer {
     return specInfo;
   }
 
-  static PartsCompatibility analyzeCpuMotherAndBoard({required PcParts cpu, required PcParts motherBoard}) {
+  static PartsCompatibility analyzeCpuAndMotherBoard({required PcParts cpu, required PcParts motherBoard}) {
     // ソケット形状の比較
     String? cpuSocket = _extractSpec(cpu.specs!, 'ソケット形状');
     String? motherBoardSocket = _extractSpec(motherBoard.specs!, 'CPUソケット');
@@ -60,7 +60,9 @@ class CompatibilityAnalyzer {
 
     // マザボがインテル対応の場合
     if (motherBoardSocket.contains('LGA')) {
-      if (cpuCoolerIntelSocket == null) { return nullCase; }
+      if (cpuCoolerIntelSocket == null) {
+        return nullCase;
+      }
       final motherSocketScrape = motherBoardSocket.replaceAll('LGA', '');
 
       if (cpuCoolerIntelSocket.contains(motherSocketScrape)) {
@@ -70,7 +72,9 @@ class CompatibilityAnalyzer {
 
     // マザボがAMD対応の場合
     if (motherBoardSocket.contains('Socket')) {
-      if (cpuCoolerAmdSocket == null) { return nullCase; }
+      if (cpuCoolerAmdSocket == null) {
+        return nullCase;
+      }
 
       final motherSocketScrape = motherBoardSocket.replaceAll('Socket', '');
       if (cpuCoolerAmdSocket.contains(motherSocketScrape)) {
@@ -78,14 +82,13 @@ class CompatibilityAnalyzer {
       }
     }
 
-
     return PartsCompatibility(
       [PartsCategory.cpuCooler, PartsCategory.motherBoard],
       [cpuCooler.image, motherBoard.image],
       isCompatible: {
         'ソケット形状': isCompatible,
       },
-    );    
+    );
   }
 
   static PartsCompatibility analyzeMemoryAndMotherBoard({required PcParts memory, required PcParts motherBoard}) {
@@ -94,7 +97,7 @@ class CompatibilityAnalyzer {
     String? motherBoardStandard = _extractSpec(motherBoard.specs!, '詳細メモリタイプ');
 
     bool? isCompatibleStandards;
-    
+
     if (memoryStandard != null && motherBoardStandard != null) {
       // "DDR4 SDRAM" -> "DDR4" に変換
       memoryStandard = memoryStandard.split(' ')[0];
@@ -115,7 +118,7 @@ class CompatibilityAnalyzer {
       // メモリ枚数、メモリスロット数を数値に変換
       final numberOfMemoryInt = int.tryParse(numberOfMemory.replaceAll('枚', ''));
       final numberOfMemorySlotsInt = int.tryParse(numberOfMemorySlots);
-      
+
       if (numberOfMemoryInt != null && numberOfMemorySlotsInt != null) {
         // メモリ枚数がメモリスロット数以下であれば互換性あり
         if (numberOfMemoryInt <= numberOfMemorySlotsInt) {
@@ -132,6 +135,70 @@ class CompatibilityAnalyzer {
       isCompatible: {
         '規格': isCompatibleStandards,
         'メモリスロット数': isCompatibleSlots,
+      },
+    );
+  }
+
+  static PartsCompatibility analyzeMotherBoardAndSsd({required PcParts motherBoard, required PcParts ssd}) {
+    String? ssdStandardSize = _extractSpec(ssd.specs!, '規格サイズ');
+
+    // サイズ不明
+    if (ssdStandardSize == null) {
+      return PartsCompatibility(
+        [PartsCategory.motherBoard, PartsCategory.ssd],
+        [motherBoard.image, ssd.image],
+        isCompatible: {
+          '互換性': null,
+        },
+      );
+    }
+
+    // M.2の場合
+    if (ssdStandardSize.contains('M.2')) {
+      String? motherBoardM2Sockets = _extractSpec(motherBoard.specs!, 'M.2ソケット数');
+      String? motherBoardM2Size = _extractSpec(motherBoard.specs!, 'M.2サイズ');
+
+      // M.2ソケット数の情報があるなら対応していると判定
+      bool? isCompatibleSockets = motherBoardM2Sockets != null;
+      bool? isCompatibleSize;
+
+      // "M.2 (Type0000)" -> "0000" に変換
+      ssdStandardSize = ssdStandardSize.trim().split('M.2 (Type')[1].replaceAll(')', '');
+      if (motherBoardM2Size != null) {
+        // M.2サイズ情報があるなら一致しているか判定
+        isCompatibleSize = motherBoardM2Size.contains(ssdStandardSize);
+      }
+
+      return PartsCompatibility(
+        [PartsCategory.motherBoard, PartsCategory.ssd],
+        [motherBoard.image, ssd.image],
+        isCompatible: {
+          'ソケット数': isCompatibleSockets,
+          'サイズ': isCompatibleSize,
+        },
+      );
+    }
+
+    // 2.5インチの場合
+    if (ssdStandardSize.contains('2.5インチ')) {
+      String? motherBoardSataPorts = _extractSpec(motherBoard.specs!, 'SATA');
+
+      return PartsCompatibility(
+        [PartsCategory.motherBoard, PartsCategory.ssd],
+        [motherBoard.image, ssd.image],
+        isCompatible: {
+          // SATAの情報があるなら対応していると判定
+          'SATAポート数': motherBoardSataPorts != null,
+        },
+      );
+    }
+
+    // M.2, 2.5インチ以外の場合
+    return PartsCompatibility(
+      [PartsCategory.motherBoard, PartsCategory.ssd],
+      [motherBoard.image, ssd.image],
+      isCompatible: {
+        '互換性': null,
       },
     );
   }

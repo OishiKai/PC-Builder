@@ -37,7 +37,7 @@ class PartsDetailPage extends ConsumerWidget {
       
       // 互換性チェック
       if (custom.cpu != null && custom.motherBoard != null) {
-        final compatibility = CompatibilityAnalyzer.analyzeCpuMotherAndBoard(cpu: custom.cpu!, motherBoard: custom.motherBoard!);
+        final compatibility = CompatibilityAnalyzer.analyzeCpuAndMotherBoard(cpu: custom.cpu!, motherBoard: custom.motherBoard!);
         ref.read(customProvider.notifier).addCompatibility(compatibility);
       }
 
@@ -48,6 +48,11 @@ class PartsDetailPage extends ConsumerWidget {
 
       if (custom.memory != null && custom.motherBoard != null) {
         final compatibility = CompatibilityAnalyzer.analyzeMemoryAndMotherBoard(memory: custom.memory!, motherBoard: custom.motherBoard!);
+        ref.read(customProvider.notifier).addCompatibility(compatibility);
+      }
+
+      if (custom.motherBoard != null && custom.ssd != null) {
+        final compatibility = CompatibilityAnalyzer.analyzeMotherBoardAndSsd(motherBoard: custom.motherBoard!, ssd: custom.ssd!);
         ref.read(customProvider.notifier).addCompatibility(compatibility);
       }
     }
