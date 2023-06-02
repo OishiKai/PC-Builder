@@ -1,11 +1,11 @@
 import 'package:custom_pc/models/custom.dart';
+import 'package:custom_pc/widgets/create_custom/parts_compatibility_widget.dart';
 import 'package:custom_pc/widgets/create_custom/parts_scroll_widget.dart';
 import 'package:custom_pc/widgets/create_custom/total_price_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../config/size_config.dart';
-import '../widgets/create_custom/parts_compatibility_widget.dart';
 
 class CreateCustomPage extends ConsumerWidget {
   const CreateCustomPage({Key? key}) : super(key: key);
@@ -71,23 +71,42 @@ class CreateCustomPage extends ConsumerWidget {
             height: 16,
           ),
 
-          Padding(
-            padding: EdgeInsets.only(left: SizeConfig.blockSizeHorizontal * 4),
-            child: Text(
-              'Compatibility',
-              style: TextStyle(
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-                color: _mainColor,
-              ),
-            ),
-          ),
+          // Padding(
+          //   padding: EdgeInsets.only(left: SizeConfig.blockSizeHorizontal * 4),
+          //   child: Text(
+          //     'Compatibility',
+          //     style: TextStyle(
+          //       fontSize: 30,
+          //       fontWeight: FontWeight.bold,
+          //       color: _mainColor,
+          //     ),
+          //   ),
+          // ),
 
-          const SizedBox(
-            height: 16,
-          ),
+          // const SizedBox(
+          //   height: 16,
+          // ),
+          // if (ref.watch(customProvider).compatibilities != null)
+          //   for (int i = 0; i < ref.watch(customProvider).compatibilities!.length; i++) PartsCompatibilityWidget(ref.watch(customProvider).compatibilities![i]),
           if (ref.watch(customProvider).compatibilities != null)
-            for (int i = 0; i < ref.watch(customProvider).compatibilities!.length; i++) PartsCompatibilityWidget(ref.watch(customProvider).compatibilities![i]),
+            NotificationListener(
+              onNotification: (OverscrollIndicatorNotification notification) {
+                notification.disallowGlow();
+                return false;
+              },
+              child: Container(
+                height: 290,
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.vertical,
+                  primary: false,
+                  child: Column(
+                    children: [
+                      for (int i = 0; i < ref.watch(customProvider).compatibilities!.length; i++) PartsCompatibilityWidget(ref.watch(customProvider).compatibilities![i]),
+                    ],
+                  ),
+                ),
+              ),
+            )
         ],
       ),
     );
