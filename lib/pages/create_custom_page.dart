@@ -71,23 +71,6 @@ class CreateCustomPage extends ConsumerWidget {
             height: 16,
           ),
 
-          // Padding(
-          //   padding: EdgeInsets.only(left: SizeConfig.blockSizeHorizontal * 4),
-          //   child: Text(
-          //     'Compatibility',
-          //     style: TextStyle(
-          //       fontSize: 30,
-          //       fontWeight: FontWeight.bold,
-          //       color: _mainColor,
-          //     ),
-          //   ),
-          // ),
-
-          // const SizedBox(
-          //   height: 16,
-          // ),
-          // if (ref.watch(customProvider).compatibilities != null)
-          //   for (int i = 0; i < ref.watch(customProvider).compatibilities!.length; i++) PartsCompatibilityWidget(ref.watch(customProvider).compatibilities![i]),
           if (ref.watch(customProvider).compatibilities != null)
             NotificationListener(
               onNotification: (OverscrollIndicatorNotification notification) {
