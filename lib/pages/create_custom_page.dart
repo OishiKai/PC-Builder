@@ -27,7 +27,7 @@ class CreateCustomPage extends ConsumerWidget {
           //crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 8),
+              padding: const EdgeInsets.only(top: 8, bottom: 20),
               child: ConstrainedBox(
                 constraints: BoxConstraints(
                   minHeight: SizeConfig.blockSizeVertical * 90,
@@ -41,7 +41,11 @@ class CreateCustomPage extends ConsumerWidget {
                   child: Column(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(top: 12, left: 16, right: 16),
+                        padding: const EdgeInsets.only(
+                          top: 12,
+                          left: 16,
+                          right: 16,
+                        ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -93,6 +97,10 @@ class CreateCustomPage extends ConsumerWidget {
 
                       if (ref.watch(customProvider).compatibilities != null)
                         for (int i = 0; i < ref.watch(customProvider).compatibilities!.length; i++) PartsCompatibilityWidget(ref.watch(customProvider).compatibilities![i]),
+
+                      const SizedBox(
+                        height: 16,
+                      )
                     ],
                   ),
                 ),
