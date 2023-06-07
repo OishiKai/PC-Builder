@@ -1,7 +1,7 @@
+import 'package:charset_converter/charset_converter.dart';
 import 'package:html/dom.dart';
 import 'package:html/parser.dart';
 import 'package:http/http.dart' as http;
-import 'package:charset_converter/charset_converter.dart';
 
 class DocumentRepository {
   static Future<Document> fetchDocument(String targetUrl) async {

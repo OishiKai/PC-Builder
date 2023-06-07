@@ -1,4 +1,5 @@
 import 'package:custom_pc/domain/document_repository.dart';
+import 'package:custom_pc/models/custom.dart';
 import 'package:custom_pc/models/parts_shop.dart';
 import 'package:html/dom.dart';
 
@@ -148,7 +149,7 @@ class DetailParser {
         classLineCount++;
         continue;
       }
-
+      final custom = customProvider.notifier;
       // カテゴリー+スペック行
       for (int i = 0; i < 2; i++) {
         final category = specElements[next].querySelectorAll('th')[i].text;
@@ -161,7 +162,7 @@ class DetailParser {
         break;
       }
     }
-    // specMap.forEach((key, value) { 
+    // specMap.forEach((key, value) {
     //   print('$key : $value');
     // });
 

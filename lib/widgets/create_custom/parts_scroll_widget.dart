@@ -102,8 +102,8 @@ class PartsScrollWidget extends ConsumerWidget {
                   child: Container(
                     // 4%, 28%, 4%, 28%, 4%, 28%, 4% の横幅で表示する
                     width: SizeConfig.blockSizeHorizontal * 35,
-                    // 横幅の1.3倍の縦幅とする
-                    height: SizeConfig.blockSizeHorizontal * 35 * 1.3,
+                    // 横幅の1.35倍の縦幅とする
+                    height: SizeConfig.blockSizeHorizontal * 35 * 1.35,
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(20),
@@ -117,7 +117,7 @@ class PartsScrollWidget extends ConsumerWidget {
                         FittedBox(
                           fit: BoxFit.fitWidth,
                           child: Text(
-                            _shortName(PartsCategory.values[i]),
+                            PartsCategory.values[i].categoryShortName,
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
