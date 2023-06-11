@@ -2,7 +2,7 @@ import 'package:custom_pc/domain/document_repository.dart';
 import 'package:custom_pc/models/pc_parts.dart';
 import 'package:html/dom.dart';
 
-class PartsListParser {
+class PartsListParsera {
   // 商品のリスト化
   static const _listSelector =
       '#default > div.l-c.l-c-2column.l-c-2column-reverse > div.l-c_cont.l-c-2column_cont.p-cont.p-cont-wide > div > div.p-result_list_wrap > div > div';
@@ -56,9 +56,9 @@ class PartsListParser {
   オブジェクト生成時に該当ページのDocumentのフェッチ、パースを完了させ、
   .partsListを参照してパーツリストを取り出す。
    */
-  PartsListParser._(this.targetUrl);
-  static Future<PartsListParser> create(String url) async {
-    final self = PartsListParser._(url);
+  PartsListParsera._(this.targetUrl);
+  static Future<PartsListParsera> create(String url) async {
+    final self = PartsListParsera._(url);
     self.document = await DocumentRepository.fetchDocument(url);
     self.partsList = self._parsePartsList();
     return self;

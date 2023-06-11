@@ -1,9 +1,9 @@
 import 'package:html/dom.dart';
 
+import '../../domain/document_repository.dart';
 import '../models/pc_parts.dart';
-import 'document_repository.dart';
 
-class PartsSearchListParser {
+class PartsListParser {
   static const _partsListSelector = '#compTblList > tbody > tr.tr-border';
   static const _partsMakerSelector = 'td.end.checkItem > table > tbody > tr > td.ckitemLink > a > span';
   static const _partsCombinedMakerAndTitleSelector = 'td.end.checkItem > table > tbody > tr > td.ckitemLink > a';
@@ -12,30 +12,16 @@ class PartsSearchListParser {
   static const _partsDetailUrlSelector = 'td.alignC > a';
   static const _partsPriceSelector = 'td.td-price > ul > li.pryen > a';
   static const _patsRankedSelector = 'td.swrank2 > span';
-  //#compTblList > tbody > tr:nth-child(5) > td:nth-child(5)
-  final String targetUrl;
-  Document? document;
-  List<PcParts>? partsList;
-  /*
-  コンストラクタをプライベートとし、createでオブジェクトを生成。
-  オブジェクト生成時に該当ページのDocumentのフェッチ、パースを完了させ、
-  .partsListを参照してパーツリストを取り出す。
-   */
-  PartsSearchListParser._(this.targetUrl);
-  static Future<PartsSearchListParser> create(String url) async {
-    final self = PartsSearchListParser._(url);
-    self.document = await DocumentRepository.fetchDocument(url);
-    self.partsList = self._parsePartsList();
-    return self;
+
+  static Future<List<PcParts>> fetch(String url) async {
+    final document = await DocumentRepository.fetchDocument(url);
+    final partsList = _parsePartsList(document);
+    return partsList;
   }
 
-  List<PcParts> _parsePartsList() {
-    if (document == null) {
-      return [];
-    }
-
+  static List<PcParts> _parsePartsList(Document document) {
     final List<PcParts> partsList = [];
-    final partsListElement = document!.querySelectorAll(_partsListSelector);
+    final partsListElement = document.querySelectorAll(_partsListSelector);
 
     for (int i = 1; i < partsListElement.length; i += 3) {
       final maker = partsListElement[i].querySelectorAll(_partsMakerSelector)[0].text;
@@ -76,7 +62,7 @@ class PartsSearchListParser {
           star = doubleStar * 100 ~/ 10;
         }
       }
-      partsList.add(PcParts(maker, isNew, title, star, evaluation, price, ranked, imageUrl, detailUrl!));
+      partsList.add(PcParts(maker: maker, isNew: isNew, title: title, star: star, evaluation: evaluation, price: price, ranked: ranked, image: imageUrl, detailUrl: detailUrl!));
     }
     return partsList;
   }

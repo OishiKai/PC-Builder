@@ -45,10 +45,16 @@ dependencies:
   clippy_flutter: ^2.0.0-nullsafety.0
   material_segmented_control: ^4.1.1
   euc: ^1.0.6+8
+  flutter_hooks:
+  riverpod_annotation:
+  freezed_annotation:
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  build_runner:
+  riverpod_generator:
+  freezed:
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
