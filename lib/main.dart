@@ -3,12 +3,12 @@ import 'package:custom_pc/domain/parts_search_list_parser.dart';
 import 'package:custom_pc/domain/search_parameter_parser/case_fan_search_parameter_parser.dart';
 import 'package:custom_pc/models/category_home_data.dart';
 import 'package:custom_pc/models/category_search_parameter.dart';
-import 'package:custom_pc/models/pc_parts.dart';
+import 'package:custom_pc/models/pc_parts_old.dart';
 import 'package:custom_pc/pages/create_custom_page.dart';
 import 'package:custom_pc/rebased/domain/parts_list_parser.dart';
-import 'package:custom_pc/rebased/models/pc_parts.dart';
+import 'package:custom_pc/models/pc_parts.dart';
 import 'package:custom_pc/rebased/pages/parts_list_page.dart';
-import 'package:custom_pc/rebased/providers/pc_parts_list.dart';
+import 'package:custom_pc/providers/pc_parts_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -90,15 +90,15 @@ final targetUrlProvider = StateProvider((ref) {
   return "";
 });
 
-final partsListFutureProvider = FutureProvider((ref) async {
-  final parser = await PartsSearchListParser.create(ref.watch(targetUrlProvider));
-  final fetchedPartsList = parser.partsList;
-  return fetchedPartsList;
-});
+// final partsListFutureProvider = FutureProvider((ref) async {
+//   final parser = await PartsSearchListParser.create(ref.watch(targetUrlProvider));
+//   final fetchedPartsList = parser.partsList;
+//   return fetchedPartsList;
+// });
 
-final partsListProvider = StateProvider((ref) {
-  return ref.watch(partsListFutureProvider).value;
-});
+// final partsListProvider = StateProvider((ref) {
+//   return ref.watch(partsListFutureProvider).value;
+// });
 
 final searchingCategoryProvider = StateProvider<PartsCategory>((ref) {
   return PartsCategory.cpu;

@@ -1,47 +1,24 @@
-import 'package:custom_pc/models/parts_shop.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'parts_shop.dart';
 
-class PcParts {
-  // データ取得状況
-  FilledDataProgress dataFiled = FilledDataProgress.filledForList;
+part 'pc_parts.freezed.dart';
 
-  // パーツ一覧画面表示に必要なデータ
-  final String maker;
-  final bool isNew;
-  final String title;
-  final int? star;
-  final String? evaluation;
-  final String price;
-  final String ranked;
-  final String image;
-  final String detailUrl;
-
-  // パーツ詳細画面表示に必要なデータ
-  List<PartsShop>? shops;
-  Map<String, String?>? specs;
-  List<String>? fullScaleImages;
-
-  PcParts(
-    this.maker,
-    this.isNew,
-    this.title,
-    this.star,
-    this.evaluation,
-    this.price,
-    this.ranked,
-    this.image,
-    this.detailUrl,
-  );
-
-  void updateProgress() {
-    if (fullScaleImages != null) {
-      dataFiled = FilledDataProgress.filledForDetail;
-    }
-  }
-}
-
-enum FilledDataProgress {
-  filledForList,
-  filledForDetail,
+@freezed
+class PcParts with _$PcParts {
+  const factory PcParts({
+    required String maker,
+    required bool isNew,
+    required String title,
+    required int? star,
+    required String? evaluation,
+    required String price,
+    required String ranked,
+    required String image,
+    required String detailUrl,
+    List<String>? fullScaleImages,
+    Map<String, String?>? specs,
+    List<PartsShop>? shops,
+  }) = _PcParts;
 }
 
 enum PartsCategory {

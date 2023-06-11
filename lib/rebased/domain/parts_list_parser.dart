@@ -1,7 +1,7 @@
 import 'package:html/dom.dart';
 
 import '../../domain/document_repository.dart';
-import '../models/pc_parts.dart';
+import '../../models/pc_parts.dart';
 
 class PartsListParser {
   static const _partsListSelector = '#compTblList > tbody > tr.tr-border';

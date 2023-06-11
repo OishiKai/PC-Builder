@@ -1,17 +1,28 @@
 import 'package:custom_pc/widgets/parts_detail/star_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../config/size_config.dart';
 import '../../models/pc_parts.dart';
+import '../../providers/pc_parts_list.dart';
 
-class PartsListCell extends StatelessWidget {
+class PartsListCell extends ConsumerWidget {
   const PartsListCell(this.parts, {Key? key}) : super(key: key);
   final PcParts parts;
   final mainColor = const Color.fromRGBO(60, 130, 80, 1);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     SizeConfig().init(context);
+    final partsList = ref.watch(pcPartsListNotifierProvider);
+
+    // return partsList.when(
+    //   data:(parts) {
+        
+    //   },
+    //   loading: () => const Center(child: CircularProgressIndicator()),
+      
+    // );
     return Column(
       children: [
         Container(
