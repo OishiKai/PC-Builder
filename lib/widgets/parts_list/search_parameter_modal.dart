@@ -1,5 +1,6 @@
 import 'package:custom_pc/models/category_search_parameter.dart';
 import 'package:custom_pc/models/custom.dart';
+import 'package:custom_pc/providers/pc_parts_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -40,13 +41,13 @@ class _SearchParameterModalState extends ConsumerState<SearchParameterModal> {
     // 条件選択時の処理
     void addParameter(CategorySearchParameter params) {
       final url = UrlBuilder.createURLWithParameters(standardPage, params.selectedParameters());
-      ref.read(targetUrlProvider.notifier).update((state) => url);
+      ref.read(pcPartsListNotifierProvider.notifier).replaceSearchUrl(url);
     }
 
     // 条件クリア時の処理
     void clearParameter() {
       ref.read(searchParameterProvider.notifier).update((state) => params.clearSelectedParameter());
-      ref.read(targetUrlProvider.notifier).update((state) => standardPage);
+      ref.read(pcPartsListNotifierProvider.notifier).replaceSearchUrl(standardPage);
     }
 
     // List<PartsSearchParameter>を取り出す工程が煩雑ため、ここから取り出す
