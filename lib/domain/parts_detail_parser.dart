@@ -1,5 +1,5 @@
 import 'package:custom_pc/domain/document_repository.dart';
-import 'package:custom_pc/models/custom.dart';
+import 'package:custom_pc/models/custom_old.dart';
 import 'package:custom_pc/models/parts_shop.dart';
 import 'package:html/dom.dart';
 
@@ -146,7 +146,6 @@ class PartsDetailParser {
         classLineCount++;
         continue;
       }
-      final custom = customProviderOld.notifier;
       // カテゴリー+スペック行
       for (int i = 0; i < 2; i++) {
         final category = specElements[next].querySelectorAll('th')[i].text;

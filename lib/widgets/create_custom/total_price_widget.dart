@@ -1,6 +1,7 @@
 import 'package:custom_pc/config/size_config.dart';
-import 'package:custom_pc/models/custom.dart';
+import 'package:custom_pc/models/custom_old.dart';
 import 'package:custom_pc/models/pc_parts.dart';
+import 'package:custom_pc/providers/create_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -22,7 +23,7 @@ class TotalPriceWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     SizeConfig().init(context);
-    final custom = ref.watch(customProviderOld);
+    final custom = ref.watch(createCustomNotifierProvider);
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 8),
       width: SizeConfig.blockSizeHorizontal * 92,

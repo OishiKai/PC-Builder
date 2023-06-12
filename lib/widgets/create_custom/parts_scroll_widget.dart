@@ -1,7 +1,8 @@
 import 'package:custom_pc/main.dart';
-import 'package:custom_pc/models/custom.dart';
+import 'package:custom_pc/models/custom_old.dart';
 import 'package:custom_pc/models/pc_parts.dart';
 import 'package:custom_pc/pages/parts_list_page.dart';
+import 'package:custom_pc/providers/create_custom.dart';
 import 'package:custom_pc/providers/pc_parts_list.dart';
 import 'package:custom_pc/providers/search_parameters.dart';
 import 'package:custom_pc/providers/searching_category.dart';
@@ -17,7 +18,7 @@ class PartsScrollWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     SizeConfig().init(context);
-    final custom = ref.watch(customProviderOld);
+    final custom = ref.watch(createCustomNotifierProvider);
 
     setupToPartsListPage(PartsCategory category) async {
       // ここで検索を始めるパーツカテゴリを設定する

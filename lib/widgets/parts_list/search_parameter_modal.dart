@@ -1,5 +1,5 @@
 import 'package:custom_pc/models/category_search_parameter.dart';
-import 'package:custom_pc/models/custom.dart';
+import 'package:custom_pc/models/custom_old.dart';
 import 'package:custom_pc/providers/pc_parts_list.dart';
 import 'package:custom_pc/providers/search_parameters.dart';
 import 'package:flutter/material.dart';

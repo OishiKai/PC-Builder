@@ -30,7 +30,7 @@ class _SystemHash {
 }
 
 String _$PcPartsListNotifierHash() =>
-    r'cb4bbb317672dfa29e62bd96ab398aae3a38f923';
+    r'95c45ffd5e5776800b20e3ebb7b1a2e24e82c2e4';
 
 /// See also [PcPartsListNotifier].
 final pcPartsListNotifierProvider =

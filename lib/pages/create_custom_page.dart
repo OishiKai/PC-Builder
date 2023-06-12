@@ -1,4 +1,5 @@
-import 'package:custom_pc/models/custom.dart';
+import 'package:custom_pc/models/custom_old.dart';
+import 'package:custom_pc/providers/create_custom.dart';
 import 'package:custom_pc/widgets/create_custom/parts_compatibility_widget.dart';
 import 'package:custom_pc/widgets/create_custom/parts_scroll_widget.dart';
 import 'package:custom_pc/widgets/create_custom/total_price_widget.dart';
@@ -51,7 +52,7 @@ class CreateCustomPage extends ConsumerWidget {
                           children: [
                             InkWell(
                               onTap: () {
-                                ref.read(customProviderOld.notifier).reset();
+                                ref.read(createCustomNotifierProvider.notifier).reset();
                                 Navigator.pop(context);
                               },
                               child: Icon(
@@ -95,8 +96,8 @@ class CreateCustomPage extends ConsumerWidget {
                         height: 16,
                       ),
 
-                      if (ref.watch(customProviderOld).compatibilities != null)
-                        for (int i = 0; i < ref.watch(customProviderOld).compatibilities!.length; i++) PartsCompatibilityWidget(ref.watch(customProviderOld).compatibilities![i]),
+                      if (ref.watch(createCustomNotifierProvider).compatibilities != null)
+                        for (int i = 0; i < ref.watch(createCustomNotifierProvider).compatibilities!.length; i++) PartsCompatibilityWidget(ref.watch(createCustomNotifierProvider).compatibilities![i]),
 
                       const SizedBox(
                         height: 16,

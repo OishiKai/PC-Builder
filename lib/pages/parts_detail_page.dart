@@ -1,8 +1,9 @@
 import 'package:clippy_flutter/arc.dart';
 import 'package:custom_pc/config/size_config.dart';
 import 'package:custom_pc/main.dart';
-import 'package:custom_pc/models/custom.dart';
+import 'package:custom_pc/models/custom_old.dart';
 import 'package:custom_pc/models/pc_parts.dart';
+import 'package:custom_pc/providers/create_custom.dart';
 import 'package:custom_pc/providers/searching_category.dart';
 import 'package:custom_pc/widgets/parts_detail/shops_widget.dart';
 import 'package:custom_pc/widgets/parts_detail/specs_widget.dart';
@@ -33,30 +34,30 @@ class PartsDetailPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     SizeConfig().init(context);
 
-    void compatibilityCheck() {
-      final custom = ref.read(customProviderOld);
+    // void compatibilityCheck() {
+    //   final custom = ref.read(createCustomNotifierProvider);
       
-      // 互換性チェック
-      if (custom.cpu != null && custom.motherBoard != null) {
-        final compatibility = CompatibilityAnalyzer.analyzeCpuAndMotherBoard(cpu: custom.cpu!, motherBoard: custom.motherBoard!);
-        ref.read(customProviderOld.notifier).addCompatibility(compatibility);
-      }
+    //   // 互換性チェック
+    //   if (custom.cpu != null && custom.motherBoard != null) {
+    //     final compatibility = CompatibilityAnalyzer.analyzeCpuAndMotherBoard(cpu: custom.cpu!, motherBoard: custom.motherBoard!);
+    //     ref.read(createCustomNotifierProvider.notifier).updateState(custom.addCompatibility(compatibility));
+    //   }
 
-      if (custom.cpuCooler != null && custom.motherBoard != null) {
-        final compatibility = CompatibilityAnalyzer.analyzeCpuCoolerAndMotherBoard(cpuCooler: custom.cpuCooler!, motherBoard: custom.motherBoard!);
-        ref.read(customProviderOld.notifier).addCompatibility(compatibility);
-      }
+    //   if (custom.cpuCooler != null && custom.motherBoard != null) {
+    //     final compatibility = CompatibilityAnalyzer.analyzeCpuCoolerAndMotherBoard(cpuCooler: custom.cpuCooler!, motherBoard: custom.motherBoard!);
+    //     ref.read(createCustomNotifierProvider).addCompatibility(compatibility);
+    //   }
+ 
+    //   if (custom.memory != null && custom.motherBoard != null) {
+    //     final compatibility = CompatibilityAnalyzer.analyzeMemoryAndMotherBoard(memory: custom.memory!, motherBoard: custom.motherBoard!);
+    //     ref.read(createCustomNotifierProvider).addCompatibility(compatibility);
+    //   }
 
-      if (custom.memory != null && custom.motherBoard != null) {
-        final compatibility = CompatibilityAnalyzer.analyzeMemoryAndMotherBoard(memory: custom.memory!, motherBoard: custom.motherBoard!);
-        ref.read(customProviderOld.notifier).addCompatibility(compatibility);
-      }
-
-      if (custom.motherBoard != null && custom.ssd != null) {
-        final compatibility = CompatibilityAnalyzer.analyzeMotherBoardAndSsd(motherBoard: custom.motherBoard!, ssd: custom.ssd!);
-        ref.read(customProviderOld.notifier).addCompatibility(compatibility);
-      }
-    }
+    //   if (custom.motherBoard != null && custom.ssd != null) {
+    //     final compatibility = CompatibilityAnalyzer.analyzeMotherBoardAndSsd(motherBoard: custom.motherBoard!, ssd: custom.ssd!);
+    //     ref.read(createCustomNotifierProvider).addCompatibility(compatibility);
+    //   }
+    // }
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -207,37 +208,9 @@ class PartsDetailPage extends ConsumerWidget {
               ElevatedButton(
                 onPressed: () {
                   final category = ref.read(searchingCategoryProvider);
-                  switch (category) {
-                    case PartsCategory.cpu:
-                      ref.read(customProviderOld.notifier).setCpu(parts);
-                      break;
-                    case PartsCategory.cpuCooler:
-                      ref.read(customProviderOld.notifier).setCpuCooler(parts);
-                      break;
-                    case PartsCategory.memory:
-                      ref.read(customProviderOld.notifier).setMemory(parts);
-                      break;
-                    case PartsCategory.motherBoard:
-                      ref.read(customProviderOld.notifier).setMotherBoard(parts);
-                      break;
-                    case PartsCategory.graphicsCard:
-                      ref.read(customProviderOld.notifier).setGraphicsCard(parts);
-                      break;
-                    case PartsCategory.ssd:
-                      ref.read(customProviderOld.notifier).setSsd(parts);
-                      break;
-                    case PartsCategory.pcCase:
-                      ref.read(customProviderOld.notifier).setPcCase(parts);
-                      break;
-                    case PartsCategory.powerUnit:
-                      ref.read(customProviderOld.notifier).setPowerUnit(parts);
-                      break;
-                    case PartsCategory.caseFan:
-                      ref.read(customProviderOld.notifier).setCaseFan(parts);
-                      break;
-                  }
+                  ref.read(createCustomNotifierProvider.notifier).setParts(category, parts);
                   int count = 0;
-                  compatibilityCheck();
+                  ref.read(createCustomNotifierProvider.notifier).updateCompatibilities();
                   Navigator.popUntil(context, (_) => count++ >= 2);
                 },
                 style: ElevatedButton.styleFrom(
