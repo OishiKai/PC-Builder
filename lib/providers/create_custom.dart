@@ -5,9 +5,9 @@ import '../models/custom.dart';
 import '../models/parts_compatibility.dart';
 import '../models/pc_parts.dart';
 
-class CreateCustomNotifiler extends StateNotifier<Custom> {
-  CreateCustomNotifiler(super.state);
-  
+class CreateCustomNotifier extends StateNotifier<Custom> {
+  CreateCustomNotifier(super.state);
+
   void setParts(PartsCategory category, PcParts parts) {
     switch (category) {
       case PartsCategory.cpu:
@@ -75,6 +75,6 @@ class CreateCustomNotifiler extends StateNotifier<Custom> {
   }
 }
 
-final createCustomNotifierProvider = StateNotifierProvider<CreateCustomNotifiler, Custom>((ref) {
-  return CreateCustomNotifiler(const Custom());
+final createCustomNotifierProvider = StateNotifierProvider<CreateCustomNotifier, Custom>((ref) {
+  return CreateCustomNotifier(const Custom());
 });
