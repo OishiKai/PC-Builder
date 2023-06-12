@@ -149,7 +149,7 @@ class DetailParser {
         classLineCount++;
         continue;
       }
-      final custom = customProvider.notifier;
+      final custom = customProviderOld.notifier;
       // カテゴリー+スペック行
       for (int i = 0; i < 2; i++) {
         final category = specElements[next].querySelectorAll('th')[i].text;

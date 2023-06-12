@@ -51,7 +51,7 @@ class CreateCustomPage extends ConsumerWidget {
                           children: [
                             InkWell(
                               onTap: () {
-                                ref.read(customProvider.notifier).reset();
+                                ref.read(customProviderOld.notifier).reset();
                                 Navigator.pop(context);
                               },
                               child: Icon(
@@ -95,8 +95,8 @@ class CreateCustomPage extends ConsumerWidget {
                         height: 16,
                       ),
 
-                      if (ref.watch(customProvider).compatibilities != null)
-                        for (int i = 0; i < ref.watch(customProvider).compatibilities!.length; i++) PartsCompatibilityWidget(ref.watch(customProvider).compatibilities![i]),
+                      if (ref.watch(customProviderOld).compatibilities != null)
+                        for (int i = 0; i < ref.watch(customProviderOld).compatibilities!.length; i++) PartsCompatibilityWidget(ref.watch(customProviderOld).compatibilities![i]),
 
                       const SizedBox(
                         height: 16,

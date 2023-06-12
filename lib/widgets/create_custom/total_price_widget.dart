@@ -22,7 +22,7 @@ class TotalPriceWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     SizeConfig().init(context);
-    final custom = ref.watch(customProvider);
+    final custom = ref.watch(customProviderOld);
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 8),
       width: SizeConfig.blockSizeHorizontal * 92,

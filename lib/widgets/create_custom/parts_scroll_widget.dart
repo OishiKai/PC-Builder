@@ -17,7 +17,7 @@ class PartsScrollWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     SizeConfig().init(context);
-    final custom = ref.watch(customProvider);
+    final custom = ref.watch(customProviderOld);
 
     setupToPartsListPage(PartsCategory category) async {
       // ここで検索を始めるパーツカテゴリを設定する

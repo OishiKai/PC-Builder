@@ -3,6 +3,7 @@ import 'package:custom_pc/config/size_config.dart';
 import 'package:custom_pc/main.dart';
 import 'package:custom_pc/models/custom.dart';
 import 'package:custom_pc/models/pc_parts.dart';
+import 'package:custom_pc/providers/searching_category.dart';
 import 'package:custom_pc/widgets/parts_detail/shops_widget.dart';
 import 'package:custom_pc/widgets/parts_detail/specs_widget.dart';
 import 'package:custom_pc/widgets/parts_detail/star_widget.dart';
@@ -33,27 +34,27 @@ class PartsDetailPage extends ConsumerWidget {
     SizeConfig().init(context);
 
     void compatibilityCheck() {
-      final custom = ref.read(customProvider);
+      final custom = ref.read(customProviderOld);
       
       // 互換性チェック
       if (custom.cpu != null && custom.motherBoard != null) {
         final compatibility = CompatibilityAnalyzer.analyzeCpuAndMotherBoard(cpu: custom.cpu!, motherBoard: custom.motherBoard!);
-        ref.read(customProvider.notifier).addCompatibility(compatibility);
+        ref.read(customProviderOld.notifier).addCompatibility(compatibility);
       }
 
       if (custom.cpuCooler != null && custom.motherBoard != null) {
         final compatibility = CompatibilityAnalyzer.analyzeCpuCoolerAndMotherBoard(cpuCooler: custom.cpuCooler!, motherBoard: custom.motherBoard!);
-        ref.read(customProvider.notifier).addCompatibility(compatibility);
+        ref.read(customProviderOld.notifier).addCompatibility(compatibility);
       }
 
       if (custom.memory != null && custom.motherBoard != null) {
         final compatibility = CompatibilityAnalyzer.analyzeMemoryAndMotherBoard(memory: custom.memory!, motherBoard: custom.motherBoard!);
-        ref.read(customProvider.notifier).addCompatibility(compatibility);
+        ref.read(customProviderOld.notifier).addCompatibility(compatibility);
       }
 
       if (custom.motherBoard != null && custom.ssd != null) {
         final compatibility = CompatibilityAnalyzer.analyzeMotherBoardAndSsd(motherBoard: custom.motherBoard!, ssd: custom.ssd!);
-        ref.read(customProvider.notifier).addCompatibility(compatibility);
+        ref.read(customProviderOld.notifier).addCompatibility(compatibility);
       }
     }
 
@@ -208,31 +209,31 @@ class PartsDetailPage extends ConsumerWidget {
                   final category = ref.read(searchingCategoryProvider);
                   switch (category) {
                     case PartsCategory.cpu:
-                      ref.read(customProvider.notifier).setCpu(parts);
+                      ref.read(customProviderOld.notifier).setCpu(parts);
                       break;
                     case PartsCategory.cpuCooler:
-                      ref.read(customProvider.notifier).setCpuCooler(parts);
+                      ref.read(customProviderOld.notifier).setCpuCooler(parts);
                       break;
                     case PartsCategory.memory:
-                      ref.read(customProvider.notifier).setMemory(parts);
+                      ref.read(customProviderOld.notifier).setMemory(parts);
                       break;
                     case PartsCategory.motherBoard:
-                      ref.read(customProvider.notifier).setMotherBoard(parts);
+                      ref.read(customProviderOld.notifier).setMotherBoard(parts);
                       break;
                     case PartsCategory.graphicsCard:
-                      ref.read(customProvider.notifier).setGraphicsCard(parts);
+                      ref.read(customProviderOld.notifier).setGraphicsCard(parts);
                       break;
                     case PartsCategory.ssd:
-                      ref.read(customProvider.notifier).setSsd(parts);
+                      ref.read(customProviderOld.notifier).setSsd(parts);
                       break;
                     case PartsCategory.pcCase:
-                      ref.read(customProvider.notifier).setPcCase(parts);
+                      ref.read(customProviderOld.notifier).setPcCase(parts);
                       break;
                     case PartsCategory.powerUnit:
-                      ref.read(customProvider.notifier).setPowerUnit(parts);
+                      ref.read(customProviderOld.notifier).setPowerUnit(parts);
                       break;
                     case PartsCategory.caseFan:
-                      ref.read(customProvider.notifier).setCaseFan(parts);
+                      ref.read(customProviderOld.notifier).setCaseFan(parts);
                       break;
                   }
                   int count = 0;

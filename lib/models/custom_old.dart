@@ -2,7 +2,7 @@ import 'package:custom_pc/models/parts_compatibility.dart';
 import 'package:custom_pc/models/pc_parts.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class Custom {
+class CustomOld {
   final PcParts? cpu;
   final PcParts? cpuCooler;
   final PcParts? memory;
@@ -15,24 +15,24 @@ class Custom {
 
   final List<PartsCompatibility>? compatibilities;
 
-  Custom._(this.cpu, this.cpuCooler, this.memory, this.motherBoard, this.graphicsCard, this.ssd, this.pcCase, this.powerUnit, this.caseFan, this.compatibilities);
+  CustomOld._(this.cpu, this.cpuCooler, this.memory, this.motherBoard, this.graphicsCard, this.ssd, this.pcCase, this.powerUnit, this.caseFan, this.compatibilities);
 
-  static Custom create() {
-    return Custom._(null, null, null, null, null, null, null, null, null, null);
+  static CustomOld create() {
+    return CustomOld._(null, null, null, null, null, null, null, null, null, null);
   }
 
-  Custom copyWith({PcParts? cpu, PcParts? cpuCooler, PcParts? memory, PcParts? motherBoard, PcParts? graphicsCard, PcParts? ssd, PcParts? pcCase, PcParts? powerUnit, PcParts? caseFan}) {
-    return Custom._(cpu ?? this.cpu, cpuCooler ?? this.cpuCooler, memory ?? this.memory, motherBoard ?? this.motherBoard, graphicsCard ?? this.graphicsCard, ssd ?? this.ssd, pcCase ?? this.pcCase, powerUnit ?? this.powerUnit, caseFan ?? this.caseFan, compatibilities);
+  CustomOld copyWith({PcParts? cpu, PcParts? cpuCooler, PcParts? memory, PcParts? motherBoard, PcParts? graphicsCard, PcParts? ssd, PcParts? pcCase, PcParts? powerUnit, PcParts? caseFan}) {
+    return CustomOld._(cpu ?? this.cpu, cpuCooler ?? this.cpuCooler, memory ?? this.memory, motherBoard ?? this.motherBoard, graphicsCard ?? this.graphicsCard, ssd ?? this.ssd, pcCase ?? this.pcCase, powerUnit ?? this.powerUnit, caseFan ?? this.caseFan, compatibilities);
   }
 
-  Custom deleteWith({PcParts? cpu, PcParts? cpuCooler, PcParts? memory, PcParts? motherBoard, PcParts? graphicsCard, PcParts? ssd, PcParts? pcCase, PcParts? powerUnit, PcParts? caseFan}) {
-    return Custom._(null, null, null, null, null, null, null, null, null, null);
+  CustomOld deleteWith({PcParts? cpu, PcParts? cpuCooler, PcParts? memory, PcParts? motherBoard, PcParts? graphicsCard, PcParts? ssd, PcParts? pcCase, PcParts? powerUnit, PcParts? caseFan}) {
+    return CustomOld._(null, null, null, null, null, null, null, null, null, null);
   }
 
-  Custom addCompatibility(PartsCompatibility compatibility) {
+  CustomOld addCompatibility(PartsCompatibility compatibility) {
     // 互換性のリストがnullの場合は新規作成
     if (compatibilities == null) {
-      return Custom._(cpu, cpuCooler, memory, motherBoard, graphicsCard, ssd, pcCase, powerUnit, caseFan, [compatibility]);
+      return CustomOld._(cpu, cpuCooler, memory, motherBoard, graphicsCard, ssd, pcCase, powerUnit, caseFan, [compatibility]);
     }
 
     // 互換性のリストがnullでなく、すでに同じパーツの互換性情報がある場合は上書き
@@ -40,12 +40,12 @@ class Custom {
     for(var i = 0; i < storedComps.length; i++) {
       if (storedComps[i].pair[0] == compatibility.pair[0] && storedComps[i].pair[1] == compatibility.pair[1]) {
         storedComps[i] = compatibility;
-        return Custom._(cpu, cpuCooler, memory, motherBoard, graphicsCard, ssd, pcCase, powerUnit, caseFan, storedComps);
+        return CustomOld._(cpu, cpuCooler, memory, motherBoard, graphicsCard, ssd, pcCase, powerUnit, caseFan, storedComps);
       }
     }
     // 互換性のリストがnullでなく、同じパーツの互換性情報がない場合は追加
     storedComps.add(compatibility);
-    return Custom._(cpu, cpuCooler, memory, motherBoard, graphicsCard, ssd, pcCase, powerUnit, caseFan, storedComps);
+    return CustomOld._(cpu, cpuCooler, memory, motherBoard, graphicsCard, ssd, pcCase, powerUnit, caseFan, storedComps);
   }
 
   int calculateTotalPrice() {
@@ -116,7 +116,7 @@ class Custom {
   }
 }
 
-class CustomNotifier extends StateNotifier<Custom> {
+class CustomNotifier extends StateNotifier<CustomOld> {
   CustomNotifier(super.state);
 
   void setCpu(PcParts cpu) {
@@ -192,10 +192,10 @@ class CustomNotifier extends StateNotifier<Custom> {
   }
 
   void reset() {
-    state = Custom.create();
+    state = CustomOld.create();
   }
 
-  void setCustom(Custom custom) {
+  void setCustom(CustomOld custom) {
     state = custom;
   }
 
@@ -204,6 +204,6 @@ class CustomNotifier extends StateNotifier<Custom> {
   }
 }
 
-final customProvider = StateNotifierProvider<CustomNotifier, Custom>((ref) {
-  return CustomNotifier(Custom.create());
+final customProviderOld = StateNotifierProvider<CustomNotifier, CustomOld>((ref) {
+  return CustomNotifier(CustomOld.create());
 });
