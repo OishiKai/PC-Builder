@@ -9,11 +9,16 @@ class DocumentRepository {
     final targetUri = Uri.parse(targetUrl);
     final response = await http.get(targetUri);
 
-    // response を Shift_JIS にデコード
-    final documentBody = await CharsetConverter.decode('Shift_JIS', response.bodyBytes);
+    try{
+      // response を Shift_JIS にデコード
+      final documentBody = await CharsetConverter.decode('Shift_JIS', response.bodyBytes);
 
-    // パース
-    final document = parse(documentBody);
-    return document;
+      // パース
+      final document = parse(documentBody);
+      return document;
+    } catch (e) {
+      final document = parse(response.body);
+      return document;
+    }
   }
 }

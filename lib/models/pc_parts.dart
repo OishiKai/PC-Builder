@@ -23,7 +23,7 @@ class PcParts with _$PcParts {
 
 enum PartsCategory {
   cpu('CPU', 'CPU','cpu'),
-  cpuCooler('CPUクーラー', 'CPUクーラー','2C0030'),
+  cpuCooler('CPUクーラー', 'CPUクーラ','2C0030'),
   memory('メモリー', 'メモリ','2C0033'),
   motherBoard('マザーボード', 'マザボ','2C0036'),
   graphicsCard('グラフィックボード・ビデオカード', 'グラボ','2C0028'),

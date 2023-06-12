@@ -115,6 +115,9 @@ class PartsDetailParser {
         adjustIndex += 2;
       }
     }
+
+    partsShopList.removeWhere((element) => element.shopName.contains(''));
+
     return partsShopList;
   }
 

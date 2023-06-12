@@ -78,9 +78,9 @@ class RootPage extends ConsumerWidget {
   }
 }
 
-final searchParameterProvider = StateProvider<CategorySearchParameter?>((ref) {
-  return null;
-});
+// final searchParameterProvider = StateProvider<CategorySearchParameter?>((ref) {
+//   return null;
+// });
 
 final categoryHomeDataProvider = StateProvider<CategoryHomeData>((ref) {
   return CategoryHomeData();

@@ -197,8 +197,10 @@ class PartsListWidget extends ConsumerWidget {
           ]),
         );
       },
-      loading: () => const CircularProgressIndicator(),
-      error: (error, stackTrace) => Center(child: Text(error.toString())),
+      loading: () => const CircularProgressIndicator(
+        valueColor: AlwaysStoppedAnimation<Color>(Color.fromRGBO(60, 130, 80, 1)),
+      ),
+      error: (error, stackTrace) => Container(),
     );
   }
 }

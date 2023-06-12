@@ -3,19 +3,11 @@ import 'package:custom_pc/models/custom.dart';
 import 'package:custom_pc/models/pc_parts.dart';
 import 'package:custom_pc/pages/parts_list_page.dart';
 import 'package:custom_pc/providers/pc_parts_list.dart';
+import 'package:custom_pc/providers/search_parameters.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../config/size_config.dart';
-import '../../domain/search_parameter_parser/case_fan_search_parameter_parser.dart';
-import '../../domain/search_parameter_parser/cpu_cooler_search_parameter_parser.dart';
-import '../../domain/search_parameter_parser/cpu_search_search_parameter_parser.dart';
-import '../../domain/search_parameter_parser/graphics_card_search_parameter_parser.dart';
-import '../../domain/search_parameter_parser/memory_search_parameter_parser.dart';
-import '../../domain/search_parameter_parser/mother_board_search_parameter_parser.dart';
-import '../../domain/search_parameter_parser/pc_case_search_parameter_parser.dart';
-import '../../domain/search_parameter_parser/power_unit_search_parameter_parser.dart';
-import '../../domain/search_parameter_parser/ssd_search_parameter_parser.dart';
 
 class PartsScrollWidget extends ConsumerWidget {
   const PartsScrollWidget({super.key});
@@ -30,53 +22,8 @@ class PartsScrollWidget extends ConsumerWidget {
       // ここで検索中を始めるパーツカテゴリを設定する
       ref.read(searchingCategoryProvider.notifier).update((state) => category);
       // カテゴリに合わせて検索URL、パラメータを設定する
-      switch (category) {
-        case PartsCategory.cpu:
-          ref.read(pcPartsListNotifierProvider.notifier).replaceSearchUrl(CpuSearchParameterParser.standardPage);
-          final param = await CpuSearchParameterParser.fetchSearchParameter();
-          ref.read(searchParameterProvider.notifier).update((state) => param);
-          break;
-        case PartsCategory.cpuCooler:
-          ref.read(pcPartsListNotifierProvider.notifier).replaceSearchUrl(CpuCoolerSearchParameterParser.standardPage);
-          final param = await CpuCoolerSearchParameterParser.fetchSearchParameter();
-          ref.read(searchParameterProvider.notifier).update((state) => param);
-          break;
-        case PartsCategory.memory:
-          ref.read(pcPartsListNotifierProvider.notifier).replaceSearchUrl(MemorySearchParameterParser.standardPage);
-          final param = await MemorySearchParameterParser.fetchSearchParameter();
-          ref.read(searchParameterProvider.notifier).update((state) => param);
-          break;
-        case PartsCategory.motherBoard:
-          ref.read(pcPartsListNotifierProvider.notifier).replaceSearchUrl(MotherBoardSearchParameterParser.standardPage);
-          final param = await MotherBoardSearchParameterParser.fetchSearchParameter();
-          ref.read(searchParameterProvider.notifier).update((state) => param);
-          break;
-        case PartsCategory.graphicsCard:
-          ref.read(pcPartsListNotifierProvider.notifier).replaceSearchUrl(GraphicsCardSearchParameterParser.standardPage);
-          final param = await GraphicsCardSearchParameterParser.fetchSearchParameter();
-          ref.read(searchParameterProvider.notifier).update((state) => param);
-          break;
-        case PartsCategory.ssd:
-          ref.read(pcPartsListNotifierProvider.notifier).replaceSearchUrl(SsdSearchParameterParser.standardPage);
-          final param = await SsdSearchParameterParser.fetchSearchParameter();
-          ref.read(searchParameterProvider.notifier).update((state) => param);
-          break;
-        case PartsCategory.pcCase:
-          ref.read(pcPartsListNotifierProvider.notifier).replaceSearchUrl(PcCaseSearchParameterParser.standardPage);
-          final param = await PcCaseSearchParameterParser.fetchSearchParameter();
-          ref.read(searchParameterProvider.notifier).update((state) => param);
-          break;
-        case PartsCategory.powerUnit:
-          ref.read(pcPartsListNotifierProvider.notifier).replaceSearchUrl(PowerUnitSearchParameterParser.standardPage);
-          final param = await PowerUnitSearchParameterParser.fetchSearchParameter();
-          ref.read(searchParameterProvider.notifier).update((state) => param);
-          break;
-        case PartsCategory.caseFan:
-          ref.read(pcPartsListNotifierProvider.notifier).replaceSearchUrl(CaseFanSearchParameterParser.standardPage);
-          final param = await CaseFanSearchParameterParser.fetchSearchParameter();
-          ref.read(searchParameterProvider.notifier).update((state) => param);
-          break;
-      }
+      ref.read(pcPartsListNotifierProvider.notifier).switchCategory(category);
+      ref.read(searchParameterProvider.notifier).replaceParameters(category);
     }
 
     return NotificationListener<OverscrollIndicatorNotification>(
