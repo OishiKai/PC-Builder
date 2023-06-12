@@ -4,6 +4,7 @@ import 'package:custom_pc/models/pc_parts.dart';
 import 'package:custom_pc/pages/parts_list_page.dart';
 import 'package:custom_pc/providers/pc_parts_list.dart';
 import 'package:custom_pc/providers/search_parameters.dart';
+import 'package:custom_pc/providers/searching_category.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -19,8 +20,8 @@ class PartsScrollWidget extends ConsumerWidget {
     final custom = ref.watch(customProvider);
 
     setupToPartsListPage(PartsCategory category) async {
-      // ここで検索中を始めるパーツカテゴリを設定する
-      ref.read(searchingCategoryProvider.notifier).update((state) => category);
+      // ここで検索を始めるパーツカテゴリを設定する
+      ref.read(searchingCategoryProvider.notifier).changeCategory(category);
       // カテゴリに合わせて検索URL、パラメータを設定する
       ref.read(pcPartsListNotifierProvider.notifier).switchCategory(category);
       ref.read(searchParameterProvider.notifier).replaceParameters(category);

@@ -77,29 +77,3 @@ class RootPage extends ConsumerWidget {
     );
   }
 }
-
-// final searchParameterProvider = StateProvider<CategorySearchParameter?>((ref) {
-//   return null;
-// });
-
-final categoryHomeDataProvider = StateProvider<CategoryHomeData>((ref) {
-  return CategoryHomeData();
-});
-
-final targetUrlProvider = StateProvider((ref) {
-  return "";
-});
-
-// final partsListFutureProvider = FutureProvider((ref) async {
-//   final parser = await PartsSearchListParser.create(ref.watch(targetUrlProvider));
-//   final fetchedPartsList = parser.partsList;
-//   return fetchedPartsList;
-// });
-
-// final partsListProvider = StateProvider((ref) {
-//   return ref.watch(partsListFutureProvider).value;
-// });
-
-final searchingCategoryProvider = StateProvider<PartsCategory>((ref) {
-  return PartsCategory.cpu;
-});
