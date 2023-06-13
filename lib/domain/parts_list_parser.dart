@@ -1,148 +1,69 @@
-// import 'package:custom_pc/domain/document_repository.dart';
-// import 'package:custom_pc/models/pc_parts_old.dart';
-// import 'package:html/dom.dart';
+import 'package:html/dom.dart';
 
-// class PartsListParsera {
-//   // 商品のリスト化
-//   static const _listSelector =
-//       '#default > div.l-c.l-c-2column.l-c-2column-reverse > div.l-c_cont.l-c-2column_cont.p-cont.p-cont-wide > div > div.p-result_list_wrap > div > div';
-//   // メーカー名
-//   static const _makerSelector =
-//       'div.c-positioning_cell.p-result_item_cell-1 > div.c-positioning.s-biggerlink.is-biggerlinkHot.p-item > div > p.p-item_maker';
+import 'document_repository.dart';
+import '../models/pc_parts.dart';
 
-//   /*
-//   商品名
-//   新商品の場合のみ_newTitleSelectorでも商品名を取得できる為、新商品かどうかの判定に利用する
-//    */
-//   static const _titleSelector =
-//       'div.c-positioning_cell.p-result_item_cell-1 > div.c-positioning.s-biggerlink.is-biggerlinkHot.p-item > div > p.p-item_name.s-biggerlinkHover_underline';
-//   static const _newTitleSelector =
-//       'div.c-positioning_cell.p-result_item_cell-1 > div.c-positioning.s-biggerlink.is-biggerlinkHot.p-item > div > p.p-item_name.s-biggerlinkHover_underline.c-box-menuBox_new';
+class PartsListParser {
+  static const _partsListSelector = '#compTblList > tbody > tr.tr-border';
+  static const _partsMakerSelector = 'td.end.checkItem > table > tbody > tr > td.ckitemLink > a > span';
+  static const _partsCombinedMakerAndTitleSelector = 'td.end.checkItem > table > tbody > tr > td.ckitemLink > a';
+  static const _partsNewSelector = 'td.end.checkItem > table > tbody > tr > td.ckitemLink > img';
+  static const _partsImageUrlSelector = 'td.alignC > a > img';
+  static const _partsDetailUrlSelector = 'td.alignC > a';
+  static const _partsPriceSelector = 'td.td-price > ul > li.pryen > a';
+  static const _patsRankedSelector = 'td.swrank2 > span';
 
-//   /*
-//   評価(星の数)
-//   末尾の'p-item_star-'の後に数字を加えて利用する
-//   星5評価の場合 'p-item_star-50', 星3.5評価の場合'p-item_star-35'と5刻みでクラス分けされている
-//   商品が評価されている場合、評価の数値とレビュー数(例: 5.00(1))が取得でき、評価されていない場合、取得に失敗する
-//    */
-//   static const _starSelector =
-//       'div.c-positioning_cell.p-result_item_cell-1 > div.c-positioning.s-biggerlink.is-biggerlinkHot.p-item > div > div.p-item_rate > p.p-item_star.p-item_star-';
+  static Future<List<PcParts>> fetch(String url) async {
+    final document = await DocumentRepository.fetchDocument(url);
+    final partsList = _parsePartsList(document);
+    return partsList;
+  }
 
-//   // 価格
-//   static const _priceSelector =
-//       'div.c-positioning_cell.p-result_item_cell-2 > div > p.p-item_price > span';
+  static List<PcParts> _parsePartsList(Document document) {
+    final List<PcParts> partsList = [];
+    final partsListElement = document.querySelectorAll(_partsListSelector);
 
-//   // 順位 圏外の場合'-'
-//   static const _rankSelector =
-//       'div.c-positioning_cell.p-result_item_cell-1 > div.c-positioning.s-biggerlink.is-biggerlinkHot.p-item > div > div.p-item_rate > p.p-item_rank > span';
+    for (int i = 1; i < partsListElement.length; i += 3) {
+      final maker = partsListElement[i].querySelectorAll(_partsMakerSelector)[0].text;
+      // 商品名を直接取得できず、"{メーカー名} {商品名}"という形式で取得し、"{メーカー名} "を除く
+      final combined = partsListElement[i].querySelectorAll(_partsCombinedMakerAndTitleSelector)[0].text;
+      final title = combined.replaceFirst(maker, '');
+      final isNew = partsListElement[i].querySelectorAll(_partsNewSelector).isNotEmpty;
+      var imageUrl = partsListElement[i + 1].querySelectorAll(_partsImageUrlSelector)[0].attributes['src']!.replaceFirst('/m/', '/ll/');
 
-//   /*
-//   商品画像URL
-//   imgタグごと取得してしまう為、不要な部分を除く必要あり
-//    */
-//   static const _imageUrlSelector =
-//       'div.c-positioning_cell.p-result_item_cell-1 > div.c-positioning.s-biggerlink.is-biggerlinkHot.p-item > p > a > noscript';
+      // if (imageUrl!.contains('https://img1.kakaku.k-img.com/images/productimage/m/')) {
+      //   imageUrl.replaceFirst('m/', 'll/');
+      // }
 
-//   // 詳細ページURL
-//   static const _detailUrlSelector =
-//       'div.c-positioning_cell.p-result_item_cell-1 > div.c-positioning.s-biggerlink.is-biggerlinkHot.p-item > p > a';
+      final detailUrl = partsListElement[i + 1].querySelectorAll(_partsDetailUrlSelector)[0].attributes['href'];
+      final price = partsListElement[i + 1].querySelectorAll(_partsPriceSelector)[0].text;
+      final ranked = partsListElement[i + 1].querySelectorAll(_patsRankedSelector)[0].text;
 
-//   final String targetUrl;
-//   Document? document;
-//   List<PcPartsOld>? partsList;
+      // レビュー、評価数はセレクターでうまくパースできなかった為、改行ごとに区切って6つ目の要素を取得する
+      // evaluate は 取得時 "4.95(15件)" という形式なので、"件"を除く
+      var evaluation = '';
+      var strStar = '';
 
-//   /*
-//   コンストラクタをプライベートとし、createでオブジェクトを生成。
-//   オブジェクト生成時に該当ページのDocumentのフェッチ、パースを完了させ、
-//   .partsListを参照してパーツリストを取り出す。
-//    */
-//   PartsListParsera._(this.targetUrl);
-//   static Future<PartsListParsera> create(String url) async {
-//     final self = PartsListParsera._(url);
-//     self.document = await DocumentRepository.fetchDocument(url);
-//     self.partsList = self._parsePartsList();
-//     return self;
-//   }
+      // 4つ目の要素に入っている場合もあったので、分岐して対応
+      final evas = partsListElement[i + 1].text.split('\n');
+      if (evas[5].contains('件')) {
+        evaluation = evas[5].replaceAll('件', '');
+      } else {
+        final evaluations = evas[3].split('位');
+        evaluation = evaluations[evaluations.length - 1].replaceAll('件', '');
+      }
+      strStar = evaluation.split('(')[0];
 
-//   List<PcPartsOld> _parsePartsList() {
-//     // オブジェクト生成時には必ずdocumentが入る為nullではない
-//     final elementList = document!.querySelectorAll(_listSelector);
-
-//     List<PcPartsOld> partsList = [];
-//     for (var element in elementList) {
-//       // メーカ名取得
-//       final maker = element
-//           .querySelectorAll(_makerSelector)[0]
-//           .text
-//           .replaceFirst('[', '')
-//           .replaceFirst(']', '');
-
-//       // 商品名取得
-//       final title = element.querySelectorAll(_titleSelector)[0].text;
-
-//       // 新商品かどうか判定
-//       bool isNew = false;
-//       if (element.querySelectorAll(_newTitleSelector).isNotEmpty) {
-//         isNew = true;
-//       }
-
-//       // 星の数、評価数取得
-//       int? star;
-//       String? eva;
-//       Map<String, dynamic>? specified = _specificEvaluation(element);
-//       if (specified != null) {
-//         star = specified['star'];
-//         eva = specified['evaluation'];
-//       }
-
-//       final price = element.querySelectorAll(_priceSelector)[0].text;
-//       final rank = element.querySelectorAll(_rankSelector)[0].text;
-//       final image =
-//           _trimImageUrl(element.querySelectorAll(_imageUrlSelector)[0].text);
-//       final detailUrl =
-//           element.querySelectorAll(_detailUrlSelector)[0].attributes['href'];
-
-//       partsList.add(PcPartsOld(
-//           maker, isNew, title, star, eva, price!, rank!, image, detailUrl!));
-//     }
-
-//     return partsList;
-//   }
-
-//   Map<String, dynamic>? _specificEvaluation(Element element) {
-//     int ratingSelector = 50;
-//     int? star;
-//     String? evaluation;
-
-//     /*
-//     評価(星の数)を特定、取得する。
-//     星の数は0~5の0.5刻み10段階であり、星5の場合は '$_starSelector50' というセレクターで評価数を取得できる。
-//     末尾の数字を50から5刻みで下げ、パース結果がヒットしたものを評価として採用。
-//     取得完了後は
-//     評価星3.5の場合 -> star = 35, evaluation = 3.5(1) という形式となる(かっこの数はレビュー数) 。
-//      */
-//     while (ratingSelector != 0) {
-//       final parsed = element.querySelectorAll('$_starSelector$ratingSelector');
-
-//       if (parsed.isNotEmpty) {
-//         star = ratingSelector;
-//         evaluation = parsed[0].text;
-//         break;
-//       }
-
-//       ratingSelector -= 5;
-//     }
-
-//     if (star == null && evaluation == null) {
-//       return null;
-//     }
-//     return {'star': star, 'evaluation': evaluation!.trim()};
-//   }
-
-//   String _trimImageUrl(String target) {
-//     String trim = target.trim();
-//     String replaced = trim.replaceFirst('<img src="', '');
-//     String url = replaced.split('"').first;
-//     return url;
-//   }
-// }
+      int? star;
+      if (strStar != '—') {
+        // "4.95" -> "49" に変換
+        if (double.tryParse(strStar) != null) {
+          final doubleStar = double.parse(strStar);
+          star = doubleStar * 100 ~/ 10;
+        }
+      }
+      partsList.add(PcParts(maker: maker, isNew: isNew, title: title, star: star, evaluation: evaluation, price: price, ranked: ranked, image: imageUrl, detailUrl: detailUrl!));
+    }
+    return partsList;
+  }
+}

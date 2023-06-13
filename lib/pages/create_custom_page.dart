@@ -1,4 +1,3 @@
-import 'package:custom_pc/models/custom_old.dart';
 import 'package:custom_pc/providers/create_custom.dart';
 import 'package:custom_pc/widgets/create_custom/parts_compatibility_widget.dart';
 import 'package:custom_pc/widgets/create_custom/parts_scroll_widget.dart';

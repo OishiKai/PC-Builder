@@ -1,4 +1,4 @@
-import 'package:custom_pc/rebased/domain/parts_list_parser.dart';
+import 'package:custom_pc/domain/parts_list_parser.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../domain/search_parameter_parser/case_fan_search_parameter_parser.dart';
 import '../domain/search_parameter_parser/cpu_cooler_search_parameter_parser.dart';

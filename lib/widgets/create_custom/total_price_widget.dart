@@ -1,5 +1,4 @@
 import 'package:custom_pc/config/size_config.dart';
-import 'package:custom_pc/models/custom_old.dart';
 import 'package:custom_pc/models/pc_parts.dart';
 import 'package:custom_pc/providers/create_custom.dart';
 import 'package:flutter/material.dart';

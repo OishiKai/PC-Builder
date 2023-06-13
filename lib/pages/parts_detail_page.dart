@@ -1,7 +1,5 @@
 import 'package:clippy_flutter/arc.dart';
 import 'package:custom_pc/config/size_config.dart';
-import 'package:custom_pc/main.dart';
-import 'package:custom_pc/models/custom_old.dart';
 import 'package:custom_pc/models/pc_parts.dart';
 import 'package:custom_pc/providers/create_custom.dart';
 import 'package:custom_pc/providers/searching_category.dart';
@@ -11,8 +9,6 @@ import 'package:custom_pc/widgets/parts_detail/star_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_segmented_control/material_segmented_control.dart';
-
-import '../domain/compatibility_analyzer.dart';
 import '../widgets/parts_detail/full_scale_image_slider.dart';
 
 // 販売店 or 詳細スペック の表示状態 (デフォルトは 0)
