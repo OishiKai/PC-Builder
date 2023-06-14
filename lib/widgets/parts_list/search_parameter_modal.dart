@@ -1,3 +1,4 @@
+import 'package:custom_pc/config/size_config.dart';
 import 'package:custom_pc/models/category_search_parameter.dart';
 import 'package:custom_pc/providers/pc_parts_list.dart';
 import 'package:custom_pc/providers/search_parameters.dart';
@@ -5,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../domain/url_builder.dart';
-import '../../main.dart';
 
 class SearchParameterModal extends ConsumerStatefulWidget {
   const SearchParameterModal({Key? key}) : super(key: key);
@@ -35,6 +35,7 @@ class _SearchParameterModalState extends ConsumerState<SearchParameterModal> {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     final params = ref.watch(searchParameterProvider)!;
     final alignParams = params.alignParameters();
     final standardPage = params.standardPage();
@@ -56,6 +57,7 @@ class _SearchParameterModalState extends ConsumerState<SearchParameterModal> {
     }
 
     return Container(
+      height: SizeConfig.blockSizeVertical * 60,
       decoration: BoxDecoration(
         color: widget._mainColor,
       ),

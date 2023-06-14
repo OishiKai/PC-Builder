@@ -39,14 +39,6 @@ class TotalPriceWidget extends ConsumerWidget {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text(
-                  '計',
-                  style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
-                    color: _mainColor,
-                  ),
-                ),
                 const Spacer(),
                 Text(
                   formatPrice(custom.calculateTotalPrice()),

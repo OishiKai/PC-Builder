@@ -26,6 +26,7 @@ class PartsListPage extends StatelessWidget {
             child: ElevatedButton(
               onPressed: () {
                 showModalBottomSheet(
+                  isScrollControlled: true,
                   backgroundColor: Colors.transparent,
                   context: context,
                   builder: (BuildContext context) {

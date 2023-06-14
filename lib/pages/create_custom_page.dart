@@ -30,7 +30,7 @@ class CreateCustomPage extends ConsumerWidget {
               padding: const EdgeInsets.only(top: 8, bottom: 20),
               child: ConstrainedBox(
                 constraints: BoxConstraints(
-                  minHeight: SizeConfig.blockSizeVertical * 90,
+                  minHeight: SizeConfig.blockSizeVertical * 89,
                 ),
                 child: Container(
                   //height: SizeConfig.blockSizeVertical * 90,
@@ -60,9 +60,7 @@ class CreateCustomPage extends ConsumerWidget {
                                 color: _mainColor,
                               ),
                             ),
-                            const Spacer(
-                              flex: 2,
-                            ),
+                            const Spacer(),
                             Text(
                               'NEW CUSTOM',
                               style: TextStyle(
@@ -71,8 +69,17 @@ class CreateCustomPage extends ConsumerWidget {
                                 color: _mainColor,
                               ),
                             ),
-                            const Spacer(
-                              flex: 3,
+                            const Spacer(),
+                            InkWell(
+                              onTap: () {
+                                ref.read(createCustomNotifierProvider.notifier).reset();
+                                Navigator.pop(context);
+                              },
+                              child: Icon(
+                                Icons.save_as_outlined,
+                                size: 35,
+                                color: _mainColor,
+                              ),
                             ),
                           ],
                         ),
