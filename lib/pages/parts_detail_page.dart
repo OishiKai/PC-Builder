@@ -9,6 +9,7 @@ import 'package:custom_pc/widgets/parts_detail/star_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_segmented_control/material_segmented_control.dart';
+
 import '../widgets/parts_detail/full_scale_image_slider.dart';
 
 // 販売店 or 詳細スペック の表示状態 (デフォルトは 0)
@@ -29,31 +30,6 @@ class PartsDetailPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     SizeConfig().init(context);
-
-    // void compatibilityCheck() {
-    //   final custom = ref.read(createCustomNotifierProvider);
-      
-    //   // 互換性チェック
-    //   if (custom.cpu != null && custom.motherBoard != null) {
-    //     final compatibility = CompatibilityAnalyzer.analyzeCpuAndMotherBoard(cpu: custom.cpu!, motherBoard: custom.motherBoard!);
-    //     ref.read(createCustomNotifierProvider.notifier).updateState(custom.addCompatibility(compatibility));
-    //   }
-
-    //   if (custom.cpuCooler != null && custom.motherBoard != null) {
-    //     final compatibility = CompatibilityAnalyzer.analyzeCpuCoolerAndMotherBoard(cpuCooler: custom.cpuCooler!, motherBoard: custom.motherBoard!);
-    //     ref.read(createCustomNotifierProvider).addCompatibility(compatibility);
-    //   }
- 
-    //   if (custom.memory != null && custom.motherBoard != null) {
-    //     final compatibility = CompatibilityAnalyzer.analyzeMemoryAndMotherBoard(memory: custom.memory!, motherBoard: custom.motherBoard!);
-    //     ref.read(createCustomNotifierProvider).addCompatibility(compatibility);
-    //   }
-
-    //   if (custom.motherBoard != null && custom.ssd != null) {
-    //     final compatibility = CompatibilityAnalyzer.analyzeMotherBoardAndSsd(motherBoard: custom.motherBoard!, ssd: custom.ssd!);
-    //     ref.read(createCustomNotifierProvider).addCompatibility(compatibility);
-    //   }
-    // }
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -196,8 +172,8 @@ class PartsDetailPage extends ConsumerWidget {
       ),
       bottomNavigationBar: BottomAppBar(
         child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-          height: 80,
+          padding: const EdgeInsets.only(top: 8, right: 20, left: 20),
+          height: SizeConfig.blockSizeVertical * 8,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

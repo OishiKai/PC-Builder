@@ -48,6 +48,8 @@ dependencies:
   flutter_hooks:
   riverpod_annotation:
   freezed_annotation:
+  sqflite: ^2.2.8+4
+  path: ^1.8.2
 
 dev_dependencies:
   flutter_test:

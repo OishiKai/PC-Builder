@@ -1,3 +1,4 @@
+import 'package:custom_pc/database_repository.dart';
 import 'package:custom_pc/widgets/parts_detail/star_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -38,6 +39,7 @@ class PartsListWidget extends ConsumerWidget {
               GestureDetector(
                 onTap: () async {
                   showProgressDialog();
+                  DatabaseRepository.insertPcParts(parts[i]);
                   if (parts[i].fullScaleImages == null) {
                     // 詳細画面用のデータ取得
                     final detailParts = await PartsDetailParser.fetch(parts[i]);

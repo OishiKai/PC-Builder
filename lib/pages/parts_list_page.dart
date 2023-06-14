@@ -30,7 +30,7 @@ class PartsListPage extends StatelessWidget {
                   backgroundColor: Colors.transparent,
                   context: context,
                   builder: (BuildContext context) {
-                    return SearchParameterModal();
+                    return const SearchParameterModal();
                   },
                 );
               },
