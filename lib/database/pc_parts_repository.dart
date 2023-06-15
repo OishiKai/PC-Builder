@@ -10,6 +10,7 @@ class PcPartsRepository {
   static final Future<Database> database = openDatabase(
     join(getDatabasesPath().toString(), 'custom_pc_database.db'),
     onCreate: (db, version) {
+      // マイグレーション
       db.execute('PRAGMA foreign_keys = ON');
       db.execute(
         'CREATE TABLE pc_parts (id TEXT PRIMARY KEY,maker TEXT NOT NULL,isNew INTEGER NOT NULL,title TEXT NOT NULL,star INTEGER,evaluation TEXT,price TEXT NOT NULL,ranked TEXT NOT NULL,image TEXT NOT NULL,detailUrl TEXT NOT NULL)',
@@ -27,44 +28,14 @@ class PcPartsRepository {
     version: 1,
   );
 
-  // static final Future<Database> databaseForPartsShops = openDatabase(
-  //   join(getDatabasesPath().toString(), 'custom_pc_database.db'),
-  //   onCreate: (db, version) {
-  //     db.execute('PRAGMA foreign_keys = ON');
-  //     return db.execute(
-  //       'CREATE TABLE parts_shops (id INTEGER PRIMARY KEY AUTOINCREMENT,custom_id TEXT PRIMARY KEY,rank TEXT NOT NULL,price INTEGER NOT NULL,bestPriceDiff TEXT NOT NULL,name TEXT,pageUrl TEXT NOT NULL, FOREIGN KEY (custom_id) REFERENCES pc_parts(id) ON DELETE CASCADE)',
-  //     );
-  //   },
-  //   version: 1,
-  // );
-
-  // static final Future<Database> databeseForPartsSpecs = openDatabase(
-  //   join(getDatabasesPath().toString(), 'custom_pc_database.db'),
-  //   onCreate: (db, version) {
-  //     db.execute('PRAGMA foreign_keys = ON');
-  //     return db.execute(
-  //       'CREATE TABLE parts_specs (id INTEGER PRIMARY KEY AUTOINCREMENT,custom_id TEXT PRIMARY KEY,specName TEXT NOT NULL,specValue TEXT, FOREIGN KEY (custom_id) REFERENCES pc_parts(id) ON DELETE CASCADE)',
-  //     );
-  //   },
-  //   version: 1,
-  // );
-
-  // static final Future<Database> databaseForFullScaleImages = openDatabase(
-  //   join(getDatabasesPath().toString(), 'custom_pc_database.db'),
-  //   onCreate: (db, version) {
-  //     db.execute('PRAGMA foreign_keys = ON');
-  //     return db.execute(
-  //       'CREATE TABLE full_scale_images (id INTEGER PRIMARY KEY AUTOINCREMENT,custom_id TEXT PRIMARY KEY,imageUrl TEXT NOT NULL, FOREIGN KEY (custom_id) REFERENCES pc_parts(id) ON DELETE CASCADE)',
-  //     );
-  //   },
-  //   version: 1,
-  // );
-
+  // PcParts保存
   static Future<void> insertPcParts(PcParts pcParts) async {
+    // idを生成
     final id = const Uuid().v4();
-    await insertPartsShops(pcParts.shops, id);
-    await insertPartsSpecs(pcParts.specs, id);
-    await insertFullScaleImages(pcParts.fullScaleImages, id);
+    // 店情報、スペック情報、画像情報を保存
+    await _insertPartsShops(pcParts.shops, id);
+    await _insertPartsSpecs(pcParts.specs, id);
+    await _insertFullScaleImages(pcParts.fullScaleImages, id);
     final map = {
       'id': id,
       'maker': pcParts.maker,
@@ -85,7 +56,8 @@ class PcPartsRepository {
     );
   }
 
-  static Future<void> insertPartsShops(List<PartsShop>? shops, String id) async {
+  // 店情報保存
+  static Future<void> _insertPartsShops(List<PartsShop>? shops, String id) async {
     if (shops == null) return;
     final Database db = await database;
     for (var shop in shops) {
@@ -105,7 +77,8 @@ class PcPartsRepository {
     }
   }
 
-  static Future<void> insertPartsSpecs(Map<String, String?>? specs, String id) async {
+  // スペック情報保存
+  static Future<void> _insertPartsSpecs(Map<String, String?>? specs, String id) async {
     if (specs == null) return;
     final Database db = await database;
     specs.forEach((key, value) async {
@@ -122,7 +95,7 @@ class PcPartsRepository {
     });
   }
 
-  static Future<void> insertFullScaleImages(List<String>? images, String id) async {
+  static Future<void> _insertFullScaleImages(List<String>? images, String id) async {
     if (images == null) return;
     final Database db = await database;
     for (var image in images) {
@@ -138,15 +111,15 @@ class PcPartsRepository {
     }
   }
 
-  
+  // PcParts取得  
   static Future<List<PcParts>> pcParts() async {
     final Database db = await database;
     final List<Map<String, dynamic>> maps = await db.query('pc_parts');
     final List<PcParts> pcParts = [];
     for (var map in maps) {
-      final List<PartsShop> shops = await partsShops(map['id']);
-      final Map<String, String?> specs = await partsSpecs(map['id']);
-      final List<String> images = await fullScaleImages(map['id']);
+      final List<PartsShop> shops = await _partsShops(map['id']);
+      final Map<String, String?> specs = await _partsSpecs(map['id']);
+      final List<String> images = await _fullScaleImages(map['id']);
       pcParts.add(PcParts(
         maker: map['maker'],
         isNew: map['isNew'] == 1 ? true : false,
@@ -165,7 +138,8 @@ class PcPartsRepository {
     return pcParts;
   }
 
-  static Future<List<PartsShop>> partsShops(String id) async {
+  // 店情報取得
+  static Future<List<PartsShop>> _partsShops(String id) async {
     final Database db = await database;
     final List<Map<String, dynamic>> maps = await db.query(
       'parts_shops',
@@ -185,7 +159,8 @@ class PcPartsRepository {
     return shops;
   }
 
-  static Future<Map<String, String?>> partsSpecs(String id) async {
+  // スペック情報取得
+  static Future<Map<String, String?>> _partsSpecs(String id) async {
     final Database db = await database;
     final List<Map<String, dynamic>> maps = await db.query(
       'parts_specs',
@@ -199,7 +174,8 @@ class PcPartsRepository {
     return specs;
   }
 
-  static Future<List<String>> fullScaleImages(String id) async {
+  // 画像情報取得
+  static Future<List<String>> _fullScaleImages(String id) async {
     final Database db = await database;
     final List<Map<String, dynamic>> maps = await db.query(
       'full_scale_images',
