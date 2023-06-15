@@ -1,4 +1,4 @@
-import 'package:custom_pc/database/database_repository.dart';
+import 'package:custom_pc/database/pc_parts_repository.dart';
 import 'package:custom_pc/pages/create_custom_page.dart';
 import 'package:custom_pc/stored_parts_page.dart';
 import 'package:flutter/cupertino.dart';
