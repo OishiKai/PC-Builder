@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_segmented_control/material_segmented_control.dart';
 
+import '../database/database_repository.dart';
 import '../widgets/parts_detail/full_scale_image_slider.dart';
 
 // 販売店 or 詳細スペック の表示状態 (デフォルトは 0)
@@ -179,6 +180,7 @@ class PartsDetailPage extends ConsumerWidget {
             children: [
               ElevatedButton(
                 onPressed: () {
+                  PcPartsRepository.insertPcParts(parts);
                   final category = ref.read(searchingCategoryProvider);
                   ref.read(createCustomNotifierProvider.notifier).setParts(category, parts);
                   int count = 0;

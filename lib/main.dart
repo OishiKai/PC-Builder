@@ -1,4 +1,4 @@
-import 'package:custom_pc/database_repository.dart';
+import 'package:custom_pc/database/database_repository.dart';
 import 'package:custom_pc/pages/create_custom_page.dart';
 import 'package:custom_pc/stored_parts_page.dart';
 import 'package:flutter/cupertino.dart';
@@ -49,10 +49,7 @@ class RootPage extends ConsumerWidget {
                 child: const Text('見積もりを作成する')),
             ElevatedButton(
               onPressed: () async {
-                final list = await DatabaseRepository.pcParts();
-                list.forEach((element) {
-                  print(element.title);
-                });
+                final list = await PcPartsRepository.pcParts();
                 Navigator.push(
                   context,
                   PageRouteBuilder(

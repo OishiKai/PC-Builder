@@ -1,4 +1,4 @@
-import 'package:custom_pc/database_repository.dart';
+import 'package:custom_pc/database/database_repository.dart';
 import 'package:custom_pc/widgets/parts_detail/star_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -38,14 +38,17 @@ class PartsListWidget extends ConsumerWidget {
             for (int i = 0; i < parts.length; i++)
               GestureDetector(
                 onTap: () async {
+                  // プログレスサークル表示
                   showProgressDialog();
-                  DatabaseRepository.insertPcParts(parts[i]);
+
+                  // 詳細画面用のデータ取得
                   if (parts[i].fullScaleImages == null) {
-                    // 詳細画面用のデータ取得
                     final detailParts = await PartsDetailParser.fetch(parts[i]);
                     parts[i] = detailParts;
                     ref.read(pcPartsListNotifierProvider.notifier).updateState(parts);
                   }
+
+                  // プログレスサークル非表示
                   Navigator.pop(context);
                   Navigator.push(context, MaterialPageRoute(builder: (context) => PartsDetailPage(parts[i])));
                 },
