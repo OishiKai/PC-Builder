@@ -1,4 +1,3 @@
-import 'package:custom_pc/database/pc_parts_repository.dart';
 import 'package:custom_pc/widgets/parts_detail/star_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

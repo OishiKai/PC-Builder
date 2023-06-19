@@ -1,3 +1,4 @@
+import 'package:custom_pc/domain/database/custom_repository.dart';
 import 'package:custom_pc/providers/create_custom.dart';
 import 'package:custom_pc/widgets/create_custom/parts_compatibility_widget.dart';
 import 'package:custom_pc/widgets/create_custom/parts_scroll_widget.dart';
@@ -72,8 +73,10 @@ class CreateCustomPage extends ConsumerWidget {
                             const Spacer(),
                             InkWell(
                               onTap: () {
-                                ref.read(createCustomNotifierProvider.notifier).reset();
-                                Navigator.pop(context);
+                                final custom = ref.read(createCustomNotifierProvider);
+                                final c = custom.copyWith(name: 'test');
+                                final s = c.copyWith(totalPrice: c.calculateTotalPrice().toString());
+                                CustomRepository.insertCustom(s);
                               },
                               child: Icon(
                                 Icons.save_as_outlined,

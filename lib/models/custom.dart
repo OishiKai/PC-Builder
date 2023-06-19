@@ -2,13 +2,16 @@ import 'package:custom_pc/models/parts_compatibility.dart';
 import 'package:custom_pc/models/pc_parts.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../domain/compatibility_analyzer.dart';
-
 part 'custom.freezed.dart';
 
 @freezed
 class Custom with _$Custom {
   const factory Custom({
+    // Custom名
+    String? name,
+    // 総額
+    String? totalPrice,
+    // 各パーツ
     PcParts? cpu,
     PcParts? cpuCooler,
     PcParts? memory,
@@ -87,5 +90,47 @@ class Custom with _$Custom {
       case PartsCategory.caseFan:
         return caseFan;
     }
+  }
+
+  Map<PartsCategory, PcParts> align() {
+    Map<PartsCategory, PcParts> alignedParts = {};
+
+    if (cpu != null) {
+      alignedParts[PartsCategory.cpu] = cpu!;
+    }
+
+    if (cpuCooler != null) {
+      alignedParts[PartsCategory.cpuCooler] = cpuCooler!;
+    }
+
+    if (memory != null) {
+      alignedParts[PartsCategory.memory] = memory!;
+    }
+
+    if (motherBoard != null) {
+      alignedParts[PartsCategory.motherBoard] = motherBoard!;
+    }
+
+    if (graphicsCard != null) {
+      alignedParts[PartsCategory.graphicsCard] = graphicsCard!;
+    }
+
+    if (ssd != null) {
+      alignedParts[PartsCategory.ssd] = ssd!;
+    }
+
+    if (pcCase != null) {
+      alignedParts[PartsCategory.pcCase] = pcCase!;
+    }
+
+    if (powerUnit != null) {
+      alignedParts[PartsCategory.powerUnit] = powerUnit!;
+    }
+
+    if (caseFan != null) {
+      alignedParts[PartsCategory.caseFan] = caseFan!;
+    }
+
+    return alignedParts;
   }
 }
