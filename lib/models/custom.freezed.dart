@@ -508,6 +508,32 @@ class _$_Custom implements _Custom {
 
     return alignedParts;
   }
+
+  @override
+  Custom updateCompatibilities() {
+    List<PartsCompatibility> comps = [];
+    // 互換性チェック
+    if (cpu != null && motherBoard != null) {
+      final compatibility = CompatibilityAnalyzer.analyzeCpuAndMotherBoard(cpu: cpu!, motherBoard: motherBoard!);
+      comps.add(compatibility);
+    }
+
+    if (cpuCooler != null && motherBoard != null) {
+      final compatibility = CompatibilityAnalyzer.analyzeCpuCoolerAndMotherBoard(cpuCooler: cpuCooler!, motherBoard: motherBoard!);
+      comps.add(compatibility);
+    }
+
+    if (memory != null && motherBoard != null) {
+      final compatibility = CompatibilityAnalyzer.analyzeMemoryAndMotherBoard(memory: memory!, motherBoard: motherBoard!);
+      comps.add(compatibility);
+    }
+
+    if (motherBoard != null && ssd != null) {
+      final compatibility = CompatibilityAnalyzer.analyzeMotherBoardAndSsd(motherBoard: motherBoard!, ssd: ssd!);
+      comps.add(compatibility);
+    }
+    return copyWith(compatibilities: comps);
+  }
 }
 
 abstract class _Custom implements Custom {

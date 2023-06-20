@@ -2,6 +2,8 @@ import 'package:custom_pc/models/parts_compatibility.dart';
 import 'package:custom_pc/models/pc_parts.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../domain/compatibility_analyzer.dart';
+
 part 'custom.freezed.dart';
 
 @freezed
@@ -25,6 +27,31 @@ class Custom with _$Custom {
     // 互換性のリスト
     List<PartsCompatibility>? compatibilities,
   }) = _Custom;
+
+  Custom updateCompatibilities() {
+    List<PartsCompatibility> comps = [];
+    // 互換性チェック
+    if (cpu != null && motherBoard != null) {
+      final compatibility = CompatibilityAnalyzer.analyzeCpuAndMotherBoard(cpu: cpu!, motherBoard: motherBoard!);
+      comps.add(compatibility);
+    }
+
+    if (cpuCooler != null && motherBoard != null) {
+      final compatibility = CompatibilityAnalyzer.analyzeCpuCoolerAndMotherBoard(cpuCooler: cpuCooler!, motherBoard: motherBoard!);
+      comps.add(compatibility);
+    }
+
+    if (memory != null && motherBoard != null) {
+      final compatibility = CompatibilityAnalyzer.analyzeMemoryAndMotherBoard(memory: memory!, motherBoard: motherBoard!);
+      comps.add(compatibility);
+    }
+
+    if (motherBoard != null && ssd != null) {
+      final compatibility = CompatibilityAnalyzer.analyzeMotherBoardAndSsd(motherBoard: motherBoard!, ssd: ssd!);
+      comps.add(compatibility);
+    }
+    return copyWith(compatibilities: comps);
+  }
 
   int parsePrice(String price) {
     final normalizedPrice = price.trim().replaceAll('¥', '').replaceAll(',', '');
