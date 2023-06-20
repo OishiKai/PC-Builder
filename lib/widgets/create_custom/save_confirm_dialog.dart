@@ -99,7 +99,7 @@ class _SaveConfirmDialogState extends ConsumerState<SaveConfirmDialog> {
               TextField(
                 onChanged: _handleText,
                 maxLines: 1,
-                maxLength: 20,
+                maxLength: 15,
                 cursorColor: mainColor,
                 style: const TextStyle(color: Colors.black),
                 decoration: const InputDecoration(
