@@ -96,7 +96,6 @@ class PcPartsRepository {
     final List<PcParts> pcParts = [];
     for (var map in maps) {
       // 店、スペック、画像情報取得
-      print(map);
       final List<PartsShop> shops = await _selectPartsShopsById(map['id']);
       final Map<String, String?> specs = await _partsSpecs(map['id']);
       final List<String> images = await _selectFullScaleImagesById(map['id']);

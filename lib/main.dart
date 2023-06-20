@@ -1,3 +1,4 @@
+import 'package:custom_pc/domain/database/custom_repository.dart';
 import 'package:custom_pc/pages/create_custom_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -45,7 +46,17 @@ class RootPage extends ConsumerWidget {
                   );
                 },
                 child: const Text('見積もりを作成する')),
-            ElevatedButton(onPressed: () async {}, child: const Text('保存済みカスタム')),
+            ElevatedButton(
+                onPressed: () async {
+                  final storedCustoms = await CustomRepository.getAllCustoms();
+                  if (storedCustoms != null) {
+                    print(storedCustoms.length);
+                    storedCustoms.forEach((element) {
+                      print(element.name);
+                    });
+                  }
+                },
+                child: const Text('保存済みカスタム')),
           ],
         ),
       ),

@@ -24,8 +24,8 @@ class CustomRepository {
 
     final map = {
       'id': customId,
-      'name': custom.name ?? 'てすと',
-      'price': custom.totalPrice,
+      'name': custom.name,
+      'price': custom.calculateTotalPrice(),
       'cpu_id': await partsIdMap[PartsCategory.cpu],
       'cpu_cooler_id': await partsIdMap[PartsCategory.cpuCooler],
       'memory_id': await partsIdMap[PartsCategory.memory],
@@ -64,7 +64,7 @@ class CustomRepository {
       final pcCase = await PcPartsRepository.selectPcPartsById(custom['pc_case_id'] as int?);
       final powerUnit = await PcPartsRepository.selectPcPartsById(custom['power_unit_id'] as int?);
       final caseFan = await PcPartsRepository.selectPcPartsById(custom['case_fan_id'] as int?);
-      print(cpu == null);
+
       customList.add(Custom(
         name: name,
         totalPrice: price,

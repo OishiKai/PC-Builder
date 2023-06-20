@@ -1,4 +1,3 @@
-import 'package:custom_pc/domain/database/custom_repository.dart';
 import 'package:custom_pc/providers/create_custom.dart';
 import 'package:custom_pc/widgets/create_custom/parts_compatibility_widget.dart';
 import 'package:custom_pc/widgets/create_custom/parts_scroll_widget.dart';
@@ -7,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../config/size_config.dart';
+import '../widgets/create_custom/save_confirm_dialog.dart';
 
 class CreateCustomPage extends ConsumerWidget {
   const CreateCustomPage({Key? key}) : super(key: key);
@@ -73,10 +73,11 @@ class CreateCustomPage extends ConsumerWidget {
                             const Spacer(),
                             InkWell(
                               onTap: () {
-                                final custom = ref.read(createCustomNotifierProvider);
-                                final c = custom.copyWith(name: 'test');
-                                final s = c.copyWith(totalPrice: c.calculateTotalPrice().toString());
-                                CustomRepository.insertCustom(s);
+                                showDialog(
+                                    context: context,
+                                    builder: (_) {
+                                      return SaveConfirmDialog();
+                                    });
                               },
                               child: Icon(
                                 Icons.save_as_outlined,
