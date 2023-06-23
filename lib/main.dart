@@ -51,13 +51,12 @@ class RootPage extends ConsumerWidget {
                 onPressed: () async {
                   final storedCustoms = await CustomRepository.getAllCustoms();
                   storedCustoms?.forEach((key, value) {
-                    print(key);
-                    print(value);
+                    print('$key: ${value.name}');
                   });
                   Navigator.push(
                     context,
                     PageRouteBuilder(
-                        pageBuilder: (context, animation, secondaryAnimation) => StoredCustomListPage(),
+                        pageBuilder: (context, animation, secondaryAnimation) => StoredCustomTablePage(),
                         transitionsBuilder: (context, animation, secondaryAnimation, child) {
                           return CupertinoPageTransition(primaryRouteAnimation: animation, secondaryRouteAnimation: secondaryAnimation, linearTransition: false, child: child);
                         }),

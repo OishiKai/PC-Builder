@@ -42,14 +42,14 @@ class CustomCellWidget extends StatelessWidget {
                 custom.name!,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
-                style: TextStyle(
+                style: const TextStyle(
                   color: mainColor,
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               width: 8,
             ),
             Column(
@@ -64,7 +64,7 @@ class CustomCellWidget extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  '2023/06/23',
+                  custom.date!,
                   style: TextStyle(
                     color: Colors.grey[700],
                     fontSize: 12,
@@ -73,10 +73,10 @@ class CustomCellWidget extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               width: 8,
             ),
-            Icon(
+            const Icon(
               Icons.arrow_forward_ios_rounded,
               size: 20,
               color: mainColor,

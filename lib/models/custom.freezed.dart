@@ -26,7 +26,8 @@ mixin _$Custom {
   PcParts? get ssd => throw _privateConstructorUsedError;
   PcParts? get pcCase => throw _privateConstructorUsedError;
   PcParts? get powerUnit => throw _privateConstructorUsedError;
-  PcParts? get caseFan => throw _privateConstructorUsedError; // 互換性のリスト
+  PcParts? get caseFan => throw _privateConstructorUsedError; // 保存日
+  String? get date => throw _privateConstructorUsedError; // 互換性のリスト
   List<PartsCompatibility>? get compatibilities => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -37,7 +38,7 @@ mixin _$Custom {
 abstract class $CustomCopyWith<$Res> {
   factory $CustomCopyWith(Custom value, $Res Function(Custom) then) = _$CustomCopyWithImpl<$Res, Custom>;
   @useResult
-  $Res call({String? name, String? totalPrice, PcParts? cpu, PcParts? cpuCooler, PcParts? memory, PcParts? motherBoard, PcParts? graphicsCard, PcParts? ssd, PcParts? pcCase, PcParts? powerUnit, PcParts? caseFan, List<PartsCompatibility>? compatibilities});
+  $Res call({String? name, String? totalPrice, PcParts? cpu, PcParts? cpuCooler, PcParts? memory, PcParts? motherBoard, PcParts? graphicsCard, PcParts? ssd, PcParts? pcCase, PcParts? powerUnit, PcParts? caseFan, String? date, List<PartsCompatibility>? compatibilities});
 
   $PcPartsCopyWith<$Res>? get cpu;
   $PcPartsCopyWith<$Res>? get cpuCooler;
@@ -73,6 +74,7 @@ class _$CustomCopyWithImpl<$Res, $Val extends Custom> implements $CustomCopyWith
     Object? pcCase = freezed,
     Object? powerUnit = freezed,
     Object? caseFan = freezed,
+    Object? date = freezed,
     Object? compatibilities = freezed,
   }) {
     return _then(_value.copyWith(
@@ -120,6 +122,10 @@ class _$CustomCopyWithImpl<$Res, $Val extends Custom> implements $CustomCopyWith
           ? _value.caseFan
           : caseFan // ignore: cast_nullable_to_non_nullable
               as PcParts?,
+      date: freezed == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as String?,
       compatibilities: freezed == compatibilities
           ? _value.compatibilities
           : compatibilities // ignore: cast_nullable_to_non_nullable
@@ -241,7 +247,7 @@ abstract class _$$_CustomCopyWith<$Res> implements $CustomCopyWith<$Res> {
   factory _$$_CustomCopyWith(_$_Custom value, $Res Function(_$_Custom) then) = __$$_CustomCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? name, String? totalPrice, PcParts? cpu, PcParts? cpuCooler, PcParts? memory, PcParts? motherBoard, PcParts? graphicsCard, PcParts? ssd, PcParts? pcCase, PcParts? powerUnit, PcParts? caseFan, List<PartsCompatibility>? compatibilities});
+  $Res call({String? name, String? totalPrice, PcParts? cpu, PcParts? cpuCooler, PcParts? memory, PcParts? motherBoard, PcParts? graphicsCard, PcParts? ssd, PcParts? pcCase, PcParts? powerUnit, PcParts? caseFan, String? date, List<PartsCompatibility>? compatibilities});
 
   @override
   $PcPartsCopyWith<$Res>? get cpu;
@@ -281,6 +287,7 @@ class __$$_CustomCopyWithImpl<$Res> extends _$CustomCopyWithImpl<$Res, _$_Custom
     Object? pcCase = freezed,
     Object? powerUnit = freezed,
     Object? caseFan = freezed,
+    Object? date = freezed,
     Object? compatibilities = freezed,
   }) {
     return _then(_$_Custom(
@@ -328,6 +335,10 @@ class __$$_CustomCopyWithImpl<$Res> extends _$CustomCopyWithImpl<$Res, _$_Custom
           ? _value.caseFan
           : caseFan // ignore: cast_nullable_to_non_nullable
               as PcParts?,
+      date: freezed == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as String?,
       compatibilities: freezed == compatibilities
           ? _value._compatibilities
           : compatibilities // ignore: cast_nullable_to_non_nullable
@@ -339,7 +350,7 @@ class __$$_CustomCopyWithImpl<$Res> extends _$CustomCopyWithImpl<$Res, _$_Custom
 /// @nodoc
 
 class _$_Custom implements _Custom {
-  const _$_Custom({this.name, this.totalPrice, this.cpu, this.cpuCooler, this.memory, this.motherBoard, this.graphicsCard, this.ssd, this.pcCase, this.powerUnit, this.caseFan, final List<PartsCompatibility>? compatibilities}) : _compatibilities = compatibilities;
+  const _$_Custom({this.name, this.totalPrice, this.cpu, this.cpuCooler, this.memory, this.motherBoard, this.graphicsCard, this.ssd, this.pcCase, this.powerUnit, this.caseFan, this.date, final List<PartsCompatibility>? compatibilities}) : _compatibilities = compatibilities;
 
 // Custom名
   @override
@@ -366,6 +377,9 @@ class _$_Custom implements _Custom {
   final PcParts? powerUnit;
   @override
   final PcParts? caseFan;
+// 保存日
+  @override
+  final String? date;
 // 互換性のリスト
   final List<PartsCompatibility>? _compatibilities;
 // 互換性のリスト
@@ -380,21 +394,64 @@ class _$_Custom implements _Custom {
 
   @override
   String toString() {
-    return 'Custom(name: $name, totalPrice: $totalPrice, cpu: $cpu, cpuCooler: $cpuCooler, memory: $memory, motherBoard: $motherBoard, graphicsCard: $graphicsCard, ssd: $ssd, pcCase: $pcCase, powerUnit: $powerUnit, caseFan: $caseFan, compatibilities: $compatibilities)';
+    return 'Custom(name: $name, totalPrice: $totalPrice, cpu: $cpu, cpuCooler: $cpuCooler, memory: $memory, motherBoard: $motherBoard, graphicsCard: $graphicsCard, ssd: $ssd, pcCase: $pcCase, powerUnit: $powerUnit, caseFan: $caseFan, date: $date, compatibilities: $compatibilities)';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other.runtimeType == runtimeType && other is _$_Custom && (identical(other.name, name) || other.name == name) && (identical(other.totalPrice, totalPrice) || other.totalPrice == totalPrice) && (identical(other.cpu, cpu) || other.cpu == cpu) && (identical(other.cpuCooler, cpuCooler) || other.cpuCooler == cpuCooler) && (identical(other.memory, memory) || other.memory == memory) && (identical(other.motherBoard, motherBoard) || other.motherBoard == motherBoard) && (identical(other.graphicsCard, graphicsCard) || other.graphicsCard == graphicsCard) && (identical(other.ssd, ssd) || other.ssd == ssd) && (identical(other.pcCase, pcCase) || other.pcCase == pcCase) && (identical(other.powerUnit, powerUnit) || other.powerUnit == powerUnit) && (identical(other.caseFan, caseFan) || other.caseFan == caseFan) && const DeepCollectionEquality().equals(other._compatibilities, _compatibilities));
+    return identical(this, other) || (other.runtimeType == runtimeType && other is _$_Custom && (identical(other.name, name) || other.name == name) && (identical(other.totalPrice, totalPrice) || other.totalPrice == totalPrice) && (identical(other.cpu, cpu) || other.cpu == cpu) && (identical(other.cpuCooler, cpuCooler) || other.cpuCooler == cpuCooler) && (identical(other.memory, memory) || other.memory == memory) && (identical(other.motherBoard, motherBoard) || other.motherBoard == motherBoard) && (identical(other.graphicsCard, graphicsCard) || other.graphicsCard == graphicsCard) && (identical(other.ssd, ssd) || other.ssd == ssd) && (identical(other.pcCase, pcCase) || other.pcCase == pcCase) && (identical(other.powerUnit, powerUnit) || other.powerUnit == powerUnit) && (identical(other.caseFan, caseFan) || other.caseFan == caseFan) && (identical(other.date, date) || other.date == date) && const DeepCollectionEquality().equals(other._compatibilities, _compatibilities));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, name, totalPrice, cpu, cpuCooler, memory, motherBoard, graphicsCard, ssd, pcCase, powerUnit, caseFan, const DeepCollectionEquality().hash(_compatibilities));
+  int get hashCode => Object.hash(runtimeType, name, totalPrice, cpu, cpuCooler, memory, motherBoard, graphicsCard, ssd, pcCase, powerUnit, caseFan, date, const DeepCollectionEquality().hash(_compatibilities));
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$_CustomCopyWith<_$_Custom> get copyWith => __$$_CustomCopyWithImpl<_$_Custom>(this, _$identity);
+
+  @override
+  Map<PartsCategory, PcParts> align() {
+    Map<PartsCategory, PcParts> alignedParts = {};
+
+    if (cpu != null) {
+      alignedParts[PartsCategory.cpu] = cpu!;
+    }
+
+    if (cpuCooler != null) {
+      alignedParts[PartsCategory.cpuCooler] = cpuCooler!;
+    }
+
+    if (memory != null) {
+      alignedParts[PartsCategory.memory] = memory!;
+    }
+
+    if (motherBoard != null) {
+      alignedParts[PartsCategory.motherBoard] = motherBoard!;
+    }
+
+    if (graphicsCard != null) {
+      alignedParts[PartsCategory.graphicsCard] = graphicsCard!;
+    }
+
+    if (ssd != null) {
+      alignedParts[PartsCategory.ssd] = ssd!;
+    }
+
+    if (pcCase != null) {
+      alignedParts[PartsCategory.pcCase] = pcCase!;
+    }
+
+    if (powerUnit != null) {
+      alignedParts[PartsCategory.powerUnit] = powerUnit!;
+    }
+
+    if (caseFan != null) {
+      alignedParts[PartsCategory.caseFan] = caseFan!;
+    }
+
+    return alignedParts;
+  }
 
   @override
   int calculateTotalPrice() {
@@ -456,6 +513,14 @@ class _$_Custom implements _Custom {
   }
 
   @override
+  String getRandomPartsImage() {
+    final alignedParts = align();
+    final randomNum = math.Random().nextInt(alignedParts.length);
+    final randomParts = alignedParts.values.toList()[randomNum];
+    return randomParts.image;
+  }
+
+  @override
   bool isEmpty() {
     return cpu == null && cpuCooler == null && memory == null && motherBoard == null && graphicsCard == null && ssd == null && pcCase == null && powerUnit == null && caseFan == null;
   }
@@ -464,49 +529,6 @@ class _$_Custom implements _Custom {
   int parsePrice(String price) {
     final normalizedPrice = price.trim().replaceAll('¥', '').replaceAll(',', '');
     return normalizedPrice.isEmpty ? 0 : int.parse(normalizedPrice);
-  }
-
-  @override
-  Map<PartsCategory, PcParts> align() {
-    Map<PartsCategory, PcParts> alignedParts = {};
-
-    if (cpu != null) {
-      alignedParts[PartsCategory.cpu] = cpu!;
-    }
-
-    if (cpuCooler != null) {
-      alignedParts[PartsCategory.cpuCooler] = cpuCooler!;
-    }
-
-    if (memory != null) {
-      alignedParts[PartsCategory.memory] = memory!;
-    }
-
-    if (motherBoard != null) {
-      alignedParts[PartsCategory.motherBoard] = motherBoard!;
-    }
-
-    if (graphicsCard != null) {
-      alignedParts[PartsCategory.graphicsCard] = graphicsCard!;
-    }
-
-    if (ssd != null) {
-      alignedParts[PartsCategory.ssd] = ssd!;
-    }
-
-    if (pcCase != null) {
-      alignedParts[PartsCategory.pcCase] = pcCase!;
-    }
-
-    if (powerUnit != null) {
-      alignedParts[PartsCategory.powerUnit] = powerUnit!;
-    }
-
-    if (caseFan != null) {
-      alignedParts[PartsCategory.caseFan] = caseFan!;
-    }
-
-    return alignedParts;
   }
 
   @override
@@ -534,18 +556,10 @@ class _$_Custom implements _Custom {
     }
     return copyWith(compatibilities: comps);
   }
-
-  @override
-  String getRandomPartsImage() {
-    final alignedParts = align();
-    final randomNum = math.Random().nextInt(alignedParts.length);
-    final randomParts = alignedParts.values.toList()[randomNum];
-    return randomParts.image;
-  }
 }
 
 abstract class _Custom implements Custom {
-  const factory _Custom({final String? name, final String? totalPrice, final PcParts? cpu, final PcParts? cpuCooler, final PcParts? memory, final PcParts? motherBoard, final PcParts? graphicsCard, final PcParts? ssd, final PcParts? pcCase, final PcParts? powerUnit, final PcParts? caseFan, final List<PartsCompatibility>? compatibilities}) = _$_Custom;
+  const factory _Custom({final String? name, final String? totalPrice, final PcParts? cpu, final PcParts? cpuCooler, final PcParts? memory, final PcParts? motherBoard, final PcParts? graphicsCard, final PcParts? ssd, final PcParts? pcCase, final PcParts? powerUnit, final PcParts? caseFan, final String? date, final List<PartsCompatibility>? compatibilities}) = _$_Custom;
 
   @override // Custom名
   String? get name;
@@ -569,6 +583,8 @@ abstract class _Custom implements Custom {
   PcParts? get powerUnit;
   @override
   PcParts? get caseFan;
+  @override // 保存日
+  String? get date;
   @override // 互換性のリスト
   List<PartsCompatibility>? get compatibilities;
   @override

@@ -21,7 +21,9 @@ class DataStoreUseCase {
         ssd_id INTEGER,
         pc_case_id INTEGER,
         power_unit_id INTEGER,
-        case_fan_id INTEGER)''',
+        case_fan_id INTEGER,
+        date TEXT NOT NULL
+        )''',
       );
       // パーツテーブル
       db.execute(

@@ -35,6 +35,7 @@ class CustomRepository {
       'pc_case_id': await partsIdMap[PartsCategory.pcCase],
       'power_unit_id': await partsIdMap[PartsCategory.powerUnit],
       'case_fan_id': await partsIdMap[PartsCategory.caseFan],
+      'date': '${DateTime.now().year}/${DateTime.now().month}/${DateTime.now().day}',
     };
     // カスタム情報を保存
     return db.insert(
@@ -55,6 +56,7 @@ class CustomRepository {
       final id = custom['id'] as String;
       final name = custom['name'] as String;
       final price = custom['price'] as String;
+      final date = custom['date'] as String;
 
       final cpu = await PcPartsRepository.selectPcPartsById(custom['cpu_id'] as int?);
       final cpuCooler = await PcPartsRepository.selectPcPartsById(custom['cpu_cooler_id'] as int?);
@@ -78,6 +80,7 @@ class CustomRepository {
         pcCase: pcCase,
         powerUnit: powerUnit,
         caseFan: caseFan,
+        date: date,
       );
     }
     return customList;

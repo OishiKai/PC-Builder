@@ -2,8 +2,8 @@ import 'package:custom_pc/config/size_config.dart';
 import 'package:custom_pc/widgets/stored_custom_list/stored_customs_table_widget.dart';
 import 'package:flutter/material.dart';
 
-class StoredCustomListPage extends StatelessWidget {
-  const StoredCustomListPage({super.key});
+class StoredCustomTablePage extends StatelessWidget {
+  const StoredCustomTablePage({super.key});
 
   @override
   Widget build(BuildContext context) {

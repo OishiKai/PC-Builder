@@ -26,6 +26,9 @@ class Custom with _$Custom {
     PcParts? powerUnit,
     PcParts? caseFan,
 
+    // 保存日
+    String? date,
+
     // 互換性のリスト
     List<PartsCompatibility>? compatibilities,
   }) = _Custom;
