@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:custom_pc/models/parts_compatibility.dart';
 import 'package:custom_pc/models/pc_parts.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -159,5 +161,12 @@ class Custom with _$Custom {
     }
 
     return alignedParts;
+  }
+
+  String getRandomPartsImage() {
+    final alignedParts = align();
+    final randomNum = math.Random().nextInt(alignedParts.length);
+    final randomParts = alignedParts.values.toList()[randomNum];
+    return randomParts.image;
   }
 }

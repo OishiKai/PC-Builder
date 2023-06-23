@@ -1,9 +1,11 @@
 import 'package:custom_pc/config/size_config.dart';
 import 'package:flutter/material.dart';
 
-class CustomCellWidget extends StatelessWidget {
-  const CustomCellWidget({super.key});
+import '../../models/custom.dart';
 
+class CustomCellWidget extends StatelessWidget {
+  const CustomCellWidget(this.custom, {super.key});
+  final Custom custom;
   @override
   Widget build(BuildContext context) {
     const mainColor = Color.fromRGBO(60, 130, 80, 1);
@@ -28,15 +30,16 @@ class CustomCellWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Image.network(
-              'https://www.d-rise.jp/images/item/p000000818179_1.jpg',
+              custom.getRandomPartsImage(),
               width: SizeConfig.blockSizeHorizontal * 14,
+              height: SizeConfig.blockSizeHorizontal * 14,
             ),
             const SizedBox(
               width: 8,
             ),
             Expanded(
               child: Text(
-                'https://www.d-rise.jp/images/item/p000000818179_1.jpg',
+                custom.name!,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
@@ -53,7 +56,7 @@ class CustomCellWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
-                  '¥0,000,000',
+                  formatPrice(custom.calculateTotalPrice()),
                   style: TextStyle(
                     color: Colors.grey[700],
                     fontSize: 16,
@@ -82,5 +85,21 @@ class CustomCellWidget extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String formatPrice(int value) {
+    final String stringValue = value.toString();
+    final StringBuffer buffer = StringBuffer();
+
+    buffer.write('¥');
+
+    for (int i = 0; i < stringValue.length; i++) {
+      if (i > 0 && (stringValue.length - i) % 3 == 0) {
+        buffer.write(',');
+      }
+      buffer.write(stringValue[i]);
+    }
+
+    return buffer.toString();
   }
 }

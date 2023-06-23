@@ -1,5 +1,5 @@
 import 'package:custom_pc/config/size_config.dart';
-import 'package:custom_pc/widgets/stored_custom_list/custom_cell.dart';
+import 'package:custom_pc/widgets/stored_custom_list/stored_customs_table_widget.dart';
 import 'package:flutter/material.dart';
 
 class StoredCustomListPage extends StatelessWidget {
@@ -66,23 +66,7 @@ class StoredCustomListPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 8),
-            Container(
-              padding: const EdgeInsets.only(top: 16),
-              height: SizeConfig.blockSizeVertical * 78,
-              decoration: BoxDecoration(
-                color: const Color(0xFFEDECF2),
-                borderRadius: BorderRadius.circular(40),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.only(top: 8, left: 8, right: 8),
-                child: ListView(
-                  padding: EdgeInsets.zero,
-                  children: [
-                    for (int i = 0; i < 30; i++) CustomCellWidget(),
-                  ],
-                ),
-              ),
-            ),
+            StoredCustomsListWidget(),
           ],
         ),
       ),

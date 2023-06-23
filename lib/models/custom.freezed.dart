@@ -534,6 +534,14 @@ class _$_Custom implements _Custom {
     }
     return copyWith(compatibilities: comps);
   }
+
+  @override
+  String getRandomPartsImage() {
+    final alignedParts = align();
+    final randomNum = math.Random().nextInt(alignedParts.length);
+    final randomParts = alignedParts.values.toList()[randomNum];
+    return randomParts.image;
+  }
 }
 
 abstract class _Custom implements Custom {
