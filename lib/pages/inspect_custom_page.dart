@@ -1,0 +1,70 @@
+import 'package:custom_pc/config/size_config.dart';
+import 'package:flutter/material.dart';
+
+class InspectCustomPage extends StatelessWidget {
+  const InspectCustomPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    SizeConfig().init(context);
+    const mainColor = Color.fromRGBO(60, 130, 80, 1);
+    return Scaffold(
+        backgroundColor: const Color(0xFFEDECF2),
+        body: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            Padding(
+              padding: EdgeInsets.only(top: SizeConfig.blockSizeHorizontal * 16, left: 16, right: 16),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  InkWell(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Icon(
+                      Icons.arrow_back_ios_new_rounded,
+                      size: 30,
+                      color: mainColor,
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 12,
+                  ),
+                  Expanded(
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: const Text(
+                        'タイトルなし',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          color: mainColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      print('edit custom name!!');
+                    },
+                    child: const Icon(
+                      Icons.edit,
+                      size: 30,
+                      color: mainColor,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: SizeConfig.blockSizeHorizontal * 4,
+            ),
+          ],
+        ));
+  }
+}
