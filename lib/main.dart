@@ -60,7 +60,7 @@ class RootPage extends ConsumerWidget {
                   Navigator.push(
                     context,
                     PageRouteBuilder(
-                        pageBuilder: (context, animation, secondaryAnimation) => const StoredCustomListPage(),
+                        pageBuilder: (context, animation, secondaryAnimation) => StoredCustomListPage(),
                         transitionsBuilder: (context, animation, secondaryAnimation, child) {
                           return CupertinoPageTransition(primaryRouteAnimation: animation, secondaryRouteAnimation: secondaryAnimation, linearTransition: false, child: child);
                         }),
