@@ -95,12 +95,12 @@ class _SearchParameterModalState extends ConsumerState<SearchParameterModal> {
                 children: <Widget>[
                   for (int i = 0; i < alignParams.length; i++)
                     Padding(
-                      padding: const EdgeInsets.only(left: 16, top: 8, right: 16),
+                      padding: const EdgeInsets.only(left: 8, top: 8, right: 8),
                       child: Container(
                         padding: EdgeInsets.all(4),
                         decoration: BoxDecoration(
                           color: widget._subColor,
-                          borderRadius: BorderRadius.circular(25),
+                          borderRadius: BorderRadius.circular(10),
                         ),
                         child: ListView(
                           children: [

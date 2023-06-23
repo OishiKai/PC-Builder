@@ -14,7 +14,7 @@ class SaveConfirmDialog extends ConsumerStatefulWidget {
 }
 
 class _SaveConfirmDialogState extends ConsumerState<SaveConfirmDialog> {
-  String _customName = 'ss';
+  String _customName = 'タイトルなし';
 
   void _handleText(String e) {
     setState(() {

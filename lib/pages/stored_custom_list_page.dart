@@ -1,6 +1,9 @@
 import 'package:custom_pc/config/size_config.dart';
 import 'package:custom_pc/widgets/stored_custom_list/stored_customs_table_widget.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import 'create_custom_page.dart';
 
 class StoredCustomTablePage extends StatelessWidget {
   const StoredCustomTablePage({super.key});
@@ -18,6 +21,7 @@ class StoredCustomTablePage extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   InkWell(
                     onTap: () {
@@ -66,7 +70,7 @@ class StoredCustomTablePage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 8),
-            StoredCustomsListWidget(),
+            const StoredCustomsListWidget(),
           ],
         ),
       ),
@@ -74,7 +78,14 @@ class StoredCustomTablePage extends StatelessWidget {
         width: SizeConfig.blockSizeHorizontal * 42,
         child: FloatingActionButton(
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.push(
+              context,
+              PageRouteBuilder(
+                  pageBuilder: (context, animation, secondaryAnimation) => const CreateCustomPage(),
+                  transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                    return CupertinoPageTransition(primaryRouteAnimation: animation, secondaryRouteAnimation: secondaryAnimation, linearTransition: false, child: child);
+                  }),
+            );
           },
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15),
