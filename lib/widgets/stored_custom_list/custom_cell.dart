@@ -9,7 +9,7 @@ class CustomCellWidget extends StatelessWidget {
     const mainColor = Color.fromRGBO(60, 130, 80, 1);
     SizeConfig().init(context);
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 2),
+      padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 2),
       child: Container(
         padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(

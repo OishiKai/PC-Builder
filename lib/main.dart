@@ -50,13 +50,10 @@ class RootPage extends ConsumerWidget {
             ElevatedButton(
                 onPressed: () async {
                   final storedCustoms = await CustomRepository.getAllCustoms();
-                  if (storedCustoms != null) {
-                    print(storedCustoms.length);
-                    storedCustoms.forEach((element) {
-                      print(element.name);
-                    });
-                  }
-
+                  storedCustoms?.forEach((key, value) {
+                    print(key);
+                    print(value);
+                  });
                   Navigator.push(
                     context,
                     PageRouteBuilder(

@@ -45,13 +45,14 @@ class CustomRepository {
   }
 
   // Custom取得
-  static Future<List<Custom>?> getAllCustoms() async {
+  static Future<Map<String, Custom>> getAllCustoms() async {
     final db = await DataStoreUseCase.database;
     final stored = await db.query('custom');
-    if (stored.isEmpty) return null;
+    if (stored.isEmpty) return {};
 
-    final List<Custom> customList = [];
+    final Map<String, Custom> customList = {};
     for (var custom in stored) {
+      final id = custom['id'] as String;
       final name = custom['name'] as String;
       final price = custom['price'] as String;
 
@@ -65,7 +66,7 @@ class CustomRepository {
       final powerUnit = await PcPartsRepository.selectPcPartsById(custom['power_unit_id'] as int?);
       final caseFan = await PcPartsRepository.selectPcPartsById(custom['case_fan_id'] as int?);
 
-      customList.add(Custom(
+      customList[id] = Custom(
         name: name,
         totalPrice: price,
         cpu: cpu,
@@ -77,7 +78,7 @@ class CustomRepository {
         pcCase: pcCase,
         powerUnit: powerUnit,
         caseFan: caseFan,
-      ));
+      );
     }
     return customList;
   }
