@@ -18,8 +18,9 @@ final detailPageProvider = StateProvider<int>((ref) {
 });
 
 class PartsDetailPage extends ConsumerWidget {
-  PartsDetailPage(this.parts, {Key? key}) : super(key: key);
+  PartsDetailPage(this.parts, this.isEditing, {super.key});
   final PcParts parts;
+  final bool isEditing;
   final Map<int, Widget> _children = {
     0: const Text('販売店'),
     1: const Text("　詳細スペック  　"),
@@ -173,7 +174,7 @@ class PartsDetailPage extends ConsumerWidget {
       bottomNavigationBar: BottomAppBar(
         child: Container(
           padding: const EdgeInsets.only(top: 8, right: 20, left: 20),
-          height: SizeConfig.blockSizeVertical * 8,
+          height: isEditing ? SizeConfig.blockSizeVertical * 8 : 0,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -191,7 +192,7 @@ class PartsDetailPage extends ConsumerWidget {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(40),
                   ),
-                  primary: Color.fromRGBO(60, 130, 80, 1),
+                  primary: const Color.fromRGBO(60, 130, 80, 1),
                 ),
                 child: Row(
                   children: const [

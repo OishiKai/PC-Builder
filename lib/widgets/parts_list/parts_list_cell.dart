@@ -49,7 +49,7 @@ class PartsListWidget extends ConsumerWidget {
 
                   // プログレスサークル非表示
                   Navigator.pop(context);
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => PartsDetailPage(parts[i])));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => PartsDetailPage(parts[i], true)));
                 },
                 child: Column(
                   children: [
