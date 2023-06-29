@@ -10,7 +10,10 @@ class StoredCustomsListWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    //
     final storedCustoms = ref.watch(storedCustomsNotifierProvider);
+    //ref.read(storedCustomsNotifierProvider.notifier).refresh();
+
     SizeConfig().init(context);
     return storedCustoms.when(
       data: (data) {

@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../domain/database/custom_repository.dart';
 import '../../providers/create_custom.dart';
+import '../../providers/stored_customs.dart';
 
 class SaveConfirmDialog extends ConsumerStatefulWidget {
   SaveConfirmDialog({Key? key}) : super(key: key);
@@ -140,8 +141,10 @@ class _SaveConfirmDialogState extends ConsumerState<SaveConfirmDialog> {
                       final namedCustom = custom.copyWith(name: _customName);
                       CustomRepository.insertCustom(namedCustom);
                       ref.read(createCustomNotifierProvider.notifier).reset();
-                      int count = 0;
-                      Navigator.popUntil(context, (_) => count++ >= 2);
+                      ref.read(storedCustomsNotifierProvider.notifier).refresh();
+                      // int count = 0;
+                      // Navigator.popUntil(context, (_) => count++ >= 2);
+                      Navigator.popUntil(context, (route) => route.isFirst);
                     },
                     child: const Padding(
                       padding: EdgeInsets.symmetric(horizontal: 20),

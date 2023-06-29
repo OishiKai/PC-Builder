@@ -1,5 +1,8 @@
 import 'package:custom_pc/config/size_config.dart';
+import 'package:custom_pc/widgets/inspect_custom/summary_widget.dart';
 import 'package:flutter/material.dart';
+
+import '../widgets/inspect_custom/parts_inspect_widget.dart';
 
 class InspectCustomPage extends StatelessWidget {
   const InspectCustomPage({super.key});
@@ -58,12 +61,27 @@ class InspectCustomPage extends StatelessWidget {
                       color: mainColor,
                     ),
                   ),
+                  SizedBox(
+                    width: 4,
+                  ),
+                  InkWell(
+                    onTap: () {
+                      print('edit custom name!!');
+                    },
+                    child: const Icon(
+                      Icons.delete,
+                      size: 30,
+                      color: mainColor,
+                    ),
+                  ),
                 ],
               ),
             ),
             SizedBox(
               height: SizeConfig.blockSizeHorizontal * 4,
             ),
+            const SummaryWidget(),
+            PartsInspectWidget(),
           ],
         ));
   }

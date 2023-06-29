@@ -1,21 +1,24 @@
 import 'package:custom_pc/config/size_config.dart';
 import 'package:custom_pc/pages/inspect_custom_page.dart';
+import 'package:custom_pc/providers/create_custom.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../models/custom.dart';
 
-class CustomCellWidget extends StatelessWidget {
+class CustomCellWidget extends ConsumerWidget {
   const CustomCellWidget(this.custom, {super.key});
   final Custom custom;
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     const mainColor = Color.fromRGBO(60, 130, 80, 1);
     SizeConfig().init(context);
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 2),
       child: InkWell(
         onTap: () {
+          ref.read(createCustomNotifierProvider.notifier).updateState(custom);
           Navigator.push(
             context,
             PageRouteBuilder(

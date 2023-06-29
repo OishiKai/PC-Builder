@@ -1,6 +1,5 @@
 import 'package:clippy_flutter/arc.dart';
 import 'package:custom_pc/config/size_config.dart';
-import 'package:custom_pc/domain/database/pc_parts_repository.dart';
 import 'package:custom_pc/models/pc_parts.dart';
 import 'package:custom_pc/providers/create_custom.dart';
 import 'package:custom_pc/providers/searching_category.dart';
@@ -180,7 +179,7 @@ class PartsDetailPage extends ConsumerWidget {
             children: [
               ElevatedButton(
                 onPressed: () async {
-                  await PcPartsRepository.insertPcParts(parts, 'custom');
+                  //await PcPartsRepository.insertPcParts(parts, 'custom');
                   final category = ref.read(searchingCategoryProvider);
                   ref.read(createCustomNotifierProvider.notifier).setParts(category, parts);
                   int count = 0;

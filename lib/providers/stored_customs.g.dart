@@ -30,7 +30,7 @@ class _SystemHash {
 }
 
 String _$StoredCustomsNotifierHash() =>
-    r'2454ff19055511409af4e4c2c4408c717fe65cc9';
+    r'4fbbaf84cea9332ea46aea4ecd5fb1a55a704228';
 
 /// See also [StoredCustomsNotifier].
 final storedCustomsNotifierProvider = AutoDisposeAsyncNotifierProvider<
