@@ -85,4 +85,29 @@ class CustomRepository {
     }
     return customList;
   }
+
+  // Custom削除
+  static Future<void> deleteCustom(String id) async {
+    final db = await DataStoreUseCase.database;
+    await db.delete(
+      'custom',
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+  }
+
+  // Custom更新
+  static Future<void> updateCustom(String id, Custom custom) async {
+    final db = await DataStoreUseCase.database;
+    await db.update(
+      'custom',
+      {
+        'name': custom.name,
+        'price': custom.calculateTotalPrice(),
+        'date': '${DateTime.now().year}/${DateTime.now().month}/${DateTime.now().day}',
+      },
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+  }
 }

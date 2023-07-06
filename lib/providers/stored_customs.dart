@@ -20,4 +20,14 @@ class StoredCustomsNotifier extends _$StoredCustomsNotifier {
       return CustomRepository.getAllCustoms();
     });
   }
+
+  void addCustom(Custom custom) async {
+    await CustomRepository.insertCustom(custom);
+    refresh();
+  }
+
+  void deleteCustom(String id) async {
+    await CustomRepository.deleteCustom(id);
+    refresh();
+  }
 }

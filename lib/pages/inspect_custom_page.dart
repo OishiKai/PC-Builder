@@ -1,11 +1,13 @@
 import 'package:custom_pc/config/size_config.dart';
+import 'package:custom_pc/widgets/inspect_custom/delete_custom_dialog.dart';
 import 'package:custom_pc/widgets/inspect_custom/summary_widget.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/inspect_custom/parts_inspect_widget.dart';
 
 class InspectCustomPage extends StatelessWidget {
-  const InspectCustomPage({super.key});
+  const InspectCustomPage(this.customId, {super.key});
+  final String customId;
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +68,11 @@ class InspectCustomPage extends StatelessWidget {
                   ),
                   InkWell(
                     onTap: () {
-                      print('edit custom name!!');
+                      showDialog(
+                          context: context,
+                          builder: (_) {
+                            return DeleteCustomDialog(customId);
+                          });
                     },
                     child: const Icon(
                       Icons.delete,

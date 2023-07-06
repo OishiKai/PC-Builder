@@ -105,8 +105,8 @@ class PartsDetailPage extends ConsumerWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 2),
+                        const Padding(
+                          padding: EdgeInsets.only(bottom: 2),
                           child: StarWidget(45),
                         ),
                         const Expanded(child: SizedBox()),

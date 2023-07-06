@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../domain/database/custom_repository.dart';
 import '../../providers/create_custom.dart';
 import '../../providers/stored_customs.dart';
 
@@ -139,12 +138,11 @@ class _SaveConfirmDialogState extends ConsumerState<SaveConfirmDialog> {
                     ),
                     onPressed: () {
                       final namedCustom = custom.copyWith(name: _customName);
-                      CustomRepository.insertCustom(namedCustom);
                       ref.read(createCustomNotifierProvider.notifier).reset();
-                      ref.read(storedCustomsNotifierProvider.notifier).refresh();
-                      // int count = 0;
-                      // Navigator.popUntil(context, (_) => count++ >= 2);
-                      Navigator.popUntil(context, (route) => route.isFirst);
+                      ref.read(storedCustomsNotifierProvider.notifier).addCustom(namedCustom);
+                      int count = 0;
+                      Navigator.popUntil(context, (_) => count++ >= 2);
+                      // Navigator.popUntil(context, (route) => route.isFirst);
                     },
                     child: const Padding(
                       padding: EdgeInsets.symmetric(horizontal: 20),
