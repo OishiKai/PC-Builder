@@ -1,4 +1,5 @@
 import 'package:custom_pc/config/size_config.dart';
+import 'package:custom_pc/pages/edit_custom_page.dart';
 import 'package:custom_pc/widgets/inspect_custom/delete_custom_dialog.dart';
 import 'package:custom_pc/widgets/inspect_custom/summary_widget.dart';
 import 'package:flutter/material.dart';
@@ -55,7 +56,12 @@ class InspectCustomPage extends StatelessWidget {
                   ),
                   InkWell(
                     onTap: () {
-                      print('edit custom name!!');
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => EditCustomPage(),
+                        ),
+                      );
                     },
                     child: const Icon(
                       Icons.edit,
