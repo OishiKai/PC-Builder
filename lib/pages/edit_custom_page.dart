@@ -1,3 +1,4 @@
+import 'package:custom_pc/widgets/edit_custom/custom_summary_panel_widget.dart';
 import 'package:custom_pc/widgets/edit_custom/parts_list_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
@@ -54,44 +55,7 @@ class EditCustomPage extends StatelessWidget {
               PartsListWidget(),
             ],
           ),
-          panel: Container(
-            color: Colors.white,
-            child: Column(
-              children: [
-                Container(
-                  width: double.infinity,
-                  height: SizeConfig.blockSizeVertical * 3,
-                  alignment: Alignment.topCenter,
-                  child: const Icon(
-                    Icons.menu,
-                    color: const Color.fromRGBO(9, 109, 54, 1),
-                  ),
-                ),
-                const SizedBox(
-                  height: 4,
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: SizeConfig.blockSizeHorizontal * 2),
-                  child: Container(
-                    height: SizeConfig.blockSizeVertical * 10,
-                    width: double.infinity,
-                    alignment: Alignment.topRight,
-                    decoration: BoxDecoration(
-                      //color: const Color.fromRGBO(157, 246, 176, 1),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Text(
-                      '¥0,000,000',
-                      style: TextStyle(
-                        color: const Color.fromRGBO(9, 109, 54, 1),
-                        fontSize: 30,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
+          panel: CustomSummaryPanelWidget(),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: FloatingActionButton(

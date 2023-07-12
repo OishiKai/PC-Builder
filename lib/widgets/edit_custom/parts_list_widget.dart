@@ -18,7 +18,7 @@ class PartsListWidget extends ConsumerWidget {
       custom.align().forEach((key, value) {
         cells.add(PartsListCellWidget(key, value));
       });
-      cells.add(SizedBox(height: SizeConfig.blockSizeVertical * 5));
+      cells.add(SizedBox(height: SizeConfig.blockSizeVertical * 22));
       return cells;
     }
 
