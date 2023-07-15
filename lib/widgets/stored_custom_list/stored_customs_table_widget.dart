@@ -24,6 +24,7 @@ class StoredCustomsListWidget extends ConsumerWidget {
             cells.add(InkWell(
               onTap: () {
                 ref.read(createCustomNotifierProvider.notifier).updateState(value);
+                ref.read(createCustomNotifierProvider.notifier).updateCompatibilities();
                 Navigator.push(
                   context,
                   PageRouteBuilder(
@@ -41,7 +42,7 @@ class StoredCustomsListWidget extends ConsumerWidget {
 
         return Container(
           padding: const EdgeInsets.only(top: 16),
-          height: SizeConfig.blockSizeVertical * 78,
+          height: SizeConfig.blockSizeVertical * 77,
           decoration: BoxDecoration(
             color: const Color(0xFFEDECF2),
             borderRadius: BorderRadius.circular(40),

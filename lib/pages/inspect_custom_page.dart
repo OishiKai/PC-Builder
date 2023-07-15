@@ -19,7 +19,7 @@ class InspectCustomPage extends StatelessWidget {
         body: ListView(
           padding: EdgeInsets.zero,
           children: [
-            Padding(
+            Container(
               padding: EdgeInsets.only(top: SizeConfig.blockSizeHorizontal * 16, left: 16, right: 16),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

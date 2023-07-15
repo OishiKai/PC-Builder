@@ -37,6 +37,7 @@ class CustomRepository {
       'case_fan_id': await partsIdMap[PartsCategory.caseFan],
       'date': '${DateTime.now().year}/${DateTime.now().month}/${DateTime.now().day}',
     };
+    print('${DateTime.now().year}/${DateTime.now().month}/${DateTime.now().day}');
     // カスタム情報を保存
     return db.insert(
       'custom',

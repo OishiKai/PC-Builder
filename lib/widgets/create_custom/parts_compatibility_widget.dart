@@ -94,13 +94,15 @@ class PartsCompatibilityWidget extends StatelessWidget {
       children: [
         Container(
           padding: EdgeInsets.symmetric(horizontal: SizeConfig.blockSizeHorizontal * 4),
+          height: SizeConfig.blockSizeVertical * 12,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
                 decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(20)),
+                //height: SizeConfig.blockSizeVertical * 11,
                 child: Padding(
-                  padding: EdgeInsets.symmetric(vertical: 8, horizontal: SizeConfig.blockSizeHorizontal * 2),
+                  padding: EdgeInsets.symmetric(vertical: SizeConfig.blockSizeVertical * 1, horizontal: SizeConfig.blockSizeHorizontal * 2),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -122,7 +124,7 @@ class PartsCompatibilityWidget extends StatelessWidget {
                           Image.network(
                             compatibility.imageUrls[0],
                             width: SizeConfig.blockSizeHorizontal * 14,
-                            //height: SizeConfig.blockSizeHorizontal * 14,
+                            height: SizeConfig.blockSizeHorizontal * 14,
                             fit: BoxFit.contain,
                           ),
                         ],

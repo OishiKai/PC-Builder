@@ -57,7 +57,7 @@ class _SummaryWidgetState extends ConsumerState<SummaryWidget> {
           if (cells.isNotEmpty)
             CarouselSlider(
               options: CarouselOptions(
-                height: cells[0].length > 2 ? SizeConfig.blockSizeVertical * 42 : SizeConfig.blockSizeVertical * 22,
+                height: cells[0].length > 2 ? SizeConfig.blockSizeHorizontal * 93 : SizeConfig.blockSizeHorizontal * 45,
                 viewportFraction: 1,
                 enableInfiniteScroll: false,
                 onScrolled: (index) {

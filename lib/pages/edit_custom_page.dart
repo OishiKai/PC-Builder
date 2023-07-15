@@ -14,57 +14,59 @@ class EditCustomPage extends StatelessWidget {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Scaffold(
+      backgroundColor: surfaceColor,
+      appBar: AppBar(
+        title: Text(
+          'タイトル',
+          style: TextStyle(
+            color: onSurfaceColor,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        elevation: 0,
+        automaticallyImplyLeading: false,
         backgroundColor: surfaceColor,
-        appBar: AppBar(
-          title: Text(
-            'タイトル',
-            style: TextStyle(
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(
+              Icons.close,
               color: onSurfaceColor,
-              fontWeight: FontWeight.bold,
             ),
           ),
-          elevation: 0,
-          automaticallyImplyLeading: false,
-          backgroundColor: surfaceColor,
-          actions: [
-            IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: Icon(
-                Icons.close,
-                color: onSurfaceColor,
-              ),
-            ),
+        ],
+      ),
+      body: SlidingUpPanel(
+        minHeight: SizeConfig.blockSizeVertical * 15,
+        maxHeight: SizeConfig.blockSizeVertical * 60,
+        //renderPanelSheet: false,
+        border: Border(
+          top: BorderSide(
+            color: mainColor,
+            width: 2.5,
+          ),
+        ),
+        // borderRadius: BorderRadius.all(
+        //   Radius.circular(20),
+        // ),
+        body: ListView(
+          children: const [
+            PartsListWidget(),
           ],
         ),
-        body: SlidingUpPanel(
-          minHeight: 100,
-          // borderRadius: const BorderRadius.only(
-          //     // topLeft: Radius.circular(24),
-          //     // topRight: Radius.circular(24),
-          //     ),
-          border: Border(
-            top: BorderSide(
-              color: mainColor,
-              width: 3,
-            ),
-          ),
-          body: ListView(
-            children: const [
-              PartsListWidget(),
-            ],
-          ),
-          panel: CustomSummaryPanelWidget(),
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {},
-          child: const Icon(
-            Icons.add,
-            color: Colors.white,
-          ),
-          backgroundColor: mainColor,
-        ));
+        panel: CustomSummaryPanelWidget(),
+      ),
+      // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () {},
+      //   child: const Icon(
+      //     Icons.add,
+      //     color: Colors.white,
+      //   ),
+      //   backgroundColor: mainColor,
+      // )
+    );
   }
 }

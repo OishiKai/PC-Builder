@@ -17,8 +17,9 @@ class StoredCustomTablePage extends StatelessWidget {
         padding: EdgeInsets.only(top: SizeConfig.blockSizeVertical * 6),
         child: Column(
           children: [
-            Padding(
+            Container(
               padding: const EdgeInsets.symmetric(horizontal: 16),
+              height: SizeConfig.blockSizeVertical * 8,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -69,7 +70,7 @@ class StoredCustomTablePage extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: SizeConfig.blockSizeVertical * 1),
             const StoredCustomsListWidget(),
           ],
         ),
