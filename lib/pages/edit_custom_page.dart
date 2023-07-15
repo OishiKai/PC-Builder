@@ -1,6 +1,7 @@
 import 'package:custom_pc/providers/create_custom.dart';
 import 'package:custom_pc/widgets/edit_custom/custom_summary_panel_widget.dart';
 import 'package:custom_pc/widgets/edit_custom/parts_list_widget.dart';
+import 'package:custom_pc/widgets/edit_custom/rename_custom_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
@@ -25,6 +26,7 @@ class EditCustomPageState extends ConsumerState<ConsumerStatefulWidget> {
     String customTitle = ref.watch(createCustomNotifierProvider).name!;
     return Scaffold(
       backgroundColor: surfaceColor,
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Row(
           children: [
@@ -40,7 +42,12 @@ class EditCustomPageState extends ConsumerState<ConsumerStatefulWidget> {
             ),
             InkWell(
               onTap: () {
-                Navigator.pop(context);
+                showDialog(
+                  context: context,
+                  builder: (_) {
+                    return RenameCustomDialog(customTitle);
+                  },
+                );
               },
               child: Icon(
                 Icons.edit,

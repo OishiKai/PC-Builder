@@ -59,7 +59,7 @@ class InspectCustomPage extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => EditCustomPage(),
+                          builder: (context) => const EditCustomPage(),
                         ),
                       );
                     },
