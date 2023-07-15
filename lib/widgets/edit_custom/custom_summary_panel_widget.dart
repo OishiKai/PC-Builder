@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../config/size_config.dart';
 import '../../providers/create_custom.dart';
 import '../create_custom/parts_compatibility_widget.dart';
+import 'add_parts_modal_widget.dart';
 
 class CustomSummaryPanelWidget extends ConsumerWidget {
   const CustomSummaryPanelWidget({super.key});
@@ -53,8 +54,14 @@ class CustomSummaryPanelWidget extends ConsumerWidget {
                     backgroundColor: const Color.fromRGBO(60, 130, 80, 1),
                   ),
                   onPressed: () {
-                    // ref.read(createCustomNotifierProvider.notifier).reset();
-                    // Navigator.pop(context);
+                    showModalBottomSheet(
+                      isScrollControlled: true,
+                      backgroundColor: Colors.transparent,
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AddPartsModalWidget();
+                      },
+                    );
                   },
                   child: const Icon(
                     Icons.add,
@@ -112,7 +119,7 @@ class CustomSummaryPanelWidget extends ConsumerWidget {
                 body: Container(
                   height: SizeConfig.blockSizeVertical * 37,
                   decoration: const BoxDecoration(
-                      color: Color(0xFFEDECF2),
+                      color: Colors.white,
                       borderRadius: BorderRadius.only(
                         bottomRight: Radius.circular(45),
                         bottomLeft: Radius.circular(45),
@@ -126,10 +133,10 @@ class CustomSummaryPanelWidget extends ConsumerWidget {
                       if (comps!.isNotEmpty)
                         ListView(
                           children: [
-                            SizedBox(
+                            const SizedBox(
                               height: 12,
                             ),
-                            for (int i = 0; i < comps!.length; i++) PartsCompatibilityWidget(comps[i]),
+                            for (int i = 0; i < comps.length; i++) PartsCompatibilityWidget(comps[i]),
                           ],
                         ),
                       if (comps.isEmpty)

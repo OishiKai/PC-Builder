@@ -69,7 +69,7 @@ class InspectCustomPage extends StatelessWidget {
                       color: mainColor,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 4,
                   ),
                   InkWell(
