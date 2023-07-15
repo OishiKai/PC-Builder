@@ -14,7 +14,7 @@ class RenameCustomDialog extends ConsumerStatefulWidget {
 
 class _RenameCustomDialogState extends ConsumerState<RenameCustomDialog> {
   String customName = '';
-  TextEditingController _controller = TextEditingController();
+  final TextEditingController _controller = TextEditingController();
   @override
   void initState() {
     super.initState();
@@ -26,12 +26,10 @@ class _RenameCustomDialogState extends ConsumerState<RenameCustomDialog> {
     SizeConfig().init(context);
     final custom = ref.watch(createCustomNotifierProvider);
     const mainColor = Color.fromRGBO(60, 130, 80, 1);
-    // String customName = widget.storedName;
     void handleText(String e) {
       setState(() {
         customName = e;
       });
-      print(customName);
     }
 
     _controller.text = customName;
@@ -82,7 +80,7 @@ class _RenameCustomDialogState extends ConsumerState<RenameCustomDialog> {
                 children: [
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.grey,
+                      backgroundColor: Colors.grey,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
                       ),
@@ -94,7 +92,7 @@ class _RenameCustomDialogState extends ConsumerState<RenameCustomDialog> {
                   ),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: mainColor,
+                      backgroundColor: mainColor,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
                       ),
