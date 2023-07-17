@@ -30,4 +30,9 @@ class StoredCustomsNotifier extends _$StoredCustomsNotifier {
     await CustomRepository.deleteCustom(id);
     refresh();
   }
+
+  void updateCustom(Custom custom, String id) async {
+    await CustomRepository.updateCustom(id, custom);
+    refresh();
+  }
 }

@@ -147,6 +147,16 @@ class PcPartsRepository {
     return i;
   }
 
+  // 削除
+  static Future<void> deletePcParts(int id) async {
+    final Database db = await DataStoreUseCase.database;
+    await db.delete(
+      'pc_parts',
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+  }
+
   // 店情報取得
   static Future<List<PartsShop>> _selectPartsShopsById(int id) async {
     final Database db = await DataStoreUseCase.database;

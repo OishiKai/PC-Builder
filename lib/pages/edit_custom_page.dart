@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 import '../config/size_config.dart';
+import '../widgets/edit_custom/update_custom_dialog.dart';
 
 class EditCustomPage extends ConsumerStatefulWidget {
   const EditCustomPage({super.key});
@@ -24,6 +25,7 @@ class EditCustomPageState extends ConsumerState<ConsumerStatefulWidget> {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     String customTitle = ref.watch(createCustomNotifierProvider).name!;
+
     return Scaffold(
       backgroundColor: surfaceColor,
       resizeToAvoidBottomInset: false,
@@ -62,7 +64,12 @@ class EditCustomPageState extends ConsumerState<ConsumerStatefulWidget> {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.pop(context);
+              showDialog(
+                context: context,
+                builder: (_) {
+                  return UpdateCustomDialog();
+                },
+              );
             },
             icon: Icon(
               Icons.check,

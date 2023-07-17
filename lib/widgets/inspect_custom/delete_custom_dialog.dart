@@ -1,14 +1,15 @@
+import 'package:custom_pc/providers/editing_custom_id.dart';
 import 'package:custom_pc/providers/stored_customs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class DeleteCustomDialog extends ConsumerWidget {
-  const DeleteCustomDialog(this.customId, {super.key});
-  final String customId;
+  const DeleteCustomDialog({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     const mainColor = Color.fromRGBO(60, 130, 80, 1);
+    final customId = ref.watch(editingCustomIdNotifierProvider);
     return SimpleDialog(
       //contentPadding: const EdgeInsets.all(0),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),

@@ -98,17 +98,43 @@ class CustomRepository {
   }
 
   // Custom更新
-  static Future<void> updateCustom(String id, Custom custom) async {
+  static Future<void> updateCustom(String customId, Custom custom) async {
     final db = await DataStoreUseCase.database;
+    await db.delete(
+      'pc_parts',
+      where: 'custom_id = ?',
+      whereArgs: [customId],
+    );
+
+    Map<PartsCategory, Future<int>> partsIdMap = {};
+    custom.align().forEach((category, parts) {
+      // 各パーツを保存して、idを保持
+      final partsId = PcPartsRepository.insertPcParts(parts, customId);
+      partsIdMap[category] = partsId;
+    });
+
+    final map = {
+      'id': customId,
+      'name': custom.name,
+      'price': custom.calculateTotalPrice(),
+      'cpu_id': await partsIdMap[PartsCategory.cpu],
+      'cpu_cooler_id': await partsIdMap[PartsCategory.cpuCooler],
+      'memory_id': await partsIdMap[PartsCategory.memory],
+      'mother_board_id': await partsIdMap[PartsCategory.motherBoard],
+      'graphics_card_id': await partsIdMap[PartsCategory.graphicsCard],
+      'ssd_id': await partsIdMap[PartsCategory.ssd],
+      'pc_case_id': await partsIdMap[PartsCategory.pcCase],
+      'power_unit_id': await partsIdMap[PartsCategory.powerUnit],
+      'case_fan_id': await partsIdMap[PartsCategory.caseFan],
+      'date': '${DateTime.now().year}/${DateTime.now().month}/${DateTime.now().day}',
+    };
+    print('${DateTime.now().year}/${DateTime.now().month}/${DateTime.now().day}');
+    // カスタム情報を更新
     await db.update(
       'custom',
-      {
-        'name': custom.name,
-        'price': custom.calculateTotalPrice(),
-        'date': '${DateTime.now().year}/${DateTime.now().month}/${DateTime.now().day}',
-      },
+      map,
       where: 'id = ?',
-      whereArgs: [id],
+      whereArgs: [customId],
     );
   }
 }

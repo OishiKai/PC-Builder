@@ -7,8 +7,7 @@ import 'package:flutter/material.dart';
 import '../widgets/inspect_custom/parts_inspect_widget.dart';
 
 class InspectCustomPage extends StatelessWidget {
-  const InspectCustomPage(this.customId, {super.key});
-  final String customId;
+  const InspectCustomPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +76,7 @@ class InspectCustomPage extends StatelessWidget {
                       showDialog(
                           context: context,
                           builder: (_) {
-                            return DeleteCustomDialog(customId);
+                            return DeleteCustomDialog();
                           });
                     },
                     child: const Icon(

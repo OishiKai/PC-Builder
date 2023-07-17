@@ -1,39 +1,20 @@
-import 'package:custom_pc/config/size_config.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../config/size_config.dart';
 import '../../providers/create_custom.dart';
+import '../../providers/editing_custom_id.dart';
+import '../../providers/stored_customs.dart';
 
-class RenameCustomDialog extends ConsumerStatefulWidget {
-  const RenameCustomDialog(this.storedName, {super.key});
-  final String storedName;
-  @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _RenameCustomDialogState();
-}
-
-class _RenameCustomDialogState extends ConsumerState<RenameCustomDialog> {
-  String customName = '';
-  final TextEditingController _controller = TextEditingController();
-  @override
-  void initState() {
-    super.initState();
-    customName = widget.storedName;
-  }
+class UpdateCustomDialog extends ConsumerWidget {
+  const UpdateCustomDialog({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     SizeConfig().init(context);
     final custom = ref.watch(createCustomNotifierProvider);
+    final customId = ref.watch(editingCustomIdNotifierProvider);
     const mainColor = Color.fromRGBO(60, 130, 80, 1);
-    void handleText(String e) {
-      setState(() {
-        customName = e;
-      });
-    }
-
-    _controller.text = customName;
-    _controller.selection = TextSelection.fromPosition(TextPosition(offset: _controller.text.length));
 
     return SimpleDialog(
       contentPadding: const EdgeInsets.all(0),
@@ -48,30 +29,11 @@ class _RenameCustomDialogState extends ConsumerState<RenameCustomDialog> {
           child: Column(
             children: [
               const Text(
-                'カスタム名を編集',
+                'カスタムを更新する',
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                   color: mainColor,
-                ),
-              ),
-              const SizedBox(height: 20),
-              TextField(
-                onChanged: handleText,
-                maxLines: 1,
-                maxLength: 15,
-                cursorColor: mainColor,
-                style: const TextStyle(color: Colors.black),
-                controller: _controller,
-                decoration: const InputDecoration(
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: mainColor, width: 2),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: mainColor, width: 2),
-                  ),
-                  labelText: 'カスタム名',
-                  labelStyle: TextStyle(color: mainColor),
                 ),
               ),
               const SizedBox(height: 12),
@@ -98,12 +60,13 @@ class _RenameCustomDialogState extends ConsumerState<RenameCustomDialog> {
                       ),
                     ),
                     onPressed: () {
-                      ref.read(createCustomNotifierProvider.notifier).rename(customName);
+                      ref.read(storedCustomsNotifierProvider.notifier).updateCustom(custom, customId);
+                      Navigator.pop(context);
                       Navigator.pop(context);
                     },
                     child: const Padding(
                       padding: EdgeInsets.symmetric(horizontal: 20),
-                      child: Text('変更'),
+                      child: Text('更新'),
                     ),
                   ),
                 ],
