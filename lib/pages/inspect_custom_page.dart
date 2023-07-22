@@ -1,18 +1,39 @@
 import 'package:custom_pc/config/size_config.dart';
 import 'package:custom_pc/pages/edit_custom_page.dart';
+import 'package:custom_pc/providers/editing_custom_id.dart';
+import 'package:custom_pc/providers/stored_customs.dart';
 import 'package:custom_pc/widgets/inspect_custom/delete_custom_dialog.dart';
 import 'package:custom_pc/widgets/inspect_custom/summary_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../models/custom.dart';
+import '../providers/create_custom.dart';
 import '../widgets/inspect_custom/parts_inspect_widget.dart';
 
-class InspectCustomPage extends StatelessWidget {
+class InspectCustomPage extends ConsumerWidget {
   const InspectCustomPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     SizeConfig().init(context);
     const mainColor = Color.fromRGBO(60, 130, 80, 1);
+    final customId = ref.watch(editingCustomIdNotifierProvider);
+    final storedCustomList = ref.watch(storedCustomsNotifierProvider);
+
+    Custom? custom;
+    storedCustomList.when(
+      data: (data) {
+        custom = data[customId]!;
+      },
+      loading: () {
+        return const Center(child: CircularProgressIndicator());
+      },
+      error: (Object error, StackTrace stackTrace) {
+        return const Center(child: CircularProgressIndicator());
+      },
+    );
+
     return Scaffold(
         backgroundColor: const Color(0xFFEDECF2),
         body: ListView(
@@ -41,11 +62,11 @@ class InspectCustomPage extends StatelessWidget {
                       onTap: () {
                         Navigator.pop(context);
                       },
-                      child: const Text(
-                        'タイトルなし',
+                      child: Text(
+                        custom!.name!,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: mainColor,
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
@@ -55,6 +76,9 @@ class InspectCustomPage extends StatelessWidget {
                   ),
                   InkWell(
                     onTap: () {
+                      ref.read(createCustomNotifierProvider.notifier).reset();
+                      ref.read(createCustomNotifierProvider.notifier).updateState(custom!);
+                      ref.read(createCustomNotifierProvider.notifier).updateCompatibilities();
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -91,8 +115,8 @@ class InspectCustomPage extends StatelessWidget {
             SizedBox(
               height: SizeConfig.blockSizeHorizontal * 4,
             ),
-            const SummaryWidget(),
-            PartsInspectWidget(),
+            SummaryWidget(custom!),
+            PartsInspectWidget(custom!),
           ],
         ));
   }

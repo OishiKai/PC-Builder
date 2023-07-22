@@ -1,7 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:custom_pc/config/size_config.dart';
 import 'package:custom_pc/models/pc_parts.dart';
-import 'package:custom_pc/providers/create_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -9,8 +8,8 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../models/custom.dart';
 
 class SummaryWidget extends ConsumerStatefulWidget {
-  const SummaryWidget({super.key});
-
+  const SummaryWidget(this.custom, {super.key});
+  final custom;
   @override
   ConsumerState<SummaryWidget> createState() => _SummaryWidgetState();
 }
@@ -20,11 +19,9 @@ class _SummaryWidgetState extends ConsumerState<SummaryWidget> {
   int activeIndex = 0;
   @override
   Widget build(BuildContext context) {
-    final custom = ref.watch(createCustomNotifierProvider);
     const mainColor = Color.fromRGBO(60, 130, 80, 1);
     SizeConfig().init(context);
-    final cells = summaryCells(custom);
-    //print(cells.length);
+    final cells = summaryCells(widget.custom);
 
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: SizeConfig.blockSizeHorizontal * 5),
@@ -42,7 +39,7 @@ class _SummaryWidgetState extends ConsumerState<SummaryWidget> {
                 ),
               ),
               Text(
-                formatPrice(custom.calculateTotalPrice()),
+                formatPrice(widget.custom.calculateTotalPrice()),
                 style: const TextStyle(
                   fontSize: 26,
                   fontWeight: FontWeight.bold,

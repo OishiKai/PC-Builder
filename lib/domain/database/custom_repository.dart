@@ -100,11 +100,7 @@ class CustomRepository {
   // Custom更新
   static Future<void> updateCustom(String customId, Custom custom) async {
     final db = await DataStoreUseCase.database;
-    await db.delete(
-      'pc_parts',
-      where: 'custom_id = ?',
-      whereArgs: [customId],
-    );
+    deleteIncludeParts(customId);
 
     Map<PartsCategory, Future<int>> partsIdMap = {};
     custom.align().forEach((category, parts) {
@@ -136,5 +132,35 @@ class CustomRepository {
       where: 'id = ?',
       whereArgs: [customId],
     );
+  }
+
+  // Customに含まれるparts_id取得->全パーツ削除
+  static Future<Map<PartsCategory, int?>> deleteIncludeParts(String customId) async {
+    final db = await DataStoreUseCase.database;
+    final stored = await db.query(
+      'custom',
+      where: 'id = ?',
+      whereArgs: [customId],
+    );
+    if (stored.isEmpty) return {};
+
+    final Map<PartsCategory, int?> partsIdMap = {};
+    partsIdMap[PartsCategory.cpu] = stored[0]['cpu_id'] as int?;
+    partsIdMap[PartsCategory.cpuCooler] = stored[0]['cpu_cooler_id'] as int?;
+    partsIdMap[PartsCategory.memory] = stored[0]['memory_id'] as int?;
+    partsIdMap[PartsCategory.motherBoard] = stored[0]['mother_board_id'] as int?;
+    partsIdMap[PartsCategory.graphicsCard] = stored[0]['graphics_card_id'] as int?;
+    partsIdMap[PartsCategory.ssd] = stored[0]['ssd_id'] as int?;
+    partsIdMap[PartsCategory.pcCase] = stored[0]['pc_case_id'] as int?;
+    partsIdMap[PartsCategory.powerUnit] = stored[0]['power_unit_id'] as int?;
+    partsIdMap[PartsCategory.caseFan] = stored[0]['case_fan_id'] as int?;
+
+    // idがnullでない場合はパーツを削除
+    partsIdMap.forEach((category, partsId) async {
+      if (partsId != null) {
+        PcPartsRepository.deletePcParts(partsId);
+      }
+    });
+    return partsIdMap;
   }
 }

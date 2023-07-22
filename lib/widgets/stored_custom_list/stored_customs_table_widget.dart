@@ -1,5 +1,4 @@
 import 'package:custom_pc/config/size_config.dart';
-import 'package:custom_pc/providers/create_custom.dart';
 import 'package:custom_pc/providers/editing_custom_id.dart';
 import 'package:custom_pc/providers/stored_customs.dart';
 import 'package:flutter/cupertino.dart';
@@ -24,8 +23,6 @@ class StoredCustomsListWidget extends ConsumerWidget {
           data.forEach((key, value) {
             cells.add(InkWell(
               onTap: () {
-                ref.read(createCustomNotifierProvider.notifier).updateState(value);
-                ref.read(createCustomNotifierProvider.notifier).updateCompatibilities();
                 ref.read(editingCustomIdNotifierProvider.notifier).setState(key);
                 Navigator.push(
                   context,

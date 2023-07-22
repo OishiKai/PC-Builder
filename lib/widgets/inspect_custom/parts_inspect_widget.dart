@@ -3,15 +3,13 @@ import 'package:custom_pc/widgets/inspect_custom/parts_inspect_cell_widget.dart'
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../providers/create_custom.dart';
-
 class PartsInspectWidget extends ConsumerWidget {
-  const PartsInspectWidget({super.key});
+  const PartsInspectWidget(this.custom, {super.key});
+  final custom;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     SizeConfig().init(context);
-    final custom = ref.watch(createCustomNotifierProvider);
 
     List<Widget> cells() {
       List<Widget> cells = [];
