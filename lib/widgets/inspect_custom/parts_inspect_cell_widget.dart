@@ -13,34 +13,34 @@ class PartsInspectCellWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     const mainColor = Color.fromRGBO(60, 130, 80, 1);
     SizeConfig().init(context);
-    return InkWell(
-      onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => PartsDetailPage(parts, false)));
-      },
-      child: Padding(
-        padding: const EdgeInsets.only(bottom: 16),
-        child: Column(children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              const SizedBox(
-                width: 4,
-              ),
-              Text(
-                category.categoryName,
-                style: const TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.bold,
-                  color: mainColor,
-                ),
-              ),
-              const Icon(
-                Icons.arrow_drop_down,
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 16),
+      child: Column(children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            const SizedBox(
+              width: 4,
+            ),
+            Text(
+              category.categoryName,
+              style: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
                 color: mainColor,
               ),
-            ],
-          ),
-          Container(
+            ),
+            const Icon(
+              Icons.arrow_drop_down,
+              color: mainColor,
+            ),
+          ],
+        ),
+        InkWell(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => PartsDetailPage(parts, false)));
+          },
+          child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 4),
             decoration: BoxDecoration(
               color: Colors.white,
@@ -117,8 +117,8 @@ class PartsInspectCellWidget extends StatelessWidget {
               ],
             ),
           ),
-        ]),
-      ),
+        ),
+      ]),
     );
   }
 }

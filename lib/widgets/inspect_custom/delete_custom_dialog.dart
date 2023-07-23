@@ -15,6 +15,7 @@ class DeleteCustomDialog extends ConsumerWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       title: const Text(
         'カスタムを削除しますか？',
+        textAlign: TextAlign.center,
         style: TextStyle(
           color: mainColor,
           fontWeight: FontWeight.bold,
@@ -22,7 +23,7 @@ class DeleteCustomDialog extends ConsumerWidget {
       ),
       children: [
         Row(
-          mainAxisAlignment: MainAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ElevatedButton(
               onPressed: () {
@@ -55,11 +56,14 @@ class DeleteCustomDialog extends ConsumerWidget {
                   borderRadius: BorderRadius.circular(10),
                 ),
               ),
-              child: const Text(
-                '削除',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
+              child: const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16),
+                child: Text(
+                  '削除',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ),

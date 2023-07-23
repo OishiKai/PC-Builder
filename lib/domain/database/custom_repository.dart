@@ -89,6 +89,7 @@ class CustomRepository {
 
   // Custom削除
   static Future<void> deleteCustom(String id) async {
+    deleteIncludeParts(id);
     final db = await DataStoreUseCase.database;
     await db.delete(
       'custom',

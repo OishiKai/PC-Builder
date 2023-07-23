@@ -24,7 +24,7 @@ class InspectCustomPage extends ConsumerWidget {
     Custom? custom;
     storedCustomList.when(
       data: (data) {
-        custom = data[customId]!;
+        custom = data[customId];
       },
       loading: () {
         return const Center(child: CircularProgressIndicator());
@@ -63,7 +63,7 @@ class InspectCustomPage extends ConsumerWidget {
                         Navigator.pop(context);
                       },
                       child: Text(
-                        custom!.name!,
+                        custom?.name! ?? '',
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(
@@ -115,8 +115,8 @@ class InspectCustomPage extends ConsumerWidget {
             SizedBox(
               height: SizeConfig.blockSizeHorizontal * 4,
             ),
-            SummaryWidget(custom!),
-            PartsInspectWidget(custom!),
+            if (custom != null) SummaryWidget(custom),
+            if (custom != null) PartsInspectWidget(custom!),
           ],
         ));
   }

@@ -40,28 +40,14 @@ class PartsDetailPage extends ConsumerWidget {
             padding: const EdgeInsets.all(16),
             child: Align(
               alignment: Alignment.topLeft,
-              child: Container(
-                decoration: BoxDecoration(
-                  color: const Color(0xFFEDECF2),
-                  borderRadius: BorderRadius.circular(20),
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Colors.grey,
-                      spreadRadius: 1,
-                      blurRadius: 1,
-                      offset: Offset(1, 1),
-                    ),
-                  ],
-                ),
-                child: InkWell(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child: Icon(
-                    Icons.arrow_back,
-                    size: 40,
-                    color: mainColor,
-                  ),
+              child: InkWell(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: Icon(
+                  Icons.arrow_back_ios_new_rounded,
+                  size: 35,
+                  color: mainColor,
                 ),
               ),
             ),

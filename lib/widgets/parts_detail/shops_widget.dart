@@ -10,69 +10,73 @@ class ShopsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        for (int i = 0; i < shops.length; i++)
-          Padding(
-            padding: const EdgeInsets.only(bottom: 8),
-            child: Container(
-              width: double.infinity,
-              height: 70,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(25),
-                border: Border.all(
-                  color: mainColor,
-                  width: 2,
+    return Container(
+      height: 500,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(25),
+      ),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+      child: ListView(
+        children: [
+          for (int i = 0; i < shops.length; i++)
+            Padding(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: Container(
+                width: double.infinity,
+                height: 70,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(25),
                 ),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const SizedBox(
-                    width: 8,
-                  ),
-                  Icon(
-                    Icons.shopping_cart,
-                    color: mainColor,
-                    size: 30,
-                  ),
-                  const SizedBox(
-                    width: 8,
-                  ),
-                  Container(
-                    width: 170,
-                    child: Text(
-                      shops[i].shopName,
-                      softWrap: false,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: mainColor,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const SizedBox(
+                      width: 8,
+                    ),
+                    Icon(
+                      Icons.shopping_cart,
+                      color: mainColor,
+                      size: 30,
+                    ),
+                    const SizedBox(
+                      width: 8,
+                    ),
+                    SizedBox(
+                      //width: 170,
+                      child: FittedBox(
+                        fit: BoxFit.fitWidth,
+                        child: Text(
+                          shops[i].shopName,
+                          softWrap: false,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: mainColor,
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                  const Expanded(child: SizedBox()),
-                  Text(
-                    shops[i].price,
-                    style: const TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.redAccent),
-                  ),
-                  Icon(
-                    Icons.arrow_right,
-                    color: mainColor,
-                    size: 30,
-                  ),
-                ],
+                    const Expanded(child: SizedBox()),
+                    Text(
+                      shops[i].price,
+                      style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.redAccent),
+                    ),
+                    Icon(
+                      Icons.arrow_right,
+                      color: mainColor,
+                      size: 30,
+                    ),
+                  ],
+                ),
               ),
-            ),
-          )
-      ],
+            )
+        ],
+      ),
     );
   }
 }
