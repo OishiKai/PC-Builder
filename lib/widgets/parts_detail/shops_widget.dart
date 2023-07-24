@@ -1,3 +1,4 @@
+import 'package:custom_pc/config/size_config.dart';
 import 'package:flutter/material.dart';
 
 import '../../models/parts_shop.dart';
@@ -10,6 +11,7 @@ class ShopsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return Container(
       height: 500,
       decoration: BoxDecoration(
@@ -23,8 +25,8 @@ class ShopsWidget extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(bottom: 8),
               child: Container(
-                width: double.infinity,
                 height: 70,
+                width: SizeConfig.blockSizeHorizontal * 90,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(25),
@@ -45,26 +47,25 @@ class ShopsWidget extends StatelessWidget {
                       width: 8,
                     ),
                     SizedBox(
-                      //width: 170,
-                      child: FittedBox(
-                        fit: BoxFit.fitWidth,
-                        child: Text(
-                          shops[i].shopName,
-                          softWrap: false,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: mainColor,
-                          ),
+                      //width: SizeConfig.blockSizeHorizontal * 30,
+                      child: Text(
+                        shops[i].shopName,
+                        softWrap: false,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: mainColor,
                         ),
                       ),
                     ),
-                    const Expanded(child: SizedBox()),
+                    const Expanded(
+                      child: SizedBox(),
+                    ),
                     Text(
                       shops[i].price,
-                      style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.redAccent),
+                      style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.redAccent),
                     ),
                     Icon(
                       Icons.arrow_right,

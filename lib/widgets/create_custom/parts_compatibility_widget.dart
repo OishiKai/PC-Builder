@@ -94,7 +94,6 @@ class PartsCompatibilityWidget extends StatelessWidget {
       children: [
         Container(
           padding: EdgeInsets.symmetric(horizontal: SizeConfig.blockSizeHorizontal * 4),
-          height: SizeConfig.blockSizeVertical * 12,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

@@ -121,8 +121,7 @@ class AddPartsModalWidget extends ConsumerWidget {
 
     return Container(
         padding: EdgeInsets.symmetric(horizontal: SizeConfig.blockSizeHorizontal * 5),
-        //color: Colors.white,
-        height: SizeConfig.blockSizeVertical * 70,
+        height: SizeConfig.blockSizeVertical * 80,
         decoration: const BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.only(
@@ -162,7 +161,7 @@ class AddPartsModalWidget extends ConsumerWidget {
           ),
           SizedBox(height: SizeConfig.blockSizeVertical * 2),
           Container(
-            height: SizeConfig.blockSizeVertical * 50,
+            height: 400,
             child: GridView.count(
               mainAxisSpacing: 10,
               crossAxisCount: 3,

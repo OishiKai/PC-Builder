@@ -1,8 +1,6 @@
 import 'package:clippy_flutter/arc.dart';
 import 'package:custom_pc/config/size_config.dart';
 import 'package:custom_pc/models/pc_parts.dart';
-import 'package:custom_pc/providers/create_custom.dart';
-import 'package:custom_pc/providers/searching_category.dart';
 import 'package:custom_pc/widgets/parts_detail/shops_widget.dart';
 import 'package:custom_pc/widgets/parts_detail/specs_widget.dart';
 import 'package:custom_pc/widgets/parts_detail/star_widget.dart';
@@ -157,48 +155,47 @@ class PartsDetailPage extends ConsumerWidget {
           )
         ],
       ),
-      bottomNavigationBar: BottomAppBar(
-        child: Container(
-          padding: const EdgeInsets.only(top: 8, right: 20, left: 20),
-          height: isEditing ? SizeConfig.blockSizeVertical * 8 : 0,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              ElevatedButton(
-                onPressed: () async {
-                  //await PcPartsRepository.insertPcParts(parts, 'custom');
-                  final category = ref.read(searchingCategoryProvider);
-                  ref.read(createCustomNotifierProvider.notifier).setParts(category, parts);
-                  int count = 0;
-                  ref.read(createCustomNotifierProvider.notifier).updateCompatibilities();
-                  Navigator.popUntil(context, (_) => count++ >= 2);
-                },
-                style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.zero,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(40),
-                  ),
-                  primary: const Color.fromRGBO(60, 130, 80, 1),
-                ),
-                child: Row(
-                  children: const [
-                    Spacer(),
-                    Text(
-                      "このパーツを選択する",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                    ),
-                    Spacer(),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
+      // bottomNavigationBar: BottomAppBar(
+      //   child: Container(
+      //     padding: const EdgeInsets.only(top: 8, right: 20, left: 20),
+      //     height: isEditing ? SizeConfig.blockSizeVertical * 10 : 0,
+      //     child: Column(
+      //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      //       children: [
+      //         ElevatedButton(
+      //           onPressed: () async {
+      //             final category = ref.read(searchingCategoryProvider);
+      //             ref.read(createCustomNotifierProvider.notifier).setParts(category, parts);
+      //             int count = 0;
+      //             ref.read(createCustomNotifierProvider.notifier).updateCompatibilities();
+      //             Navigator.popUntil(context, (_) => count++ >= 2);
+      //           },
+      //           style: ElevatedButton.styleFrom(
+      //             padding: EdgeInsets.zero,
+      //             shape: RoundedRectangleBorder(
+      //               borderRadius: BorderRadius.circular(40),
+      //             ),
+      //             primary: const Color.fromRGBO(60, 130, 80, 1),
+      //           ),
+      //           child: Row(
+      //             children: const [
+      //               Spacer(),
+      //               Text(
+      //                 "このパーツを選択する",
+      //                 style: TextStyle(
+      //                   fontSize: 16,
+      //                   fontWeight: FontWeight.bold,
+      //                   color: Colors.white,
+      //                 ),
+      //               ),
+      //               Spacer(),
+      //             ],
+      //           ),
+      //         ),
+      //       ],
+      //     ),
+      //   ),
+      // ),
     );
   }
 }

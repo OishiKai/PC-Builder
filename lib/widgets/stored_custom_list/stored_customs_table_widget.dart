@@ -1,4 +1,5 @@
 import 'package:custom_pc/config/size_config.dart';
+import 'package:custom_pc/providers/detail_page_usage.dart';
 import 'package:custom_pc/providers/editing_custom_id.dart';
 import 'package:custom_pc/providers/stored_customs.dart';
 import 'package:flutter/cupertino.dart';
@@ -24,10 +25,11 @@ class StoredCustomsListWidget extends ConsumerWidget {
             cells.add(InkWell(
               onTap: () {
                 ref.read(editingCustomIdNotifierProvider.notifier).setState(key);
+                ref.read(detailPageUsageNotifierProvider.notifier).switchView();
                 Navigator.push(
                   context,
                   PageRouteBuilder(
-                      pageBuilder: (context, animation, secondaryAnimation) => InspectCustomPage(),
+                      pageBuilder: (context, animation, secondaryAnimation) => const InspectCustomPage(),
                       transitionsBuilder: (context, animation, secondaryAnimation, child) {
                         return CupertinoPageTransition(primaryRouteAnimation: animation, secondaryRouteAnimation: secondaryAnimation, linearTransition: false, child: child);
                       }),
@@ -36,22 +38,21 @@ class StoredCustomsListWidget extends ConsumerWidget {
               child: CustomCellWidget(value),
             ));
           });
+          cells.add(SizedBox(height: SizeConfig.blockSizeVertical * 15));
           return cells;
         }
 
         return Container(
-          padding: const EdgeInsets.only(top: 16),
-          height: SizeConfig.blockSizeVertical * 77,
-          decoration: BoxDecoration(
-            color: const Color(0xFFEDECF2),
-            borderRadius: BorderRadius.circular(40),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.only(top: 8, left: 8, right: 8),
-            child: ListView(
-              padding: EdgeInsets.zero,
-              children: cells(),
+          padding: const EdgeInsets.only(top: 16, left: 8, right: 8),
+          decoration: const BoxDecoration(
+            color: Color(0xFFEDECF2),
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(20),
+              topRight: Radius.circular(20),
             ),
+          ),
+          child: ListView(
+            children: cells(),
           ),
         );
       },

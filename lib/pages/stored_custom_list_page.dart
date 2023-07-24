@@ -13,67 +13,47 @@ class StoredCustomTablePage extends StatelessWidget {
     const mainColor = Color.fromRGBO(60, 130, 80, 1);
     SizeConfig().init(context);
     return Scaffold(
-      body: Container(
-        padding: EdgeInsets.only(top: SizeConfig.blockSizeVertical * 6),
-        child: Column(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        automaticallyImplyLeading: true,
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              height: SizeConfig.blockSizeVertical * 8,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  InkWell(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: const Icon(
-                      Icons.tune_sharp,
-                      size: 35,
-                      color: mainColor,
-                    ),
-                  ),
-                  const Spacer(),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      const Text(
-                        'ライブラリ',
-                        style: TextStyle(
-                          fontSize: 24,
-                          color: mainColor,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Text(
-                        '保存済みカスタム',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.grey[600],
-                          fontWeight: FontWeight.bold,
-                        ),
-                      )
-                    ],
-                  ),
-                  const Spacer(),
-                  InkWell(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: const Icon(
-                      Icons.more_vert_outlined,
-                      size: 35,
-                      color: mainColor,
-                    ),
-                  ),
-                ],
+            const Text(
+              'ライブラリ',
+              style: TextStyle(
+                fontSize: 24,
+                color: mainColor,
+                fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: SizeConfig.blockSizeVertical * 1),
-            const StoredCustomsListWidget(),
+            Text(
+              '保存済みカスタム',
+              style: TextStyle(
+                fontSize: 14,
+                color: Colors.grey[600],
+                fontWeight: FontWeight.bold,
+              ),
+            )
           ],
         ),
+        centerTitle: true,
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(
+            Icons.sort,
+            color: mainColor,
+            size: 32,
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
+      body: const Padding(
+        padding: EdgeInsets.only(top: 8.0),
+        child: StoredCustomsListWidget(),
       ),
       floatingActionButton: SizedBox(
         width: SizeConfig.blockSizeHorizontal * 42,
@@ -118,12 +98,8 @@ class StoredCustomTablePage extends StatelessWidget {
       ),
       bottomNavigationBar: Container(
         height: SizeConfig.blockSizeVertical * 8,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: mainColor,
-          // borderRadius: const BorderRadius.only(
-          //   topLeft: Radius.circular(40),
-          //   topRight: Radius.circular(40),
-          // ),
         ),
       ),
     );

@@ -36,88 +36,90 @@ class InspectCustomPage extends ConsumerWidget {
 
     return Scaffold(
         backgroundColor: const Color(0xFFEDECF2),
-        body: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            Container(
-              padding: EdgeInsets.only(top: SizeConfig.blockSizeHorizontal * 16, left: 16, right: 16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  InkWell(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: const Icon(
-                      Icons.arrow_back_ios_new_rounded,
-                      size: 30,
-                      color: mainColor,
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 12,
-                  ),
-                  Expanded(
-                    child: InkWell(
+        body: SafeArea(
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: [
+              Container(
+                padding: EdgeInsets.only(top: SizeConfig.blockSizeHorizontal * 2, left: 16, right: 16),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    InkWell(
                       onTap: () {
                         Navigator.pop(context);
                       },
-                      child: Text(
-                        custom?.name! ?? '',
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                          color: mainColor,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
+                      child: const Icon(
+                        Icons.arrow_back_ios_new_rounded,
+                        size: 30,
+                        color: mainColor,
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 12,
+                    ),
+                    Expanded(
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: Text(
+                          custom?.name! ?? '',
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(
+                            color: mainColor,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      ref.read(createCustomNotifierProvider.notifier).reset();
-                      ref.read(createCustomNotifierProvider.notifier).updateState(custom!);
-                      ref.read(createCustomNotifierProvider.notifier).updateCompatibilities();
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const EditCustomPage(),
-                        ),
-                      );
-                    },
-                    child: const Icon(
-                      Icons.edit,
-                      size: 30,
-                      color: mainColor,
+                    InkWell(
+                      onTap: () {
+                        ref.read(createCustomNotifierProvider.notifier).reset();
+                        ref.read(createCustomNotifierProvider.notifier).updateState(custom!);
+                        ref.read(createCustomNotifierProvider.notifier).updateCompatibilities();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const EditCustomPage(),
+                          ),
+                        );
+                      },
+                      child: const Icon(
+                        Icons.edit,
+                        size: 30,
+                        color: mainColor,
+                      ),
                     ),
-                  ),
-                  const SizedBox(
-                    width: 4,
-                  ),
-                  InkWell(
-                    onTap: () {
-                      showDialog(
-                          context: context,
-                          builder: (_) {
-                            return DeleteCustomDialog();
-                          });
-                    },
-                    child: const Icon(
-                      Icons.delete,
-                      size: 30,
-                      color: mainColor,
+                    const SizedBox(
+                      width: 4,
                     ),
-                  ),
-                ],
+                    InkWell(
+                      onTap: () {
+                        showDialog(
+                            context: context,
+                            builder: (_) {
+                              return const DeleteCustomDialog();
+                            });
+                      },
+                      child: const Icon(
+                        Icons.delete,
+                        size: 30,
+                        color: mainColor,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            SizedBox(
-              height: SizeConfig.blockSizeHorizontal * 4,
-            ),
-            if (custom != null) SummaryWidget(custom),
-            if (custom != null) PartsInspectWidget(custom!),
-          ],
+              SizedBox(
+                height: SizeConfig.blockSizeHorizontal * 4,
+              ),
+              if (custom != null) SummaryWidget(custom),
+              if (custom != null) PartsInspectWidget(custom!),
+            ],
+          ),
         ));
   }
 }

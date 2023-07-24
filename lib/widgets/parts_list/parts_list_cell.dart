@@ -147,25 +147,22 @@ class PartsListWidget extends ConsumerWidget {
                                   ),
                                   Container(
                                     height: 26,
+                                    width: double.infinity,
                                     alignment: Alignment.centerLeft,
-                                    decoration: BoxDecoration(
-                                        //color: Colors.blue,
-                                        ),
                                     child: Row(
                                       children: [
                                         StarWidget(parts[i].star),
-                                        Row(
-                                          mainAxisAlignment: MainAxisAlignment.start,
-                                          children: [
-                                            SizedBox(
-                                              width: 2,
+                                        FittedBox(
+                                          fit: BoxFit.fitWidth,
+                                          child: Text(
+                                            parts[i].evaluation ?? '-',
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 12,
+                                              color: mainColor,
                                             ),
-                                            Text(
-                                              parts[i].evaluation ?? '-',
-                                              style: TextStyle(fontWeight: FontWeight.bold, color: mainColor),
-                                            )
-                                          ],
-                                        ),
+                                          ),
+                                        )
                                       ],
                                     ),
                                   ),
