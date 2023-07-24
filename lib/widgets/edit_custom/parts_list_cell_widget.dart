@@ -1,8 +1,7 @@
 import 'package:custom_pc/config/size_config.dart';
 import 'package:custom_pc/models/pc_parts.dart';
+import 'package:custom_pc/pages/parts_detail_page.dart';
 import 'package:flutter/material.dart';
-
-import '../../pages/parts_detail_page.dart';
 
 class PartsListCellWidget extends StatelessWidget {
   const PartsListCellWidget(this.category, this.parts, {super.key});
