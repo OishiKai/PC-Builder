@@ -1,20 +1,27 @@
 import 'package:custom_pc/config/size_config.dart';
 import 'package:custom_pc/models/pc_parts.dart';
 import 'package:custom_pc/pages/parts_detail_page.dart';
+import 'package:custom_pc/providers/detail_page_usage.dart';
+import 'package:custom_pc/providers/searching_category.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class PartsListCellWidget extends StatelessWidget {
+class PartsListCellWidget extends ConsumerWidget {
   const PartsListCellWidget(this.category, this.parts, {super.key});
   final PartsCategory category;
   final PcParts parts;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     const mainColor = Color.fromRGBO(14, 31, 18, 1);
     SizeConfig().init(context);
     return InkWell(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => PartsDetailPage(parts, false)));
+        // 詳細画面を編集モードで開く
+        ref.read(detailPageUsageNotifierProvider.notifier).switchEdit();
+        // 詳細画面から他のパーツを選択する際、カテゴリーを利用するためここでセット
+        ref.read(searchingCategoryProvider.notifier).changeCategory(category);
+        Navigator.push(context, MaterialPageRoute(builder: (context) => PartsDetailPage(parts)));
       },
       child: Padding(
         padding: const EdgeInsets.only(bottom: 16),

@@ -1,16 +1,18 @@
 import 'package:custom_pc/config/size_config.dart';
 import 'package:custom_pc/models/pc_parts.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../pages/parts_detail_page.dart';
+import '../../providers/detail_page_usage.dart';
 
-class PartsInspectCellWidget extends StatelessWidget {
+class PartsInspectCellWidget extends ConsumerWidget {
   const PartsInspectCellWidget(this.category, this.parts, {super.key});
   final PartsCategory category;
   final PcParts parts;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     const mainColor = Color.fromRGBO(60, 130, 80, 1);
     SizeConfig().init(context);
     return Padding(
@@ -38,7 +40,8 @@ class PartsInspectCellWidget extends StatelessWidget {
         ),
         InkWell(
           onTap: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => PartsDetailPage(parts, false)));
+            ref.read(detailPageUsageNotifierProvider.notifier).switchView();
+            Navigator.push(context, MaterialPageRoute(builder: (context) => PartsDetailPage(parts)));
           },
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 4),

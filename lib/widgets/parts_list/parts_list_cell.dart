@@ -1,4 +1,5 @@
 import 'package:custom_pc/pages/parts_detail_page.dart';
+import 'package:custom_pc/providers/detail_page_usage.dart';
 import 'package:custom_pc/widgets/parts_detail/star_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -46,10 +47,10 @@ class PartsListWidget extends ConsumerWidget {
                     parts[i] = detailParts;
                     ref.read(pcPartsListNotifierProvider.notifier).updateState(parts);
                   }
-
+                  ref.read(detailPageUsageNotifierProvider.notifier).switchCreate();
                   // プログレスサークル非表示
                   Navigator.pop(context);
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => PartsDetailPage(parts[i], true)));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => PartsDetailPage(parts[i])));
                 },
                 child: Column(
                   children: [

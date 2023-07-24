@@ -1,5 +1,6 @@
 import 'package:custom_pc/config/size_config.dart';
 import 'package:custom_pc/pages/edit_custom_page.dart';
+import 'package:custom_pc/providers/detail_page_usage.dart';
 import 'package:custom_pc/providers/editing_custom_id.dart';
 import 'package:custom_pc/providers/stored_customs.dart';
 import 'package:custom_pc/widgets/inspect_custom/delete_custom_dialog.dart';
@@ -80,6 +81,7 @@ class InspectCustomPage extends ConsumerWidget {
                         ref.read(createCustomNotifierProvider.notifier).reset();
                         ref.read(createCustomNotifierProvider.notifier).updateState(custom!);
                         ref.read(createCustomNotifierProvider.notifier).updateCompatibilities();
+                        ref.read(detailPageUsageNotifierProvider.notifier).switchEdit();
                         Navigator.push(
                           context,
                           MaterialPageRoute(

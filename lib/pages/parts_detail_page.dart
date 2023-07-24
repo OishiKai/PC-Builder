@@ -1,13 +1,14 @@
 import 'package:clippy_flutter/arc.dart';
 import 'package:custom_pc/models/pc_parts.dart';
+import 'package:custom_pc/providers/detail_page_usage.dart';
+import 'package:custom_pc/widgets/parts_detail/select_for_create_button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_segmented_control/material_segmented_control.dart';
 
 import '../config/size_config.dart';
-import '../providers/create_custom.dart';
-import '../providers/searching_category.dart';
+import '../widgets/parts_detail/edit_button_widget.dart';
 import '../widgets/parts_detail/full_scale_image_slider.dart';
 import '../widgets/parts_detail/shops_widget.dart';
 import '../widgets/parts_detail/specs_widget.dart';
@@ -19,9 +20,8 @@ final detailPageProvider = StateProvider<int>((ref) {
 });
 
 class PartsDetailPage extends ConsumerStatefulWidget {
-  const PartsDetailPage(this.parts, this.isEditing, {super.key});
+  const PartsDetailPage(this.parts, {super.key});
   final PcParts parts;
-  final bool isEditing;
   @override
   ConsumerState<PartsDetailPage> createState() => _PartsDetailPageState();
 }
@@ -32,7 +32,6 @@ class _PartsDetailPageState extends ConsumerState<PartsDetailPage> with SingleTi
   late ScrollController _scrollController;
 
   bool isHidden = false;
-  int _selectedIndex = 0;
 
   final Map<int, Widget> _children = {
     0: const Text('販売店'),
@@ -77,12 +76,14 @@ class _PartsDetailPageState extends ConsumerState<PartsDetailPage> with SingleTi
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
+    int selectedIndex = 0;
+    final usage = ref.watch(detailPageUsageNotifierProvider);
     return Scaffold(
       backgroundColor: Colors.white,
       body: Stack(
         children: <Widget>[
           IndexedStack(
-            index: _selectedIndex,
+            index: selectedIndex,
             children: [
               ListView(
                 controller: _scrollController,
@@ -222,43 +223,12 @@ class _PartsDetailPageState extends ConsumerState<PartsDetailPage> with SingleTi
                   child: Container(
                     padding: const EdgeInsets.only(right: 20, left: 20),
                     height: SizeConfig.blockSizeVertical * 10,
+                    width: double.infinity,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        ElevatedButton(
-                          onPressed: () async {
-                            final category = ref.read(searchingCategoryProvider);
-                            ref.read(createCustomNotifierProvider.notifier).setParts(category, widget.parts);
-                            int count = 0;
-                            ref.read(createCustomNotifierProvider.notifier).updateCompatibilities();
-                            Navigator.popUntil(context, (_) => count++ >= 2);
-                          },
-                          style: ElevatedButton.styleFrom(
-                            padding: EdgeInsets.zero,
-                            backgroundColor: const Color.fromRGBO(60, 130, 80, 1),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(40),
-                            ),
-                            side: BorderSide(
-                              color: Colors.green,
-                              width: 5,
-                            ),
-                          ),
-                          child: Row(
-                            children: const [
-                              Spacer(),
-                              Text(
-                                "このパーツを選択する",
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              Spacer(),
-                            ],
-                          ),
-                        ),
+                        if (usage == DetailPageUsage.create) SelectForCreateButtonWidget(widget.parts),
+                        if (usage == DetailPageUsage.edit) const EditButtonWidget(),
                       ],
                     ),
                   ),
