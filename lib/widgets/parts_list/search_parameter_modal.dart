@@ -76,12 +76,15 @@ class _SearchParameterModalState extends ConsumerState<SearchParameterModal> {
                 indicatorWeight: 2,
                 tabs: <Widget>[
                   for (Map<String, List<PartsSearchParameter>> map in alignParams)
-                    Text(
-                      map.keys.join(''),
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: adjustFontSize(map.keys.join('')),
+                    FittedBox(
+                      fit: BoxFit.fitWidth,
+                      child: Text(
+                        map.keys.join(''),
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: adjustFontSize(map.keys.join('')),
+                        ),
                       ),
                     ),
                 ],

@@ -1,13 +1,16 @@
 import 'package:custom_pc/config/size_config.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../models/custom.dart';
 
-class CustomCellWidget extends StatelessWidget {
+class CustomCellWidget extends ConsumerWidget {
   const CustomCellWidget(this.custom, {super.key});
   final Custom custom;
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     const mainColor = Color.fromRGBO(60, 130, 80, 1);
     SizeConfig().init(context);
     return Padding(
@@ -56,7 +59,7 @@ class CustomCellWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
-                  formatPrice(custom.calculateTotalPrice()),
+                  custom.formatPrice(),
                   style: TextStyle(
                     color: Colors.grey[700],
                     fontSize: 16,
@@ -85,21 +88,5 @@ class CustomCellWidget extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  String formatPrice(int value) {
-    final String stringValue = value.toString();
-    final StringBuffer buffer = StringBuffer();
-
-    buffer.write('¥');
-
-    for (int i = 0; i < stringValue.length; i++) {
-      if (i > 0 && (stringValue.length - i) % 3 == 0) {
-        buffer.write(',');
-      }
-      buffer.write(stringValue[i]);
-    }
-
-    return buffer.toString();
   }
 }

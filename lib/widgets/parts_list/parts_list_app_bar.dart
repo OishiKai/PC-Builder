@@ -1,6 +1,6 @@
 import 'package:custom_pc/domain/url_builder.dart';
-import 'package:custom_pc/main.dart';
-import 'package:custom_pc/models/pc_parts.dart';
+import 'package:custom_pc/providers/pc_parts_list.dart';
+import 'package:custom_pc/providers/search_parameters.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -9,7 +9,7 @@ final searchTextProvider = StateProvider<String>((ref) {
 });
 
 class PartsListAppBar extends ConsumerWidget implements PreferredSizeWidget {
-  PartsListAppBar({super.key});
+  const PartsListAppBar({super.key});
 
   @override
   Size get preferredSize => const Size.fromHeight(70);
@@ -20,50 +20,81 @@ class PartsListAppBar extends ConsumerWidget implements PreferredSizeWidget {
     controller.selection = TextSelection.fromPosition(
       TextPosition(offset: controller.text.length),
     );
+    const mainColor = Color.fromRGBO(60, 130, 80, 1);
+
+    // 検索キーワード入力前に検索のパラメータが選択されている場合の考慮
+    void setupSearchParams() {
+      final params = ref.read(searchParameterProvider)!;
+      final standardPage = ref.read(searchParameterProvider)!.standardPage();
+      final url = UrlBuilder.createURLWithParameters(standardPage, params.selectedParameters());
+      ref.read(pcPartsListNotifierProvider.notifier).replaceSearchUrl(url);
+    }
+
     return WillPopScope(
       onWillPop: () async {
         ref.read(searchTextProvider.notifier).update((state) => '');
         return true;
       },
-      child: AppBar(
-        backgroundColor: Color.fromRGBO(60, 130, 80, 1),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(40),
-            bottomRight: Radius.circular(40),
-          ),
-        ),
-        title: SizedBox(
-          height: 40,
-          child: Container(
-            decoration: BoxDecoration(
-              color: const Color(0xFFEDECF2),
-              border: Border.all(color: Color.fromRGBO(60, 130, 80, 1)),
-              borderRadius: BorderRadius.circular(40),
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: () {
+          FocusScope.of(context).unfocus();
+        },
+        child: AppBar(
+          backgroundColor: mainColor,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(20),
+              bottomRight: Radius.circular(20),
             ),
-            child: Center(
-              child: Container(
-                width: 340,
-                margin: const EdgeInsets.symmetric(vertical: 10.0),
-                child: TextField(
-                  controller: controller,
-                  decoration: const InputDecoration(
-                    hintText: 'Search',
-                    prefixIcon: Icon(Icons.search),
-                    contentPadding: EdgeInsets.only(left: 8.0),
-                    enabledBorder: InputBorder.none,
-                    focusedBorder: InputBorder.none,
-                    isDense: true,
+          ),
+          title: SizedBox(
+            height: 40,
+            child: Container(
+              decoration: BoxDecoration(
+                color: const Color(0xFFEDECF2),
+                border: Border.all(color: mainColor),
+                borderRadius: BorderRadius.circular(40),
+              ),
+              child: Center(
+                child: Container(
+                  width: 340,
+                  margin: const EdgeInsets.symmetric(vertical: 10.0),
+                  child: TextField(
+                    controller: controller,
+                    cursorColor: mainColor,
+                    decoration: InputDecoration(
+                      hintText: 'Search',
+                      prefixIcon: const Icon(
+                        Icons.search,
+                        color: mainColor,
+                      ),
+                      suffixIcon: IconButton(
+                        padding: EdgeInsets.zero,
+                        onPressed: () {
+                          ref.read(searchTextProvider.notifier).update((state) => '');
+                          setupSearchParams();
+                        },
+                        icon: const Icon(
+                          Icons.clear,
+                          color: mainColor,
+                        ),
+                      ),
+                      contentPadding: const EdgeInsets.only(left: 8.0),
+                      enabledBorder: InputBorder.none,
+                      focusedBorder: InputBorder.none,
+                      isDense: true,
+                    ),
+                    onSubmitted: (text) {
+                      final trimText = text.trim();
+                      if (trimText == '' || trimText == '　') {
+                        return;
+                      }
+
+                      ref.read(searchTextProvider.notifier).update((state) => text);
+                      setupSearchParams();
+                    },
                   ),
-                  onSubmitted: (text) {
-                    final trimText = text.trim();
-                    if (trimText == '' || trimText == '　') {
-                      return;
-                    }
-                    final url = UrlBuilder.searchPartsList(PartsCategory.graphicsCard, trimText);
-                    //ref.read(targetUrlProvider.notifier).update((state) => url);
-                    ref.read(searchTextProvider.notifier).update((state) => text);
-                  },
                 ),
               ),
             ),

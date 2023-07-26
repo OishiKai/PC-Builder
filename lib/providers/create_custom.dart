@@ -73,6 +73,10 @@ class CreateCustomNotifier extends StateNotifier<Custom> {
     final cus = state.copyWith(compatibilities: comps);
     state = cus;
   }
+
+  void rename(String name) {
+    state = state.copyWith(name: name);
+  }
 }
 
 final createCustomNotifierProvider = StateNotifierProvider<CreateCustomNotifier, Custom>((ref) {

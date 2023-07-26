@@ -1,10 +1,11 @@
+import 'package:custom_pc/pages/parts_detail_page.dart';
+import 'package:custom_pc/providers/detail_page_usage.dart';
 import 'package:custom_pc/widgets/parts_detail/star_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../config/size_config.dart';
 import '../../domain/parts_detail_parser.dart';
-import '../../pages/parts_detail_page.dart';
 import '../../providers/pc_parts_list.dart';
 
 class PartsListWidget extends ConsumerWidget {
@@ -22,7 +23,7 @@ class PartsListWidget extends ConsumerWidget {
           barrierDismissible: false,
           barrierColor: Colors.black.withOpacity(0.5),
           pageBuilder: (BuildContext context, Animation animation, Animation secondaryAnimation) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(
                 valueColor: AlwaysStoppedAnimation<Color>(Colors.greenAccent),
               ),
@@ -46,7 +47,7 @@ class PartsListWidget extends ConsumerWidget {
                     parts[i] = detailParts;
                     ref.read(pcPartsListNotifierProvider.notifier).updateState(parts);
                   }
-
+                  ref.read(detailPageUsageNotifierProvider.notifier).switchCreate();
                   // プログレスサークル非表示
                   Navigator.pop(context);
                   Navigator.push(context, MaterialPageRoute(builder: (context) => PartsDetailPage(parts[i])));
@@ -94,6 +95,7 @@ class PartsListWidget extends ConsumerWidget {
                                     height: 16,
                                     width: double.infinity,
                                     child: Row(
+                                      crossAxisAlignment: CrossAxisAlignment.center,
                                       children: [
                                         Text(
                                           parts[i].maker,
@@ -104,20 +106,17 @@ class PartsListWidget extends ConsumerWidget {
                                             color: mainColor,
                                           ),
                                         ),
-                                        SizedBox(
-                                          width: 8,
-                                        ),
                                         Visibility(
                                           visible: parts[i].isNew,
                                           child: Container(
-                                            padding: EdgeInsets.all(2),
+                                            //padding: EdgeInsets.all(2),
                                             height: 14,
                                             width: 30,
                                             decoration: BoxDecoration(
                                               color: Colors.red,
                                               borderRadius: BorderRadius.circular(10),
                                             ),
-                                            child: Text(
+                                            child: const Text(
                                               'NEW',
                                               textAlign: TextAlign.center,
                                               style: TextStyle(
@@ -147,37 +146,34 @@ class PartsListWidget extends ConsumerWidget {
                                   ),
                                   Container(
                                     height: 26,
+                                    width: double.infinity,
                                     alignment: Alignment.centerLeft,
-                                    decoration: BoxDecoration(
-                                        //color: Colors.blue,
-                                        ),
                                     child: Row(
                                       children: [
                                         StarWidget(parts[i].star),
-                                        Row(
-                                          mainAxisAlignment: MainAxisAlignment.start,
-                                          children: [
-                                            SizedBox(
-                                              width: 2,
+                                        FittedBox(
+                                          fit: BoxFit.fitWidth,
+                                          child: Text(
+                                            parts[i].evaluation ?? '-',
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 12,
+                                              color: mainColor,
                                             ),
-                                            Text(
-                                              parts[i].evaluation ?? '-',
-                                              style: TextStyle(fontWeight: FontWeight.bold, color: mainColor),
-                                            )
-                                          ],
-                                        ),
+                                          ),
+                                        )
                                       ],
                                     ),
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.only(left: 3),
-                                    child: Container(
+                                    child: SizedBox(
                                       height: 25,
                                       width: double.infinity,
                                       child: Text(
                                         parts[i].price,
                                         textAlign: TextAlign.left,
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           fontSize: 20,
                                           fontWeight: FontWeight.bold,
                                           color: Colors.redAccent,
@@ -192,7 +188,7 @@ class PartsListWidget extends ConsumerWidget {
                         ],
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 8,
                     ),
                   ],

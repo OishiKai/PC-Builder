@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+
 import 'parts_shop.dart';
 
 part 'pc_parts.freezed.dart';
@@ -22,15 +23,15 @@ class PcParts with _$PcParts {
 }
 
 enum PartsCategory {
-  cpu('CPU', 'CPU','cpu'),
-  cpuCooler('CPUクーラー', 'CPUクーラ','2C0030'),
-  memory('メモリー', 'メモリ','2C0033'),
-  motherBoard('マザーボード', 'マザボ','2C0036'),
-  graphicsCard('グラフィックボード・ビデオカード', 'グラボ','2C0028'),
-  ssd('SSD', 'SSD','2C0070'),
-  pcCase('PCケース', 'ケース','2C0032'),
-  powerUnit('電源ユニット', '電源','2C0035'),
-  caseFan('ケースファン', 'ケースファン','2C0089');
+  cpu('CPU', 'CPU', 'cpu'),
+  cpuCooler('CPUクーラー', 'CPUクーラー', '2C0030'),
+  memory('メモリー', 'メモリ', '2C0033'),
+  motherBoard('マザーボード', 'マザーボード', '2C0036'),
+  graphicsCard('グラフィックボード・ビデオカード', 'グラフィックボード', '2C0028'),
+  ssd('SSD', 'SSD', '2C0070'),
+  pcCase('PCケース', 'ケース', '2C0032'),
+  powerUnit('電源ユニット', '電源', '2C0035'),
+  caseFan('ケースファン', 'ケースファン', '2C0089');
 
   final String categoryName;
   final String categoryShortName;

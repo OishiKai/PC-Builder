@@ -147,6 +147,19 @@ class PcPartsRepository {
     return i;
   }
 
+  // 削除
+  static Future<void> deletePcParts(int id) async {
+    final Database db = await DataStoreUseCase.database;
+    await _deletePartsShops(id);
+    await _deletePartsSpecs(id);
+    await _deleteFullScaleImages(id);
+    await db.delete(
+      'pc_parts',
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+  }
+
   // 店情報取得
   static Future<List<PartsShop>> _selectPartsShopsById(int id) async {
     final Database db = await DataStoreUseCase.database;
@@ -168,6 +181,16 @@ class PcPartsRepository {
     return shops;
   }
 
+  //　店情報削除
+  static Future<void> _deletePartsShops(int id) async {
+    final Database db = await DataStoreUseCase.database;
+    await db.delete(
+      'parts_shops',
+      where: 'parts_id = ?',
+      whereArgs: [id],
+    );
+  }
+
   // スペック情報取得
   static Future<Map<String, String?>> _partsSpecs(int id) async {
     final Database db = await DataStoreUseCase.database;
@@ -183,6 +206,16 @@ class PcPartsRepository {
     return specs;
   }
 
+  // スペック情報削除
+  static Future<void> _deletePartsSpecs(int id) async {
+    final Database db = await DataStoreUseCase.database;
+    await db.delete(
+      'parts_specs',
+      where: 'parts_id = ?',
+      whereArgs: [id],
+    );
+  }
+
   // 画像情報取得
   static Future<List<String>> _selectFullScaleImagesById(int id) async {
     final Database db = await DataStoreUseCase.database;
@@ -196,5 +229,15 @@ class PcPartsRepository {
       images.add(map['image_url']);
     }
     return images;
+  }
+
+  // 画像情報削除
+  static Future<void> _deleteFullScaleImages(int id) async {
+    final Database db = await DataStoreUseCase.database;
+    await db.delete(
+      'full_scale_images',
+      where: 'parts_id = ?',
+      whereArgs: [id],
+    );
   }
 }

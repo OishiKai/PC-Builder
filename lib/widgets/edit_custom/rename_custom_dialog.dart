@@ -4,22 +4,21 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../providers/create_custom.dart';
-import '../../providers/stored_customs.dart';
 
-class SaveConfirmDialog extends ConsumerStatefulWidget {
-  SaveConfirmDialog({Key? key}) : super(key: key);
-
+class RenameCustomDialog extends ConsumerStatefulWidget {
+  const RenameCustomDialog(this.storedName, {super.key});
+  final String storedName;
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _SaveConfirmDialogState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _RenameCustomDialogState();
 }
 
-class _SaveConfirmDialogState extends ConsumerState<SaveConfirmDialog> {
-  String _customName = 'タイトルなし';
-
-  void _handleText(String e) {
-    setState(() {
-      _customName = e;
-    });
+class _RenameCustomDialogState extends ConsumerState<RenameCustomDialog> {
+  String customName = '';
+  final TextEditingController _controller = TextEditingController();
+  @override
+  void initState() {
+    super.initState();
+    customName = widget.storedName;
   }
 
   @override
@@ -27,54 +26,15 @@ class _SaveConfirmDialogState extends ConsumerState<SaveConfirmDialog> {
     SizeConfig().init(context);
     final custom = ref.watch(createCustomNotifierProvider);
     const mainColor = Color.fromRGBO(60, 130, 80, 1);
-
-    // パーツを選択していない場合
-    if (custom.isEmpty()) {
-      return SimpleDialog(
-        backgroundColor: mainColor,
-        contentPadding: const EdgeInsets.all(0),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        children: [
-          Container(
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: const Color(0xFFEDECF2),
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: Column(
-              children: [
-                const Text(
-                  'パーツを選択してください',
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: mainColor,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(height: 8),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: mainColor,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                  ),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: SizeConfig.blockSizeHorizontal * 20),
-                    child: const Text('OK'),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      );
+    void handleText(String e) {
+      setState(() {
+        customName = e;
+      });
     }
 
-    // 一つ以上パーツを選択している場合
+    _controller.text = customName;
+    _controller.selection = TextSelection.fromPosition(TextPosition(offset: _controller.text.length));
+
     return SimpleDialog(
       contentPadding: const EdgeInsets.all(0),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
@@ -88,7 +48,7 @@ class _SaveConfirmDialogState extends ConsumerState<SaveConfirmDialog> {
           child: Column(
             children: [
               const Text(
-                '保存する',
+                'カスタム名を編集',
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
@@ -97,11 +57,12 @@ class _SaveConfirmDialogState extends ConsumerState<SaveConfirmDialog> {
               ),
               const SizedBox(height: 20),
               TextField(
-                onChanged: _handleText,
+                onChanged: handleText,
                 maxLines: 1,
                 maxLength: 15,
                 cursorColor: mainColor,
                 style: const TextStyle(color: Colors.black),
+                controller: _controller,
                 decoration: const InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: mainColor, width: 2),
@@ -119,7 +80,7 @@ class _SaveConfirmDialogState extends ConsumerState<SaveConfirmDialog> {
                 children: [
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.grey,
+                      backgroundColor: Colors.grey,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
                       ),
@@ -131,21 +92,18 @@ class _SaveConfirmDialogState extends ConsumerState<SaveConfirmDialog> {
                   ),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: mainColor,
+                      backgroundColor: mainColor,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
                       ),
                     ),
                     onPressed: () {
-                      final namedCustom = custom.copyWith(name: _customName);
-                      ref.read(storedCustomsNotifierProvider.notifier).addCustom(namedCustom);
-                      int count = 0;
-                      Navigator.popUntil(context, (_) => count++ >= 2);
-                      // Navigator.popUntil(context, (route) => route.isFirst);
+                      ref.read(createCustomNotifierProvider.notifier).rename(customName);
+                      Navigator.pop(context);
                     },
                     child: const Padding(
                       padding: EdgeInsets.symmetric(horizontal: 20),
-                      child: Text('保存'),
+                      child: Text('変更'),
                     ),
                   ),
                 ],

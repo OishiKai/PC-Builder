@@ -32,17 +32,18 @@ class _FullScaleImageSliderState extends State<FullScaleImageSlider> {
             return buildImage(path, index);
           },
         ),
-        Align(
-          alignment: Alignment.center,
-          child: Column(
-            children: [
-              SizedBox(
-                height: 300,
-              ),
-              buildIndicator(),
-            ],
-          ),
-        )
+        if (widget.imageUrlList.length > 1)
+          Align(
+            alignment: Alignment.center,
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 300,
+                ),
+                buildIndicator(),
+              ],
+            ),
+          )
       ],
     );
   }
@@ -60,10 +61,6 @@ class _FullScaleImageSliderState extends State<FullScaleImageSlider> {
   Widget buildIndicator() => AnimatedSmoothIndicator(
         activeIndex: activeIndex,
         count: widget.imageUrlList.length ?? 0,
-        effect: const JumpingDotEffect(
-            dotHeight: 10,
-            dotWidth: 10,
-            activeDotColor: Color.fromRGBO(60, 130, 80, 1),
-            dotColor: Colors.black12),
+        effect: const JumpingDotEffect(dotHeight: 10, dotWidth: 10, activeDotColor: Color.fromRGBO(60, 130, 80, 1), dotColor: Colors.black12),
       );
 }

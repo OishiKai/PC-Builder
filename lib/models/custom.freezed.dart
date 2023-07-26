@@ -556,6 +556,23 @@ class _$_Custom implements _Custom {
     }
     return copyWith(compatibilities: comps);
   }
+
+  @override
+  String formatPrice() {
+    final String stringValue = calculateTotalPrice().toString();
+    final StringBuffer buffer = StringBuffer();
+
+    buffer.write('¥');
+
+    for (int i = 0; i < stringValue.length; i++) {
+      if (i > 0 && (stringValue.length - i) % 3 == 0) {
+        buffer.write(',');
+      }
+      buffer.write(stringValue[i]);
+    }
+
+    return buffer.toString();
+  }
 }
 
 abstract class _Custom implements Custom {

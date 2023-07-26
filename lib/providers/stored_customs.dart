@@ -9,6 +9,30 @@ part 'stored_customs.g.dart';
 class StoredCustomsNotifier extends _$StoredCustomsNotifier {
   @override
   Future<Map<String, Custom>> build() {
+    ref.onDispose(() {
+      print('disposed');
+    });
     return CustomRepository.getAllCustoms();
+  }
+
+  void refresh() async {
+    state = await AsyncValue.guard(() async {
+      return CustomRepository.getAllCustoms();
+    });
+  }
+
+  void addCustom(Custom custom) async {
+    await CustomRepository.insertCustom(custom);
+    refresh();
+  }
+
+  void deleteCustom(String id) async {
+    await CustomRepository.deleteCustom(id);
+    refresh();
+  }
+
+  void updateCustom(Custom custom, String id) async {
+    await CustomRepository.updateCustom(id, custom);
+    refresh();
   }
 }

@@ -26,13 +26,15 @@ class TotalPriceWidget extends ConsumerWidget {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 8),
       width: SizeConfig.blockSizeHorizontal * 92,
-      //height: 300,
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(30),
+          bottomRight: Radius.circular(30),
+        ),
       ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Padding(
             padding: EdgeInsets.symmetric(horizontal: SizeConfig.blockSizeHorizontal * 4),
@@ -104,9 +106,10 @@ class TotalPriceWidget extends ConsumerWidget {
                               fontSize: 14,
                               color: Colors.black,
                             ),
-                          )
+                          ),
                         ],
-                      )
+                      ),
+                  //Spacer(),
                 ],
               ),
             )

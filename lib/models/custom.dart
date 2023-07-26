@@ -97,6 +97,22 @@ class Custom with _$Custom {
     return totalPrice;
   }
 
+  String formatPrice() {
+    final String stringValue = calculateTotalPrice().toString();
+    final StringBuffer buffer = StringBuffer();
+
+    buffer.write('¥');
+
+    for (int i = 0; i < stringValue.length; i++) {
+      if (i > 0 && (stringValue.length - i) % 3 == 0) {
+        buffer.write(',');
+      }
+      buffer.write(stringValue[i]);
+    }
+
+    return buffer.toString();
+  }
+
   bool isEmpty() {
     return cpu == null && cpuCooler == null && memory == null && motherBoard == null && graphicsCard == null && ssd == null && pcCase == null && powerUnit == null && caseFan == null;
   }
