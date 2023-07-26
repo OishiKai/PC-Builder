@@ -3,7 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../config/size_config.dart';
+import '../../models/pc_parts.dart';
+import '../../pages/parts_list_page.dart';
 import '../../providers/create_custom.dart';
+import '../../providers/pc_parts_list.dart';
+import '../../providers/search_parameters.dart';
+import '../../providers/searching_category.dart';
 import '../create_custom/parts_compatibility_widget.dart';
 import 'add_parts_modal_widget.dart';
 
@@ -15,6 +20,17 @@ class CustomSummaryPanelWidget extends ConsumerWidget {
     SizeConfig().init(context);
     final custom = ref.watch(createCustomNotifierProvider);
     final comps = custom.compatibilities;
+
+    onTapGrit(PartsCategory category) {
+      // ここで検索を始めるパーツカテゴリを設定する
+      ref.read(searchingCategoryProvider.notifier).changeCategory(category);
+      // カテゴリに合わせて検索URL、パラメータを設定する
+      ref.read(pcPartsListNotifierProvider.notifier).switchCategory(category);
+      ref.read(searchParameterProvider.notifier).replaceParameters(category);
+      Navigator.of(context).pop();
+      Navigator.push(context, MaterialPageRoute(builder: (context) => const PartsListPage()));
+    }
+
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -59,7 +75,7 @@ class CustomSummaryPanelWidget extends ConsumerWidget {
                       backgroundColor: Colors.transparent,
                       context: context,
                       builder: (BuildContext context) {
-                        return AddPartsModalWidget();
+                        return AddPartsModalWidget(onTapGrit);
                       },
                     );
                   },

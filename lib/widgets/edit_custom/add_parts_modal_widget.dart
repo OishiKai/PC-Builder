@@ -3,14 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../config/size_config.dart';
-import '../../pages/parts_list_page.dart';
-import '../../providers/pc_parts_list.dart';
-import '../../providers/search_parameters.dart';
-import '../../providers/searching_category.dart';
 
 class AddPartsModalWidget extends ConsumerWidget {
-  const AddPartsModalWidget({super.key});
-
+  const AddPartsModalWidget(this.onTapGrit, {super.key});
+  final Function onTapGrit;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     SizeConfig().init(context);
@@ -89,13 +85,7 @@ class AddPartsModalWidget extends ConsumerWidget {
             width: SizeConfig.blockSizeHorizontal * 20,
             child: ElevatedButton(
               onPressed: () {
-                // ここで検索を始めるパーツカテゴリを設定する
-                ref.read(searchingCategoryProvider.notifier).changeCategory(category);
-                // カテゴリに合わせて検索URL、パラメータを設定する
-                ref.read(pcPartsListNotifierProvider.notifier).switchCategory(category);
-                ref.read(searchParameterProvider.notifier).replaceParameters(category);
-                Navigator.of(context).pop();
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const PartsListPage()));
+                onTapGrit(category);
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color.fromRGBO(60, 130, 80, 1),
@@ -168,15 +158,7 @@ class AddPartsModalWidget extends ConsumerWidget {
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               children: [
-                categoryGrit(PartsCategory.cpu),
-                categoryGrit(PartsCategory.cpuCooler),
-                categoryGrit(PartsCategory.memory),
-                categoryGrit(PartsCategory.motherBoard),
-                categoryGrit(PartsCategory.graphicsCard),
-                categoryGrit(PartsCategory.ssd),
-                categoryGrit(PartsCategory.powerUnit),
-                categoryGrit(PartsCategory.pcCase),
-                categoryGrit(PartsCategory.caseFan),
+                for (var category in PartsCategory.values) categoryGrit(category),
               ],
             ),
           ),

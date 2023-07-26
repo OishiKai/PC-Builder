@@ -16,61 +16,67 @@ class PartsListPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: PartsListAppBar(),
-      body: Column(
-        children: [
-          const SizedBox(
-            height: 16,
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 15, right: 16),
-            child: ElevatedButton(
-              onPressed: () {
-                showModalBottomSheet(
-                  isScrollControlled: true,
-                  backgroundColor: Colors.transparent,
-                  context: context,
-                  builder: (BuildContext context) {
-                    return const SearchParameterModal();
-                  },
-                );
-              },
-              style: ElevatedButton.styleFrom(
-                padding: EdgeInsets.zero,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(40),
+      body: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: () {
+          FocusScope.of(context).unfocus();
+        },
+        child: Column(
+          children: [
+            const SizedBox(
+              height: 16,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 15, right: 16),
+              child: ElevatedButton(
+                onPressed: () {
+                  showModalBottomSheet(
+                    isScrollControlled: true,
+                    backgroundColor: Colors.transparent,
+                    context: context,
+                    builder: (BuildContext context) {
+                      return const SearchParameterModal();
+                    },
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  padding: EdgeInsets.zero,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(40),
+                  ),
+                  primary: _mainColor,
                 ),
-                primary: _mainColor,
-              ),
-              child: Row(
-                children: const [
-                  SizedBox(
-                    width: 8,
-                  ),
-                  Icon(
-                    Icons.arrow_drop_down_outlined,
-                    size: 24,
-                    color: Colors.white,
-                  ),
-                  SizedBox(
-                    width: 8,
-                  ),
-                  Text(
-                    '絞り込み',
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
+                child: Row(
+                  children: const [
+                    SizedBox(
+                      width: 8,
+                    ),
+                    Icon(
+                      Icons.arrow_drop_down_outlined,
+                      size: 24,
                       color: Colors.white,
                     ),
-                  ),
-                ],
+                    SizedBox(
+                      width: 8,
+                    ),
+                    Text(
+                      '絞り込み',
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-          const SizedBox(
-            height: 8,
-          ),
-          const PartsListWidget(),
-        ],
+            const SizedBox(
+              height: 8,
+            ),
+            const PartsListWidget(),
+          ],
+        ),
       ),
     );
   }

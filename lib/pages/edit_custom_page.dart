@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 import '../config/size_config.dart';
+import '../widgets/create_custom/save_confirm_dialog.dart';
 import '../widgets/edit_custom/edit_cancel_dialog.dart';
 import '../widgets/edit_custom/update_custom_dialog.dart';
 
@@ -25,7 +26,7 @@ class EditCustomPageState extends ConsumerState<ConsumerStatefulWidget> {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    String customTitle = ref.watch(createCustomNotifierProvider).name ?? 'Custom';
+    String? customTitle = ref.watch(createCustomNotifierProvider).name;
 
     return Scaffold(
       backgroundColor: surfaceColor,
@@ -33,50 +34,70 @@ class EditCustomPageState extends ConsumerState<ConsumerStatefulWidget> {
       appBar: AppBar(
         title: Row(
           children: [
-            Text(
-              customTitle,
-              style: TextStyle(
-                color: onSurfaceColor,
-                fontWeight: FontWeight.bold,
+            FittedBox(
+              fit: BoxFit.fitWidth,
+              child: Text(
+                customTitle ?? 'New Custom',
+                style: TextStyle(
+                  color: onSurfaceColor,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
             SizedBox(
               width: SizeConfig.blockSizeHorizontal * 2,
             ),
-            InkWell(
-              onTap: () {
-                showDialog(
-                  context: context,
-                  builder: (_) {
-                    return RenameCustomDialog(customTitle);
-                  },
-                );
-              },
-              child: Icon(
-                Icons.edit,
-                color: onSurfaceColor,
+            if (customTitle != null)
+              InkWell(
+                onTap: () {
+                  showDialog(
+                    context: context,
+                    builder: (_) {
+                      return RenameCustomDialog(customTitle);
+                    },
+                  );
+                },
+                child: Icon(
+                  Icons.edit,
+                  color: onSurfaceColor,
+                ),
               ),
-            ),
           ],
         ),
         elevation: 0,
         automaticallyImplyLeading: false,
         backgroundColor: surfaceColor,
         actions: [
-          IconButton(
-            onPressed: () {
-              showDialog(
-                context: context,
-                builder: (_) {
-                  return const UpdateCustomDialog();
-                },
-              );
-            },
-            icon: Icon(
-              Icons.check,
-              color: mainColor,
+          if (customTitle != null)
+            IconButton(
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (_) {
+                    return const UpdateCustomDialog();
+                  },
+                );
+              },
+              icon: Icon(
+                Icons.check,
+                color: mainColor,
+              ),
             ),
-          ),
+          if (customTitle == null)
+            InkWell(
+              onTap: () {
+                showDialog(
+                    context: context,
+                    builder: (_) {
+                      return SaveConfirmDialog();
+                    });
+              },
+              child: Icon(
+                Icons.save_as_outlined,
+                size: 35,
+                color: mainColor,
+              ),
+            ),
           IconButton(
             onPressed: () {
               showDialog(

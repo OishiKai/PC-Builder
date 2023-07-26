@@ -1,5 +1,7 @@
 import 'package:custom_pc/domain/parts_list_parser.dart';
+import 'package:custom_pc/widgets/parts_list/parts_list_app_bar.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+
 import '../domain/search_parameter_parser/case_fan_search_parameter_parser.dart';
 import '../domain/search_parameter_parser/cpu_cooler_search_parameter_parser.dart';
 import '../domain/search_parameter_parser/cpu_search_search_parameter_parser.dart';
@@ -18,6 +20,7 @@ class PcPartsListNotifier extends _$PcPartsListNotifier {
   @override
   Future<List<PcParts>> build() {
     final standardPartsList = PartsListParser.fetch('');
+
     return standardPartsList;
   }
 
@@ -80,6 +83,14 @@ class PcPartsListNotifier extends _$PcPartsListNotifier {
 
   // 検索対象のURLを変更する
   void replaceSearchUrl(String listUrl) async {
+    final text = ref.read(searchTextProvider);
+    if (text != '' && listUrl.contains('?')) {
+      // 検索条件が含まれる場合
+      listUrl = '$listUrl&pdf_kw=$text';
+    } else if (text != '') {
+      // 検索条件が含まれない場合
+      listUrl = '$listUrl?pdf_kw=$text';
+    }
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async {
       return PartsListParser.fetch(listUrl);

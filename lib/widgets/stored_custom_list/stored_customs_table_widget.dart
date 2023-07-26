@@ -38,8 +38,9 @@ class StoredCustomsListWidget extends ConsumerWidget {
               child: CustomCellWidget(value),
             ));
           });
-          cells.add(SizedBox(height: SizeConfig.blockSizeVertical * 15));
-          return cells;
+          final List<Widget> cellList = List.from(cells.reversed);
+          cellList.add(SizedBox(height: SizeConfig.blockSizeVertical * 7));
+          return cellList;
         }
 
         return Container(

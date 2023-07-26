@@ -138,7 +138,6 @@ class _SaveConfirmDialogState extends ConsumerState<SaveConfirmDialog> {
                     ),
                     onPressed: () {
                       final namedCustom = custom.copyWith(name: _customName);
-                      ref.read(createCustomNotifierProvider.notifier).reset();
                       ref.read(storedCustomsNotifierProvider.notifier).addCustom(namedCustom);
                       int count = 0;
                       Navigator.popUntil(context, (_) => count++ >= 2);

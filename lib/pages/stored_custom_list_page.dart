@@ -1,12 +1,11 @@
 import 'package:custom_pc/config/size_config.dart';
+import 'package:custom_pc/widgets/stored_custom_list/new_custom_bottom_bar.dart';
 import 'package:custom_pc/widgets/stored_custom_list/stored_customs_table_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'create_custom_page.dart';
-
-class StoredCustomTablePage extends StatelessWidget {
-  const StoredCustomTablePage({super.key});
+class StoredCustomListPage extends StatelessWidget {
+  const StoredCustomListPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +46,7 @@ class StoredCustomTablePage extends StatelessWidget {
             size: 32,
           ),
           onPressed: () {
-            Navigator.pop(context);
+            //Navigator.pop(context);
           },
         ),
       ),
@@ -55,53 +54,48 @@ class StoredCustomTablePage extends StatelessWidget {
         padding: EdgeInsets.only(top: 8.0),
         child: StoredCustomsListWidget(),
       ),
-      floatingActionButton: SizedBox(
-        width: SizeConfig.blockSizeHorizontal * 42,
-        child: FloatingActionButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              PageRouteBuilder(
-                  pageBuilder: (context, animation, secondaryAnimation) => const CreateCustomPage(),
-                  transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                    return CupertinoPageTransition(primaryRouteAnimation: animation, secondaryRouteAnimation: secondaryAnimation, linearTransition: false, child: child);
-                  }),
-            );
-          },
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15),
-          ),
-          backgroundColor: mainColor,
-          child: Row(
-            children: const [
-              SizedBox(
-                width: 8,
-              ),
-              Icon(Icons.add),
-              SizedBox(
-                width: 4,
-              ),
-              Text(
-                'NEW CUSTOM',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 14,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              SizedBox(
-                width: 8,
-              )
-            ],
-          ),
-        ),
-      ),
-      bottomNavigationBar: Container(
-        height: SizeConfig.blockSizeVertical * 8,
-        decoration: const BoxDecoration(
-          color: mainColor,
-        ),
-      ),
+      // floatingActionButton: SizedBox(
+      //   width: SizeConfig.blockSizeHorizontal * 42,
+      //   child: FloatingActionButton(
+      //     onPressed: () {
+      //       Navigator.push(
+      //         context,
+      //         PageRouteBuilder(
+      //             pageBuilder: (context, animation, secondaryAnimation) => const CreateCustomPage(),
+      //             transitionsBuilder: (context, animation, secondaryAnimation, child) {
+      //               return CupertinoPageTransition(primaryRouteAnimation: animation, secondaryRouteAnimation: secondaryAnimation, linearTransition: false, child: child);
+      //             }),
+      //       );
+      //     },
+      //     shape: RoundedRectangleBorder(
+      //       borderRadius: BorderRadius.circular(15),
+      //     ),
+      //     backgroundColor: mainColor,
+      //     child: Row(
+      //       children: const [
+      //         SizedBox(
+      //           width: 8,
+      //         ),
+      //         Icon(Icons.add),
+      //         SizedBox(
+      //           width: 4,
+      //         ),
+      //         Text(
+      //           'NEW CUSTOM',
+      //           style: TextStyle(
+      //             color: Colors.white,
+      //             fontSize: 14,
+      //             fontWeight: FontWeight.bold,
+      //           ),
+      //         ),
+      //         SizedBox(
+      //           width: 8,
+      //         )
+      //       ],
+      //     ),
+      //   ),
+      // ),
+      bottomNavigationBar: const NewCustomBottomBar(),
     );
   }
 }

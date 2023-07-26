@@ -23,7 +23,7 @@ class PartsListWidget extends ConsumerWidget {
           barrierDismissible: false,
           barrierColor: Colors.black.withOpacity(0.5),
           pageBuilder: (BuildContext context, Animation animation, Animation secondaryAnimation) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(
                 valueColor: AlwaysStoppedAnimation<Color>(Colors.greenAccent),
               ),
@@ -95,6 +95,7 @@ class PartsListWidget extends ConsumerWidget {
                                     height: 16,
                                     width: double.infinity,
                                     child: Row(
+                                      crossAxisAlignment: CrossAxisAlignment.center,
                                       children: [
                                         Text(
                                           parts[i].maker,
@@ -105,20 +106,17 @@ class PartsListWidget extends ConsumerWidget {
                                             color: mainColor,
                                           ),
                                         ),
-                                        SizedBox(
-                                          width: 8,
-                                        ),
                                         Visibility(
                                           visible: parts[i].isNew,
                                           child: Container(
-                                            padding: EdgeInsets.all(2),
+                                            //padding: EdgeInsets.all(2),
                                             height: 14,
                                             width: 30,
                                             decoration: BoxDecoration(
                                               color: Colors.red,
                                               borderRadius: BorderRadius.circular(10),
                                             ),
-                                            child: Text(
+                                            child: const Text(
                                               'NEW',
                                               textAlign: TextAlign.center,
                                               style: TextStyle(
@@ -169,13 +167,13 @@ class PartsListWidget extends ConsumerWidget {
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.only(left: 3),
-                                    child: Container(
+                                    child: SizedBox(
                                       height: 25,
                                       width: double.infinity,
                                       child: Text(
                                         parts[i].price,
                                         textAlign: TextAlign.left,
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           fontSize: 20,
                                           fontWeight: FontWeight.bold,
                                           color: Colors.redAccent,
@@ -190,7 +188,7 @@ class PartsListWidget extends ConsumerWidget {
                         ],
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 8,
                     ),
                   ],

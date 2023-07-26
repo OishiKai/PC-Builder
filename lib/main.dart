@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: RootPage(),
+      home: StoredCustomListPage(),
     );
   }
 }
@@ -56,7 +56,7 @@ class RootPage extends ConsumerWidget {
                   Navigator.push(
                     context,
                     PageRouteBuilder(
-                        pageBuilder: (context, animation, secondaryAnimation) => StoredCustomTablePage(),
+                        pageBuilder: (context, animation, secondaryAnimation) => StoredCustomListPage(),
                         transitionsBuilder: (context, animation, secondaryAnimation, child) {
                           return CupertinoPageTransition(primaryRouteAnimation: animation, secondaryRouteAnimation: secondaryAnimation, linearTransition: false, child: child);
                         }),
