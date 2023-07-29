@@ -35,4 +35,23 @@ class StoredCustomsNotifier extends _$StoredCustomsNotifier {
     await CustomRepository.updateCustom(id, custom);
     refresh();
   }
+
+  void sortCustomsByPrice() async {
+    state.when(
+      data: (data) {
+        // 価格降順でソート
+        final sorted = data.entries.toList()..sort((a, b) => b.value.calculateTotalPrice().compareTo(a.value.calculateTotalPrice()));
+        final sortedMap = Map.fromEntries(sorted.reversed);
+        state = AsyncValue.data(sortedMap);
+      },
+      error: (e, t) {},
+      loading: () {},
+    );
+  }
+
+  void sortCustomsByCreateDate() async {
+    state = await AsyncValue.guard(() async {
+      return CustomRepository.getAllCustoms();
+    });
+  }
 }
