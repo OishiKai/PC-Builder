@@ -13,6 +13,21 @@ class PartsListWidget extends ConsumerWidget {
     SizeConfig().init(context);
     final custom = ref.watch(createCustomNotifierProvider);
 
+    if (custom.isEmpty()) {
+      return Padding(
+        padding: EdgeInsets.only(top: SizeConfig.blockSizeVertical * 30),
+        child: const Center(
+          child: Text(
+            'パーツを追加してください',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+              color: Colors.grey,
+            ),
+          ),
+        ),
+      );
+    }
     List<Widget> cells() {
       List<Widget> cells = [];
       custom.align().forEach((key, value) {
