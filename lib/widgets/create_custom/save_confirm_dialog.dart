@@ -1,13 +1,12 @@
 import 'package:custom_pc/config/size_config.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../providers/create_custom.dart';
 import '../../providers/stored_customs.dart';
 
 class SaveConfirmDialog extends ConsumerStatefulWidget {
-  SaveConfirmDialog({Key? key}) : super(key: key);
+  const SaveConfirmDialog({Key? key}) : super(key: key);
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _SaveConfirmDialogState();
@@ -141,7 +140,6 @@ class _SaveConfirmDialogState extends ConsumerState<SaveConfirmDialog> {
                       ref.read(storedCustomsNotifierProvider.notifier).addCustom(namedCustom);
                       int count = 0;
                       Navigator.popUntil(context, (_) => count++ >= 2);
-                      // Navigator.popUntil(context, (route) => route.isFirst);
                     },
                     child: const Padding(
                       padding: EdgeInsets.symmetric(horizontal: 20),

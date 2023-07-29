@@ -1,6 +1,5 @@
 import 'package:custom_pc/config/size_config.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../providers/create_custom.dart';
@@ -19,6 +18,7 @@ class _RenameCustomDialogState extends ConsumerState<RenameCustomDialog> {
   void initState() {
     super.initState();
     customName = widget.storedName;
+    _controller.text = customName;
   }
 
   @override
@@ -32,7 +32,6 @@ class _RenameCustomDialogState extends ConsumerState<RenameCustomDialog> {
       });
     }
 
-    _controller.text = customName;
     _controller.selection = TextSelection.fromPosition(TextPosition(offset: _controller.text.length));
 
     return SimpleDialog(
