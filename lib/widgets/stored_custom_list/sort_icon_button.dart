@@ -7,9 +7,10 @@ enum SortState {
   price,
 }
 
+final alignState = StateProvider<SortState>((ref) => SortState.date);
+
 class SortIconButton extends ConsumerWidget {
-  SortIconButton({super.key});
-  final alignState = StateProvider<SortState>((ref) => SortState.date);
+  const SortIconButton({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

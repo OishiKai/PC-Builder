@@ -2,6 +2,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../domain/database/custom_repository.dart';
 import '../models/custom.dart';
+import '../widgets/stored_custom_list/sort_icon_button.dart';
 
 part 'stored_customs.g.dart';
 
@@ -16,6 +17,7 @@ class StoredCustomsNotifier extends _$StoredCustomsNotifier {
   }
 
   void refresh() async {
+    ref.read(alignState.notifier).update((state) => SortState.date);
     state = await AsyncValue.guard(() async {
       return CustomRepository.getAllCustoms();
     });
