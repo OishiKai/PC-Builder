@@ -8,14 +8,13 @@ import '../config/size_config.dart';
 class PartsListPage extends StatelessWidget {
   const PartsListPage({super.key});
   final _mainColor = const Color.fromRGBO(60, 130, 80, 1);
-  //final PartsCategory category;
 
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: PartsListAppBar(),
+      appBar: const PartsListAppBar(),
       body: GestureDetector(
         behavior: HitTestBehavior.opaque,
         onTap: () {
@@ -46,8 +45,8 @@ class PartsListPage extends StatelessWidget {
                   ),
                   primary: _mainColor,
                 ),
-                child: Row(
-                  children: const [
+                child: const Row(
+                  children: [
                     SizedBox(
                       width: 8,
                     ),

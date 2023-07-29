@@ -33,6 +33,20 @@ class PartsListWidget extends ConsumerWidget {
 
     return partsList.when(
       data: (parts) {
+        if (parts.isEmpty) {
+          return Center(
+            child: FittedBox(
+              fit: BoxFit.fitWidth,
+              child: Text(
+                '検索条件に一致するパーツはありませんでした。',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.grey[600],
+                ),
+              ),
+            ),
+          );
+        }
         return Expanded(
           child: ListView(children: [
             for (int i = 0; i < parts.length; i++)
@@ -73,7 +87,7 @@ class PartsListWidget extends ConsumerWidget {
                             ),
                             child: Stack(
                               children: [
-                                Container(width: SizeConfig.blockSizeHorizontal * 45, height: 160 - SizeConfig.blockSizeHorizontal * 0.5, child: Image.network(parts[i].image)),
+                                SizedBox(width: SizeConfig.blockSizeHorizontal * 45, height: 160 - SizeConfig.blockSizeHorizontal * 0.5, child: Image.network(parts[i].image)),
                               ],
                             ),
                           ),
