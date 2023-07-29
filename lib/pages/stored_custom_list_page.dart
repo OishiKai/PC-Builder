@@ -1,4 +1,5 @@
 import 'package:custom_pc/config/size_config.dart';
+import 'package:custom_pc/tutorial_page.dart';
 import 'package:custom_pc/widgets/stored_custom_list/new_custom_bottom_bar.dart';
 import 'package:custom_pc/widgets/stored_custom_list/sort_icon_button.dart';
 import 'package:custom_pc/widgets/stored_custom_list/stored_customs_table_widget.dart';
@@ -39,7 +40,23 @@ class StoredCustomListPage extends StatelessWidget {
         ),
         centerTitle: true,
         elevation: 0,
-        leading: SortIconButton(),
+        leading: const SortIconButton(),
+        actions: [
+          IconButton(
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (_) {
+                  return FlutterOverboardPage();
+                },
+              );
+            },
+            icon: const Icon(
+              Icons.question_mark,
+              color: mainColor,
+            ),
+          ),
+        ],
       ),
       body: const Padding(
         padding: EdgeInsets.only(top: 8.0),
