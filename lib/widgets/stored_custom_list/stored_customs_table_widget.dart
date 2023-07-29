@@ -19,6 +19,31 @@ class StoredCustomsListWidget extends ConsumerWidget {
     SizeConfig().init(context);
     return storedCustoms.when(
       data: (data) {
+        if (data.isEmpty) {
+          return Container(
+            padding: const EdgeInsets.only(top: 16, left: 8, right: 8),
+            decoration: const BoxDecoration(
+              color: Color(0xFFEDECF2),
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(20),
+                topRight: Radius.circular(20),
+              ),
+            ),
+            child: Center(
+              child: FittedBox(
+                fit: BoxFit.fitWidth,
+                child: Text(
+                  '保存済みカスタムはありません',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.grey[600],
+                  ),
+                ),
+              ),
+            ),
+          );
+        }
+
         List<Widget> cells() {
           final List<Widget> cells = [];
           data.forEach((key, value) {
