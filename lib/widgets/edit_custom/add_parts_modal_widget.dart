@@ -10,7 +10,6 @@ class AddPartsModalWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     SizeConfig().init(context);
-
     Widget categoryGrit(PartsCategory category) {
       Icon categoryIcon;
       switch (category) {
@@ -150,8 +149,7 @@ class AddPartsModalWidget extends ConsumerWidget {
             ),
           ),
           SizedBox(height: SizeConfig.blockSizeVertical * 2),
-          Container(
-            height: 400,
+          Expanded(
             child: GridView.count(
               mainAxisSpacing: 10,
               crossAxisCount: 3,

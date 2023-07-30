@@ -69,7 +69,7 @@ class PartsListWidget extends ConsumerWidget {
                 child: Column(
                   children: [
                     Container(
-                      height: 150,
+                      height: SizeConfig.screenHeight < 1300 ? 150 : 200,
                       width: SizeConfig.blockSizeHorizontal * 98,
                       decoration: BoxDecoration(
                           color: Colors.white,

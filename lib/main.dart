@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
       home: StoredCustomListPage(),
     );
@@ -58,7 +58,7 @@ class RootPage extends ConsumerWidget {
             ElevatedButton(
                 onPressed: () async {
                   final storedCustoms = await CustomRepository.getAllCustoms();
-                  storedCustoms?.forEach((key, value) {
+                  storedCustoms.forEach((key, value) {
                     print('$key: ${value.name}');
                   });
                   Navigator.push(
