@@ -45,34 +45,39 @@ class ShopsWidget extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      const SizedBox(
-                        width: 8,
-                      ),
-                      Icon(
-                        Icons.shopping_cart,
-                        color: mainColor,
-                        size: 30,
-                      ),
-                      const SizedBox(
-                        width: 8,
-                      ),
                       SizedBox(
-                        //width: SizeConfig.blockSizeHorizontal * 30,
-                        child: Text(
-                          shops[i].shopName,
-                          softWrap: false,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: mainColor,
-                          ),
+                        width: SizeConfig.blockSizeHorizontal * 54,
+                        child: Row(
+                          children: [
+                            const SizedBox(
+                              width: 8,
+                            ),
+                            Icon(
+                              Icons.shopping_cart,
+                              color: mainColor,
+                              size: 30,
+                            ),
+                            const SizedBox(
+                              width: 8,
+                            ),
+                            SizedBox(
+                              width: SizeConfig.blockSizeHorizontal * 40,
+                              child: Text(
+                                shops[i].shopName,
+                                softWrap: false,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: mainColor,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                      const Expanded(
-                        child: SizedBox(),
-                      ),
+                      const Spacer(),
                       Text(
                         shops[i].price,
                         style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.redAccent),
