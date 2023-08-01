@@ -1,6 +1,7 @@
 import 'package:custom_pc/widgets/parts_list/parts_list_app_bar.dart';
 import 'package:custom_pc/widgets/parts_list/parts_list_cell.dart';
 import 'package:custom_pc/widgets/parts_list/search_parameter_modal.dart';
+import 'package:custom_pc/widgets/parts_list/searching_parameter_widget.dart';
 import 'package:flutter/material.dart';
 
 import '../config/size_config.dart';
@@ -70,6 +71,10 @@ class PartsListPage extends StatelessWidget {
                 ),
               ),
             ),
+            const SizedBox(
+              height: 4,
+            ),
+            const SearchingParameterWidget(),
             const SizedBox(
               height: 8,
             ),

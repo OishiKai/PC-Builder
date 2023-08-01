@@ -61,6 +61,32 @@ class CpuSearchParameter extends CategorySearchParameter {
   }
 
   @override
+  List<String> selectedParameterNames() {
+    List<String> params = [];
+    for (var element in makers) {
+      if (element.isSelect) {
+        params.add(element.name);
+      }
+    }
+    for (var element in processors) {
+      if (element.isSelect) {
+        params.add(element.name);
+      }
+    }
+    for (var element in series) {
+      if (element.isSelect) {
+        params.add(element.name);
+      }
+    }
+    for (var element in sockets) {
+      if (element.isSelect) {
+        params.add(element.name);
+      }
+    }
+    return params;
+  }
+
+  @override
   List<Map<String, List<PartsSearchParameter>>> alignParameters() {
     return [
       {'メーカー': makers},

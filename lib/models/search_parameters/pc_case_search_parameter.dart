@@ -2,7 +2,6 @@ import 'package:custom_pc/domain/search_parameter_parser/pc_case_search_paramete
 import 'package:custom_pc/models/category_search_parameter.dart';
 
 class PcCaseSearchParameter extends CategorySearchParameter {
-
   final List<PartsSearchParameter> supportMotherBoards;
   final List<PartsSearchParameter> supportGraphicsCards;
   final List<PartsSearchParameter> colors;
@@ -55,6 +54,27 @@ class PcCaseSearchParameter extends CategorySearchParameter {
     for (var element in colors) {
       if (element.isSelect) {
         params.add(element.parameter);
+      }
+    }
+    return params;
+  }
+
+  @override
+  List<String> selectedParameterNames() {
+    List<String> params = [];
+    for (var element in supportMotherBoards) {
+      if (element.isSelect) {
+        params.add(element.name);
+      }
+    }
+    for (var element in supportGraphicsCards) {
+      if (element.isSelect) {
+        params.add(element.name);
+      }
+    }
+    for (var element in colors) {
+      if (element.isSelect) {
+        params.add(element.name);
       }
     }
     return params;
