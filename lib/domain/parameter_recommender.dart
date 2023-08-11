@@ -26,7 +26,7 @@ class ParameterRecommender {
         // TODO: Handle this case.
         break;
       case PartsCategory.memory:
-        // TODO: Handle this case.
+        recommendedParameter = recommendParamsForMemory();
         break;
       case PartsCategory.motherBoard:
         // TODO: Handle this case.
@@ -60,6 +60,37 @@ class ParameterRecommender {
     return specInfo;
   }
 
+  int? getParamIndex(String paramSectionName, String paramName) {
+    int specIndex = 0;
+    bool isComplete = false;
+    final p = params.alignParameters();
+    for (var para in p) {
+      for (var par in para.entries) {
+        specIndex = 0;
+        if (par.key.contains(paramSectionName)) {
+          for (var element in par.value) {
+            if (element.name.contains(paramName)) {
+              isComplete = true;
+              break;
+            }
+            specIndex++;
+          }
+        }
+        if (isComplete) {
+          break;
+        }
+      }
+      if (isComplete) {
+        break;
+      }
+    }
+    if (isComplete) {
+      return specIndex;
+    } else {
+      return null;
+    }
+  }
+
   List<RecommendParameter> recommendParamsForCpu() {
     if (custom.motherBoard == null) {
       return [];
@@ -76,38 +107,42 @@ class ParameterRecommender {
 
     // CPUのパラメータに選択中のマザーボードのソケット形状があるか確認
     // ある場合は、そのソケット形状のインデックスを返す
-    int paramIndex = 0;
-    int specIndex = 0;
-    bool isComplete = false;
-    final p = params.alignParameters();
-    for (var para in p) {
-      for (var par in para.entries) {
-        specIndex = 0;
-        if (par.key.contains('ソケット\n形状')) {
-          for (var element in par.value) {
-            if (element.name.contains(socket)) {
-              isComplete = true;
-              break;
-            }
-            specIndex++;
-          }
-        }
-        if (isComplete) {
-          break;
-        }
-      }
-      if (isComplete) {
-        break;
-      }
-    }
-
-    if (isComplete) {
+    final specIndex = getParamIndex('ソケット\n形状', socket);
+    if (specIndex != null) {
       return [
         // "ソケット形状"は3番目のパラメータなので、3を指定
         RecommendParameter(PartsCategory.motherBoard, 3, socket, specIndex),
       ];
     }
-
     return [];
+  }
+
+  List<RecommendParameter> recommendParamsForMemory() {
+    if (custom.motherBoard == null) {
+      return [];
+    }
+
+    // マザーボードのメモリタイプを取得
+    final motherBoard = custom.motherBoard!;
+    final rawMemoryType = _extractSpec(motherBoard.specs!, '詳細メモリタイプ');
+    if (rawMemoryType == null) {
+      return [];
+    }
+    // メモリインターフェース(DIMMなど)とメモリタイプ(DDR4など)に分割
+    final memoryInterface = rawMemoryType.split(' ')[0];
+    final memoryType = rawMemoryType.split(' ')[1];
+
+    // メモリのパラメータに、選択中のマザーボードのメモリインターフェースとメモリタイプがあるか確認
+    final memoryInterfaceIndex = getParamIndex('インター\nフェース', memoryInterface);
+    final memoryTypeIndex = getParamIndex('規格', memoryType);
+
+    List<RecommendParameter> recs = [];
+    if (memoryInterfaceIndex != null) {
+      recs.add(RecommendParameter(PartsCategory.memory, 1, memoryInterface, memoryInterfaceIndex));
+    }
+    if (memoryTypeIndex != null) {
+      recs.add(RecommendParameter(PartsCategory.memory, 2, memoryType, memoryTypeIndex));
+    }
+    return recs;
   }
 }
