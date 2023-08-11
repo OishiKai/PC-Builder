@@ -62,6 +62,8 @@ dev_dependencies:
   build_runner:
   riverpod_generator:
   freezed:
+  custom_lint:
+  riverpod_lint:
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

@@ -12,7 +12,6 @@ import '../domain/search_parameter_parser/pc_case_search_parameter_parser.dart';
 import '../domain/search_parameter_parser/power_unit_search_parameter_parser.dart';
 import '../domain/search_parameter_parser/ssd_search_parameter_parser.dart';
 
-
 class CategorySearchParameterNotifier extends StateNotifier<CategorySearchParameter?> {
   CategorySearchParameterNotifier(super.state);
 
@@ -29,7 +28,7 @@ class CategorySearchParameterNotifier extends StateNotifier<CategorySearchParame
   }
 
   // 別のカテゴリの検索条件に切り替える
-  void replaceParameters(PartsCategory category) async {
+  Future<void> replaceParameters(PartsCategory category) async {
     switch (category) {
       case PartsCategory.cpu:
         state = await CpuSearchParameterParser.fetchSearchParameter();
