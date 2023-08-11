@@ -23,7 +23,7 @@ class ParameterRecommender {
         recommendedParameter = recommendParamsForCpu();
         break;
       case PartsCategory.cpuCooler:
-        // TODO: Handle this case.
+        recommendedParameter = recommendParamsForCpuCooler();
         break;
       case PartsCategory.memory:
         recommendedParameter = recommendParamsForMemory();
@@ -107,11 +107,48 @@ class ParameterRecommender {
 
     // CPUのパラメータに選択中のマザーボードのソケット形状があるか確認
     // ある場合は、そのソケット形状のインデックスを返す
+    print(socket);
     final specIndex = getParamIndex('ソケット\n形状', socket);
     if (specIndex != null) {
       return [
         // "ソケット形状"は3番目のパラメータなので、3を指定
         RecommendParameter(PartsCategory.motherBoard, 3, socket, specIndex),
+      ];
+    }
+    return [];
+  }
+
+  List<RecommendParameter> recommendParamsForCpuCooler() {
+    if (custom.motherBoard == null) {
+      return [];
+    }
+
+    // マザーボードのソケット形状を取得
+    final motherBoard = custom.motherBoard!;
+    final rawSocket = _extractSpec(motherBoard.specs!, 'CPUソケット');
+    if (rawSocket == null) {
+      return [];
+    }
+    bool isIntel = false;
+    String socket = '';
+    if (rawSocket.contains('LGA')) {
+      isIntel = true;
+      socket = rawSocket.replaceAll('LGA', '');
+    } else {
+      socket = rawSocket.replaceAll('Socket', '');
+    }
+
+    // CPUクーラーのパラメータに、選択中のCPUのソケット形状があるか確認
+    int? specIndex;
+    if (isIntel) {
+      specIndex = getParamIndex('intel\nソケット', socket);
+    } else {
+      specIndex = getParamIndex('AMD\nソケット', socket);
+    }
+    if (specIndex != null) {
+      return [
+        // intelソケットなら1番目のパラメータ、AMDソケットなら2番目のパラメータ
+        RecommendParameter(PartsCategory.cpuCooler, isIntel ? 1 : 2, socket, specIndex),
       ];
     }
     return [];
