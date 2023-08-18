@@ -11,7 +11,9 @@
 ## Install
 
 ### iOS
+https://apps.apple.com/jp/app/pc-builder-%E8%87%AA%E4%BD%9Cpc%E3%82%A2%E3%82%B7%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%88/id6455426079
 ### Android
+https://play.google.com/store/apps/details?id=com.appdeveloper.kai.pc_builder&pli=1
 
 ## 導入ライブラリ
  - flutter_riverpod
