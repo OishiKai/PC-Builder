@@ -17,18 +17,6 @@ class RecommendParametersDialog extends ConsumerStatefulWidget {
 }
 
 class _RecommendParametersDialogState extends ConsumerState<RecommendParametersDialog> {
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   final params = ref.read(searchParameterProvider)!;
-  //   for (final rec in widget.recommendParameters) {
-  //     final paramName = params.alignParameters()[rec.paramSectionIndex].keys.join('');
-  //     ref.read(searchParameterProvider.notifier).toggleParameterSelect(paramName, rec.paramIndex);
-  //   }
-  //   final url = UrlBuilder.createURLWithParameters(params.standardPage(), params.selectedParameters());
-  //   ref.read(pcPartsListNotifierProvider.notifier).replaceSearchUrl(url);
-  // }
-
   @override
   Widget build(BuildContext context) {
     const mainColor = Color.fromRGBO(60, 130, 80, 1);
@@ -82,7 +70,7 @@ class _RecommendParametersDialogState extends ConsumerState<RecommendParametersD
                       Row(
                         children: [
                           Text(
-                            '${params.alignParameters()[rec.paramSectionIndex].keys.join('').replaceFirst('\n', '')} :',
+                            '${params.alignParameters()[rec.paramSectionIndex].keys.join('').replaceAll('\n', '').split('(')[0]} :',
                             style: const TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.bold,

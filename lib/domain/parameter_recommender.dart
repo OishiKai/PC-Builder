@@ -29,7 +29,8 @@ class ParameterRecommender {
         recommendedParameter = recommendParamsForMemory();
         break;
       case PartsCategory.motherBoard:
-        // TODO: Handle this case.
+        print('motherBoard');
+        recommendedParameter = recommendParamsForMotherBoard();
         break;
       case PartsCategory.graphicsCard:
         // TODO: Handle this case.
@@ -180,6 +181,58 @@ class ParameterRecommender {
     if (memoryTypeIndex != null) {
       recs.add(RecommendParameter(PartsCategory.memory, 2, memoryType, memoryTypeIndex));
     }
+    return recs;
+  }
+
+  List<RecommendParameter> recommendParamsForMotherBoard() {
+    if (custom.cpu == null && custom.memory == null) {
+      return [];
+    }
+
+    List<RecommendParameter> recs = [];
+
+    if (custom.cpu != null) {
+      // CPUのソケット形状を取得
+      final cpu = custom.cpu!;
+      final rawSocket = _extractSpec(cpu.specs!, 'ソケット形状');
+      if (rawSocket != null) {
+        bool isIntel = false;
+        String socket = '';
+        if (rawSocket.contains('LGA')) {
+          isIntel = true;
+          socket = rawSocket.replaceAll('LGA', '').trim();
+        } else {
+          socket = rawSocket.replaceAll('Socket', '').trim();
+        }
+        print(socket);
+        print(isIntel);
+        if (isIntel && getParamIndex('CPU\nソケット\n(intel)', socket) != null) {
+          recs.add(RecommendParameter(PartsCategory.motherBoard, 0, socket, getParamIndex('CPU\nソケット\n(intel)', socket)!));
+        }
+
+        if (!isIntel && getParamIndex('CPU\nソケット\n(AMD)', socket) != null) {
+          recs.add(RecommendParameter(PartsCategory.motherBoard, 1, socket, getParamIndex('CPU\nソケット\n(AMD)', socket)!));
+        }
+      }
+    }
+
+    if (custom.memory != null) {
+      // メモリの規格を取得
+      final memory = custom.memory!;
+      final rawMemoryType = _extractSpec(memory.specs!, 'メモリ規格');
+      if (rawMemoryType != null) {
+        // メモリタイプ(DDR4など)に分割
+        final memoryType = rawMemoryType.split(' ')[0];
+
+        // マザーボードのパラメータに、選択中のメモリのメモリインターフェースとメモリタイプがあるか確認
+        final memoryTypeIndex = getParamIndex('メモリ\nタイプ', memoryType);
+
+        if (memoryTypeIndex != null) {
+          recs.add(RecommendParameter(PartsCategory.motherBoard, 3, rawMemoryType, memoryTypeIndex));
+        }
+      }
+    }
+
     return recs;
   }
 }
