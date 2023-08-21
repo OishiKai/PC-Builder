@@ -1,3 +1,4 @@
+import 'package:custom_pc/v2/widgets/sort_icon_button.dart';
 import 'package:custom_pc/v2/widgets/stored_custom_list_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -32,16 +33,7 @@ class StoredCustomListPageV2 extends StatelessWidget {
               )
             ],
           ),
-          leading: IconButton(
-            onPressed: () {
-              debugPrint('on pressed sort icon button');
-            },
-            icon: Icon(
-              Icons.sort,
-              color: Theme.of(context).colorScheme.primary,
-              size: 40,
-            ),
-          ),
+          leading: SortIconButton(),
           actions: [
             IconButton(
               onPressed: () {
