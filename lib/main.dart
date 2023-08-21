@@ -1,4 +1,5 @@
-import 'package:custom_pc/pages/stored_custom_list_page.dart';
+import 'package:custom_pc/v2/color_schemes.g.dart';
+import 'package:custom_pc/v2/providers/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -18,14 +19,46 @@ void main() {
   });
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+// class MyApp extends StatelessWidget {
+//   const MyApp({Key? key}) : super(key: key);
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return const MaterialApp(
+//       debugShowCheckedModeBanner: false,
+//       home: StoredCustomListPage(),
+//     );
+//   }
+// }
+
+// v2
+class MyApp extends ConsumerWidget {
+  const MyApp({super.key});
+
+  static const Map<TargetPlatform, PageTransitionsBuilder> _defaultBuilders = <TargetPlatform, PageTransitionsBuilder>{
+    TargetPlatform.android: CupertinoPageTransitionsBuilder(),
+    TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+  };
+
+  ThemeData createTheme(ColorScheme colorScheme) {
+    return ThemeData(
+      useMaterial3: true,
+      colorScheme: colorScheme,
+      fontFamily: 'Noto Sans JP',
+      pageTransitionsTheme: const PageTransitionsTheme(builders: _defaultBuilders),
+    );
+  }
 
   @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
+  Widget build(BuildContext context, WidgetRef ref) {
+    final router = ref.watch(routerProvider);
+    return MaterialApp.router(
+      theme: createTheme(lightColorScheme),
+      darkTheme: createTheme(darkColorScheme),
       debugShowCheckedModeBanner: false,
-      home: StoredCustomListPage(),
+      routerDelegate: router.routerDelegate,
+      routeInformationParser: router.routeInformationParser,
+      routeInformationProvider: router.routeInformationProvider,
     );
   }
 }
