@@ -30,16 +30,19 @@ class StoredCustomCard extends StatelessWidget {
                         colorBlendMode: BlendMode.darken,
                       ))),
               const SizedBox(width: 16),
-              Text(
-                custom.name!,
-                textAlign: TextAlign.start,
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: Theme.of(context).colorScheme.primary,
+              Expanded(
+                child: Text(
+                  custom.name!,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                  textAlign: TextAlign.start,
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
                 ),
               ),
-              const Spacer(),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [

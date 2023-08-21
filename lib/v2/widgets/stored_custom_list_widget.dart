@@ -24,10 +24,19 @@ class StoredCustomListWidget extends ConsumerWidget {
             return false;
           },
           child: ListView.builder(
-            itemCount: data.length,
+            // 保存済みカスタムの最後に余白を作るために+1
+            itemCount: data.length + 1,
             itemBuilder: (context, index) {
-              return StoredCustomCard(
-                custom: customList[index].custom,
+              if (index == data.length) {
+                return const SizedBox(
+                  height: 80,
+                );
+              }
+              return InkWell(
+                onTap: () => debugPrint('tapped'),
+                child: StoredCustomCard(
+                  custom: customList[index].custom,
+                ),
               );
             },
           ),
