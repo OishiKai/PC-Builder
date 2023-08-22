@@ -1,7 +1,9 @@
 import 'package:custom_pc/providers/stored_customs.dart';
+import 'package:custom_pc/v2/providers/focus_custom.dart';
 import 'package:custom_pc/v2/widgets/stored_custom_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../models/custom.dart';
 
@@ -14,6 +16,7 @@ class StoredCustomListWidget extends ConsumerWidget {
 
     return storedCustoms.when(data: (data) {
       final customList = [];
+      // id + custom のMapをListに変換
       data.forEach((key, value) => customList.add(_StoredCustom(id: key, custom: value)));
 
       return Padding(
@@ -33,7 +36,10 @@ class StoredCustomListWidget extends ConsumerWidget {
                 );
               }
               return InkWell(
-                onTap: () => debugPrint('tapped'),
+                onTap: () {
+                  ref.read(focusCustomProvider.notifier).setState(customList[index].custom);
+                  context.push('/home/detail');
+                },
                 child: StoredCustomCard(
                   custom: customList[index].custom,
                 ),
