@@ -11,6 +11,7 @@ part 'custom.freezed.dart';
 @freezed
 class Custom with _$Custom {
   const factory Custom({
+    String? id,
     // Custom名
     String? name,
     // 総額

@@ -70,6 +70,7 @@ class CustomRepository {
       final caseFan = await PcPartsRepository.selectPcPartsById(custom['case_fan_id'] as int?);
 
       customList[id] = Custom(
+        id: id,
         name: name,
         totalPrice: price,
         cpu: cpu,
@@ -125,7 +126,6 @@ class CustomRepository {
       'case_fan_id': await partsIdMap[PartsCategory.caseFan],
       'date': '${DateTime.now().year}/${DateTime.now().month}/${DateTime.now().day}',
     };
-    print('${DateTime.now().year}/${DateTime.now().month}/${DateTime.now().day}');
     // カスタム情報を更新
     await db.update(
       'custom',
@@ -163,5 +163,47 @@ class CustomRepository {
       }
     });
     return partsIdMap;
+  }
+
+  // v2 Custom取得
+  static Future<List<Custom>> getAllCustomsV2() async {
+    final db = await DataStoreUseCase.database;
+    final stored = await db.query('custom');
+    if (stored.isEmpty) return [];
+
+    final List<Custom> customList = [];
+    for (var custom in stored) {
+      final id = custom['id'] as String;
+      final name = custom['name'] as String;
+      final price = custom['price'] as String;
+      final date = custom['date'] as String;
+
+      final cpu = await PcPartsRepository.selectPcPartsById(custom['cpu_id'] as int?);
+      final cpuCooler = await PcPartsRepository.selectPcPartsById(custom['cpu_cooler_id'] as int?);
+      final memory = await PcPartsRepository.selectPcPartsById(custom['memory_id'] as int?);
+      final motherBoard = await PcPartsRepository.selectPcPartsById(custom['mother_board_id'] as int?);
+      final graphicsCard = await PcPartsRepository.selectPcPartsById(custom['graphics_card_id'] as int?);
+      final ssd = await PcPartsRepository.selectPcPartsById(custom['ssd_id'] as int?);
+      final pcCase = await PcPartsRepository.selectPcPartsById(custom['pc_case_id'] as int?);
+      final powerUnit = await PcPartsRepository.selectPcPartsById(custom['power_unit_id'] as int?);
+      final caseFan = await PcPartsRepository.selectPcPartsById(custom['case_fan_id'] as int?);
+
+      customList.add(Custom(
+        id: id,
+        name: name,
+        totalPrice: price,
+        cpu: cpu,
+        cpuCooler: cpuCooler,
+        memory: memory,
+        motherBoard: motherBoard,
+        graphicsCard: graphicsCard,
+        ssd: ssd,
+        pcCase: pcCase,
+        powerUnit: powerUnit,
+        caseFan: caseFan,
+        date: date,
+      ));
+    }
+    return customList;
   }
 }
