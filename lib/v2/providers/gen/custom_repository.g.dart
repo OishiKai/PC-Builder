@@ -29,7 +29,7 @@ class _SystemHash {
   }
 }
 
-String _$CustomRepositoryNotifierHash() => r'0017cae427c142baea1cc900d9df93f1bd3b2750';
+String _$CustomRepositoryNotifierHash() => r'8fcc284ed4c54faee9503577a08020923e561958';
 
 /// See also [CustomRepositoryNotifier].
 final customRepositoryNotifierProvider = AutoDisposeAsyncNotifierProvider<CustomRepositoryNotifier, List<Custom>>(

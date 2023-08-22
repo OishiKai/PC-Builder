@@ -1,6 +1,7 @@
-import 'package:custom_pc/providers/stored_customs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../providers/custom_repository.dart';
 
 enum SortState {
   date,
@@ -18,10 +19,10 @@ class SortIconButton extends ConsumerWidget {
     return IconButton(
       onPressed: () {
         if (sort == SortState.date) {
-          ref.read(storedCustomsNotifierProvider.notifier).sortCustomsByPrice();
+          ref.read(customRepositoryNotifierProvider.notifier).sortCustomsByPrice();
           ref.read(_alignState.notifier).update((state) => SortState.price);
         } else {
-          ref.read(storedCustomsNotifierProvider.notifier).sortCustomsByCreateDate();
+          ref.read(customRepositoryNotifierProvider.notifier).sortCustomsByCreateDate();
           ref.read(_alignState.notifier).update((state) => SortState.date);
         }
       },

@@ -1,24 +1,18 @@
-import 'package:custom_pc/providers/stored_customs.dart';
-import 'package:custom_pc/v2/providers/focus_custom.dart';
+import 'package:custom_pc/v2/providers/custom_repository.dart';
 import 'package:custom_pc/v2/widgets/stored_custom_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../models/custom.dart';
-
+/// 保存済みカスタム一覧表示Widget
 class StoredCustomListWidget extends ConsumerWidget {
   const StoredCustomListWidget({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final storedCustoms = ref.watch(storedCustomsNotifierProvider);
+    final storedCustoms = ref.watch(customRepositoryNotifierProvider);
 
     return storedCustoms.when(data: (data) {
-      final customList = [];
-      // id + custom のMapをListに変換
-      data.forEach((key, value) => customList.add(_StoredCustom(id: key, custom: value)));
-
       return Padding(
         padding: const EdgeInsets.all(8.0),
         child: NotificationListener<OverscrollIndicatorNotification>(
@@ -37,11 +31,11 @@ class StoredCustomListWidget extends ConsumerWidget {
               }
               return InkWell(
                 onTap: () {
-                  ref.read(focusCustomProvider.notifier).setState(customList[index].custom);
-                  context.push('/home/detail');
+                  // 詳細画面(CustomDetailPage)へ遷移
+                  context.push('/home/detail/${data[index].id}');
                 },
                 child: StoredCustomCard(
-                  custom: customList[index].custom,
+                  custom: data[index],
                 ),
               );
             },
@@ -58,15 +52,4 @@ class StoredCustomListWidget extends ConsumerWidget {
       );
     });
   }
-}
-
-// MapをListにする用のクラス
-class _StoredCustom {
-  _StoredCustom({
-    required this.id,
-    required this.custom,
-  });
-
-  final String id;
-  final Custom custom;
 }

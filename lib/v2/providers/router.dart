@@ -37,9 +37,12 @@ final routerProvider = Provider<GoRouter>((ref) {
                 },
                 routes: [
                   GoRoute(
-                    path: 'detail',
+                    path: 'detail/:id',
                     builder: (context, state) {
-                      return const CustomDetailPage();
+                      final String id = state.pathParameters['id']!;
+                      return CustomDetailPage(
+                        id: id,
+                      );
                     },
                   )
                 ],
