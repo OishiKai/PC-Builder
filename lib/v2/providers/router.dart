@@ -1,7 +1,7 @@
-import 'package:custom_pc/v2/custom_detail_page.dart';
-import 'package:custom_pc/v2/dashboard.dart';
 import 'package:custom_pc/v2/next_tab_page.dart';
-import 'package:custom_pc/v2/stored_custom_list_page.dart';
+import 'package:custom_pc/v2/pages/custom_detail_page.dart';
+import 'package:custom_pc/v2/pages/dashboard.dart';
+import 'package:custom_pc/v2/pages/stored_custom_list_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';

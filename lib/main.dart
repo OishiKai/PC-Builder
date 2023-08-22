@@ -1,5 +1,5 @@
-import 'package:custom_pc/v2/color_schemes.g.dart';
 import 'package:custom_pc/v2/providers/router.dart';
+import 'package:custom_pc/v2/theme/color_schemes.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
