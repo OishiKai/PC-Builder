@@ -23,7 +23,7 @@ class StoredCustomCard extends StatelessWidget {
                   height: 60.0,
                   width: 60.0,
                   child: ClipRRect(
-                      borderRadius: BorderRadius.circular(100),
+                      borderRadius: BorderRadius.circular(10),
                       child: Image.network(
                         custom.getRandomPartsImage(),
                         fit: BoxFit.cover,

@@ -19,8 +19,18 @@ class CustomDetailPage extends ConsumerWidget {
               onPressed: () => Navigator.pop(context),
             ),
           ),
-          body: Center(
-            child: Text(custom.name!),
+          body: Container(
+            color: Theme.of(context).colorScheme.background,
+            child: Center(
+              child: Text(
+                custom.name!,
+                style: TextStyle(
+                  fontSize: 24,
+                  color: Theme.of(context).colorScheme.onSecondary,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
           ),
         );
       },
