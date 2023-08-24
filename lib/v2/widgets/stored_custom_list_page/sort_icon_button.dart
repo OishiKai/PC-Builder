@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../providers/custom_repository.dart';
+import '../../providers/custom_repository.dart';
 
 enum SortState {
   date,

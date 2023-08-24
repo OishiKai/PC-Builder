@@ -2,7 +2,7 @@ import 'package:custom_pc/v2/providers/custom_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../widgets/custom_summary_widget.dart';
+import '../widgets/custom_detail_page/custom_summary_widget.dart';
 
 class CustomDetailPage extends ConsumerWidget {
   const CustomDetailPage({super.key, required this.id});

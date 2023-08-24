@@ -3,7 +3,7 @@ import 'package:custom_pc/v2/custom_summarizer.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import '../../models/custom.dart';
+import '../../../models/custom.dart';
 
 /// CustomのSummaryを表示するWidget
 class CustomSummaryWidget extends StatefulWidget {
