@@ -8,15 +8,11 @@ class SummaryInfoCell extends StatelessWidget {
     required this.icon,
     required this.title,
     required this.category,
-    required this.backgroundColor,
-    required this.textColor,
   });
 
   final IconData icon;
   final String title;
   final PartsCategory category;
-  final Color backgroundColor;
-  final Color textColor;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +25,7 @@ class SummaryInfoCell extends StatelessWidget {
         width: MediaQuery.of(context).size.width * 0.45,
         height: MediaQuery.of(context).size.width * 0.45,
         decoration: BoxDecoration(
-          color: backgroundColor,
+          color: Theme.of(context).colorScheme.surfaceVariant,
           borderRadius: BorderRadius.circular(10),
         ),
         child: Column(
@@ -39,7 +35,7 @@ class SummaryInfoCell extends StatelessWidget {
             Icon(
               icon,
               size: 50,
-              color: textColor,
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
             ),
             const SizedBox(
               height: 4,
@@ -52,7 +48,7 @@ class SummaryInfoCell extends StatelessWidget {
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 18,
-                color: textColor,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
               ),
             ),
             const SizedBox(
@@ -61,7 +57,7 @@ class SummaryInfoCell extends StatelessWidget {
             Text(
               category.categoryShortName,
               style: TextStyle(
-                color: textColor,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
                 fontSize: 12,
                 fontWeight: FontWeight.bold,
               ),
