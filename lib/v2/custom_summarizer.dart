@@ -27,7 +27,7 @@ class CustomSummarizer {
   //   'onStorage': Theme.of(context).colorScheme.onPrimary,
   // };
 
-  static List<Widget> getSummaryWidgets(Custom custom, Brightness brightness) {
+  static List<SummaryInfoCell> getSummaryWidgets(Custom custom, Brightness brightness) {
     // 各パーツのSummaryInfoCellを作成し、最後にnullを除く
     return [
       _summarizeCpu(custom.cpu, brightness),
@@ -37,10 +37,10 @@ class CustomSummarizer {
       _summarizeGraphicsCard(custom.graphicsCard, brightness),
       _summarizeSsd(custom.ssd, brightness),
       _summarizePowerUnit(custom.powerUnit, brightness),
-    ].whereType<Widget>().toList();
+    ].whereType<SummaryInfoCell>().toList();
   }
 
-  static Widget? _summarizeCpu(PcParts? parts, Brightness brightness) {
+  static SummaryInfoCell? _summarizeCpu(PcParts? parts, Brightness brightness) {
     if (parts == null) return null;
 
     const IconData icon = Icons.memory;
@@ -66,7 +66,7 @@ class CustomSummarizer {
     );
   }
 
-  static Widget? _summarizeCpuCooler(PcParts? parts, Brightness brightness) {
+  static SummaryInfoCell? _summarizeCpuCooler(PcParts? parts, Brightness brightness) {
     if (parts == null) return null;
 
     final backgroundColor = brightness == Brightness.light ? const Color(0xFFB5251C) : const Color(0xFFFFB4A9);
@@ -93,7 +93,7 @@ class CustomSummarizer {
     );
   }
 
-  static Widget? _summarizeMemory(PcParts? parts, Brightness brightness) {
+  static SummaryInfoCell? _summarizeMemory(PcParts? parts, Brightness brightness) {
     if (parts == null) return null;
 
     final backgroundColor = brightness == Brightness.light ? const Color(0xFFB5251C) : const Color(0xFFFFB4A9);
@@ -113,7 +113,7 @@ class CustomSummarizer {
     );
   }
 
-  static Widget? _summarizeMotherboard(PcParts? parts, Brightness brightness) {
+  static SummaryInfoCell? _summarizeMotherboard(PcParts? parts, Brightness brightness) {
     if (parts == null) return null;
 
     final backgroundColor = brightness == Brightness.light ? const Color(0xFF9EEFFF) : const Color(0xFF004E59);
@@ -132,7 +132,7 @@ class CustomSummarizer {
     );
   }
 
-  static Widget? _summarizeGraphicsCard(PcParts? parts, Brightness brightness) {
+  static SummaryInfoCell? _summarizeGraphicsCard(PcParts? parts, Brightness brightness) {
     if (parts == null) return null;
     const IconData icon = Icons.wallpaper;
 
@@ -158,7 +158,7 @@ class CustomSummarizer {
     );
   }
 
-  static Widget? _summarizeSsd(PcParts? parts, Brightness brightness) {
+  static SummaryInfoCell? _summarizeSsd(PcParts? parts, Brightness brightness) {
     if (parts == null) return null;
 
     final backgroundColor = brightness == Brightness.light ? const Color(0xFFB5251C) : const Color(0xFFFFB4A9);
@@ -177,7 +177,7 @@ class CustomSummarizer {
     );
   }
 
-  static Widget? _summarizePowerUnit(PcParts? parts, Brightness brightness) {
+  static SummaryInfoCell? _summarizePowerUnit(PcParts? parts, Brightness brightness) {
     if (parts == null) return null;
 
     final backgroundColor = brightness == Brightness.light ? const Color(0xFFB5251C) : const Color(0xFFFFB4A9);
