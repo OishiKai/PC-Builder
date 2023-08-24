@@ -34,7 +34,7 @@ class AddPartsModalWidget extends ConsumerWidget {
             size: 45,
           );
           break;
-        case PartsCategory.motherBoard:
+        case PartsCategory.motherboard:
           categoryIcon = const Icon(
             Icons.dashboard_outlined,
             color: Colors.white,

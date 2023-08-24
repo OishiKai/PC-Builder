@@ -26,7 +26,7 @@ enum PartsCategory {
   cpu('CPU', 'CPU', 'cpu'),
   cpuCooler('CPUクーラー', 'CPUクーラー', '2C0030'),
   memory('メモリー', 'メモリ', '2C0033'),
-  motherBoard('マザーボード', 'マザーボード', '2C0036'),
+  motherboard('マザーボード', 'マザーボード', '2C0036'),
   graphicsCard('グラフィックボード・ビデオカード', 'グラフィックボード', '2C0028'),
   ssd('SSD', 'SSD', '2C0070'),
   pcCase('PCケース', 'ケース', '2C0032'),

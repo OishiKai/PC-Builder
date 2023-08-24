@@ -118,7 +118,7 @@ class _SummaryWidgetState extends ConsumerState<SummaryWidget> {
         cells.add(generateCell(Icons.straighten, '$volume × $sheets', key, const Color.fromRGBO(60, 130, 80, 1)));
       }
 
-      if (key == PartsCategory.motherBoard) {
+      if (key == PartsCategory.motherboard) {
         final type = value.specs!['フォームファクタ']!;
         cells.add(generateCell(Icons.dashboard_outlined, type, key, Colors.black38));
       }

@@ -137,7 +137,7 @@ class PartsScrollWidget extends ConsumerWidget {
         return 'CPUクーラー';
       case PartsCategory.memory:
         return 'メモリ';
-      case PartsCategory.motherBoard:
+      case PartsCategory.motherboard:
         return 'マザボ';
       case PartsCategory.graphicsCard:
         return 'グラボ';

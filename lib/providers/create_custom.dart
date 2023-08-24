@@ -19,7 +19,7 @@ class CreateCustomNotifier extends StateNotifier<Custom> {
       case PartsCategory.memory:
         state = state.copyWith(memory: parts);
         break;
-      case PartsCategory.motherBoard:
+      case PartsCategory.motherboard:
         state = state.copyWith(motherBoard: parts);
         break;
       case PartsCategory.graphicsCard:

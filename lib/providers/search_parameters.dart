@@ -12,7 +12,6 @@ import '../domain/search_parameter_parser/pc_case_search_parameter_parser.dart';
 import '../domain/search_parameter_parser/power_unit_search_parameter_parser.dart';
 import '../domain/search_parameter_parser/ssd_search_parameter_parser.dart';
 
-
 class CategorySearchParameterNotifier extends StateNotifier<CategorySearchParameter?> {
   CategorySearchParameterNotifier(super.state);
 
@@ -40,7 +39,7 @@ class CategorySearchParameterNotifier extends StateNotifier<CategorySearchParame
       case PartsCategory.memory:
         state = await MemorySearchParameterParser.fetchSearchParameter();
         break;
-      case PartsCategory.motherBoard:
+      case PartsCategory.motherboard:
         state = (await MotherBoardSearchParameterParser.fetchSearchParameter())!;
         break;
       case PartsCategory.graphicsCard:

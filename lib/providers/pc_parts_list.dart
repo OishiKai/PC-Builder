@@ -43,7 +43,7 @@ class PcPartsListNotifier extends _$PcPartsListNotifier {
           return PartsListParser.fetch(MemorySearchParameterParser.standardPage);
         });
         break;
-      case PartsCategory.motherBoard:
+      case PartsCategory.motherboard:
         state = await AsyncValue.guard(() async {
           return PartsListParser.fetch(MotherBoardSearchParameterParser.standardPage);
         });

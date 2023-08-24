@@ -126,7 +126,7 @@ class Custom with _$Custom {
         return cpuCooler;
       case PartsCategory.memory:
         return memory;
-      case PartsCategory.motherBoard:
+      case PartsCategory.motherboard:
         return motherBoard;
       case PartsCategory.graphicsCard:
         return graphicsCard;
@@ -157,7 +157,7 @@ class Custom with _$Custom {
     }
 
     if (motherBoard != null) {
-      alignedParts[PartsCategory.motherBoard] = motherBoard!;
+      alignedParts[PartsCategory.motherboard] = motherBoard!;
     }
 
     if (graphicsCard != null) {

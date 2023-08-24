@@ -2,9 +2,12 @@ import 'package:custom_pc/v2/providers/custom_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../widgets/custom_summary_widget.dart';
+
 class CustomDetailPage extends ConsumerWidget {
   const CustomDetailPage({super.key, required this.id});
   final String id;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final custom = ref.watch(customRepositoryNotifierProvider);
@@ -13,24 +16,49 @@ class CustomDetailPage extends ConsumerWidget {
         final custom = data.firstWhere((element) => element.id == id);
         return Scaffold(
           appBar: AppBar(
-            title: const Text('カスタムの詳細'),
-            leading: IconButton(
-              icon: const Icon(Icons.arrow_back),
-              onPressed: () => Navigator.pop(context),
-            ),
-          ),
-          body: Container(
-            color: Theme.of(context).colorScheme.background,
-            child: Center(
-              child: Text(
-                custom.name!,
-                style: TextStyle(
-                  fontSize: 24,
-                  color: Theme.of(context).colorScheme.onSecondary,
-                  fontWeight: FontWeight.bold,
-                ),
+            title: Text(
+              custom.name!,
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.primary,
+                fontWeight: FontWeight.bold,
               ),
             ),
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back_ios),
+              color: Theme.of(context).colorScheme.secondary,
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            actions: [
+              IconButton(
+                onPressed: () {
+                  // context.push('/sub_route');
+                },
+                icon: Icon(
+                  Icons.delete,
+                  color: Theme.of(context).colorScheme.secondary,
+                  size: 32,
+                ),
+              ),
+            ],
+          ),
+          body: ListView(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 16),
+                child: Text(
+                  'SUMMARY',
+                  style: TextStyle(
+                    fontSize: 24,
+                    color: Theme.of(context).colorScheme.primary,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 8),
+              CustomSummaryWidget(custom: custom),
+            ],
           ),
         );
       },

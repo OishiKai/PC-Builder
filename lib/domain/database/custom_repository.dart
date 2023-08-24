@@ -29,7 +29,7 @@ class CustomRepository {
       'cpu_id': await partsIdMap[PartsCategory.cpu],
       'cpu_cooler_id': await partsIdMap[PartsCategory.cpuCooler],
       'memory_id': await partsIdMap[PartsCategory.memory],
-      'mother_board_id': await partsIdMap[PartsCategory.motherBoard],
+      'mother_board_id': await partsIdMap[PartsCategory.motherboard],
       'graphics_card_id': await partsIdMap[PartsCategory.graphicsCard],
       'ssd_id': await partsIdMap[PartsCategory.ssd],
       'pc_case_id': await partsIdMap[PartsCategory.pcCase],
@@ -118,7 +118,7 @@ class CustomRepository {
       'cpu_id': await partsIdMap[PartsCategory.cpu],
       'cpu_cooler_id': await partsIdMap[PartsCategory.cpuCooler],
       'memory_id': await partsIdMap[PartsCategory.memory],
-      'mother_board_id': await partsIdMap[PartsCategory.motherBoard],
+      'mother_board_id': await partsIdMap[PartsCategory.motherboard],
       'graphics_card_id': await partsIdMap[PartsCategory.graphicsCard],
       'ssd_id': await partsIdMap[PartsCategory.ssd],
       'pc_case_id': await partsIdMap[PartsCategory.pcCase],
@@ -149,7 +149,7 @@ class CustomRepository {
     partsIdMap[PartsCategory.cpu] = stored[0]['cpu_id'] as int?;
     partsIdMap[PartsCategory.cpuCooler] = stored[0]['cpu_cooler_id'] as int?;
     partsIdMap[PartsCategory.memory] = stored[0]['memory_id'] as int?;
-    partsIdMap[PartsCategory.motherBoard] = stored[0]['mother_board_id'] as int?;
+    partsIdMap[PartsCategory.motherboard] = stored[0]['mother_board_id'] as int?;
     partsIdMap[PartsCategory.graphicsCard] = stored[0]['graphics_card_id'] as int?;
     partsIdMap[PartsCategory.ssd] = stored[0]['ssd_id'] as int?;
     partsIdMap[PartsCategory.pcCase] = stored[0]['pc_case_id'] as int?;
