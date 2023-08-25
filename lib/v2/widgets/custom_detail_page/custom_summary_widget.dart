@@ -22,13 +22,21 @@ class _CustomSummaryWidgetState extends State<CustomSummaryWidget> {
   Widget build(BuildContext context) {
     // SummaryInfoCellのリストを取得
     final cells = CustomSummarizer.getSummaryWidgets(widget.custom, MediaQuery.platformBrightnessOf(context));
+
+    double carouselHeight = 0;
+    if (cells.length > 2) {
+      carouselHeight = MediaQuery.of(context).size.width;
+    } else if (cells.isNotEmpty) {
+      carouselHeight = MediaQuery.of(context).size.width * 0.55;
+    }
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
         children: [
           CarouselSlider.builder(
             options: CarouselOptions(
-              height: cells.length > 2 ? MediaQuery.of(context).size.width : MediaQuery.of(context).size.width * 0.55,
+              height: carouselHeight,
               viewportFraction: 1,
               enableInfiniteScroll: false,
               onScrolled: (index) {
