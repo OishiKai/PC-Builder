@@ -5,7 +5,7 @@ import '../../models/custom.dart';
 import '../../models/parts_compatibility.dart';
 import '../../models/pc_parts.dart';
 
-part 'edit_custom.g.dart';
+part 'gen/edit_custom.g.dart';
 
 @Riverpod(keepAlive: true)
 class EditCustomNotifier extends _$EditCustomNotifier {

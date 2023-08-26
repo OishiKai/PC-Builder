@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'edit_custom.dart';
+part of '../edit_custom.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -29,16 +29,13 @@ class _SystemHash {
   }
 }
 
-String _$EditCustomNotifierHash() =>
-    r'0e958e09f416e1f97a707ec33c29ac126221bfe9';
+String _$EditCustomNotifierHash() => r'0e958e09f416e1f97a707ec33c29ac126221bfe9';
 
 /// See also [EditCustomNotifier].
 final editCustomNotifierProvider = NotifierProvider<EditCustomNotifier, Custom>(
   EditCustomNotifier.new,
   name: r'editCustomNotifierProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$EditCustomNotifierHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$EditCustomNotifierHash,
 );
 typedef EditCustomNotifierRef = NotifierProviderRef<Custom>;
 
