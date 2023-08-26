@@ -1,6 +1,7 @@
 import 'package:custom_pc/v2/next_tab_page.dart';
 import 'package:custom_pc/v2/pages/custom_detail_page.dart';
 import 'package:custom_pc/v2/pages/dashboard.dart';
+import 'package:custom_pc/v2/pages/parts_detail_page.dart';
 import 'package:custom_pc/v2/pages/stored_custom_list_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -44,7 +45,20 @@ final routerProvider = Provider<GoRouter>((ref) {
                         id: id,
                       );
                     },
-                  )
+                  ),
+                  GoRoute(
+                    path: 'parts/:usage/:id/:categoryName',
+                    builder: (context, state) {
+                      final usage = state.pathParameters['usage']!;
+                      final id = state.pathParameters['id']!;
+                      final categoryName = state.pathParameters['categoryName']!;
+                      return PartsDetailPageV2(
+                        usageValue: usage,
+                        customId: id,
+                        categoryName: categoryName,
+                      );
+                    },
+                  ),
                 ],
               ),
             ],

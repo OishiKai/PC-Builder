@@ -1,4 +1,6 @@
+import 'package:custom_pc/providers/detail_page_usage.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../models/custom.dart';
 import '../../../models/pc_parts.dart';
@@ -38,61 +40,69 @@ class PartsListWidgetV2 extends StatelessWidget {
                   ],
                 ),
                 // パーツ情報部分
-                Row(
-                  children: [
-                    const SizedBox(
-                      width: 8,
-                    ),
-                    SizedBox(
-                      height: 60.0,
-                      width: 60.0,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: Image.network(
-                          p.parts.image,
-                          fit: BoxFit.cover,
-                          colorBlendMode: BlendMode.darken,
+                InkWell(
+                  onTap: () {
+                    // パーツ詳細ページ(閲覧モード)に遷移
+                    context.push(
+                      '/home/parts/${DetailPageUsage.view.value}/${custom.id}/${p.category.categoryName}',
+                    );
+                  },
+                  child: Row(
+                    children: [
+                      const SizedBox(
+                        width: 8,
+                      ),
+                      SizedBox(
+                        height: 60.0,
+                        width: 60.0,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Image.network(
+                            p.parts.image,
+                            fit: BoxFit.cover,
+                            colorBlendMode: BlendMode.darken,
+                          ),
                         ),
                       ),
-                    ),
-                    const SizedBox(
-                      width: 12,
-                    ),
-                    Expanded(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            p.parts.maker,
-                            style: TextStyle(
-                              color: Theme.of(context).colorScheme.secondary,
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Text(
-                            p.parts.title,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                              color: Theme.of(context).colorScheme.primary,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Text(
-                            p.parts.price,
-                            style: TextStyle(
-                              color: Theme.of(context).colorScheme.error,
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
+                      const SizedBox(
+                        width: 12,
                       ),
-                    ),
-                  ],
+                      Expanded(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              p.parts.maker,
+                              style: TextStyle(
+                                color: Theme.of(context).colorScheme.secondary,
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              p.parts.title,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                color: Theme.of(context).colorScheme.primary,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              p.parts.price,
+                              style: TextStyle(
+                                color: Theme.of(context).colorScheme.error,
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
                 const SizedBox(
                   height: 16,
