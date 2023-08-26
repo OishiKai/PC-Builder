@@ -60,6 +60,27 @@ class MemorySearchParameter extends CategorySearchParameter {
   }
 
   @override
+  List<String> selectedParameterNames() {
+    List<String> params = [];
+    for (var element in volume) {
+      if (element.isSelect) {
+        params.add(element.name);
+      }
+    }
+    for (var element in interface) {
+      if (element.isSelect) {
+        params.add(element.name);
+      }
+    }
+    for (var element in type) {
+      if (element.isSelect) {
+        params.add(element.name);
+      }
+    }
+    return params;
+  }
+
+  @override
   String standardPage() {
     return MemorySearchParameterParser.standardPage;
   }

@@ -47,6 +47,22 @@ class PowerUnitSearchParameter extends CategorySearchParameter {
   }
 
   @override
+  List<String> selectedParameterNames() {
+    List<String> params = [];
+    for (var element in supportTypes) {
+      if (element.isSelect) {
+        params.add(element.name);
+      }
+    }
+    for (var element in powerSupplyCapacitys) {
+      if (element.isSelect) {
+        params.add(element.name);
+      }
+    }
+    return params;
+  }
+
+  @override
   String standardPage() {
     return 'https://kakaku.com/pc/power-supply/itemlist.aspx';
   }

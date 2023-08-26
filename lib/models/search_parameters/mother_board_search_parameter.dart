@@ -72,6 +72,32 @@ class MotherBoardSearchParameter extends CategorySearchParameter {
   }
 
   @override
+  List<String> selectedParameterNames() {
+    List<String> params = [];
+    for (var element in intelSockets) {
+      if (element.isSelect) {
+        params.add(element.name);
+      }
+    }
+    for (var element in amdSockets) {
+      if (element.isSelect) {
+        params.add(element.name);
+      }
+    }
+    for (var element in formFactors) {
+      if (element.isSelect) {
+        params.add(element.name);
+      }
+    }
+    for (var element in memoryType) {
+      if (element.isSelect) {
+        params.add(element.name);
+      }
+    }
+    return params;
+  }
+
+  @override
   String standardPage() {
     return MotherBoardSearchParameterParser.standardPage;
   }

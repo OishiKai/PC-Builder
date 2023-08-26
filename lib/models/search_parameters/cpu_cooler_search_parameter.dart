@@ -37,6 +37,32 @@ class CpuCoolerSearchParameter extends CategorySearchParameter {
   }
 
   @override
+  List<String> selectedParameterNames() {
+    List<String> params = [];
+    for (var element in makers) {
+      if (element.isSelect) {
+        params.add(element.name);
+      }
+    }
+    for (var element in intelSockets) {
+      if (element.isSelect) {
+        params.add(element.name);
+      }
+    }
+    for (var element in amdSockets) {
+      if (element.isSelect) {
+        params.add(element.name);
+      }
+    }
+    for (var element in type) {
+      if (element.isSelect) {
+        params.add(element.name);
+      }
+    }
+    return params;
+  }
+
+  @override
   CpuCoolerSearchParameter clearSelectedParameter() {
     final List<PartsSearchParameter> clearMaker = [];
     for (var element in makers) {

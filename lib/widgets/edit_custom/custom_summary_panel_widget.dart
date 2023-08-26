@@ -1,8 +1,11 @@
+import 'package:custom_pc/domain/parameter_recommender.dart';
 import 'package:custom_pc/widgets/create_custom/total_price_widget.dart';
+import 'package:custom_pc/widgets/edit_custom/recommend_parameters_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../config/size_config.dart';
+import '../../domain/url_builder.dart';
 import '../../models/pc_parts.dart';
 import '../../pages/parts_list_page.dart';
 import '../../providers/create_custom.dart';
@@ -15,20 +18,57 @@ import 'add_parts_modal_widget.dart';
 class CustomSummaryPanelWidget extends ConsumerWidget {
   const CustomSummaryPanelWidget({super.key});
 
+  void showProgressDialog(BuildContext context) {
+    showGeneralDialog(
+        context: context,
+        barrierDismissible: false,
+        barrierColor: Colors.black.withOpacity(0.5),
+        pageBuilder: (BuildContext context, Animation animation, Animation secondaryAnimation) {
+          return const Center(
+            child: CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation<Color>(Colors.greenAccent),
+            ),
+          );
+        });
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     SizeConfig().init(context);
     final custom = ref.watch(createCustomNotifierProvider);
     final comps = custom.compatibilities;
+    //final params = ref.watch(searchParameterProvider);
 
-    onTapGrit(PartsCategory category) {
+    onTapGrit(PartsCategory category) async {
+      showProgressDialog(context);
       // ここで検索を始めるパーツカテゴリを設定する
       ref.read(searchingCategoryProvider.notifier).changeCategory(category);
       // カテゴリに合わせて検索URL、パラメータを設定する
       ref.read(pcPartsListNotifierProvider.notifier).switchCategory(category);
-      ref.read(searchParameterProvider.notifier).replaceParameters(category);
+      await ref.read(searchParameterProvider.notifier).replaceParameters(category);
+      final params = ref.read(searchParameterProvider);
+      // すでに選択済みのパーツの中で、検索対象のパーツで絞り込みできるかチェック
+      final recommend = ParameterRecommender(custom, category, params!).recommendedParameters;
+      // プログレスサークル非表示
       Navigator.of(context).pop();
-      Navigator.push(context, MaterialPageRoute(builder: (context) => const PartsListPage()));
+      if (recommend.isNotEmpty) {
+        for (final rec in recommend) {
+          final paramName = params.alignParameters()[rec.paramSectionIndex].keys.join('');
+          ref.read(searchParameterProvider.notifier).toggleParameterSelect(paramName, rec.paramIndex);
+        }
+        final url = UrlBuilder.createURLWithParameters(params.standardPage(), params.selectedParameters());
+        ref.read(pcPartsListNotifierProvider.notifier).replaceSearchUrl(url);
+        Navigator.of(context).pop();
+        showDialog(
+          context: context,
+          builder: (context) {
+            return RecommendParametersDialog(recommend);
+          },
+        );
+      } else {
+        Navigator.of(context).pop();
+        Navigator.push(context, MaterialPageRoute(builder: (context) => PartsListPage()));
+      }
     }
 
     return Container(

@@ -28,7 +28,7 @@ class CategorySearchParameterNotifier extends StateNotifier<CategorySearchParame
   }
 
   // 別のカテゴリの検索条件に切り替える
-  void replaceParameters(PartsCategory category) async {
+  Future<void> replaceParameters(PartsCategory category) async {
     switch (category) {
       case PartsCategory.cpu:
         state = await CpuSearchParameterParser.fetchSearchParameter();
