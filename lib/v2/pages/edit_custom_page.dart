@@ -1,3 +1,4 @@
+import 'package:custom_pc/v2/pages/dashboard.dart';
 import 'package:custom_pc/v2/providers/edit_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -12,12 +13,20 @@ class EditCustomPageV2 extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.background,
-        title: Text(custom.name ?? 'New Custom'),
+        title: Text(
+          'カスタムの編集用',
+          style: TextStyle(
+            color: Theme.of(context).colorScheme.primary,
+            fontFamily: 'NotoSansJP',
+            // fontWeight: FontWeight.bold,
+          ),
+        ),
         leading: IconButton(
           icon: const Icon(Icons.close),
           color: Theme.of(context).colorScheme.secondary,
           onPressed: () {
-            context.go('/home/detail/${custom.id}');
+            ref.read(bottomNavigationBarVisibilityProvider.notifier).update((state) => true);
+            context.pop();
           },
         ),
       ),

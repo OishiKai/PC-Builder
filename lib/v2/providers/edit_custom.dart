@@ -4,6 +4,7 @@ import '../../domain/compatibility_analyzer.dart';
 import '../../models/custom.dart';
 import '../../models/parts_compatibility.dart';
 import '../../models/pc_parts.dart';
+import '../pages/dashboard.dart';
 
 part 'gen/edit_custom.g.dart';
 
@@ -18,6 +19,7 @@ class EditCustomNotifier extends _$EditCustomNotifier {
   void setCustom(Custom custom) {
     state = custom;
     updateCompatibilities();
+    ref.read(bottomNavigationBarVisibilityProvider.notifier).update((state) => false);
   }
 
   /// カスタム名を変更する

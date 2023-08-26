@@ -1,6 +1,7 @@
 import 'package:custom_pc/v2/next_tab_page.dart';
 import 'package:custom_pc/v2/pages/custom_detail_page.dart';
 import 'package:custom_pc/v2/pages/dashboard.dart';
+import 'package:custom_pc/v2/pages/edit_custom_page.dart';
 import 'package:custom_pc/v2/pages/parts_detail_page.dart';
 import 'package:custom_pc/v2/pages/stored_custom_list_page.dart';
 import 'package:flutter/material.dart';
@@ -45,6 +46,16 @@ final routerProvider = Provider<GoRouter>((ref) {
                         id: id,
                       );
                     },
+                    routes: [
+                      GoRoute(
+                        name: 'edit',
+                        path: 'edit',
+                        pageBuilder: (context, state) => const MaterialPage(
+                          fullscreenDialog: true,
+                          child: EditCustomPageV2(),
+                        ),
+                      ),
+                    ],
                   ),
                   GoRoute(
                     path: 'parts/:usage/:id/:categoryName',
@@ -59,6 +70,13 @@ final routerProvider = Provider<GoRouter>((ref) {
                       );
                     },
                   ),
+                  // GoRoute(
+                  //   path: 'edit',
+                  //   pageBuilder: (context, state) => const MaterialPage(
+                  //     fullscreenDialog: true,
+                  //     child: EditCustomPageV2(),
+                  //   ),
+                  // ),
                 ],
               ),
             ],

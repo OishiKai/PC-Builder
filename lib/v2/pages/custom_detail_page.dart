@@ -81,7 +81,7 @@ class CustomDetailPage extends ConsumerWidget {
           floatingActionButton: FloatingActionButton(
             onPressed: () {
               ref.read(editCustomNotifierProvider.notifier).setCustom(custom);
-              context.go('/edit');
+              context.goNamed('edit', pathParameters: {'id': id});
             },
             backgroundColor: Theme.of(context).colorScheme.primary,
             foregroundColor: Theme.of(context).colorScheme.onPrimary,

@@ -44,7 +44,7 @@ class MyApp extends ConsumerWidget {
     return ThemeData(
       useMaterial3: true,
       colorScheme: colorScheme,
-      fontFamily: 'Noto Sans JP',
+      fontFamily: 'NotoSansJP',
       pageTransitionsTheme: const PageTransitionsTheme(builders: _defaultBuilders),
     );
   }
