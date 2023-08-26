@@ -17,6 +17,7 @@ class CustomDetailPage extends ConsumerWidget {
         final custom = data.firstWhere((element) => element.id == id);
         return Scaffold(
           appBar: AppBar(
+            backgroundColor: Theme.of(context).colorScheme.background,
             title: Text(
               custom.name!,
               style: TextStyle(

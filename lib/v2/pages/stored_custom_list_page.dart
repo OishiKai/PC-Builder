@@ -3,8 +3,6 @@ import 'package:custom_pc/v2/widgets/stored_custom_list_page/stored_custom_list_
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../widgets/edit_custom/add_parts_modal_widget.dart';
-
 class StoredCustomListPageV2 extends StatelessWidget {
   const StoredCustomListPageV2({super.key});
 
@@ -53,14 +51,7 @@ class StoredCustomListPageV2 extends StatelessWidget {
       body: const StoredCustomListWidget(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          showModalBottomSheet(
-            isScrollControlled: true,
-            backgroundColor: Colors.transparent,
-            context: context,
-            builder: (BuildContext context) {
-              return AddPartsModalWidget(() {});
-            },
-          );
+          context.go('/next');
         },
         backgroundColor: Theme.of(context).colorScheme.primary,
         foregroundColor: Theme.of(context).colorScheme.onPrimary,

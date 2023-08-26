@@ -8,19 +8,18 @@ class ShopsWidget extends StatelessWidget {
   const ShopsWidget(this.shops, {super.key});
 
   final List<PartsShop> shops;
-  final mainColor = const Color.fromRGBO(60, 130, 80, 1);
 
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Container(
-      height: 500,
+      //height: 500,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.surfaceVariant,
         borderRadius: BorderRadius.circular(25),
       ),
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-      child: ListView(
+      child: Column(
         children: [
           for (int i = 0; i < shops.length; i++)
             Padding(
@@ -38,7 +37,7 @@ class ShopsWidget extends StatelessWidget {
                   height: 70,
                   width: SizeConfig.blockSizeHorizontal * 90,
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: Theme.of(context).colorScheme.surfaceVariant,
                     borderRadius: BorderRadius.circular(25),
                   ),
                   child: Row(
@@ -54,7 +53,7 @@ class ShopsWidget extends StatelessWidget {
                             ),
                             Icon(
                               Icons.shopping_cart,
-                              color: mainColor,
+                              color: Theme.of(context).colorScheme.primary,
                               size: 30,
                             ),
                             const SizedBox(
@@ -70,7 +69,7 @@ class ShopsWidget extends StatelessWidget {
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
-                                  color: mainColor,
+                                  color: Theme.of(context).colorScheme.primary,
                                 ),
                               ),
                             ),
@@ -80,11 +79,15 @@ class ShopsWidget extends StatelessWidget {
                       const Spacer(),
                       Text(
                         shops[i].price,
-                        style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.redAccent),
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.redAccent,
+                        ),
                       ),
                       Icon(
                         Icons.arrow_right,
-                        color: mainColor,
+                        color: Theme.of(context).colorScheme.primary,
                         size: 30,
                       ),
                     ],

@@ -161,7 +161,7 @@ class _PartsDetailPageState extends ConsumerState<PartsDetailPage> with SingleTi
                             const SizedBox(
                               height: 8,
                             ),
-                            SpecsWidgets(widget.parts.specs!).generalSpecs(),
+                            SpecsWidgets(widget.parts.specs!).generalSpecs(context),
                             const SizedBox(
                               height: 16,
                             ),

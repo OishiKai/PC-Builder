@@ -184,7 +184,7 @@ class _PartsDetailPageV2State extends ConsumerState<PartsDetailPageV2> with Sing
                                 const SizedBox(
                                   height: 8,
                                 ),
-                                SpecsWidgets(parts.specs!).generalSpecs(),
+                                SpecsWidgets(parts.specs!).generalSpecs(context),
                                 const SizedBox(
                                   height: 16,
                                 ),

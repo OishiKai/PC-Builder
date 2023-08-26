@@ -9,10 +9,7 @@ class NextPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Next Page'),
-        leading: IconButton(
-          icon: const Icon(Icons.close),
-          onPressed: () => context.pop(),
-        ),
+        leading: IconButton(icon: const Icon(Icons.close), onPressed: () => context.go('/home')),
       ),
       body: const Center(
         child: Text('Next Page'),

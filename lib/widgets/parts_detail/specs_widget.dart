@@ -3,9 +3,8 @@ import 'package:flutter/material.dart';
 class SpecsWidgets extends StatelessWidget {
   const SpecsWidgets(this.specs, {super.key});
   final Map<String, String?> specs;
-  final mainColor = const Color.fromRGBO(60, 130, 80, 1);
 
-  List<Container> _setUpWidgets() {
+  List<Container> _setUpWidgets(BuildContext context) {
     List<Container> widgets = [];
     specs.forEach((key, value) {
       if (value != null && value != '　') {
@@ -21,7 +20,7 @@ class SpecsWidgets extends StatelessWidget {
                   Icon(
                     Icons.info,
                     size: 18,
-                    color: mainColor,
+                    color: Theme.of(context).colorScheme.primary,
                   ),
                   const SizedBox(
                     width: 8,
@@ -31,7 +30,7 @@ class SpecsWidgets extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.bold,
-                      color: mainColor,
+                      color: Theme.of(context).colorScheme.primary,
                     ),
                   ),
                 ],
@@ -46,7 +45,7 @@ class SpecsWidgets extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
-                    color: mainColor,
+                    color: Theme.of(context).colorScheme.primary,
                   ),
                 ),
               ),
@@ -59,8 +58,8 @@ class SpecsWidgets extends StatelessWidget {
   }
 
   // 先頭2件のスペック情報のみ返す
-  Column generalSpecs() {
-    final widgets = _setUpWidgets();
+  Column generalSpecs(BuildContext context) {
+    final widgets = _setUpWidgets(context);
     return Column(
       children: [
         widgets[0],
@@ -72,7 +71,7 @@ class SpecsWidgets extends StatelessWidget {
   // 先頭3件以降のスペックのみ返す
   @override
   Widget build(BuildContext context) {
-    final widgets = _setUpWidgets();
+    final widgets = _setUpWidgets(context);
     return Column(
       children: [
         for (int i = 2; i < widgets.length; i++) widgets[i],
