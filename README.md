@@ -21,6 +21,7 @@ https://play.google.com/store/apps/details?id=com.appdeveloper.kai.pc_builder&pl
  - riverpod_generator
  - freezed
  - freezed_annotation
+ - go_router
  - sqflite
  - shared_preferences
  - charset_converter
