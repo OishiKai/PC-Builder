@@ -24,19 +24,23 @@ class PcParts with _$PcParts {
 
 enum PartsCategory {
   cpu('CPU', 'CPU', 'cpu'),
-  cpuCooler('CPUクーラー', 'CPUクーラー', '2C0030'),
-  memory('メモリー', 'メモリ', '2C0033'),
-  motherboard('マザーボード', 'マザーボード', '2C0036'),
-  graphicsCard('グラフィックボード・ビデオカード', 'グラフィックボード', '2C0028'),
-  ssd('SSD', 'SSD', '2C0070'),
-  pcCase('PCケース', 'ケース', '2C0032'),
-  powerUnit('電源ユニット', '電源', '2C0035'),
-  caseFan('ケースファン', 'ケースファン', '2C0089');
+  cpuCooler('CPUクーラー', 'CPUクーラー', 'cpu-cooler'),
+  memory('メモリー', 'メモリ', 'pc-memory'),
+  motherboard('マザーボード', 'マザーボード', 'motherboard'),
+  graphicsCard('グラフィックボード・ビデオカード', 'グラフィックボード', 'videocard'),
+  ssd('SSD', 'SSD', 'ssd'),
+  pcCase('PCケース', 'ケース', 'pc-case'),
+  powerUnit('電源ユニット', '電源', 'power-supply'),
+  caseFan('ケースファン', 'ケースファン', 'case-fan');
 
   final String categoryName;
   final String categoryShortName;
   final String categoryParameter;
   const PartsCategory(this.categoryName, this.categoryShortName, this.categoryParameter);
+
+  String basePartsListUrl() {
+    return 'https://kakaku.com/pc/$categoryParameter/itemlist.aspx';
+  }
 
   static PartsCategory fromCategoryName(String categoryName) {
     switch (categoryName) {
