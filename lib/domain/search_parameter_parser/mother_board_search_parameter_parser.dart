@@ -11,7 +11,7 @@ class MotherBoardSearchParameterParser {
 
   static Document? _document;
 
-  static Future<MotherBoardSearchParameter?> fetchSearchParameter() async {
+  static Future<MotherBoardSearchParameter> fetchSearchParameter() async {
     _document = await DocumentRepository.fetchDocument(standardPage);
     final intelSockets = _parseIntelSockets();
     final amdSockets = _parseAmdSockets();

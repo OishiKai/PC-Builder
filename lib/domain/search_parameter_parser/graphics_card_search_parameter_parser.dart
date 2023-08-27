@@ -1,4 +1,3 @@
-
 import 'package:custom_pc/models/category_search_parameter.dart';
 import 'package:html/dom.dart';
 
@@ -11,8 +10,8 @@ class GraphicsCardSearchParameterParser {
   static const String _parameterSelector = '#menu > div.searchspec > div';
 
   static Document? _document;
-  
-  static Future<GraphicsCardSearchParameter?> fetchSearchParameter() async {
+
+  static Future<GraphicsCardSearchParameter> fetchSearchParameter() async {
     _document = await DocumentRepository.fetchDocument(standardPage);
     final nvidiaChips = _parseNvidiaChipList();
     final amdChips = _parseAmdChips();
@@ -25,7 +24,7 @@ class GraphicsCardSearchParameterParser {
 
     // fetchSearchParameter() で _document に値が入っていることを保証しているので、nullチェックは不要
     final nvidiaChipListElement = _document!.querySelectorAll(_parameterSelector)[4].querySelectorAll('ul');
-    
+
     // NVIDIAチップのリストは1番目と2番目 div にある
     final headNvidiaChipList = nvidiaChipListElement[0].querySelectorAll('li');
     final tailNvidiaChipList = nvidiaChipListElement[1].querySelectorAll('li');
@@ -40,7 +39,7 @@ class GraphicsCardSearchParameterParser {
     List<PartsSearchParameter> amdChipList = [];
     // AMDチップのリストは3番目の div にある
     final amdChipListElement = _document!.querySelectorAll(_parameterSelector)[4].querySelectorAll('ul');
-    
+
     // AMDチップのリストは3番目と4番目 div にある
     final headAmdChipList = amdChipListElement[2].querySelectorAll('li');
     final tailAmdChipList = amdChipListElement[3].querySelectorAll('li');
