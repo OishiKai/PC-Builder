@@ -60,6 +60,39 @@ class EditCustomNotifier extends _$EditCustomNotifier {
     }
   }
 
+  /// パーツを削除
+  void removeParts(PartsCategory category) {
+    switch (category) {
+      case PartsCategory.cpu:
+        state = state.copyWith(cpu: null);
+        break;
+      case PartsCategory.cpuCooler:
+        state = state.copyWith(cpuCooler: null);
+        break;
+      case PartsCategory.memory:
+        state = state.copyWith(memory: null);
+        break;
+      case PartsCategory.motherboard:
+        state = state.copyWith(motherBoard: null);
+        break;
+      case PartsCategory.graphicsCard:
+        state = state.copyWith(graphicsCard: null);
+        break;
+      case PartsCategory.ssd:
+        state = state.copyWith(ssd: null);
+        break;
+      case PartsCategory.powerUnit:
+        state = state.copyWith(powerUnit: null);
+        break;
+      case PartsCategory.pcCase:
+        state = state.copyWith(pcCase: null);
+        break;
+      case PartsCategory.caseFan:
+        state = state.copyWith(caseFan: null);
+        break;
+    }
+  }
+
   /// 互換性情報を更新
   void updateCompatibilities() {
     List<PartsCompatibility> comps = [];
