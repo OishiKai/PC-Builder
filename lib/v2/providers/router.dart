@@ -54,6 +54,22 @@ final routerProvider = Provider<GoRouter>((ref) {
                           fullscreenDialog: true,
                           child: EditCustomPageV2(),
                         ),
+                        routes: [
+                          GoRoute(
+                            name: 'partsDetailForEdit',
+                            path: 'partsDetailForEdit/:usage/:categoryName',
+                            builder: (context, state) {
+                              final usage = state.pathParameters['usage']!;
+                              final id = state.pathParameters['id']!;
+                              final categoryName = state.pathParameters['categoryName']!;
+                              return PartsDetailPageV2(
+                                usageValue: usage,
+                                customId: id,
+                                categoryName: categoryName,
+                              );
+                            },
+                          ),
+                        ],
                       ),
                     ],
                   ),
@@ -70,13 +86,6 @@ final routerProvider = Provider<GoRouter>((ref) {
                       );
                     },
                   ),
-                  // GoRoute(
-                  //   path: 'edit',
-                  //   pageBuilder: (context, state) => const MaterialPage(
-                  //     fullscreenDialog: true,
-                  //     child: EditCustomPageV2(),
-                  //   ),
-                  // ),
                 ],
               ),
             ],

@@ -19,7 +19,7 @@ class CustomNameEditWidget extends ConsumerWidget {
             'カスタム名',
             style: TextStyle(
               fontSize: 16,
-              color: Theme.of(context).colorScheme.tertiary,
+              color: Theme.of(context).colorScheme.secondary,
               fontWeight: FontWeight.bold,
             ),
           ),

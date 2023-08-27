@@ -1,6 +1,9 @@
 import 'package:custom_pc/models/pc_parts.dart';
+import 'package:custom_pc/providers/detail_page_usage.dart';
+import 'package:custom_pc/v2/widgets/edit_custom_page/add_parts_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../providers/edit_custom.dart';
 
@@ -20,7 +23,7 @@ class PartsEditWidget extends ConsumerWidget {
           Text(
             '構成',
             style: TextStyle(
-              color: Theme.of(context).colorScheme.tertiary,
+              color: Theme.of(context).colorScheme.secondary,
               fontSize: 16,
               fontWeight: FontWeight.bold,
             ),
@@ -50,7 +53,17 @@ class PartsEditWidget extends ConsumerWidget {
                   ),
                   // パーツ情報部分
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      // context.push('/home/detail/${custom.id}/edit/partsEdit/${DetailPageUsage.edit.value}/${p.category.categoryName}');
+                      context.pushNamed(
+                        'partsDetailForEdit',
+                        pathParameters: {
+                          'id': custom.id!,
+                          'usage': DetailPageUsage.edit.value,
+                          'categoryName': p.category.categoryName,
+                        },
+                      );
+                    },
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -171,6 +184,39 @@ class PartsEditWidget extends ConsumerWidget {
                 ],
               ),
             ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Theme.of(context).colorScheme.secondary,
+              foregroundColor: Theme.of(context).colorScheme.onSecondary,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (context) => const AddPartsDialog(),
+              );
+            },
+            child: const Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.add,
+                ),
+                Text(
+                  'パーツを追加',
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(
+            height: 100,
+          ),
         ],
       ),
     );
