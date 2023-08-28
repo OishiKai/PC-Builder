@@ -12,15 +12,17 @@ class SearchResultPartsListWidget extends ConsumerWidget {
 
     return asyncPartsList.when(
       data: (data) {
-        return ListView.builder(
-          itemCount: data.length,
-          itemBuilder: (context, index) {
-            final parts = data[index];
-            return ListTile(
-              title: Text(parts.title),
-              subtitle: Text(parts.price.toString()),
-            );
-          },
+        return Expanded(
+          child: ListView.builder(
+            itemCount: data.length,
+            itemBuilder: (context, index) {
+              final parts = data[index];
+              return ListTile(
+                title: Text(parts.title),
+                subtitle: Text(parts.price.toString()),
+              );
+            },
+          ),
         );
       },
       error: (error, stackTrace) => const Center(
