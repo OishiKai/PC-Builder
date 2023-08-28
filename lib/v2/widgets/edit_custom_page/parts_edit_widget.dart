@@ -1,5 +1,6 @@
 import 'package:custom_pc/models/pc_parts.dart';
 import 'package:custom_pc/providers/detail_page_usage.dart';
+import 'package:custom_pc/v2/providers/searching_category.dart';
 import 'package:custom_pc/v2/widgets/edit_custom_page/add_parts_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -121,7 +122,10 @@ class PartsEditWidget extends ConsumerWidget {
                                   ),
                                   const Spacer(),
                                   TextButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      ref.read(searchingCategoryProviderV2.notifier).update((state) => p.category);
+                                      context.pushNamed('partsList', pathParameters: {'id': custom.id!});
+                                    },
                                     child: Row(
                                       children: [
                                         Icon(

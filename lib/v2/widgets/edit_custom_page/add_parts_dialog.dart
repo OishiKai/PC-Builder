@@ -1,6 +1,8 @@
 import 'package:custom_pc/models/pc_parts.dart';
+import 'package:custom_pc/v2/providers/searching_category.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../providers/edit_custom.dart';
 
@@ -17,7 +19,9 @@ class AddPartsDialog extends ConsumerWidget {
         for (final category in PartsCategory.values)
           SimpleDialogOption(
             onPressed: () {
-              Navigator.pop(context);
+              ref.read(searchingCategoryProviderV2.notifier).update((state) => category);
+              context.pop();
+              context.pushNamed('partsList', pathParameters: {'id': custom.id!});
             },
             child: Row(
               children: [

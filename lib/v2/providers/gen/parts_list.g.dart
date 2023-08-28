@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'parts_list.dart';
+part of '../parts_list.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -35,8 +35,7 @@ String _$PartsListHash() => r'2a5aedf4330b044d305bb948014bc0cecf183b5d';
 final partsListProvider = AsyncNotifierProvider<PartsList, List<PcParts>>(
   PartsList.new,
   name: r'partsListProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$PartsListHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$PartsListHash,
 );
 typedef PartsListRef = AsyncNotifierProviderRef<List<PcParts>>;
 

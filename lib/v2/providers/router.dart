@@ -3,6 +3,7 @@ import 'package:custom_pc/v2/pages/custom_detail_page.dart';
 import 'package:custom_pc/v2/pages/dashboard.dart';
 import 'package:custom_pc/v2/pages/edit_custom_page.dart';
 import 'package:custom_pc/v2/pages/parts_detail_page.dart';
+import 'package:custom_pc/v2/pages/parts_list_page.dart';
 import 'package:custom_pc/v2/pages/stored_custom_list_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -67,6 +68,13 @@ final routerProvider = Provider<GoRouter>((ref) {
                                 customId: id,
                                 categoryName: categoryName,
                               );
+                            },
+                          ),
+                          GoRoute(
+                            name: 'partsList',
+                            path: 'partsList',
+                            builder: (context, state) {
+                              return const PartsListPageV2();
                             },
                           ),
                         ],

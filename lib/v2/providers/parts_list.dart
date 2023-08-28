@@ -6,7 +6,7 @@ import '../../domain/parts_list_parser.dart';
 import '../../domain/url_builder.dart';
 import '../../models/pc_parts.dart';
 
-part 'parts_list.g.dart';
+part 'gen/parts_list.g.dart';
 
 @Riverpod(keepAlive: true)
 class PartsList extends _$PartsList {
@@ -23,7 +23,6 @@ class PartsList extends _$PartsList {
           selectedParams,
         );
         return PartsListParser.fetch(url);
-        // return Future.value([]);
       },
       loading: () {
         return Future.value([]);
