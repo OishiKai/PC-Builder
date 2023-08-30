@@ -2,15 +2,26 @@ import 'package:custom_pc/v2/providers/searching_category.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class PartsSearchAppBar extends ConsumerWidget implements PreferredSizeWidget {
+final searchTextProviderV2 = StateProvider<String>((ref) => '');
+
+class PartsSearchAppBar extends ConsumerStatefulWidget implements PreferredSizeWidget {
   const PartsSearchAppBar({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  PartsSearchAppBarState createState() => PartsSearchAppBarState();
+
+  @override
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+}
+
+class PartsSearchAppBarState extends ConsumerState<PartsSearchAppBar> {
+  @override
+  Widget build(BuildContext context) {
     final category = ref.watch(searchingCategoryProviderV2);
     return AppBar(
       backgroundColor: Theme.of(context).colorScheme.background,
       title: TextField(
+        controller: TextEditingController(text: ref.watch(searchTextProviderV2)),
         decoration: InputDecoration(
           hintText: '${category.categoryShortName}を検索',
           hintStyle: const TextStyle(
@@ -22,25 +33,29 @@ class PartsSearchAppBar extends ConsumerWidget implements PreferredSizeWidget {
           filled: true,
           fillColor: Theme.of(context).colorScheme.surface,
           contentPadding: const EdgeInsets.symmetric(horizontal: 8),
-          prefixIcon: IconButton(
-            icon: Icon(
-              Icons.search,
-              color: Theme.of(context).colorScheme.primary,
-            ),
-            onPressed: () {},
+          prefixIcon: Icon(
+            Icons.search,
+            color: Theme.of(context).colorScheme.primary,
           ),
           suffixIcon: IconButton(
             icon: Icon(
               Icons.clear,
               color: Theme.of(context).colorScheme.primary,
             ),
-            onPressed: () {},
+            onPressed: () {
+              ref.read(searchTextProviderV2.notifier).update((state) => '');
+            },
           ),
         ),
+        onSubmitted: (value) {
+          if (value.trim() == '') return;
+          ref.read(searchTextProviderV2.notifier).update((state) => value.trim());
+        },
       ),
       actions: [
         Builder(
           builder: (context) => InkWell(
+            // 絞り込み条件選択Drawerを開く
             onTap: () => Scaffold.of(context).openEndDrawer(),
             child: Padding(
               padding: const EdgeInsets.only(right: 8.0),
@@ -67,7 +82,4 @@ class PartsSearchAppBar extends ConsumerWidget implements PreferredSizeWidget {
       ],
     );
   }
-
-  @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }
