@@ -1,5 +1,4 @@
 import 'package:custom_pc/v2/providers/searching_category.dart';
-import 'package:custom_pc/v2/widgets/parts_list_page/add_parameters_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -43,7 +42,26 @@ class PartsSearchAppBar extends ConsumerWidget implements PreferredSizeWidget {
         Builder(
           builder: (context) => InkWell(
             onTap: () => Scaffold.of(context).openEndDrawer(),
-            child: const AddParametersWidget(),
+            child: Padding(
+              padding: const EdgeInsets.only(right: 8.0),
+              child: Column(
+                children: [
+                  Icon(
+                    Icons.manage_search_outlined,
+                    color: Theme.of(context).colorScheme.tertiary,
+                    size: 30,
+                  ),
+                  Text(
+                    '絞り込み',
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.tertiary,
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
         ),
       ],
