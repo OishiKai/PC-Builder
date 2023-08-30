@@ -3,6 +3,7 @@ import 'package:custom_pc/v2/providers/searching_category.dart';
 import 'package:custom_pc/v2/widgets/parts_list_page/parts_search_app_bar.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import '../../domain/parts_detail_parser.dart';
 import '../../domain/parts_list_parser.dart';
 import '../../domain/url_builder.dart';
 import '../../models/pc_parts.dart';
@@ -39,6 +40,20 @@ class PartsList extends _$PartsList {
       error: (error, stackTrace) {
         return Future.value([]);
       },
+    );
+  }
+
+  Future<void> updateDetailPartsInfo(int index, PcParts parts) async {
+    if (parts.fullScaleImages != null) return;
+    final updatedParts = await PartsDetailParser.fetch(parts);
+
+    state.when(
+      data: (data) async {
+        data[index] = updatedParts;
+        state = AsyncValue.data(data);
+      },
+      error: (e, t) {},
+      loading: () {},
     );
   }
 }

@@ -77,6 +77,18 @@ final routerProvider = Provider<GoRouter>((ref) {
                               return const PartsListPageV2();
                             },
                           ),
+                          GoRoute(
+                            name: 'partsDetailForCreate',
+                            path: 'partsDetailForCreate/:usage/:listIndex',
+                            builder: (context, state) {
+                              final usage = state.pathParameters['usage']!;
+                              final listIndex = state.pathParameters['listIndex']!;
+                              return PartsDetailPageV2(
+                                usageValue: usage,
+                                listIndex: int.parse(listIndex),
+                              );
+                            },
+                          ),
                         ],
                       ),
                     ],

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../../providers/detail_page_usage.dart';
 import '../../../widgets/parts_detail/star_widget.dart';
+import '../../providers/edit_custom.dart';
 import '../../providers/parts_list.dart';
 
 class SearchResultPartsListWidget extends ConsumerWidget {
@@ -10,6 +13,21 @@ class SearchResultPartsListWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final asyncPartsList = ref.watch(partsListProvider);
+
+    void showProgressDialog() {
+      showGeneralDialog(
+        context: context,
+        barrierDismissible: false,
+        barrierColor: Colors.black.withOpacity(0.5),
+        pageBuilder: (BuildContext context, Animation animation, Animation secondaryAnimation) {
+          return const Center(
+            child: CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation<Color>(Colors.greenAccent),
+            ),
+          );
+        },
+      );
+    }
 
     return asyncPartsList.when(
       data: (data) {
@@ -21,7 +39,27 @@ class SearchResultPartsListWidget extends ConsumerWidget {
               return Column(
                 children: [
                   InkWell(
-                    onTap: () => debugPrint('parts tapped'),
+                    onTap: () async {
+                      // プログレスサークル表示
+                      showProgressDialog();
+
+                      // パーツ詳細情報を取得
+                      await ref.read(partsListProvider.notifier).updateDetailPartsInfo(index, parts);
+                      final custom = ref.read(editCustomNotifierProvider);
+                      if (!context.mounted) return;
+
+                      // プログレスサークル非表示
+                      context.pop();
+                      // パーツ詳細ページへ遷移
+                      context.pushNamed(
+                        'partsDetailForCreate',
+                        pathParameters: {
+                          'id': custom.id!,
+                          'usage': DetailPageUsage.create.value,
+                          'listIndex': index.toString(),
+                        },
+                      );
+                    },
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
