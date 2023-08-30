@@ -11,12 +11,6 @@ class PartsSearchAppBar extends ConsumerWidget implements PreferredSizeWidget {
     final category = ref.watch(searchingCategoryProviderV2);
     return AppBar(
       backgroundColor: Theme.of(context).colorScheme.background,
-      // shape: const RoundedRectangleBorder(
-      //   borderRadius: BorderRadius.only(
-      //     bottomLeft: Radius.circular(20),
-      //     bottomRight: Radius.circular(20),
-      //   ),
-      // ),
       title: TextField(
         decoration: InputDecoration(
           hintText: '${category.categoryShortName}を検索',
@@ -45,8 +39,13 @@ class PartsSearchAppBar extends ConsumerWidget implements PreferredSizeWidget {
           ),
         ),
       ),
-      actions: const [
-        AddParametersWidget(),
+      actions: [
+        Builder(
+          builder: (context) => InkWell(
+            onTap: () => Scaffold.of(context).openEndDrawer(),
+            child: const AddParametersWidget(),
+          ),
+        ),
       ],
     );
   }

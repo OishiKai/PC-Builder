@@ -11,6 +11,24 @@ class PartsListPageV2 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PartsSearchAppBar(),
+      endDrawer: Drawer(
+        child: Column(
+          children: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text('Close'),
+            ),
+            TextButton(
+              onPressed: () {
+                Scaffold.of(context).openEndDrawer();
+              },
+              child: const Text('Sub Route Page'),
+            )
+          ],
+        ),
+      ),
       body: const Column(
         children: [
           // AddParametersWidget(),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../providers/edit_custom.dart';
@@ -27,12 +28,16 @@ class CustomNameEditWidget extends ConsumerWidget {
             padding: const EdgeInsets.symmetric(horizontal: 12),
             child: Row(
               children: [
-                Text(
-                  custom.name ?? 'NEW CUSTOM',
-                  style: TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                    color: Theme.of(context).colorScheme.primary,
+                Expanded(
+                  child: Text(
+                    custom.name ?? 'NEW CUSTOM',
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                    style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
                   ),
                 ),
                 IconButton(
@@ -63,7 +68,7 @@ class CustomNameEditWidget extends ConsumerWidget {
                                   TextField(
                                     controller: controller,
                                     maxLines: 1,
-                                    maxLength: 15,
+                                    inputFormatters: [LengthLimitingTextInputFormatter(20)],
                                     cursorColor: Theme.of(context).colorScheme.primary,
                                     style: TextStyle(
                                       fontSize: 16,

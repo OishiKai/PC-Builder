@@ -8,25 +8,22 @@ class AddParametersWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Padding(
       padding: const EdgeInsets.only(right: 8.0),
-      child: InkWell(
-        onTap: () {},
-        child: Column(
-          children: [
-            Icon(
-              Icons.manage_search_outlined,
+      child: Column(
+        children: [
+          Icon(
+            Icons.manage_search_outlined,
+            color: Theme.of(context).colorScheme.tertiary,
+            size: 30,
+          ),
+          Text(
+            '絞り込み',
+            style: TextStyle(
               color: Theme.of(context).colorScheme.tertiary,
-              size: 30,
+              fontSize: 12,
+              fontWeight: FontWeight.bold,
             ),
-            Text(
-              '絞り込み',
-              style: TextStyle(
-                color: Theme.of(context).colorScheme.tertiary,
-                fontSize: 12,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
