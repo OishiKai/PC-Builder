@@ -13,7 +13,7 @@ class SsdSearchParameter extends CategorySearchParameter {
     return [
       {'容量': volumes},
       {'規格': type},
-      {'インター\nフェース': interface},
+      {'インターフェース': interface},
     ];
   }
 
@@ -95,7 +95,7 @@ class SsdSearchParameter extends CategorySearchParameter {
       var toggleType = type;
       toggleType[index].isSelect = !type[index].isSelect;
       return SsdSearchParameter(volumes, toggleType, interface);
-    } else if (paramName == 'インター\nフェース') {
+    } else if (paramName == 'インターフェース') {
       var toggleInterface = interface;
       toggleInterface[index].isSelect = !interface[index].isSelect;
       return SsdSearchParameter(volumes, type, toggleInterface);

@@ -3,6 +3,7 @@ import 'package:custom_pc/v2/widgets/parts_list_page/searching_parameter_widget.
 import 'package:flutter/material.dart';
 
 import '../widgets/parts_list_page/PartsSearchAppBar.dart';
+import '../widgets/parts_list_page/parameters_select_drawer.dart';
 
 class PartsListPageV2 extends StatelessWidget {
   const PartsListPageV2({super.key});
@@ -10,25 +11,8 @@ class PartsListPageV2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PartsSearchAppBar(),
-      endDrawer: Drawer(
-        child: Column(
-          children: [
-            TextButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: const Text('Close'),
-            ),
-            TextButton(
-              onPressed: () {
-                Scaffold.of(context).openEndDrawer();
-              },
-              child: const Text('Sub Route Page'),
-            )
-          ],
-        ),
-      ),
+      appBar: const PartsSearchAppBar(),
+      endDrawer: ParametersSelectDrawer(),
       body: const Column(
         children: [
           // AddParametersWidget(),

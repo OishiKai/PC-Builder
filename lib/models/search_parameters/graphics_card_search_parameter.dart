@@ -10,8 +10,8 @@ class GraphicsCardSearchParameter extends CategorySearchParameter {
   @override
   List<Map<String, List<PartsSearchParameter>>> alignParameters() {
     return [
-      {'チップ\n(NVIDIA)': nvidiaChips},
-      {'チップ\n(AMD)': amdChips},
+      {'チップ(NVIDIA)': nvidiaChips},
+      {'チップ(AMD)': amdChips},
     ];
   }
 
@@ -70,11 +70,11 @@ class GraphicsCardSearchParameter extends CategorySearchParameter {
 
   @override
   CategorySearchParameter toggleParameterSelect(String paramName, int index) {
-    if (paramName == 'チップ\n(NVIDIA)') {
+    if (paramName == 'チップ(NVIDIA)') {
       var toggleNviviaChips = nvidiaChips;
       toggleNviviaChips[index].isSelect = !nvidiaChips[index].isSelect;
       return GraphicsCardSearchParameter(toggleNviviaChips, amdChips);
-    } else if (paramName == 'チップ\n(AMD)') {
+    } else if (paramName == 'チップ(AMD)') {
       var toggleAmdChips = amdChips;
       toggleAmdChips[index].isSelect = !amdChips[index].isSelect;
       return GraphicsCardSearchParameter(nvidiaChips, toggleAmdChips);

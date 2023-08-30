@@ -12,7 +12,7 @@ class CaseFanSearchParameter extends CategorySearchParameter {
     return [
       {'メーカー': maker},
       {'サイズ': size},
-      {'最大\n風量': maxAirVolume},
+      {'最大風量': maxAirVolume},
     ];
   }
 
@@ -95,7 +95,7 @@ class CaseFanSearchParameter extends CategorySearchParameter {
         var toggleSize = size;
         toggleSize[index].isSelect = !size[index].isSelect;
         return CaseFanSearchParameter(maker, toggleSize, maxAirVolume);
-      case '最大\n風量':
+      case '最大風量':
         var toggleMaxAirVolume = maxAirVolume;
         toggleMaxAirVolume[index].isSelect = !maxAirVolume[index].isSelect;
         return CaseFanSearchParameter(maker, size, toggleMaxAirVolume);

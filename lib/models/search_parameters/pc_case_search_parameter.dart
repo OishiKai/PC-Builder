@@ -11,8 +11,8 @@ class PcCaseSearchParameter extends CategorySearchParameter {
   @override
   List<Map<String, List<PartsSearchParameter>>> alignParameters() {
     return [
-      {'対応\nマザボ': supportMotherBoards},
-      {'対応\nグラボ': supportGraphicsCards},
+      {'対応マザーボード': supportMotherBoards},
+      {'対応グラフィックボード': supportGraphicsCards},
       {'カラー': colors},
     ];
   }
@@ -88,11 +88,11 @@ class PcCaseSearchParameter extends CategorySearchParameter {
   @override
   CategorySearchParameter toggleParameterSelect(String paramName, int index) {
     switch (paramName) {
-      case '対応\nマザボ':
+      case '対応マザーボード':
         var toggleSupportMotherBoards = supportMotherBoards;
         toggleSupportMotherBoards[index].isSelect = !toggleSupportMotherBoards[index].isSelect;
         return PcCaseSearchParameter(toggleSupportMotherBoards, supportGraphicsCards, colors);
-      case '対応\nグラボ':
+      case '対応グラフィックボード':
         var toggleSupportGraphicsCards = supportGraphicsCards;
         toggleSupportGraphicsCards[index].isSelect = !toggleSupportGraphicsCards[index].isSelect;
         return PcCaseSearchParameter(supportMotherBoards, toggleSupportGraphicsCards, colors);

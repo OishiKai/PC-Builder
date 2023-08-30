@@ -11,8 +11,8 @@ class MemorySearchParameter extends CategorySearchParameter {
   @override
   List<Map<String, List<PartsSearchParameter>>> alignParameters() {
     return [
-      {'容量\n(一枚あたり)': volume},
-      {'インター\nフェース': interface},
+      {'容量(一枚あたり)': volume},
+      {'インターフェース': interface},
       {'規格': type},
     ];
   }
@@ -88,11 +88,11 @@ class MemorySearchParameter extends CategorySearchParameter {
   @override
   CategorySearchParameter toggleParameterSelect(String paramName, int index) {
     switch (paramName) {
-      case '容量\n(一枚あたり)':
+      case '容量(一枚あたり)':
         var toggleVolume = volume;
         toggleVolume[index].isSelect = !volume[index].isSelect;
         return MemorySearchParameter(toggleVolume, interface, type);
-      case 'インター\nフェース':
+      case 'インターフェース':
         var toggleInterface = interface;
         toggleInterface[index].isSelect = !interface[index].isSelect;
         return MemorySearchParameter(volume, toggleInterface, type);

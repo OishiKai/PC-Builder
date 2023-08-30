@@ -92,8 +92,8 @@ class CpuCoolerSearchParameter extends CategorySearchParameter {
   List<Map<String, List<PartsSearchParameter>>> alignParameters() {
     return [
       {'メーカー': makers},
-      {'intel\nソケット': intelSockets},
-      {'AMD\nソケット': amdSockets},
+      {'intelソケット': intelSockets},
+      {'AMDソケット': amdSockets},
       {'タイプ': type},
     ];
   }
@@ -105,11 +105,11 @@ class CpuCoolerSearchParameter extends CategorySearchParameter {
         var toggleMaker = makers;
         toggleMaker[index].isSelect = !makers[index].isSelect;
         return CpuCoolerSearchParameter(toggleMaker, intelSockets, amdSockets, type);
-      case 'intel\nソケット':
+      case 'intelソケット':
         var toggleIntelSockets = intelSockets;
         toggleIntelSockets[index].isSelect = !intelSockets[index].isSelect;
         return CpuCoolerSearchParameter(makers, toggleIntelSockets, amdSockets, type);
-      case 'AMD\nソケット':
+      case 'AMDソケット':
         var toggleAmdSockets = amdSockets;
         toggleAmdSockets[index].isSelect = !amdSockets[index].isSelect;
         return CpuCoolerSearchParameter(makers, intelSockets, toggleAmdSockets, type);

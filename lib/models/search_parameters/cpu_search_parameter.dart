@@ -92,7 +92,7 @@ class CpuSearchParameter extends CategorySearchParameter {
       {'メーカー': makers},
       {'プロセッサ': processors},
       {'世代': series},
-      {'ソケット\n形状': sockets},
+      {'ソケット形状': sockets},
     ];
   }
 
@@ -111,7 +111,7 @@ class CpuSearchParameter extends CategorySearchParameter {
         var toggleSeries = series;
         toggleSeries[index].isSelect = !series[index].isSelect;
         return CpuSearchParameter(makers, processors, toggleSeries, sockets);
-      case 'ソケット\n形状':
+      case 'ソケット形状':
         var toggleSockets = sockets;
         toggleSockets[index].isSelect = !sockets[index].isSelect;
         return CpuSearchParameter(makers, processors, series, toggleSockets);

@@ -9,8 +9,8 @@ class PowerUnitSearchParameter extends CategorySearchParameter {
   @override
   List<Map<String, List<PartsSearchParameter>>> alignParameters() {
     return [
-      {'対応\n規格': supportTypes},
-      {'電源\n容量': powerSupplyCapacitys},
+      {'対応規格': supportTypes},
+      {'電源容量': powerSupplyCapacitys},
     ];
   }
 
@@ -70,11 +70,11 @@ class PowerUnitSearchParameter extends CategorySearchParameter {
   @override
   CategorySearchParameter toggleParameterSelect(String paramName, int index) {
     switch (paramName) {
-      case '対応\n規格':
+      case '対応規格':
         var toggleSupportTypes = supportTypes;
         toggleSupportTypes[index].isSelect = !toggleSupportTypes[index].isSelect;
         return PowerUnitSearchParameter(toggleSupportTypes, powerSupplyCapacitys);
-      case '電源\n容量':
+      case '電源容量':
         var togglePowerSupplyCapacitys = powerSupplyCapacitys;
         togglePowerSupplyCapacitys[index].isSelect = !togglePowerSupplyCapacitys[index].isSelect;
         return PowerUnitSearchParameter(supportTypes, togglePowerSupplyCapacitys);
