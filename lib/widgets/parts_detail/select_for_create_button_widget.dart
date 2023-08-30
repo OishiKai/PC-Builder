@@ -1,21 +1,21 @@
+import 'package:custom_pc/v2/providers/edit_custom.dart';
+import 'package:custom_pc/v2/providers/searching_category.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../models/pc_parts.dart';
-import '../../providers/create_custom.dart';
-import '../../providers/searching_category.dart';
 
 class SelectForCreateButtonWidget extends ConsumerWidget {
-  const SelectForCreateButtonWidget(this.parts, {super.key});
+  const SelectForCreateButtonWidget({super.key, required this.parts});
   final PcParts parts;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return ElevatedButton(
       onPressed: () async {
-        final category = ref.read(searchingCategoryProvider);
-        ref.read(createCustomNotifierProvider.notifier).setParts(category, parts);
+        final category = ref.read(searchingCategoryProviderV2);
+        ref.read(editCustomNotifierProvider.notifier).setParts(category, parts);
         int count = 0;
-        ref.read(createCustomNotifierProvider.notifier).updateCompatibilities();
         Navigator.popUntil(context, (_) => count++ >= 2);
       },
       style: ElevatedButton.styleFrom(
@@ -29,8 +29,8 @@ class SelectForCreateButtonWidget extends ConsumerWidget {
           width: 5,
         ),
       ),
-      child: Row(
-        children: const [
+      child: const Row(
+        children: [
           Spacer(),
           Text(
             "このパーツを選択する",

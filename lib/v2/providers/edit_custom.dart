@@ -58,6 +58,7 @@ class EditCustomNotifier extends _$EditCustomNotifier {
         state = state.copyWith(caseFan: parts);
         break;
     }
+    updateCompatibilities();
   }
 
   /// パーツを削除

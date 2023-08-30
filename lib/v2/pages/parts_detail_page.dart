@@ -250,7 +250,7 @@ class _PartsDetailPageV2State extends ConsumerState<PartsDetailPageV2> with Sing
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          if (usage == DetailPageUsage.create) SelectForCreateButtonWidget(parts),
+                          if (usage == DetailPageUsage.create) SelectForCreateButtonWidget(parts: parts),
                           if (usage == DetailPageUsage.edit) const EditButtonWidget(),
                         ],
                       ),

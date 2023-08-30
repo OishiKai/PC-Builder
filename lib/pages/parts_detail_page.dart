@@ -227,7 +227,7 @@ class _PartsDetailPageState extends ConsumerState<PartsDetailPage> with SingleTi
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        if (usage == DetailPageUsage.create) SelectForCreateButtonWidget(widget.parts),
+                        if (usage == DetailPageUsage.create) SelectForCreateButtonWidget(parts: widget.parts),
                         if (usage == DetailPageUsage.edit) const EditButtonWidget(),
                       ],
                     ),

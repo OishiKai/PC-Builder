@@ -29,6 +29,39 @@ class PartsEditWidget extends ConsumerWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
+          Visibility(
+            visible: partsList.length > 4,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Theme.of(context).colorScheme.secondary,
+                foregroundColor: Theme.of(context).colorScheme.onSecondary,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) => const AddPartsDialog(),
+                );
+              },
+              child: const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.add,
+                  ),
+                  Text(
+                    'パーツを追加',
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
           for (final p in partsList)
             Padding(
               padding: const EdgeInsets.all(8.0),
