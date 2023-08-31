@@ -14,6 +14,11 @@ class EditCustomNotifier extends _$EditCustomNotifier {
     return const Custom();
   }
 
+  /// カスタムを新規作成する場合
+  void createCustom() {
+    state = const Custom();
+  }
+
   /// 保存済みのカスタムを編集する場合
   void setCustom(Custom custom) {
     state = custom;

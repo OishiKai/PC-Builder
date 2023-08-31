@@ -12,17 +12,26 @@ class AddPartsDialog extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final custom = ref.watch(editCustomNotifierProvider);
+
+    void selectForCreate() {
+      ref.read(searchingCategoryProviderV2.notifier).update((state) => category);
+      context.pop();
+      context.pushNamed('partsList', pathParameters: {'id': custom.id!});
+    }
+
+    void selectForEdit() {
+      ref.read(searchingCategoryProviderV2.notifier).update((state) => category);
+      context.pop();
+      context.pushNamed('partsList', pathParameters: {'id': custom.id!});
+    }
+
     return SimpleDialog(
       backgroundColor: Theme.of(context).colorScheme.surface,
       title: const Text('カテゴリーを選択'),
       children: [
         for (final category in PartsCategory.values)
           SimpleDialogOption(
-            onPressed: () {
-              ref.read(searchingCategoryProviderV2.notifier).update((state) => category);
-              context.pop();
-              context.pushNamed('partsList', pathParameters: {'id': custom.id!});
-            },
+            onPressed: () {},
             child: Row(
               children: [
                 Icon(

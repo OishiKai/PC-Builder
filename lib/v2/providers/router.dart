@@ -108,6 +108,14 @@ final routerProvider = Provider<GoRouter>((ref) {
                   ),
                 ],
               ),
+              GoRoute(
+                name: 'create',
+                path: '/create',
+                pageBuilder: (context, state) => const MaterialPage(
+                  fullscreenDialog: true,
+                  child: EditCustomPageV2(),
+                ),
+              ),
             ],
           ),
           // ボトムナビゲーションバーのルート分岐3を追加

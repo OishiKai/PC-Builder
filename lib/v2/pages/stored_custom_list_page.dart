@@ -1,3 +1,4 @@
+import 'package:custom_pc/v2/widgets/stored_custom_list_page/create_custom_floating_action_button.dart';
 import 'package:custom_pc/v2/widgets/stored_custom_list_page/sort_icon_button.dart';
 import 'package:custom_pc/v2/widgets/stored_custom_list_page/stored_custom_list_widget.dart';
 import 'package:flutter/material.dart';
@@ -49,17 +50,7 @@ class StoredCustomListPageV2 extends StatelessWidget {
         ],
       ),
       body: const StoredCustomListWidget(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          context.go('/next');
-        },
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        foregroundColor: Theme.of(context).colorScheme.onPrimary,
-        child: const Icon(
-          Icons.add,
-          size: 32,
-        ),
-      ),
+      floatingActionButton: const CreateCustomFloatingActionButton(),
     );
   }
 }
