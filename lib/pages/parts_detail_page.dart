@@ -8,7 +8,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_segmented_control/material_segmented_control.dart';
 
 import '../config/size_config.dart';
-import '../widgets/parts_detail/edit_button_widget.dart';
 import '../widgets/parts_detail/full_scale_image_slider.dart';
 import '../widgets/parts_detail/shops_widget.dart';
 import '../widgets/parts_detail/specs_widget.dart';
@@ -228,7 +227,7 @@ class _PartsDetailPageState extends ConsumerState<PartsDetailPage> with SingleTi
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         if (usage == DetailPageUsage.create) SelectForCreateButtonWidget(parts: widget.parts),
-                        if (usage == DetailPageUsage.edit) const EditButtonWidget(),
+                        // if (usage == DetailPageUsage.edit) const EditButtonWidget(category: ,),
                       ],
                     ),
                   ),

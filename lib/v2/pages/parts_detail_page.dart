@@ -1,6 +1,7 @@
 import 'package:clippy_flutter/arc.dart';
 import 'package:custom_pc/models/pc_parts.dart';
 import 'package:custom_pc/providers/detail_page_usage.dart';
+import 'package:custom_pc/v2/providers/edit_custom.dart';
 import 'package:custom_pc/v2/providers/parts_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -92,7 +93,8 @@ class _PartsDetailPageV2State extends ConsumerState<PartsDetailPageV2> with Sing
     final usage = DetailPageUsage.fromString(widget.usageValue);
     int selectedIndex = 0;
 
-    Scaffold build(PcParts parts) {
+    // 用途がview,editの場合はcategoryを指定
+    Scaffold build(PcParts parts, PartsCategory? category) {
       return Scaffold(
         backgroundColor: Theme.of(context).colorScheme.background,
         body: Stack(
@@ -251,7 +253,7 @@ class _PartsDetailPageV2State extends ConsumerState<PartsDetailPageV2> with Sing
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           if (usage == DetailPageUsage.create) SelectForCreateButtonWidget(parts: parts),
-                          if (usage == DetailPageUsage.edit) const EditButtonWidget(),
+                          if (usage == DetailPageUsage.edit) EditButtonWidget(category: category!),
                         ],
                       ),
                     ),
@@ -264,25 +266,31 @@ class _PartsDetailPageV2State extends ConsumerState<PartsDetailPageV2> with Sing
       );
     }
 
-    if (usage == DetailPageUsage.edit || usage == DetailPageUsage.view) {
-      // 閲覧or編集用途の場合は、customIdからcustomを取得し、categoryでパーツを指定する
+    if (usage == DetailPageUsage.view) {
+      // 閲覧用途の場合は、customIdからcustomを取得し、categoryでパーツを指定する
       final category = PartsCategory.fromCategoryName(widget.categoryName!);
+
       return customs.when(
         data: (data) {
           final custom = data.firstWhere((element) => element.id == widget.customId);
           final parts = custom.get(category)!;
-          return build(parts);
+          return build(parts, category);
         },
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (e, s) => Center(child: Text(e.toString())),
       );
+    } else if (usage == DetailPageUsage.edit) {
+      // 編集用途の場合は、editCustomNotifierProviderからcustomを取得し、categoryでパーツを指定する
+      final category = PartsCategory.fromCategoryName(widget.categoryName!);
+      final parts = ref.watch(editCustomNotifierProvider).get(category)!;
+      return build(parts, category);
     } else {
-      // 作成用途の場合は、
+      // 作成用途の場合は、partsListProviderからパーツを取得する
       final asyncParts = ref.watch(partsListProvider);
       return asyncParts.when(
         data: (data) {
           final parts = data[widget.listIndex!];
-          return build(parts);
+          return build(parts, null);
         },
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (e, s) => Center(child: Text(e.toString())),
