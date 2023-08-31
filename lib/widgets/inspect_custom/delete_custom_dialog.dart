@@ -1,24 +1,25 @@
-import 'package:custom_pc/providers/editing_custom_id.dart';
-import 'package:custom_pc/providers/stored_customs.dart';
+import 'package:custom_pc/v2/providers/custom_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+
+import '../../models/custom.dart';
 
 class DeleteCustomDialog extends ConsumerWidget {
-  const DeleteCustomDialog({super.key});
+  const DeleteCustomDialog({super.key, required this.custom});
+  final Custom custom;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    const mainColor = Color.fromRGBO(60, 130, 80, 1);
-    final customId = ref.watch(editingCustomIdNotifierProvider);
     return SimpleDialog(
-      //contentPadding: const EdgeInsets.all(0),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      title: const Text(
+      title: Text(
         'カスタムを削除しますか？',
         textAlign: TextAlign.center,
         style: TextStyle(
-          color: mainColor,
+          color: Theme.of(context).colorScheme.secondary,
           fontWeight: FontWeight.bold,
+          fontSize: 20,
         ),
       ),
       children: [
@@ -30,7 +31,8 @@ class DeleteCustomDialog extends ConsumerWidget {
                 Navigator.pop(context);
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.grey[600],
+                backgroundColor: Theme.of(context).colorScheme.surfaceVariant,
+                foregroundColor: Theme.of(context).colorScheme.onSurfaceVariant,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
@@ -38,20 +40,20 @@ class DeleteCustomDialog extends ConsumerWidget {
               child: const Text(
                 'キャンセル',
                 style: TextStyle(
-                  color: Colors.white,
                   fontWeight: FontWeight.bold,
                 ),
               ),
             ),
             const SizedBox(width: 8),
             ElevatedButton(
-              onPressed: () {
-                ref.read(storedCustomsNotifierProvider.notifier).deleteCustom(customId);
-                Navigator.pop(context, customId);
-                Navigator.pop(context, customId);
+              onPressed: () async {
+                Navigator.pop(context);
+                context.pop();
+                ref.read(customRepositoryNotifierProvider.notifier).deleteCustom(custom.id!);
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.red,
+                backgroundColor: Theme.of(context).colorScheme.error,
+                foregroundColor: Theme.of(context).colorScheme.onError,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),

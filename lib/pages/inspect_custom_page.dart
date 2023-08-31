@@ -3,7 +3,6 @@ import 'package:custom_pc/pages/edit_custom_page.dart';
 import 'package:custom_pc/providers/detail_page_usage.dart';
 import 'package:custom_pc/providers/editing_custom_id.dart';
 import 'package:custom_pc/providers/stored_customs.dart';
-import 'package:custom_pc/widgets/inspect_custom/delete_custom_dialog.dart';
 import 'package:custom_pc/widgets/inspect_custom/summary_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -98,20 +97,20 @@ class InspectCustomPage extends ConsumerWidget {
                     const SizedBox(
                       width: 4,
                     ),
-                    InkWell(
-                      onTap: () {
-                        showDialog(
-                            context: context,
-                            builder: (_) {
-                              return const DeleteCustomDialog();
-                            });
-                      },
-                      child: const Icon(
-                        Icons.delete,
-                        size: 30,
-                        color: mainColor,
-                      ),
-                    ),
+                    // InkWell(
+                    //   onTap: () {
+                    //     showDialog(
+                    //         context: context,
+                    //         builder: (_) {
+                    //           return const DeleteCustomDialog();
+                    //         });
+                    //   },
+                    //   child: const Icon(
+                    //     Icons.delete,
+                    //     size: 30,
+                    //     color: mainColor,
+                    //   ),
+                    // ),
                   ],
                 ),
               ),

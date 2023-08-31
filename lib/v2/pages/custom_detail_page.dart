@@ -1,5 +1,6 @@
 import 'package:custom_pc/v2/providers/custom_repository.dart';
 import 'package:custom_pc/v2/widgets/custom_detail_page/parts_list_widget.dart';
+import 'package:custom_pc/widgets/inspect_custom/delete_custom_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -17,6 +18,13 @@ class CustomDetailPage extends ConsumerWidget {
     final custom = ref.watch(customRepositoryNotifierProvider);
     return custom.when(
       data: (data) {
+        // idに一致するカスタムが存在するか確認(カスタム削除時にNoElementErrorとなるため)
+        if (data.where((element) => element.id == id).isEmpty) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+
         final custom = data.firstWhere((element) => element.id == id);
         return Scaffold(
           appBar: AppBar(
@@ -38,7 +46,12 @@ class CustomDetailPage extends ConsumerWidget {
             actions: [
               IconButton(
                 onPressed: () {
-                  // context.push('/sub_route');
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return DeleteCustomDialog(custom: custom);
+                    },
+                  );
                 },
                 icon: Icon(
                   Icons.delete,
