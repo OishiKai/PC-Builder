@@ -49,7 +49,22 @@ class DeleteCustomDialog extends ConsumerWidget {
               onPressed: () async {
                 Navigator.pop(context);
                 context.pop();
+
+                // カスタム削除
                 ref.read(customRepositoryNotifierProvider.notifier).deleteCustom(custom.id!);
+                // SnackBar表示
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(
+                      '${custom.name}を削除しました',
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.onSurface,
+                      ),
+                    ),
+                    backgroundColor: Theme.of(context).colorScheme.surfaceVariant,
+                    duration: const Duration(seconds: 1),
+                  ),
+                );
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Theme.of(context).colorScheme.error,
