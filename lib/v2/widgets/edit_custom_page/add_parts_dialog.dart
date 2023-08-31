@@ -13,13 +13,13 @@ class AddPartsDialog extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final custom = ref.watch(editCustomNotifierProvider);
 
-    void selectForCreate() {
+    void selectForCreate(PartsCategory category) {
       ref.read(searchingCategoryProviderV2.notifier).update((state) => category);
       context.pop();
-      context.pushNamed('partsList', pathParameters: {'id': custom.id!});
+      context.pushNamed('create_partsList');
     }
 
-    void selectForEdit() {
+    void selectForEdit(PartsCategory category) {
       ref.read(searchingCategoryProviderV2.notifier).update((state) => category);
       context.pop();
       context.pushNamed('partsList', pathParameters: {'id': custom.id!});
@@ -31,7 +31,7 @@ class AddPartsDialog extends ConsumerWidget {
       children: [
         for (final category in PartsCategory.values)
           SimpleDialogOption(
-            onPressed: () {},
+            onPressed: () => custom.id == null ? selectForCreate(category) : selectForEdit(category),
             child: Row(
               children: [
                 Icon(

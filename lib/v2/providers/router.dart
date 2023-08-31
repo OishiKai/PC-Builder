@@ -115,6 +115,41 @@ final routerProvider = Provider<GoRouter>((ref) {
                   fullscreenDialog: true,
                   child: EditCustomPageV2(),
                 ),
+                routes: [
+                  GoRoute(
+                    name: 'create_partsDetail_selecting',
+                    path: 'partsDetail/:usage/:categoryName',
+                    builder: (context, state) {
+                      final usage = state.pathParameters['usage']!;
+                      final categoryName = state.pathParameters['categoryName']!;
+                      return PartsDetailPageV2(
+                        usageValue: usage,
+                        categoryName: categoryName,
+                      );
+                    },
+                  ),
+                  GoRoute(
+                    name: 'create_partsList',
+                    path: 'partsList',
+                    builder: (context, state) {
+                      return const PartsListPageV2();
+                    },
+                    routes: [
+                      GoRoute(
+                        name: 'create_partsDetail_searching',
+                        path: 'partsDetail/:usage/:listIndex',
+                        builder: (context, state) {
+                          final usage = state.pathParameters['usage']!;
+                          final listIndex = state.pathParameters['listIndex']!;
+                          return PartsDetailPageV2(
+                            usageValue: usage,
+                            listIndex: int.parse(listIndex),
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ],
           ),

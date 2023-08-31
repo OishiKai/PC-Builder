@@ -51,14 +51,26 @@ class SearchResultPartsListWidget extends ConsumerWidget {
                       // プログレスサークル非表示
                       context.pop();
                       // パーツ詳細ページへ遷移
-                      context.pushNamed(
-                        'partsDetailForCreate',
-                        pathParameters: {
-                          'id': custom.id!,
-                          'usage': DetailPageUsage.create.value,
-                          'listIndex': index.toString(),
-                        },
-                      );
+                      if (custom.id == null) {
+                        // 新規作成の場合
+                        context.pushNamed(
+                          'create_partsDetail_searching',
+                          pathParameters: {
+                            'usage': DetailPageUsage.create.value,
+                            'listIndex': index.toString(),
+                          },
+                        );
+                      } else {
+                        // 編集の場合
+                        context.pushNamed(
+                          'partsDetailForCreate',
+                          pathParameters: {
+                            'id': custom.id!,
+                            'usage': DetailPageUsage.create.value,
+                            'listIndex': index.toString(),
+                          },
+                        );
+                      }
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
