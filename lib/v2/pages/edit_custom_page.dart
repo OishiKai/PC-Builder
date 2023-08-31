@@ -1,3 +1,5 @@
+import 'package:custom_pc/v2/pages/dashboard.dart';
+import 'package:custom_pc/v2/providers/custom_repository.dart';
 import 'package:custom_pc/v2/providers/edit_custom.dart';
 import 'package:custom_pc/v2/widgets/edit_custom_page/custom_title_edit_widget.dart';
 import 'package:custom_pc/v2/widgets/edit_custom_page/edit_cancel_button.dart';
@@ -24,6 +26,22 @@ class EditCustomPageV2 extends ConsumerWidget {
           ),
         ),
         leading: const EditCancelButton(),
+        actions: [
+          IconButton(
+            onPressed: () {
+              // 編集中のカスタムを保存
+              ref.read(customRepositoryNotifierProvider.notifier).updateCustom(custom);
+              // bottomNavigationBarを表示
+              ref.read(bottomNavigationBarVisibilityProvider.notifier).update((state) => true);
+              Navigator.of(context).pop();
+            },
+            icon: Icon(
+              Icons.check,
+              color: Theme.of(context).colorScheme.primary,
+              size: 32,
+            ),
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(8),
@@ -33,14 +51,6 @@ class EditCustomPageV2 extends ConsumerWidget {
             SizedBox(height: 16),
             PartsEditWidget(),
           ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        onPressed: () {},
-        child: Icon(
-          Icons.check,
-          color: Theme.of(context).colorScheme.onPrimary,
         ),
       ),
     );

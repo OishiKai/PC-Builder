@@ -30,8 +30,9 @@ class CustomRepositoryNotifier extends _$CustomRepositoryNotifier {
     refresh();
   }
 
-  void updateCustom(Custom custom, String id) async {
-    await CustomRepository.updateCustom(id, custom);
+  void updateCustom(Custom custom) async {
+    // 更新なのでidはnullではない
+    await CustomRepository.updateCustom(custom.id!, custom);
     refresh();
   }
 

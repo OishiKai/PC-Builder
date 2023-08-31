@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 
 import '../providers/edit_custom.dart';
 import '../widgets/custom_detail_page/custom_summary_widget.dart';
+import 'dashboard.dart';
 
 class CustomDetailPage extends ConsumerWidget {
   const CustomDetailPage({super.key, required this.id});
@@ -80,7 +81,10 @@ class CustomDetailPage extends ConsumerWidget {
           ),
           floatingActionButton: FloatingActionButton(
             onPressed: () {
+              // 表示中のカスタムを編集用Providerにセット
               ref.read(editCustomNotifierProvider.notifier).setCustom(custom);
+              // bottomNavigationBarを非表示化
+              ref.read(bottomNavigationBarVisibilityProvider.notifier).update((state) => false);
               context.goNamed('edit', pathParameters: {'id': id});
             },
             backgroundColor: Theme.of(context).colorScheme.primary,
