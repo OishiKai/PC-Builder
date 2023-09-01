@@ -21,6 +21,7 @@ class CustomRepositoryNotifier extends _$CustomRepositoryNotifier {
   }
 
   void addCustom(Custom custom) async {
+    if (custom.name == null) custom = custom.copyWith(name: 'タイトルなし');
     await CustomRepository.insertCustom(custom);
     refresh();
   }
