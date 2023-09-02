@@ -57,7 +57,7 @@ class _CustomSummaryWidgetState extends State<CustomSummaryWidget> {
             },
           ),
           // 5つ以上のSummaryInfoCellがある場合(2ページ以上ある)は、ページインジケーターを表示
-          if (cells.length > 5)
+          if (cells.length > 4)
             AnimatedSmoothIndicator(
               activeIndex: activeIndex,
               count: cells.length % 4 == 0 ? cells.length ~/ 4 : cells.length ~/ 4 + 1,
