@@ -543,11 +543,11 @@ class _$_Custom implements _Custom {
   }
 
   @override
-  String getRandomPartsImage() {
+  String getMainPartsImage() {
     final alignedParts = align();
-    final randomNum = math.Random().nextInt(alignedParts.length);
-    final randomParts = alignedParts.values.toList()[randomNum];
-    return randomParts.image;
+    // 最も高い価格のパーツを取得
+    final parts = alignedParts.values.reduce((a, b) => parsePrice(a.price) > parsePrice(b.price) ? a : b);
+    return parts.image;
   }
 
   @override
