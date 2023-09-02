@@ -156,8 +156,16 @@ class PartsEditWidget extends ConsumerWidget {
                                   const Spacer(),
                                   TextButton(
                                     onPressed: () {
+                                      // 検索対象のカテゴリを変更
                                       ref.read(searchingCategoryProviderV2.notifier).update((state) => p.category);
-                                      context.pushNamed('partsList', pathParameters: {'id': custom.id!});
+
+                                      if (custom.id == null) {
+                                        // 新規作成時
+                                        context.pushNamed('create_partsList');
+                                      } else {
+                                        // 編集時
+                                        context.pushNamed('partsList', pathParameters: {'id': custom.id!});
+                                      }
                                     },
                                     child: Row(
                                       children: [
