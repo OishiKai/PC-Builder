@@ -1,5 +1,4 @@
 import 'package:custom_pc/config/size_config.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -33,7 +32,7 @@ class CustomCellWidget extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Image.network(
-              custom.getRandomPartsImage(),
+              custom.getMainPartsImage(),
               width: SizeConfig.blockSizeHorizontal * 14,
               height: SizeConfig.blockSizeHorizontal * 14,
             ),
