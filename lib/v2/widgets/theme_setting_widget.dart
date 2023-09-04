@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../providers/theme.dart' as th;
+import '../providers/theme.dart';
+import '../share_preferences_instance.dart';
 
 class ThemeSettingWidget extends ConsumerWidget {
   const ThemeSettingWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final theme = ref.watch(th.themeProvider);
+    final theme = ref.watch(themeProvider);
+    final prefs = SharedPreferencesInstance().prefs;
+    const themeKey = 'theme';
     return Container(
       padding: const EdgeInsets.all(16),
       child: Column(
@@ -25,28 +28,31 @@ class ThemeSettingWidget extends ConsumerWidget {
           const SizedBox(height: 16),
           CheckboxListTile(
             title: const Text('システムの設定'),
-            value: theme == th.ThemeMode.followSystem,
-            onChanged: (value) {
-              if (theme != th.ThemeMode.followSystem) {
-                ref.read(th.themeProvider.notifier).update((state) => th.ThemeMode.followSystem);
+            value: theme == ThemeMode.system,
+            onChanged: (value) async {
+              if (theme != ThemeMode.system) {
+                ref.read(themeProvider.notifier).update((state) => ThemeMode.system);
+                prefs.setString(themeKey, 'system');
               }
             },
           ),
           CheckboxListTile(
             title: const Text('ライトモード'),
-            value: theme == th.ThemeMode.light,
+            value: theme == ThemeMode.light,
             onChanged: (value) {
-              if (theme != th.ThemeMode.light) {
-                ref.read(th.themeProvider.notifier).update((state) => th.ThemeMode.light);
+              if (theme != ThemeMode.light) {
+                ref.read(themeProvider.notifier).update((state) => ThemeMode.light);
+                prefs.setString(themeKey, 'light');
               }
             },
           ),
           CheckboxListTile(
             title: const Text('ダークモード'),
-            value: theme == th.ThemeMode.dark,
+            value: theme == ThemeMode.dark,
             onChanged: (value) {
-              if (theme != th.ThemeMode.dark) {
-                ref.read(th.themeProvider.notifier).update((state) => th.ThemeMode.dark);
+              if (theme != ThemeMode.dark) {
+                ref.read(themeProvider.notifier).update((state) => ThemeMode.dark);
+                prefs.setString(themeKey, 'dark');
               }
             },
           )

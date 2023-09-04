@@ -1,16 +1,18 @@
 import 'package:custom_pc/v2/providers/router.dart';
 import 'package:custom_pc/v2/providers/theme.dart' as th;
+import 'package:custom_pc/v2/share_preferences_instance.dart';
 import 'package:custom_pc/v2/theme/color_schemes.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-void main() {
+Future<void> main() async {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
   ));
 
   WidgetsFlutterBinding.ensureInitialized();
+  await SharedPreferencesInstance.initialize();
   SystemChrome.setPreferredOrientations([
     // 縦向きのみ
     DeviceOrientation.portraitUp,
@@ -56,14 +58,14 @@ class MyApp extends ConsumerWidget {
     final theme = ref.watch(th.themeProvider);
     ThemeData themeData;
     switch (theme) {
-      case th.ThemeMode.light:
+      case ThemeMode.light:
         themeData = createTheme(lightColorScheme);
         break;
-      case th.ThemeMode.dark:
+      case ThemeMode.dark:
         themeData = createTheme(darkColorScheme);
         break;
-      case th.ThemeMode.followSystem:
-        MediaQuery.platformBrightnessOf(context) == Brightness.light ? themeData = createTheme(lightColorScheme) : themeData = createTheme(darkColorScheme);
+      case ThemeMode.system:
+        MediaQuery.platformBrightnessOf(context) == Brightness.dark ? themeData = createTheme(darkColorScheme) : themeData = createTheme(lightColorScheme);
         break;
     }
 

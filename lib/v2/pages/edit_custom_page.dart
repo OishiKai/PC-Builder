@@ -11,43 +11,46 @@ class EditCustomPageV2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 2,
-      child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Theme.of(context).colorScheme.background,
-          title: Text(
-            'カスタムエディタ',
-            style: TextStyle(
-              color: Theme.of(context).colorScheme.primary,
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: DefaultTabController(
+        length: 2,
+        child: Scaffold(
+          appBar: AppBar(
+            backgroundColor: Theme.of(context).colorScheme.background,
+            title: Text(
+              'カスタムエディタ',
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.primary,
+              ),
+            ),
+            leading: const EditCancelButton(),
+            actions: const [
+              SaveIconButton(),
+            ],
+            bottom: const TabBar(
+              tabs: [
+                Tab(text: '編集'),
+                Tab(text: '分析'),
+              ],
             ),
           ),
-          leading: const EditCancelButton(),
-          actions: const [
-            SaveIconButton(),
-          ],
-          bottom: const TabBar(
-            tabs: [
-              Tab(text: '編集'),
-              Tab(text: '分析'),
-            ],
-          ),
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: TabBarView(
-            children: [
-              // 編集タブ
-              ListView(
-                children: const [
-                  CustomNameEditWidget(),
-                  SizedBox(height: 16),
-                  PartsEditWidget(),
-                ],
-              ),
-              // 分析タブ
-              const AnalyzeCustomWidget(),
-            ],
+          body: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TabBarView(
+              children: [
+                // 編集タブ
+                ListView(
+                  children: const [
+                    CustomNameEditWidget(),
+                    SizedBox(height: 16),
+                    PartsEditWidget(),
+                  ],
+                ),
+                // 分析タブ
+                const AnalyzeCustomWidget(),
+              ],
+            ),
           ),
         ),
       ),
