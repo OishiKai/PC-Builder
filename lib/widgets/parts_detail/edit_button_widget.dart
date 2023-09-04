@@ -47,7 +47,7 @@ class EditButtonWidget extends ConsumerWidget {
         //   Navigator.push(context, MaterialPageRoute(builder: (context) => PartsListPage()));
         // }
 
-        ref.read(searchingCategoryProviderV2.notifier).update((state) => category);
+        ref.read(searchingCategoryProvider.notifier).update((state) => category);
         Navigator.pop(context);
         context.pushNamed('partsList', pathParameters: {'id': custom.id!});
       },

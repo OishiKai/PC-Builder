@@ -1,7 +1,7 @@
 import 'package:custom_pc/models/parts_compatibility.dart';
 import 'package:flutter/material.dart';
 
-import '../../config/size_config.dart';
+import '../../../config/size_config.dart';
 
 class PartsCompatibilityWidget extends StatelessWidget {
   const PartsCompatibilityWidget(this.compatibility, {super.key});

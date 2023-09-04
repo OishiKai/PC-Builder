@@ -17,8 +17,8 @@ import '../../widgets/parts_detail/specs_widget.dart';
 import '../../widgets/parts_detail/star_widget.dart';
 import '../providers/custom_repository.dart';
 
-class PartsDetailPageV2 extends ConsumerStatefulWidget {
-  const PartsDetailPageV2({
+class PartsDetailPage extends ConsumerStatefulWidget {
+  const PartsDetailPage({
     super.key,
     required this.usageValue,
     this.categoryName,
@@ -32,10 +32,10 @@ class PartsDetailPageV2 extends ConsumerStatefulWidget {
   final int? listIndex;
 
   @override
-  ConsumerState<PartsDetailPageV2> createState() => _PartsDetailPageV2State();
+  ConsumerState<PartsDetailPage> createState() => _PartsDetailPageState();
 }
 
-class _PartsDetailPageV2State extends ConsumerState<PartsDetailPageV2> with SingleTickerProviderStateMixin {
+class _PartsDetailPageState extends ConsumerState<PartsDetailPage> with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _height;
   late ScrollController _scrollController;

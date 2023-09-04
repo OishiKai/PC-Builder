@@ -23,19 +23,19 @@ class NewCustomBottomBar extends ConsumerWidget {
       Navigator.of(context).pop();
       ref.read(createCustomNotifierProvider.notifier).reset();
       ref.read(createCustomNotifierProvider.notifier).updateCompatibilities();
-      ref.read(searchingCategoryProvider.notifier).changeCategory(category);
+      ref.read(searchingCategoryProviderOld.notifier).changeCategory(category);
 
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => const EditCustomPage(),
+          builder: (context) => const EditCustomPageOld(),
         ),
       );
 
       // カテゴリに合わせて検索URL、パラメータを設定する
       ref.read(pcPartsListNotifierProvider.notifier).switchCategory(category);
       ref.read(searchParameterProvider.notifier).replaceParameters(category);
-      Navigator.push(context, MaterialPageRoute(builder: (context) => const PartsListPage()));
+      Navigator.push(context, MaterialPageRoute(builder: (context) => const PartsListPageOld()));
     }
 
     return InkWell(

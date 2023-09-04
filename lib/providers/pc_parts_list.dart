@@ -83,7 +83,7 @@ class PcPartsListNotifier extends _$PcPartsListNotifier {
 
   // 検索対象のURLを変更する
   Future<void> replaceSearchUrl(String listUrl) async {
-    final text = ref.read(searchTextProvider);
+    final text = ref.read(searchTextProviderOld);
     if (text != '' && listUrl.contains('?')) {
       // 検索条件が含まれる場合
       listUrl = '$listUrl&pdf_kw=$text';

@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 import '../../tutorial_page.dart';
 import '../share_preferences_instance.dart';
 
-class StoredCustomListPageV2 extends StatelessWidget {
-  const StoredCustomListPageV2({super.key});
+class StoredCustomListPage extends StatelessWidget {
+  const StoredCustomListPage({super.key});
 
   void _showTutorial(BuildContext context) {
     final prefs = SharedPreferencesInstance().prefs;

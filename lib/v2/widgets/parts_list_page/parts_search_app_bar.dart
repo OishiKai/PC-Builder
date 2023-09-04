@@ -2,7 +2,7 @@ import 'package:custom_pc/v2/providers/searching_category.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final searchTextProviderV2 = StateProvider<String>((ref) => '');
+final searchTextProvider = StateProvider<String>((ref) => '');
 
 class PartsSearchAppBar extends ConsumerStatefulWidget implements PreferredSizeWidget {
   const PartsSearchAppBar({super.key});
@@ -17,11 +17,11 @@ class PartsSearchAppBar extends ConsumerStatefulWidget implements PreferredSizeW
 class PartsSearchAppBarState extends ConsumerState<PartsSearchAppBar> {
   @override
   Widget build(BuildContext context) {
-    final category = ref.watch(searchingCategoryProviderV2);
+    final category = ref.watch(searchingCategoryProvider);
     return AppBar(
       backgroundColor: Theme.of(context).colorScheme.background,
       title: TextField(
-        controller: TextEditingController(text: ref.watch(searchTextProviderV2)),
+        controller: TextEditingController(text: ref.watch(searchTextProvider)),
         decoration: InputDecoration(
           hintText: '${category.categoryShortName}を検索',
           hintStyle: const TextStyle(
@@ -43,13 +43,13 @@ class PartsSearchAppBarState extends ConsumerState<PartsSearchAppBar> {
               color: Theme.of(context).colorScheme.primary,
             ),
             onPressed: () {
-              ref.read(searchTextProviderV2.notifier).update((state) => '');
+              ref.read(searchTextProvider.notifier).update((state) => '');
             },
           ),
         ),
         onSubmitted: (value) {
           if (value.trim() == '') return;
-          ref.read(searchTextProviderV2.notifier).update((state) => value.trim());
+          ref.read(searchTextProvider.notifier).update((state) => value.trim());
         },
       ),
       actions: [

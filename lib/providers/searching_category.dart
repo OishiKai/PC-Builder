@@ -10,6 +10,6 @@ class SearchingCategoryNotifier extends StateNotifier<PartsCategory> {
   }
 }
 
-final searchingCategoryProvider = StateNotifierProvider<SearchingCategoryNotifier, PartsCategory>(
+final searchingCategoryProviderOld = StateNotifierProvider<SearchingCategoryNotifier, PartsCategory>(
   (ref) => SearchingCategoryNotifier(PartsCategory.cpu),
 );

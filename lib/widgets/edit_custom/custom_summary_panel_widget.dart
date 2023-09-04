@@ -12,7 +12,7 @@ import '../../providers/create_custom.dart';
 import '../../providers/pc_parts_list.dart';
 import '../../providers/search_parameters.dart';
 import '../../providers/searching_category.dart';
-import '../create_custom/parts_compatibility_widget.dart';
+import '../../v2/widgets/edit_custom_page/parts_compatibility_widget.dart';
 import 'add_parts_modal_widget.dart';
 
 class CustomSummaryPanelWidget extends ConsumerWidget {
@@ -42,7 +42,7 @@ class CustomSummaryPanelWidget extends ConsumerWidget {
     onTapGrit(PartsCategory category) async {
       showProgressDialog(context);
       // ここで検索を始めるパーツカテゴリを設定する
-      ref.read(searchingCategoryProvider.notifier).changeCategory(category);
+      ref.read(searchingCategoryProviderOld.notifier).changeCategory(category);
       // カテゴリに合わせて検索URL、パラメータを設定する
       ref.read(pcPartsListNotifierProvider.notifier).switchCategory(category);
       await ref.read(searchParameterProvider.notifier).replaceParameters(category);
@@ -67,7 +67,7 @@ class CustomSummaryPanelWidget extends ConsumerWidget {
         );
       } else {
         Navigator.of(context).pop();
-        Navigator.push(context, MaterialPageRoute(builder: (context) => PartsListPage()));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => PartsListPageOld()));
       }
     }
 

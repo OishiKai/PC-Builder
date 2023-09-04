@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import '../widgets/parts_list_page/parameters_select_drawer.dart';
 import '../widgets/parts_list_page/parts_search_app_bar.dart';
 
-class PartsListPageV2 extends StatelessWidget {
-  const PartsListPageV2({super.key});
+class PartsListPage extends StatelessWidget {
+  const PartsListPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,8 +15,7 @@ class PartsListPageV2 extends StatelessWidget {
       endDrawer: ParametersSelectDrawer(),
       body: Column(
         children: [
-          // AddParametersWidget(),
-          SearchingParameterWidgetV2(),
+          SearchingParameterWidget(),
           SearchResultPartsListWidget(),
         ],
       ),

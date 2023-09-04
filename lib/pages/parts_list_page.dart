@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 
 import '../config/size_config.dart';
 
-class PartsListPage extends StatelessWidget {
-  const PartsListPage({super.key});
+class PartsListPageOld extends StatelessWidget {
+  const PartsListPageOld({super.key});
   final _mainColor = const Color.fromRGBO(60, 130, 80, 1);
 
   @override
@@ -74,11 +74,11 @@ class PartsListPage extends StatelessWidget {
             const SizedBox(
               height: 4,
             ),
-            const SearchingParameterWidget(),
+            const SearchingParameterWidgetOld(),
             const SizedBox(
               height: 8,
             ),
-            const PartsListWidget(),
+            const PartsListWidgetOld(),
           ],
         ),
       ),

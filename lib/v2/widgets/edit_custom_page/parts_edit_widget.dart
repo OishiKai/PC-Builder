@@ -157,7 +157,7 @@ class PartsEditWidget extends ConsumerWidget {
                                   TextButton(
                                     onPressed: () {
                                       // 検索対象のカテゴリを変更
-                                      ref.read(searchingCategoryProviderV2.notifier).update((state) => p.category);
+                                      ref.read(searchingCategoryProvider.notifier).update((state) => p.category);
 
                                       if (custom.id == null) {
                                         // 新規作成時

@@ -6,8 +6,8 @@ import 'package:custom_pc/widgets/stored_custom_list/stored_customs_table_widget
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class StoredCustomListPage extends StatelessWidget {
-  const StoredCustomListPage({super.key});
+class StoredCustomListPageOld extends StatelessWidget {
+  const StoredCustomListPageOld({super.key});
 
   void _showTutorial(BuildContext context) async {
     final pref = await SharedPreferences.getInstance();

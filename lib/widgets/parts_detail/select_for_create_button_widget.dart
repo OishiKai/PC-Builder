@@ -13,7 +13,7 @@ class SelectForCreateButtonWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return ElevatedButton(
       onPressed: () async {
-        final category = ref.read(searchingCategoryProviderV2);
+        final category = ref.read(searchingCategoryProvider);
         ref.read(editCustomNotifierProvider.notifier).setParts(category, parts);
         int count = 0;
         Navigator.popUntil(context, (_) => count++ >= 2);

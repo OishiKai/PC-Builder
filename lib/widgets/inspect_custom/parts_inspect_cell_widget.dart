@@ -41,7 +41,7 @@ class PartsInspectCellWidget extends ConsumerWidget {
         InkWell(
           onTap: () {
             ref.read(detailPageUsageNotifierProvider.notifier).switchView();
-            Navigator.push(context, MaterialPageRoute(builder: (context) => PartsDetailPage(parts)));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => PartsDetailPageOld(parts)));
           },
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 4),

@@ -20,7 +20,7 @@ class PartsScrollWidget extends ConsumerWidget {
 
     setupToPartsListPage(PartsCategory category) async {
       // ここで検索を始めるパーツカテゴリを設定する
-      ref.read(searchingCategoryProvider.notifier).changeCategory(category);
+      ref.read(searchingCategoryProviderOld.notifier).changeCategory(category);
       // カテゴリに合わせて検索URL、パラメータを設定する
       ref.read(pcPartsListNotifierProvider.notifier).switchCategory(category);
       ref.read(searchParameterProvider.notifier).replaceParameters(category);
@@ -45,7 +45,7 @@ class PartsScrollWidget extends ConsumerWidget {
                 child: InkWell(
                   onTap: () async {
                     setupToPartsListPage(PartsCategory.values[i]);
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => const PartsListPage()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const PartsListPageOld()));
                   },
                   child: Container(
                     // 4%, 28%, 4%, 28%, 4%, 28%, 4% の横幅で表示する

@@ -14,9 +14,9 @@ part 'gen/parts_list.g.dart';
 class PartsList extends _$PartsList {
   @override
   Future<List<PcParts>> build() {
-    final searchingCategory = ref.watch(searchingCategoryProviderV2);
+    final searchingCategory = ref.watch(searchingCategoryProvider);
     final searchParameter = ref.watch(searchParametersNotifierProvider);
-    final searchText = ref.watch(searchTextProviderV2);
+    final searchText = ref.watch(searchTextProvider);
 
     return searchParameter.when(
       data: (data) {

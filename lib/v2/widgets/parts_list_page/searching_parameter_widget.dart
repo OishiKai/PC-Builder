@@ -3,8 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../providers/search_parameters.dart';
 
-class SearchingParameterWidgetV2 extends ConsumerWidget {
-  const SearchingParameterWidgetV2({super.key});
+class SearchingParameterWidget extends ConsumerWidget {
+  const SearchingParameterWidget({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

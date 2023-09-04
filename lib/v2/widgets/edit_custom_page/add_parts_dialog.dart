@@ -14,13 +14,13 @@ class AddPartsDialog extends ConsumerWidget {
     final custom = ref.watch(editCustomNotifierProvider);
 
     void selectForCreate(PartsCategory category) {
-      ref.read(searchingCategoryProviderV2.notifier).update((state) => category);
+      ref.read(searchingCategoryProvider.notifier).update((state) => category);
       context.pop();
       context.pushNamed('create_partsList');
     }
 
     void selectForEdit(PartsCategory category) {
-      ref.read(searchingCategoryProviderV2.notifier).update((state) => category);
+      ref.read(searchingCategoryProvider.notifier).update((state) => category);
       context.pop();
       context.pushNamed('partsList', pathParameters: {'id': custom.id!});
     }

@@ -8,8 +8,8 @@ import '../../config/size_config.dart';
 import '../../domain/parts_detail_parser.dart';
 import '../../providers/pc_parts_list.dart';
 
-class PartsListWidget extends ConsumerWidget {
-  const PartsListWidget({super.key});
+class PartsListWidgetOld extends ConsumerWidget {
+  const PartsListWidgetOld({super.key});
   final mainColor = const Color.fromRGBO(60, 130, 80, 1);
 
   @override
@@ -64,7 +64,7 @@ class PartsListWidget extends ConsumerWidget {
                   ref.read(detailPageUsageNotifierProvider.notifier).switchCreate();
                   // プログレスサークル非表示
                   Navigator.pop(context);
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => PartsDetailPage(parts[i])));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => PartsDetailPageOld(parts[i])));
                 },
                 child: Column(
                   children: [

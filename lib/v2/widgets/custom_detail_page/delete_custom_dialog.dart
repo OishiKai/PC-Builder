@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../models/custom.dart';
+import '../../../models/custom.dart';
 
 class DeleteCustomDialog extends ConsumerWidget {
   const DeleteCustomDialog({super.key, required this.custom});

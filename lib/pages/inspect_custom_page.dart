@@ -84,7 +84,7 @@ class InspectCustomPage extends ConsumerWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const EditCustomPage(),
+                            builder: (context) => const EditCustomPageOld(),
                           ),
                         );
                       },

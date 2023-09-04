@@ -20,7 +20,7 @@ class SearchParametersNotifier extends _$SearchParametersNotifier {
   @override
   Future<CategorySearchParameter> build() {
     // searchingCategoryProviderを監視して、カテゴリが変更されたら検索条件情報を更新する
-    final category = ref.watch(searchingCategoryProviderV2);
+    final category = ref.watch(searchingCategoryProvider);
     return _fetchParameters(category);
   }
 

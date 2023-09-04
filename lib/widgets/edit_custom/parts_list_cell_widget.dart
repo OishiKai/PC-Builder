@@ -20,8 +20,8 @@ class PartsListCellWidget extends ConsumerWidget {
         // 詳細画面を編集モードで開く
         ref.read(detailPageUsageNotifierProvider.notifier).switchEdit();
         // 詳細画面から他のパーツを選択する際、カテゴリーを利用するためここでセット
-        ref.read(searchingCategoryProvider.notifier).changeCategory(category);
-        Navigator.push(context, MaterialPageRoute(builder: (context) => PartsDetailPage(parts)));
+        ref.read(searchingCategoryProviderOld.notifier).changeCategory(category);
+        Navigator.push(context, MaterialPageRoute(builder: (context) => PartsDetailPageOld(parts)));
       },
       child: Padding(
         padding: const EdgeInsets.only(bottom: 16),

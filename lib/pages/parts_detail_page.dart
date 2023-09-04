@@ -18,14 +18,14 @@ final detailPageProvider = StateProvider<int>((ref) {
   return 0;
 });
 
-class PartsDetailPage extends ConsumerStatefulWidget {
-  const PartsDetailPage(this.parts, {super.key});
+class PartsDetailPageOld extends ConsumerStatefulWidget {
+  const PartsDetailPageOld(this.parts, {super.key});
   final PcParts parts;
   @override
-  ConsumerState<PartsDetailPage> createState() => _PartsDetailPageState();
+  ConsumerState<PartsDetailPageOld> createState() => _PartsDetailPageOldState();
 }
 
-class _PartsDetailPageState extends ConsumerState<PartsDetailPage> with SingleTickerProviderStateMixin {
+class _PartsDetailPageOldState extends ConsumerState<PartsDetailPageOld> with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _height;
   late ScrollController _scrollController;

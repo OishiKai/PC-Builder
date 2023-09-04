@@ -11,14 +11,14 @@ import '../widgets/create_custom/save_confirm_dialog.dart';
 import '../widgets/edit_custom/edit_cancel_dialog.dart';
 import '../widgets/edit_custom/update_custom_dialog.dart';
 
-class EditCustomPage extends ConsumerStatefulWidget {
-  const EditCustomPage({super.key});
+class EditCustomPageOld extends ConsumerStatefulWidget {
+  const EditCustomPageOld({super.key});
 
   @override
-  EditCustomPageState createState() => EditCustomPageState();
+  EditCustomPageOldState createState() => EditCustomPageOldState();
 }
 
-class EditCustomPageState extends ConsumerState<ConsumerStatefulWidget> {
+class EditCustomPageOldState extends ConsumerState<ConsumerStatefulWidget> {
   final mainColor = const Color.fromRGBO(60, 130, 80, 1);
   final surfaceColor = const Color(0xFFEDECF2);
   final onSurfaceColor = const Color.fromRGBO(14, 31, 18, 1);

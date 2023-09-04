@@ -26,7 +26,7 @@ final routerProvider = Provider<GoRouter>((ref) {
               GoRoute(
                 path: '/home',
                 builder: (context, state) {
-                  return const StoredCustomListPageV2();
+                  return const StoredCustomListPage();
                 },
                 routes: [
                   GoRoute(
@@ -43,7 +43,7 @@ final routerProvider = Provider<GoRouter>((ref) {
                         path: 'edit',
                         pageBuilder: (context, state) => const MaterialPage(
                           fullscreenDialog: true,
-                          child: EditCustomPageV2(),
+                          child: EditCustomPage(),
                         ),
                         routes: [
                           GoRoute(
@@ -53,7 +53,7 @@ final routerProvider = Provider<GoRouter>((ref) {
                               final usage = state.pathParameters['usage']!;
                               final id = state.pathParameters['id']!;
                               final categoryName = state.pathParameters['categoryName']!;
-                              return PartsDetailPageV2(
+                              return PartsDetailPage(
                                 usageValue: usage,
                                 customId: id,
                                 categoryName: categoryName,
@@ -64,7 +64,7 @@ final routerProvider = Provider<GoRouter>((ref) {
                             name: 'partsList',
                             path: 'partsList',
                             builder: (context, state) {
-                              return const PartsListPageV2();
+                              return const PartsListPage();
                             },
                           ),
                           GoRoute(
@@ -73,7 +73,7 @@ final routerProvider = Provider<GoRouter>((ref) {
                             builder: (context, state) {
                               final usage = state.pathParameters['usage']!;
                               final listIndex = state.pathParameters['listIndex']!;
-                              return PartsDetailPageV2(
+                              return PartsDetailPage(
                                 usageValue: usage,
                                 listIndex: int.parse(listIndex),
                               );
@@ -89,7 +89,7 @@ final routerProvider = Provider<GoRouter>((ref) {
                       final usage = state.pathParameters['usage']!;
                       final id = state.pathParameters['id']!;
                       final categoryName = state.pathParameters['categoryName']!;
-                      return PartsDetailPageV2(
+                      return PartsDetailPage(
                         usageValue: usage,
                         customId: id,
                         categoryName: categoryName,
@@ -103,7 +103,7 @@ final routerProvider = Provider<GoRouter>((ref) {
                 path: '/create',
                 pageBuilder: (context, state) => const MaterialPage(
                   fullscreenDialog: true,
-                  child: EditCustomPageV2(),
+                  child: EditCustomPage(),
                 ),
                 routes: [
                   GoRoute(
@@ -112,7 +112,7 @@ final routerProvider = Provider<GoRouter>((ref) {
                     builder: (context, state) {
                       final usage = state.pathParameters['usage']!;
                       final categoryName = state.pathParameters['categoryName']!;
-                      return PartsDetailPageV2(
+                      return PartsDetailPage(
                         usageValue: usage,
                         categoryName: categoryName,
                       );
@@ -122,7 +122,7 @@ final routerProvider = Provider<GoRouter>((ref) {
                     name: 'create_partsList',
                     path: 'partsList',
                     builder: (context, state) {
-                      return const PartsListPageV2();
+                      return const PartsListPage();
                     },
                     routes: [
                       GoRoute(
@@ -131,7 +131,7 @@ final routerProvider = Provider<GoRouter>((ref) {
                         builder: (context, state) {
                           final usage = state.pathParameters['usage']!;
                           final listIndex = state.pathParameters['listIndex']!;
-                          return PartsDetailPageV2(
+                          return PartsDetailPage(
                             usageValue: usage,
                             listIndex: int.parse(listIndex),
                           );

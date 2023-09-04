@@ -1,5 +1,5 @@
 import 'package:custom_pc/providers/create_custom.dart';
-import 'package:custom_pc/widgets/create_custom/parts_compatibility_widget.dart';
+import 'package:custom_pc/v2/widgets/edit_custom_page/parts_compatibility_widget.dart';
 import 'package:custom_pc/widgets/create_custom/parts_scroll_widget.dart';
 import 'package:custom_pc/widgets/create_custom/total_price_widget.dart';
 import 'package:flutter/material.dart';

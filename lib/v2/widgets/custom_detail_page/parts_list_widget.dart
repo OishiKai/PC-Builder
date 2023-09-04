@@ -5,8 +5,8 @@ import 'package:go_router/go_router.dart';
 import '../../../models/custom.dart';
 import '../../../models/pc_parts.dart';
 
-class PartsListWidgetV2 extends StatelessWidget {
-  const PartsListWidgetV2({super.key, required this.custom});
+class PartsListWidget extends StatelessWidget {
+  const PartsListWidget({super.key, required this.custom});
   final Custom custom;
 
   @override

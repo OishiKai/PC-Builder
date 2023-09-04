@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 import '../widgets/edit_custom_page/parts_edit_widget.dart';
 import '../widgets/edit_custom_page/save_icon_button.dart';
 
-class EditCustomPageV2 extends StatelessWidget {
-  const EditCustomPageV2({super.key});
+class EditCustomPage extends StatelessWidget {
+  const EditCustomPage({super.key});
 
   @override
   Widget build(BuildContext context) {

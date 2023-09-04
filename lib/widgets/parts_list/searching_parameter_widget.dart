@@ -2,8 +2,8 @@ import 'package:custom_pc/providers/search_parameters.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class SearchingParameterWidget extends ConsumerWidget {
-  const SearchingParameterWidget({super.key});
+class SearchingParameterWidgetOld extends ConsumerWidget {
+  const SearchingParameterWidgetOld({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

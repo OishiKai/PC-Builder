@@ -4,7 +4,7 @@ import 'package:custom_pc/providers/search_parameters.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final searchTextProvider = StateProvider<String>((ref) {
+final searchTextProviderOld = StateProvider<String>((ref) {
   return '';
 });
 
@@ -16,7 +16,7 @@ class PartsListAppBar extends ConsumerWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final controller = TextEditingController(text: ref.watch(searchTextProvider));
+    final controller = TextEditingController(text: ref.watch(searchTextProviderOld));
     controller.selection = TextSelection.fromPosition(
       TextPosition(offset: controller.text.length),
     );
@@ -32,7 +32,7 @@ class PartsListAppBar extends ConsumerWidget implements PreferredSizeWidget {
 
     return WillPopScope(
       onWillPop: () async {
-        ref.read(searchTextProvider.notifier).update((state) => '');
+        ref.read(searchTextProviderOld.notifier).update((state) => '');
         return true;
       },
       child: GestureDetector(
@@ -72,7 +72,7 @@ class PartsListAppBar extends ConsumerWidget implements PreferredSizeWidget {
                       suffixIcon: IconButton(
                         padding: EdgeInsets.zero,
                         onPressed: () {
-                          ref.read(searchTextProvider.notifier).update((state) => '');
+                          ref.read(searchTextProviderOld.notifier).update((state) => '');
                           setupSearchParams();
                         },
                         icon: const Icon(
@@ -91,7 +91,7 @@ class PartsListAppBar extends ConsumerWidget implements PreferredSizeWidget {
                         return;
                       }
 
-                      ref.read(searchTextProvider.notifier).update((state) => text);
+                      ref.read(searchTextProviderOld.notifier).update((state) => text);
                       setupSearchParams();
                     },
                   ),

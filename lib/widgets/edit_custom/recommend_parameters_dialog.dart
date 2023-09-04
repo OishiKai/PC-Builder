@@ -120,7 +120,7 @@ class _RecommendParametersDialogState extends ConsumerState<RecommendParametersD
             ElevatedButton(
               onPressed: () {
                 Navigator.pop(context);
-                Navigator.push(context, MaterialPageRoute(builder: (context) => PartsListPage()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => PartsListPageOld()));
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: mainColor,
