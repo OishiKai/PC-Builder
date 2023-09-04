@@ -9,13 +9,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_segmented_control/material_segmented_control.dart';
 
 import '../../config/size_config.dart';
-import '../../widgets/parts_detail/edit_button_widget.dart';
-import '../../widgets/parts_detail/full_scale_image_slider.dart';
-import '../../widgets/parts_detail/select_for_create_button_widget.dart';
-import '../../widgets/parts_detail/shops_widget.dart';
-import '../../widgets/parts_detail/specs_widget.dart';
-import '../../widgets/parts_detail/star_widget.dart';
 import '../providers/custom_repository.dart';
+import '../widgets/parts_detail/edit_button_widget.dart';
+import '../widgets/parts_detail/full_scale_image_slider.dart';
+import '../widgets/parts_detail/select_for_create_button_widget.dart';
+import '../widgets/parts_detail/shops_widget.dart';
+import '../widgets/parts_detail/specs_widget.dart';
+import '../widgets/parts_detail/star_widget.dart';
 
 class PartsDetailPage extends ConsumerStatefulWidget {
   const PartsDetailPage({

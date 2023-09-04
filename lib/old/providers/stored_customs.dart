@@ -2,26 +2,28 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../domain/database/custom_repository.dart';
 import '../../models/custom.dart';
-import '../widgets/sort_icon_button.dart';
+import '../../v2/widgets/sort_icon_button.dart';
 
-part 'gen/custom_repository.g.dart';
+part 'stored_customs.g.dart';
 
 @riverpod
-class CustomRepositoryNotifier extends _$CustomRepositoryNotifier {
+class StoredCustomsNotifier extends _$StoredCustomsNotifier {
   @override
-  Future<List<Custom>> build() {
-    return CustomRepository.getAllCustomsV2();
+  Future<Map<String, Custom>> build() {
+    ref.onDispose(() {
+      print('disposed');
+    });
+    return CustomRepository.getAllCustoms();
   }
 
   void refresh() async {
     ref.read(alignState.notifier).update((state) => SortState.date);
     state = await AsyncValue.guard(() async {
-      return CustomRepository.getAllCustomsV2();
+      return CustomRepository.getAllCustoms();
     });
   }
 
   void addCustom(Custom custom) async {
-    if (custom.name == null) custom = custom.copyWith(name: 'タイトルなし');
     await CustomRepository.insertCustom(custom);
     refresh();
   }
@@ -31,9 +33,8 @@ class CustomRepositoryNotifier extends _$CustomRepositoryNotifier {
     refresh();
   }
 
-  void updateCustom(Custom custom) async {
-    // 更新なのでidはnullではない
-    await CustomRepository.updateCustom(custom.id!, custom);
+  void updateCustom(Custom custom, String id) async {
+    await CustomRepository.updateCustom(id, custom);
     refresh();
   }
 
@@ -41,8 +42,9 @@ class CustomRepositoryNotifier extends _$CustomRepositoryNotifier {
     state.when(
       data: (data) {
         // 価格降順でソート
-        data.sort((a, b) => b.calculateTotalPrice().compareTo(a.calculateTotalPrice()));
-        state = AsyncValue.data(data);
+        final sorted = data.entries.toList()..sort((a, b) => b.value.calculateTotalPrice().compareTo(a.value.calculateTotalPrice()));
+        final sortedMap = Map.fromEntries(sorted.reversed);
+        state = AsyncValue.data(sortedMap);
       },
       error: (e, t) {},
       loading: () {},
@@ -51,7 +53,7 @@ class CustomRepositoryNotifier extends _$CustomRepositoryNotifier {
 
   void sortCustomsByCreateDate() async {
     state = await AsyncValue.guard(() async {
-      return CustomRepository.getAllCustomsV2();
+      return CustomRepository.getAllCustoms();
     });
   }
 }
