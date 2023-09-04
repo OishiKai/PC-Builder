@@ -20,9 +20,8 @@ class Dashboard extends ConsumerWidget {
           child: BottomNavigationBar(
             currentIndex: navigationShell.currentIndex,
             items: const [
-              BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-              BottomNavigationBarItem(icon: Icon(Icons.library_books), label: 'Shope'),
-              BottomNavigationBarItem(icon: Icon(Icons.gamepad), label: 'Profile'),
+              BottomNavigationBarItem(icon: Icon(Icons.library_books_rounded), label: 'ライブラリ'),
+              BottomNavigationBarItem(icon: Icon(Icons.settings), label: '設定'),
             ],
             onTap: _onTap,
           ),

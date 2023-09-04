@@ -1,9 +1,9 @@
-import 'package:custom_pc/v2/next_tab_page.dart';
 import 'package:custom_pc/v2/pages/custom_detail_page.dart';
 import 'package:custom_pc/v2/pages/dashboard.dart';
 import 'package:custom_pc/v2/pages/edit_custom_page.dart';
 import 'package:custom_pc/v2/pages/parts_detail_page.dart';
 import 'package:custom_pc/v2/pages/parts_list_page.dart';
+import 'package:custom_pc/v2/pages/setting_page.dart';
 import 'package:custom_pc/v2/pages/stored_custom_list_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -30,7 +30,6 @@ final routerProvider = Provider<GoRouter>((ref) {
           return Dashboard(navigationShell: navigationShell);
         },
         branches: [
-          // ボトムナビゲーションバーのルート分岐2
           StatefulShellBranch(
             routes: [
               GoRoute(
@@ -153,15 +152,12 @@ final routerProvider = Provider<GoRouter>((ref) {
               ),
             ],
           ),
-          // ボトムナビゲーションバーのルート分岐3を追加
           StatefulShellBranch(
             routes: [
-              // このブランチルートを追加する
-              // 各ルートとそのサブルート (利用可能な場合) 例: profile/uuid/details
               GoRoute(
-                path: '/nextTab',
+                path: '/setting',
                 builder: (context, state) {
-                  return const NextTabPage();
+                  return const SettingPage();
                 },
               ),
             ],
