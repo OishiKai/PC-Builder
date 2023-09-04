@@ -1,4 +1,4 @@
-import 'package:custom_pc/old/providers/stored_customs.dart';
+import 'package:custom_pc/providers/custom_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -19,10 +19,10 @@ class SortIconButton extends ConsumerWidget {
     return IconButton(
       onPressed: () {
         if (sort == SortState.date) {
-          ref.read(storedCustomsNotifierProvider.notifier).sortCustomsByPrice();
+          ref.read(customRepositoryNotifierProvider.notifier).sortCustomsByPrice();
           ref.read(alignState.notifier).update((state) => SortState.price);
         } else {
-          ref.read(storedCustomsNotifierProvider.notifier).sortCustomsByCreateDate();
+          ref.read(customRepositoryNotifierProvider.notifier).sortCustomsByCreateDate();
           ref.read(alignState.notifier).update((state) => SortState.date);
         }
       },
