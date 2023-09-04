@@ -11,7 +11,7 @@ class MotherBoardSearchParameterParser {
 
   static Document? _document;
 
-  static Future<MotherBoardSearchParameter?> fetchSearchParameter() async {
+  static Future<MotherBoardSearchParameter> fetchSearchParameter() async {
     _document = await DocumentRepository.fetchDocument(standardPage);
     final intelSockets = _parseIntelSockets();
     final amdSockets = _parseAmdSockets();
@@ -37,7 +37,7 @@ class MotherBoardSearchParameterParser {
     return intelSocketList;
   }
 
-  static  List<PartsSearchParameter> _parseAmdSockets() {
+  static List<PartsSearchParameter> _parseAmdSockets() {
     List<PartsSearchParameter> amdSocketList = [];
     // CPUソケット(AMD)のリストは3番目の div の中の 2番目の ul にある
     final specListElement = _document!.querySelectorAll(_parameterSelector)[3].querySelectorAll('ul');
@@ -73,7 +73,7 @@ class MotherBoardSearchParameterParser {
     List<PartsSearchParameter> memoryTypeList = [];
     // メモリタイプのリストは3番目の div の中の 2番目の ul にある
     final specListElement = _document!.querySelectorAll(_parameterSelector)[3].querySelectorAll('ul');
-    final firstMemoryTypeListElement = specListElement[12].querySelectorAll('li');
+    final firstMemoryTypeListElement = specListElement[11].querySelectorAll('li');
 
     memoryTypeList.addAll(PartsListSearchParameter.takeOutParameters(firstMemoryTypeListElement));
     return memoryTypeList;

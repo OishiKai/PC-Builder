@@ -61,12 +61,38 @@ class CpuSearchParameter extends CategorySearchParameter {
   }
 
   @override
+  List<String> selectedParameterNames() {
+    List<String> params = [];
+    for (var element in makers) {
+      if (element.isSelect) {
+        params.add(element.name);
+      }
+    }
+    for (var element in processors) {
+      if (element.isSelect) {
+        params.add(element.name);
+      }
+    }
+    for (var element in series) {
+      if (element.isSelect) {
+        params.add(element.name);
+      }
+    }
+    for (var element in sockets) {
+      if (element.isSelect) {
+        params.add(element.name);
+      }
+    }
+    return params;
+  }
+
+  @override
   List<Map<String, List<PartsSearchParameter>>> alignParameters() {
     return [
       {'メーカー': makers},
       {'プロセッサ': processors},
       {'世代': series},
-      {'ソケット\n形状': sockets},
+      {'ソケット形状': sockets},
     ];
   }
 
@@ -85,7 +111,7 @@ class CpuSearchParameter extends CategorySearchParameter {
         var toggleSeries = series;
         toggleSeries[index].isSelect = !series[index].isSelect;
         return CpuSearchParameter(makers, processors, toggleSeries, sockets);
-      case 'ソケット\n形状':
+      case 'ソケット形状':
         var toggleSockets = sockets;
         toggleSockets[index].isSelect = !sockets[index].isSelect;
         return CpuSearchParameter(makers, processors, series, toggleSockets);

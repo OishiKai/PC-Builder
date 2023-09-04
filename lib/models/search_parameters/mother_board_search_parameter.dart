@@ -12,10 +12,10 @@ class MotherBoardSearchParameter extends CategorySearchParameter {
   @override
   List<Map<String, List<PartsSearchParameter>>> alignParameters() {
     return [
-      {'CPU\nソケット\n(intel)': intelSockets},
-      {'CPU\nソケット\n(AMD)': amdSockets},
-      {'フォーム\nファクタ': formFactors},
-      {'メモリ\nタイプ': memoryType},
+      {'CPUソケット(intel)': intelSockets},
+      {'CPUソケット(AMD)': amdSockets},
+      {'フォームファクタ': formFactors},
+      {'メモリタイプ': memoryType},
     ];
   }
 
@@ -72,6 +72,32 @@ class MotherBoardSearchParameter extends CategorySearchParameter {
   }
 
   @override
+  List<String> selectedParameterNames() {
+    List<String> params = [];
+    for (var element in intelSockets) {
+      if (element.isSelect) {
+        params.add(element.name);
+      }
+    }
+    for (var element in amdSockets) {
+      if (element.isSelect) {
+        params.add(element.name);
+      }
+    }
+    for (var element in formFactors) {
+      if (element.isSelect) {
+        params.add(element.name);
+      }
+    }
+    for (var element in memoryType) {
+      if (element.isSelect) {
+        params.add(element.name);
+      }
+    }
+    return params;
+  }
+
+  @override
   String standardPage() {
     return MotherBoardSearchParameterParser.standardPage;
   }
@@ -79,19 +105,19 @@ class MotherBoardSearchParameter extends CategorySearchParameter {
   @override
   CategorySearchParameter toggleParameterSelect(String paramName, int index) {
     switch (paramName) {
-      case 'CPU\nソケット\n(intel)':
+      case 'CPUソケット(intel)':
         var toggleIntelSockets = intelSockets;
         toggleIntelSockets[index].isSelect = !intelSockets[index].isSelect;
         return MotherBoardSearchParameter(toggleIntelSockets, amdSockets, formFactors, memoryType);
-      case 'CPU\nソケット\n(AMD)':
+      case 'CPUソケット(AMD)':
         var toggleAmdSockets = amdSockets;
         toggleAmdSockets[index].isSelect = !amdSockets[index].isSelect;
         return MotherBoardSearchParameter(intelSockets, toggleAmdSockets, formFactors, memoryType);
-      case 'フォーム\nファクタ':
+      case 'フォームファクタ':
         var toggleFormFactors = formFactors;
         toggleFormFactors[index].isSelect = !formFactors[index].isSelect;
         return MotherBoardSearchParameter(intelSockets, amdSockets, toggleFormFactors, memoryType);
-      case 'メモリ\nタイプ':
+      case 'メモリタイプ':
         var toggleMemoryType = memoryType;
         toggleMemoryType[index].isSelect = !memoryType[index].isSelect;
         return MotherBoardSearchParameter(intelSockets, amdSockets, formFactors, toggleMemoryType);

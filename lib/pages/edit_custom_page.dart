@@ -1,135 +1,58 @@
-import 'package:custom_pc/providers/create_custom.dart';
-import 'package:custom_pc/widgets/edit_custom/custom_summary_panel_widget.dart';
-import 'package:custom_pc/widgets/edit_custom/parts_list_widget.dart';
-import 'package:custom_pc/widgets/edit_custom/rename_custom_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:sliding_up_panel/sliding_up_panel.dart';
 
-import '../config/size_config.dart';
-import '../widgets/create_custom/save_confirm_dialog.dart';
-import '../widgets/edit_custom/edit_cancel_dialog.dart';
-import '../widgets/edit_custom/update_custom_dialog.dart';
+import '../widgets/edit_custom_page/analyze_custom_widget.dart';
+import '../widgets/edit_custom_page/custom_title_edit_widget.dart';
+import '../widgets/edit_custom_page/edit_cancel_button.dart';
+import '../widgets/edit_custom_page/parts_edit_widget.dart';
+import '../widgets/edit_custom_page/save_icon_button.dart';
 
-class EditCustomPage extends ConsumerStatefulWidget {
+class EditCustomPage extends StatelessWidget {
   const EditCustomPage({super.key});
 
   @override
-  EditCustomPageState createState() => EditCustomPageState();
-}
-
-class EditCustomPageState extends ConsumerState<ConsumerStatefulWidget> {
-  final mainColor = const Color.fromRGBO(60, 130, 80, 1);
-  final surfaceColor = const Color(0xFFEDECF2);
-  final onSurfaceColor = const Color.fromRGBO(14, 31, 18, 1);
-
-  @override
   Widget build(BuildContext context) {
-    SizeConfig().init(context);
-    String? customTitle = ref.watch(createCustomNotifierProvider).name;
-
-    return Scaffold(
-      backgroundColor: surfaceColor,
-      resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        title: Row(
-          children: [
-            FittedBox(
-              fit: BoxFit.fitWidth,
-              child: Text(
-                customTitle ?? 'New Custom',
-                style: TextStyle(
-                  color: onSurfaceColor,
-                  fontWeight: FontWeight.bold,
-                ),
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: DefaultTabController(
+        length: 2,
+        child: Scaffold(
+          appBar: AppBar(
+            backgroundColor: Theme.of(context).colorScheme.background,
+            title: Text(
+              'カスタムエディタ',
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.primary,
               ),
             ),
-            SizedBox(
-              width: SizeConfig.blockSizeHorizontal * 2,
-            ),
-            if (customTitle != null)
-              InkWell(
-                onTap: () {
-                  showDialog(
-                    context: context,
-                    builder: (_) {
-                      return RenameCustomDialog(customTitle);
-                    },
-                  );
-                },
-                child: Icon(
-                  Icons.edit,
-                  color: onSurfaceColor,
-                ),
-              ),
-          ],
-        ),
-        elevation: 0,
-        automaticallyImplyLeading: false,
-        backgroundColor: surfaceColor,
-        actions: [
-          if (customTitle != null)
-            IconButton(
-              onPressed: () {
-                showDialog(
-                  context: context,
-                  builder: (_) {
-                    return const UpdateCustomDialog();
-                  },
-                );
-              },
-              icon: Icon(
-                Icons.check,
-                color: mainColor,
-              ),
-            ),
-          if (customTitle == null)
-            InkWell(
-              onTap: () {
-                showDialog(
-                    context: context,
-                    builder: (_) {
-                      return SaveConfirmDialog();
-                    });
-              },
-              child: Icon(
-                Icons.save_as_outlined,
-                size: 35,
-                color: mainColor,
-              ),
-            ),
-          IconButton(
-            onPressed: () {
-              showDialog(
-                context: context,
-                builder: (_) {
-                  return const EditCancelDialog();
-                },
-              );
-            },
-            icon: const Icon(
-              Icons.close,
-              color: Colors.red,
+            leading: const EditCancelButton(),
+            actions: const [
+              SaveIconButton(),
+            ],
+            bottom: const TabBar(
+              tabs: [
+                Tab(text: '編集'),
+                Tab(text: '分析'),
+              ],
             ),
           ),
-        ],
-      ),
-      body: SlidingUpPanel(
-        minHeight: SizeConfig.blockSizeVertical * 15,
-        maxHeight: SizeConfig.blockSizeVertical * 60,
-        //renderPanelSheet: false,
-        border: Border(
-          top: BorderSide(
-            color: mainColor,
-            width: 2.5,
+          body: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TabBarView(
+              children: [
+                // 編集タブ
+                ListView(
+                  children: const [
+                    CustomNameEditWidget(),
+                    SizedBox(height: 16),
+                    PartsEditWidget(),
+                  ],
+                ),
+                // 分析タブ
+                const AnalyzeCustomWidget(),
+              ],
+            ),
           ),
         ),
-        body: ListView(
-          children: const [
-            PartsListWidget(),
-          ],
-        ),
-        panel: const CustomSummaryPanelWidget(),
       ),
     );
   }

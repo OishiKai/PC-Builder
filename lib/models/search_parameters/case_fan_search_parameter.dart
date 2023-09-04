@@ -1,11 +1,10 @@
 import 'package:custom_pc/models/category_search_parameter.dart';
 
 class CaseFanSearchParameter extends CategorySearchParameter {
-
   final List<PartsSearchParameter> maker;
   final List<PartsSearchParameter> size;
   final List<PartsSearchParameter> maxAirVolume;
-  
+
   CaseFanSearchParameter(this.maker, this.size, this.maxAirVolume);
 
   @override
@@ -13,7 +12,7 @@ class CaseFanSearchParameter extends CategorySearchParameter {
     return [
       {'メーカー': maker},
       {'サイズ': size},
-      {'最大\n風量': maxAirVolume},
+      {'最大風量': maxAirVolume},
     ];
   }
 
@@ -60,6 +59,27 @@ class CaseFanSearchParameter extends CategorySearchParameter {
   }
 
   @override
+  List<String> selectedParameterNames() {
+    List<String> params = [];
+    for (var element in maker) {
+      if (element.isSelect) {
+        params.add(element.name);
+      }
+    }
+    for (var element in size) {
+      if (element.isSelect) {
+        params.add(element.name);
+      }
+    }
+    for (var element in maxAirVolume) {
+      if (element.isSelect) {
+        params.add(element.name);
+      }
+    }
+    return params;
+  }
+
+  @override
   String standardPage() {
     return 'https://kakaku.com/pc/case-fan/itemlist.aspx';
   }
@@ -67,7 +87,7 @@ class CaseFanSearchParameter extends CategorySearchParameter {
   @override
   CategorySearchParameter toggleParameterSelect(String paramName, int index) {
     switch (paramName) {
-      case  'メーカー':
+      case 'メーカー':
         var toggleMaker = maker;
         toggleMaker[index].isSelect = !maker[index].isSelect;
         return CaseFanSearchParameter(toggleMaker, size, maxAirVolume);
@@ -75,7 +95,7 @@ class CaseFanSearchParameter extends CategorySearchParameter {
         var toggleSize = size;
         toggleSize[index].isSelect = !size[index].isSelect;
         return CaseFanSearchParameter(maker, toggleSize, maxAirVolume);
-      case '最大\n風量':
+      case '最大風量':
         var toggleMaxAirVolume = maxAirVolume;
         toggleMaxAirVolume[index].isSelect = !maxAirVolume[index].isSelect;
         return CaseFanSearchParameter(maker, size, toggleMaxAirVolume);

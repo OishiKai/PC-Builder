@@ -37,6 +37,32 @@ class CpuCoolerSearchParameter extends CategorySearchParameter {
   }
 
   @override
+  List<String> selectedParameterNames() {
+    List<String> params = [];
+    for (var element in makers) {
+      if (element.isSelect) {
+        params.add(element.name);
+      }
+    }
+    for (var element in intelSockets) {
+      if (element.isSelect) {
+        params.add(element.name);
+      }
+    }
+    for (var element in amdSockets) {
+      if (element.isSelect) {
+        params.add(element.name);
+      }
+    }
+    for (var element in type) {
+      if (element.isSelect) {
+        params.add(element.name);
+      }
+    }
+    return params;
+  }
+
+  @override
   CpuCoolerSearchParameter clearSelectedParameter() {
     final List<PartsSearchParameter> clearMaker = [];
     for (var element in makers) {
@@ -66,8 +92,8 @@ class CpuCoolerSearchParameter extends CategorySearchParameter {
   List<Map<String, List<PartsSearchParameter>>> alignParameters() {
     return [
       {'メーカー': makers},
-      {'intel\nソケット': intelSockets},
-      {'AMD\nソケット': amdSockets},
+      {'intelソケット': intelSockets},
+      {'AMDソケット': amdSockets},
       {'タイプ': type},
     ];
   }
@@ -79,11 +105,11 @@ class CpuCoolerSearchParameter extends CategorySearchParameter {
         var toggleMaker = makers;
         toggleMaker[index].isSelect = !makers[index].isSelect;
         return CpuCoolerSearchParameter(toggleMaker, intelSockets, amdSockets, type);
-      case 'intel\nソケット':
+      case 'intelソケット':
         var toggleIntelSockets = intelSockets;
         toggleIntelSockets[index].isSelect = !intelSockets[index].isSelect;
         return CpuCoolerSearchParameter(makers, toggleIntelSockets, amdSockets, type);
-      case 'AMD\nソケット':
+      case 'AMDソケット':
         var toggleAmdSockets = amdSockets;
         toggleAmdSockets[index].isSelect = !amdSockets[index].isSelect;
         return CpuCoolerSearchParameter(makers, intelSockets, toggleAmdSockets, type);

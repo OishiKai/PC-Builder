@@ -10,7 +10,7 @@ class PowerUnitSearchParameterParser {
 
   static Document? _document;
 
-  static Future<PowerUnitSearchParameter?> fetchSearchParameter() async {
+  static Future<PowerUnitSearchParameter> fetchSearchParameter() async {
     _document = await DocumentRepository.fetchDocument(standardPage);
     final supportTypes = _parseSupportTypes()!;
     final powerSupplyCapacitys = _parsePowerSupplyCapacitys()!;
@@ -24,7 +24,6 @@ class PowerUnitSearchParameterParser {
     List<PartsSearchParameter> supportTypeList = [];
     final specListElement = _document!.querySelectorAll(_parameterSelector)[4].querySelectorAll('ul');
 
-    
     for (var element in specListElement) {
       final supportTypeName = element.text.split('（')[0].replaceFirst('\n', '');
       final supportTypeParameterAtag = element.querySelectorAll('a');
@@ -61,5 +60,5 @@ class PowerUnitSearchParameterParser {
       }
     }
     return powerSupplyCapacityList;
-  } 
+  }
 }

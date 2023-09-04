@@ -1,7 +1,6 @@
-import 'package:custom_pc/models/pc_parts.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:custom_pc/providers/searching_category.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../models/category_search_parameter.dart';
 import '../domain/search_parameter_parser/case_fan_search_parameter_parser.dart';
 import '../domain/search_parameter_parser/cpu_cooler_search_parameter_parser.dart';
 import '../domain/search_parameter_parser/cpu_search_search_parameter_parser.dart';
@@ -11,57 +10,62 @@ import '../domain/search_parameter_parser/mother_board_search_parameter_parser.d
 import '../domain/search_parameter_parser/pc_case_search_parameter_parser.dart';
 import '../domain/search_parameter_parser/power_unit_search_parameter_parser.dart';
 import '../domain/search_parameter_parser/ssd_search_parameter_parser.dart';
+import '../models/category_search_parameter.dart';
+import '../models/pc_parts.dart';
 
+part 'gen/search_parameters.g.dart';
 
-class CategorySearchParameterNotifier extends StateNotifier<CategorySearchParameter?> {
-  CategorySearchParameterNotifier(super.state);
+@Riverpod(keepAlive: true)
+class SearchParametersNotifier extends _$SearchParametersNotifier {
+  @override
+  Future<CategorySearchParameter> build() {
+    // searchingCategoryProviderを監視して、カテゴリが変更されたら検索条件情報を更新する
+    final category = ref.watch(searchingCategoryProvider);
+    return _fetchParameters(category);
+  }
+
+  Future<CategorySearchParameter> _fetchParameters(PartsCategory category) async {
+    switch (category) {
+      case PartsCategory.cpu:
+        return CpuSearchParameterParser.fetchSearchParameter();
+      case PartsCategory.cpuCooler:
+        return CpuCoolerSearchParameterParser.fetchSearchParameter();
+      case PartsCategory.memory:
+        return MemorySearchParameterParser.fetchSearchParameter();
+      case PartsCategory.motherboard:
+        return MotherBoardSearchParameterParser.fetchSearchParameter();
+      case PartsCategory.graphicsCard:
+        return GraphicsCardSearchParameterParser.fetchSearchParameter();
+      case PartsCategory.ssd:
+        return SsdSearchParameterParser.fetchSearchParameter();
+      case PartsCategory.powerUnit:
+        return PowerUnitSearchParameterParser.fetchSearchParameter();
+      case PartsCategory.pcCase:
+        return PcCaseSearchParameterParser.fetchSearchParameter();
+      case PartsCategory.caseFan:
+        return CaseFanSearchParameterParser.fetchSearchParameter();
+    }
+  }
 
   // 検索条件を追加する
   void toggleParameterSelect(String paramName, int index) {
-    if (state == null) return;
-    state = state!.toggleParameterSelect(paramName, index);
+    state.when(
+      data: (data) {
+        state = AsyncValue.data(data.toggleParameterSelect(paramName, index));
+      },
+      loading: () {},
+      error: (error, stackTrace) {},
+    );
   }
 
   // 検索条件をクリア
   void clearSelectedParameter() {
-    if (state == null) return;
-    state = state!.clearSelectedParameter();
-  }
-
-  // 別のカテゴリの検索条件に切り替える
-  void replaceParameters(PartsCategory category) async {
-    switch (category) {
-      case PartsCategory.cpu:
-        state = await CpuSearchParameterParser.fetchSearchParameter();
-        break;
-      case PartsCategory.cpuCooler:
-        state = await CpuCoolerSearchParameterParser.fetchSearchParameter();
-        break;
-      case PartsCategory.memory:
-        state = await MemorySearchParameterParser.fetchSearchParameter();
-        break;
-      case PartsCategory.motherBoard:
-        state = (await MotherBoardSearchParameterParser.fetchSearchParameter())!;
-        break;
-      case PartsCategory.graphicsCard:
-        state = (await GraphicsCardSearchParameterParser.fetchSearchParameter())!;
-        break;
-      case PartsCategory.ssd:
-        state = await SsdSearchParameterParser.fetchSearchParameter();
-        break;
-      case PartsCategory.powerUnit:
-        state = (await PowerUnitSearchParameterParser.fetchSearchParameter())!;
-        break;
-      case PartsCategory.pcCase:
-        state = await PcCaseSearchParameterParser.fetchSearchParameter();
-        break;
-      case PartsCategory.caseFan:
-        state = await CaseFanSearchParameterParser.fetchSearchParameter();
-        break;
-    }
+    state.when(
+      data: (data) {
+        state = AsyncValue.data(data.clearSelectedParameter());
+      },
+      loading: () {},
+      error: (error, stackTrace) {},
+    );
   }
 }
-
-final searchParameterProvider = StateNotifierProvider<CategorySearchParameterNotifier, CategorySearchParameter?>((ref) {
-  return CategorySearchParameterNotifier(null);
-});

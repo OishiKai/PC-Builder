@@ -11,6 +11,7 @@ part 'custom.freezed.dart';
 @freezed
 class Custom with _$Custom {
   const factory Custom({
+    String? id,
     // Custom名
     String? name,
     // 総額
@@ -125,7 +126,7 @@ class Custom with _$Custom {
         return cpuCooler;
       case PartsCategory.memory:
         return memory;
-      case PartsCategory.motherBoard:
+      case PartsCategory.motherboard:
         return motherBoard;
       case PartsCategory.graphicsCard:
         return graphicsCard;
@@ -156,7 +157,7 @@ class Custom with _$Custom {
     }
 
     if (motherBoard != null) {
-      alignedParts[PartsCategory.motherBoard] = motherBoard!;
+      alignedParts[PartsCategory.motherboard] = motherBoard!;
     }
 
     if (graphicsCard != null) {
@@ -182,10 +183,10 @@ class Custom with _$Custom {
     return alignedParts;
   }
 
-  String getRandomPartsImage() {
+  String getMainPartsImage() {
     final alignedParts = align();
-    final randomNum = math.Random().nextInt(alignedParts.length);
-    final randomParts = alignedParts.values.toList()[randomNum];
-    return randomParts.image;
+    // 最も高い価格のパーツを取得
+    final parts = alignedParts.values.reduce((a, b) => parsePrice(a.price) > parsePrice(b.price) ? a : b);
+    return parts.image;
   }
 }

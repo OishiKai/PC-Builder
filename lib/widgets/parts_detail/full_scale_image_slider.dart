@@ -50,11 +50,15 @@ class _FullScaleImageSliderState extends State<FullScaleImageSlider> {
 
   Widget buildImage(path, index) => Container(
         //画像間の隙間
-        margin: EdgeInsets.symmetric(horizontal: 10),
+        margin: const EdgeInsets.symmetric(horizontal: 10),
         color: Colors.white,
-        child: Image.network(
-          path,
-          fit: BoxFit.contain,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(60),
+          child: Image.network(
+            path,
+            width: MediaQuery.of(context).size.width * 0.9,
+            fit: BoxFit.contain,
+          ),
         ),
       );
 

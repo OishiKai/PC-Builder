@@ -28,7 +28,7 @@ class CompatibilityAnalyzer {
     bool? isCompatibleChipsets;
 
     return PartsCompatibility(
-      [PartsCategory.cpu, PartsCategory.motherBoard],
+      [PartsCategory.cpu, PartsCategory.motherboard],
       [cpu.image, motherBoard.image],
       isCompatible: {
         'ソケット形状': isCompatibleSockets,
@@ -44,7 +44,7 @@ class CompatibilityAnalyzer {
     String? motherBoardSocket = _extractSpec(motherBoard.specs!, 'CPUソケット');
 
     final nullCase = PartsCompatibility(
-      [PartsCategory.cpuCooler, PartsCategory.motherBoard],
+      [PartsCategory.cpuCooler, PartsCategory.motherboard],
       [cpuCooler.image, motherBoard.image],
       isCompatible: {
         'ソケット形状': null,
@@ -83,7 +83,7 @@ class CompatibilityAnalyzer {
     }
 
     return PartsCompatibility(
-      [PartsCategory.cpuCooler, PartsCategory.motherBoard],
+      [PartsCategory.cpuCooler, PartsCategory.motherboard],
       [cpuCooler.image, motherBoard.image],
       isCompatible: {
         'ソケット形状': isCompatible,
@@ -130,7 +130,7 @@ class CompatibilityAnalyzer {
     }
 
     return PartsCompatibility(
-      [PartsCategory.memory, PartsCategory.motherBoard],
+      [PartsCategory.memory, PartsCategory.motherboard],
       [memory.image, motherBoard.image],
       isCompatible: {
         '規格': isCompatibleStandards,
@@ -145,7 +145,7 @@ class CompatibilityAnalyzer {
     // サイズ不明
     if (ssdStandardSize == null) {
       return PartsCompatibility(
-        [PartsCategory.motherBoard, PartsCategory.ssd],
+        [PartsCategory.motherboard, PartsCategory.ssd],
         [motherBoard.image, ssd.image],
         isCompatible: {
           '互換性': null,
@@ -170,7 +170,7 @@ class CompatibilityAnalyzer {
       }
 
       return PartsCompatibility(
-        [PartsCategory.motherBoard, PartsCategory.ssd],
+        [PartsCategory.motherboard, PartsCategory.ssd],
         [motherBoard.image, ssd.image],
         isCompatible: {
           'ソケット数': isCompatibleSockets,
@@ -184,7 +184,7 @@ class CompatibilityAnalyzer {
       String? motherBoardSataPorts = _extractSpec(motherBoard.specs!, 'SATA');
 
       return PartsCompatibility(
-        [PartsCategory.motherBoard, PartsCategory.ssd],
+        [PartsCategory.motherboard, PartsCategory.ssd],
         [motherBoard.image, ssd.image],
         isCompatible: {
           // SATAの情報があるなら対応していると判定
@@ -195,7 +195,7 @@ class CompatibilityAnalyzer {
 
     // M.2, 2.5インチ以外の場合
     return PartsCompatibility(
-      [PartsCategory.motherBoard, PartsCategory.ssd],
+      [PartsCategory.motherboard, PartsCategory.ssd],
       [motherBoard.image, ssd.image],
       isCompatible: {
         '互換性': null,
