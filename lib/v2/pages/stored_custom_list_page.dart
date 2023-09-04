@@ -2,13 +2,31 @@ import 'package:custom_pc/v2/widgets/stored_custom_list_page/create_custom_float
 import 'package:custom_pc/v2/widgets/stored_custom_list_page/sort_icon_button.dart';
 import 'package:custom_pc/v2/widgets/stored_custom_list_page/stored_custom_list_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+
+import '../../tutorial_page.dart';
+import '../share_preferences_instance.dart';
 
 class StoredCustomListPageV2 extends StatelessWidget {
   const StoredCustomListPageV2({super.key});
 
+  void _showTutorial(BuildContext context) {
+    final prefs = SharedPreferencesInstance().prefs;
+
+    if (prefs.getBool('isAlreadyFirstLaunch') != true) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => TutorialPage(),
+          fullscreenDialog: true,
+        ),
+      );
+      prefs.setBool('isAlreadyFirstLaunch', true);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) => _showTutorial(context));
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.background,
@@ -39,7 +57,13 @@ class StoredCustomListPageV2 extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              context.push('/sub_route');
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => TutorialPage(),
+                  fullscreenDialog: true,
+                ),
+              );
             },
             icon: Icon(
               Icons.help_outline,

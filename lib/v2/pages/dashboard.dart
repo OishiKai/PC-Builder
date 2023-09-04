@@ -2,7 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-final bottomNavigationBarVisibilityProvider = StateProvider<bool>((ref) => true);
+import '../share_preferences_instance.dart';
+
+final bottomNavigationBarVisibilityProvider = StateProvider<bool>((ref) {
+  final prefs = SharedPreferencesInstance().prefs;
+  // 初回起動時は非表示
+  if (prefs.getBool('isAlreadyFirstLaunch') != true) {
+    return false;
+  }
+  return true;
+});
 
 class Dashboard extends ConsumerWidget {
   const Dashboard({super.key, required this.navigationShell});

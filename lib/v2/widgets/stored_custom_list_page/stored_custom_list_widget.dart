@@ -13,6 +13,11 @@ class StoredCustomListWidget extends ConsumerWidget {
     final storedCustoms = ref.watch(customRepositoryNotifierProvider);
 
     return storedCustoms.when(data: (data) {
+      if (data.isEmpty) {
+        return const Center(
+          child: Text('保存済みのカスタムはありません'),
+        );
+      }
       return Padding(
         padding: const EdgeInsets.all(8.0),
         child: NotificationListener<OverscrollIndicatorNotification>(

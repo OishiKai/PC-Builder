@@ -16,7 +16,7 @@ class StoredCustomListPage extends StatelessWidget {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => FlutterOverboardPage(),
+          builder: (context) => TutorialPage(),
           fullscreenDialog: true,
         ),
       );
@@ -64,7 +64,7 @@ class StoredCustomListPage extends StatelessWidget {
               showDialog(
                 context: context,
                 builder: (_) {
-                  return FlutterOverboardPage();
+                  return TutorialPage();
                 },
               );
             },

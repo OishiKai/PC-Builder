@@ -1,19 +1,24 @@
+import 'package:custom_pc/v2/pages/dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_overboard/flutter_overboard.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class FlutterOverboardPage extends StatelessWidget {
-  FlutterOverboardPage({super.key});
+class TutorialPage extends ConsumerWidget {
+  TutorialPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       body: OverBoard(
         pages: pages,
         showBullets: true,
         skipCallback: () {
+          // 初回のチュートリアル表示後はナビゲーションバーを表示する
+          ref.read(bottomNavigationBarVisibilityProvider.notifier).update((state) => true);
           Navigator.pop(context);
         },
         finishCallback: () {
+          ref.read(bottomNavigationBarVisibilityProvider.notifier).update((state) => true);
           Navigator.pop(context);
         },
       ),
