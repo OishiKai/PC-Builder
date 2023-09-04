@@ -1,6 +1,6 @@
+import 'package:custom_pc/config/share_preferences_instance.dart';
 import 'package:custom_pc/providers/router.dart';
-import 'package:custom_pc/providers/theme.dart' as th;
-import 'package:custom_pc/share_preferences_instance.dart';
+import 'package:custom_pc/providers/theme.dart';
 import 'package:custom_pc/theme/color_schemes.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -21,18 +21,6 @@ Future<void> main() async {
     runApp(const ProviderScope(child: MyApp()));
   });
 }
-
-// class MyApp extends StatelessWidget {
-//   const MyApp({Key? key}) : super(key: key);
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return const MaterialApp(
-//       debugShowCheckedModeBanner: false,
-//       home: StoredCustomListPage(),
-//     );
-//   }
-// }
 
 // v2
 class MyApp extends ConsumerWidget {
@@ -55,7 +43,7 @@ class MyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final router = ref.watch(routerProvider);
-    final theme = ref.watch(th.themeProvider);
+    final theme = ref.watch(themeProvider);
     ThemeData themeData;
     switch (theme) {
       case ThemeMode.light:

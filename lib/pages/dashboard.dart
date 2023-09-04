@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../share_preferences_instance.dart';
+import '../config/share_preferences_instance.dart';
 
 final bottomNavigationBarVisibilityProvider = StateProvider<bool>((ref) {
   final prefs = SharedPreferencesInstance().prefs;

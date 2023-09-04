@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../share_preferences_instance.dart';
+import '../config/share_preferences_instance.dart';
 import '../tutorial_page.dart';
 import '../widgets/sort_icon_button.dart';
 import '../widgets/stored_custom_list_page/create_custom_floating_action_button.dart';
