@@ -1,11 +1,11 @@
 import 'package:custom_pc/old/pages/parts_detail_page.dart';
 import 'package:custom_pc/providers/detail_page_usage.dart';
-import 'package:custom_pc/v2/widgets/parts_detail/star_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../config/size_config.dart';
 import '../../../domain/parts_detail_parser.dart';
+import '../../../widgets/parts_detail/star_widget.dart';
 import '../../providers/pc_parts_list.dart';
 
 class PartsListWidgetOld extends ConsumerWidget {

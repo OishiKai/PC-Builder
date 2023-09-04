@@ -2,9 +2,10 @@ import 'package:custom_pc/config/size_config.dart';
 import 'package:custom_pc/old/widgets/stored_custom_list/new_custom_bottom_bar.dart';
 import 'package:custom_pc/old/widgets/stored_custom_list/stored_customs_table_widget.dart';
 import 'package:custom_pc/tutorial_page.dart';
-import 'package:custom_pc/v2/widgets/sort_icon_button.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../widgets/sort_icon_button.dart';
 
 class StoredCustomListPageOld extends StatelessWidget {
   const StoredCustomListPageOld({super.key});

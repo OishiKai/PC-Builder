@@ -1,5 +1,5 @@
 import 'package:custom_pc/providers/custom_repository.dart';
-import 'package:custom_pc/v2/widgets/stored_custom_list_page/stored_custom_card.dart';
+import 'package:custom_pc/widgets/stored_custom_list_page/stored_custom_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';

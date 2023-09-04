@@ -1,5 +1,6 @@
-import 'package:custom_pc/v2/widgets/theme_setting_widget.dart';
 import 'package:flutter/material.dart';
+
+import '../widgets/theme_setting_widget.dart';
 
 class SettingPage extends StatelessWidget {
   const SettingPage({Key? key}) : super(key: key);

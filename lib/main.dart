@@ -1,7 +1,7 @@
 import 'package:custom_pc/providers/router.dart';
 import 'package:custom_pc/providers/theme.dart' as th;
-import 'package:custom_pc/v2/share_preferences_instance.dart';
-import 'package:custom_pc/v2/theme/color_schemes.g.dart';
+import 'package:custom_pc/share_preferences_instance.dart';
+import 'package:custom_pc/theme/color_schemes.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

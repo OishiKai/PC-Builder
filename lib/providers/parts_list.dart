@@ -1,12 +1,12 @@
 import 'package:custom_pc/providers/search_parameters.dart';
 import 'package:custom_pc/providers/searching_category.dart';
-import 'package:custom_pc/v2/widgets/parts_list_page/parts_search_app_bar.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../domain/parts_detail_parser.dart';
 import '../domain/parts_list_parser.dart';
 import '../domain/url_builder.dart';
 import '../models/pc_parts.dart';
+import '../widgets/parts_list_page/parts_search_app_bar.dart';
 
 part 'gen/parts_list.g.dart';
 

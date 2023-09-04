@@ -1,11 +1,11 @@
 import 'package:custom_pc/old/providers/create_custom.dart';
 import 'package:custom_pc/old/widgets/create_custom/parts_scroll_widget.dart';
 import 'package:custom_pc/old/widgets/create_custom/total_price_widget.dart';
-import 'package:custom_pc/v2/widgets/edit_custom_page/parts_compatibility_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../config/size_config.dart';
+import '../../widgets/edit_custom_page/parts_compatibility_widget.dart';
 import '../widgets/create_custom/save_confirm_dialog.dart';
 
 class CreateCustomPage extends ConsumerWidget {

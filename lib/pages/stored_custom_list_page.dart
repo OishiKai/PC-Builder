@@ -1,10 +1,10 @@
-import 'package:custom_pc/v2/widgets/stored_custom_list_page/create_custom_floating_action_button.dart';
-import 'package:custom_pc/v2/widgets/stored_custom_list_page/sort_icon_button.dart';
-import 'package:custom_pc/v2/widgets/stored_custom_list_page/stored_custom_list_widget.dart';
 import 'package:flutter/material.dart';
 
+import '../share_preferences_instance.dart';
 import '../tutorial_page.dart';
-import '../v2/share_preferences_instance.dart';
+import '../widgets/sort_icon_button.dart';
+import '../widgets/stored_custom_list_page/create_custom_floating_action_button.dart';
+import '../widgets/stored_custom_list_page/stored_custom_list_widget.dart';
 
 class StoredCustomListPage extends StatelessWidget {
   const StoredCustomListPage({super.key});

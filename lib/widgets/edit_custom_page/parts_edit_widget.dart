@@ -1,12 +1,12 @@
 import 'package:custom_pc/models/pc_parts.dart';
 import 'package:custom_pc/providers/detail_page_usage.dart';
 import 'package:custom_pc/providers/searching_category.dart';
-import 'package:custom_pc/v2/widgets/edit_custom_page/add_parts_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../providers/edit_custom.dart';
+import 'add_parts_dialog.dart';
 
 class PartsEditWidget extends ConsumerWidget {
   const PartsEditWidget({super.key});

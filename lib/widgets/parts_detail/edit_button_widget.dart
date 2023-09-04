@@ -48,7 +48,7 @@ class EditButtonWidget extends ConsumerWidget {
         // }
 
         ref.read(searchingCategoryProvider.notifier).update((state) => category);
-        Navigator.pop(context);
+        context.pop();
         context.pushNamed('partsList', pathParameters: {'id': custom.id!});
       },
       style: ElevatedButton.styleFrom(

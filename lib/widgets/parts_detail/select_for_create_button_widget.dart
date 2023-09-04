@@ -2,6 +2,7 @@ import 'package:custom_pc/providers/edit_custom.dart';
 import 'package:custom_pc/providers/searching_category.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../models/pc_parts.dart';
 
@@ -15,8 +16,8 @@ class SelectForCreateButtonWidget extends ConsumerWidget {
       onPressed: () async {
         final category = ref.read(searchingCategoryProvider);
         ref.read(editCustomNotifierProvider.notifier).setParts(category, parts);
-        int count = 0;
-        Navigator.popUntil(context, (_) => count++ >= 2);
+        context.pop();
+        context.pop();
       },
       style: ElevatedButton.styleFrom(
         padding: EdgeInsets.zero,

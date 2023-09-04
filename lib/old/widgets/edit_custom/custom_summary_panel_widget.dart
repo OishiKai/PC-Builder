@@ -7,7 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../config/size_config.dart';
 import '../../../domain/url_builder.dart';
 import '../../../models/pc_parts.dart';
-import '../../../v2/widgets/edit_custom_page/parts_compatibility_widget.dart';
+import '../../../widgets/edit_custom_page/parts_compatibility_widget.dart';
 import '../../pages/parts_list_page.dart';
 import '../../providers/create_custom.dart';
 import '../../providers/pc_parts_list.dart';
@@ -212,25 +212,6 @@ class CustomSummaryPanelWidget extends ConsumerWidget {
               ),
             ),
           ),
-          // Padding(
-          //   padding: EdgeInsets.symmetric(horizontal: SizeConfig.blockSizeHorizontal * 2),
-          //   child: Container(
-          //     height: SizeConfig.blockSizeVertical * 37,
-          //     decoration: BoxDecoration(
-          //       color: const Color(0xFFEDECF2),
-          //       borderRadius: BorderRadius.circular(20),
-          //     ),
-          //     child: ListView(
-          //       children: [
-          //         SizedBox(
-          //           height: 10,
-          //         ),
-          //         if (ref.watch(createCustomNotifierProvider).compatibilities != null)
-          //           for (int i = 0; i < ref.watch(createCustomNotifierProvider).compatibilities!.length; i++) PartsCompatibilityWidget(ref.watch(createCustomNotifierProvider).compatibilities![i]),
-          //       ],
-          //     ),
-          //   ),
-          // ),
         ],
       ),
     );
