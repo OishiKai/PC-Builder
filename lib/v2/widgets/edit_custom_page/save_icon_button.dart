@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../pages/dashboard.dart';
+import '../../../pages/dashboard.dart';
 import '../../providers/custom_repository.dart';
 import '../../providers/edit_custom.dart';
 

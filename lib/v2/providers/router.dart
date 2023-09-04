@@ -1,10 +1,10 @@
-import 'package:custom_pc/v2/pages/custom_detail_page.dart';
-import 'package:custom_pc/v2/pages/dashboard.dart';
-import 'package:custom_pc/v2/pages/edit_custom_page.dart';
-import 'package:custom_pc/v2/pages/parts_detail_page.dart';
-import 'package:custom_pc/v2/pages/parts_list_page.dart';
-import 'package:custom_pc/v2/pages/setting_page.dart';
-import 'package:custom_pc/v2/pages/stored_custom_list_page.dart';
+import 'package:custom_pc/pages/custom_detail_page.dart';
+import 'package:custom_pc/pages/dashboard.dart';
+import 'package:custom_pc/pages/edit_custom_page.dart';
+import 'package:custom_pc/pages/parts_detail_page.dart';
+import 'package:custom_pc/pages/parts_list_page.dart';
+import 'package:custom_pc/pages/setting_page.dart';
+import 'package:custom_pc/pages/stored_custom_list_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';

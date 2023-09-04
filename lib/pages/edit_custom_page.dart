@@ -3,8 +3,8 @@ import 'package:custom_pc/v2/widgets/edit_custom_page/custom_title_edit_widget.d
 import 'package:custom_pc/v2/widgets/edit_custom_page/edit_cancel_button.dart';
 import 'package:flutter/material.dart';
 
-import '../widgets/edit_custom_page/parts_edit_widget.dart';
-import '../widgets/edit_custom_page/save_icon_button.dart';
+import '../v2/widgets/edit_custom_page/parts_edit_widget.dart';
+import '../v2/widgets/edit_custom_page/save_icon_button.dart';
 
 class EditCustomPage extends StatelessWidget {
   const EditCustomPage({super.key});
