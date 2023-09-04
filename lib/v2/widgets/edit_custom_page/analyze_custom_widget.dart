@@ -1,4 +1,5 @@
 import 'package:custom_pc/v2/providers/edit_custom.dart';
+import 'package:custom_pc/widgets/create_custom/parts_compatibility_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -8,8 +9,10 @@ class AnalyzeCustomWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final custom = ref.watch(editCustomNotifierProvider);
+    final customCompatibility = custom.compatibilities;
     return ListView(
       children: [
+        // 合計金額部分
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Row(
@@ -34,22 +37,25 @@ class AnalyzeCustomWidget extends ConsumerWidget {
             ],
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.all(8),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                '分析',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Theme.of(context).colorScheme.secondary,
+        // パーツ間の互換性表示部分(互換性情報がない場合は非表示)
+        if (customCompatibility != null)
+          Padding(
+            padding: const EdgeInsets.all(8),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  '分析',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).colorScheme.secondary,
+                  ),
                 ),
-              ),
-            ],
+                for (final comp in customCompatibility) PartsCompatibilityWidget(comp),
+              ],
+            ),
           ),
-        ),
       ],
     );
   }
