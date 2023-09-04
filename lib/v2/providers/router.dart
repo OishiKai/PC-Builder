@@ -9,8 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../next_page.dart';
-
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 final _sectionNavigatorKey = GlobalKey<NavigatorState>();
 
@@ -18,13 +16,6 @@ final routerProvider = Provider<GoRouter>((ref) {
   return GoRouter(
     initialLocation: '/home',
     routes: [
-      GoRoute(
-        path: '/next',
-        pageBuilder: (context, state) => const MaterialPage(
-          fullscreenDialog: true,
-          child: NextPage(),
-        ),
-      ),
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) {
           return Dashboard(navigationShell: navigationShell);
