@@ -96,6 +96,10 @@ flutter:
     - images/tutorial02.png
     - images/tutorial03.png
     - images/tutorial04.png
+    - images/tutorial_v2_01.jpg
+    - images/tutorial_v2_02.jpg
+    - images/tutorial_v2_03.jpg
+    - images/tutorial_v2_04.jpg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 
