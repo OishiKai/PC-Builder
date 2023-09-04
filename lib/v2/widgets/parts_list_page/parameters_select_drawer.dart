@@ -1,4 +1,4 @@
-import 'package:custom_pc/v2/providers/search_parameters.dart';
+import 'package:custom_pc/providers/search_parameters.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

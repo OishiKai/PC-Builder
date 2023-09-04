@@ -1,7 +1,7 @@
 import 'package:custom_pc/config/size_config.dart';
 import 'package:custom_pc/old/providers/editing_custom_id.dart';
 import 'package:custom_pc/old/providers/stored_customs.dart';
-import 'package:custom_pc/v2/providers/detail_page_usage.dart';
+import 'package:custom_pc/providers/detail_page_usage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

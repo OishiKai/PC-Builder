@@ -1,6 +1,6 @@
 import 'package:clippy_flutter/arc.dart';
 import 'package:custom_pc/models/pc_parts.dart';
-import 'package:custom_pc/v2/providers/detail_page_usage.dart';
+import 'package:custom_pc/providers/detail_page_usage.dart';
 import 'package:custom_pc/v2/widgets/parts_detail/select_for_create_button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../providers/search_parameters.dart';
+import '../../../providers/search_parameters.dart';
 
 class SearchingParameterWidget extends ConsumerWidget {
   const SearchingParameterWidget({super.key});

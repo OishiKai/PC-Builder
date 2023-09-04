@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../share_preferences_instance.dart';
+import '../v2/share_preferences_instance.dart';
 
 final themeProvider = StateProvider<ThemeMode>((ref) {
   final prefs = SharedPreferencesInstance().prefs;

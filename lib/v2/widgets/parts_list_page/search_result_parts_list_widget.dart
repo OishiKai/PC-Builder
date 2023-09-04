@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../providers/detail_page_usage.dart';
-import '../../providers/edit_custom.dart';
-import '../../providers/parts_list.dart';
+import '../../../providers/detail_page_usage.dart';
+import '../../../providers/edit_custom.dart';
+import '../../../providers/parts_list.dart';
 import '../parts_detail/star_widget.dart';
 
 class SearchResultPartsListWidget extends ConsumerWidget {

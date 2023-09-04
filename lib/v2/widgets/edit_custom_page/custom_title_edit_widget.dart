@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../providers/edit_custom.dart';
+import '../../../providers/edit_custom.dart';
 
 class CustomNameEditWidget extends ConsumerWidget {
   const CustomNameEditWidget({super.key});

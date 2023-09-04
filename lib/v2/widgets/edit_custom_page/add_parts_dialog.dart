@@ -1,10 +1,10 @@
 import 'package:custom_pc/models/pc_parts.dart';
-import 'package:custom_pc/v2/providers/searching_category.dart';
+import 'package:custom_pc/providers/searching_category.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../providers/edit_custom.dart';
+import '../../../providers/edit_custom.dart';
 
 class AddPartsDialog extends ConsumerWidget {
   const AddPartsDialog({Key? key}) : super(key: key);

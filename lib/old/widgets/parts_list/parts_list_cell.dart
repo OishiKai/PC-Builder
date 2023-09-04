@@ -1,5 +1,5 @@
 import 'package:custom_pc/old/pages/parts_detail_page.dart';
-import 'package:custom_pc/v2/providers/detail_page_usage.dart';
+import 'package:custom_pc/providers/detail_page_usage.dart';
 import 'package:custom_pc/v2/widgets/parts_detail/star_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

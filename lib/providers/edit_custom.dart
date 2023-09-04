@@ -1,9 +1,9 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../domain/compatibility_analyzer.dart';
-import '../../models/custom.dart';
-import '../../models/parts_compatibility.dart';
-import '../../models/pc_parts.dart';
+import '../domain/compatibility_analyzer.dart';
+import '../models/custom.dart';
+import '../models/parts_compatibility.dart';
+import '../models/pc_parts.dart';
 
 part 'gen/edit_custom.g.dart';
 

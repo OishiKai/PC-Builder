@@ -3,7 +3,7 @@ import 'package:custom_pc/models/pc_parts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../v2/providers/detail_page_usage.dart';
+import '../../../providers/detail_page_usage.dart';
 import '../../pages/parts_detail_page.dart';
 
 class PartsInspectCellWidget extends ConsumerWidget {

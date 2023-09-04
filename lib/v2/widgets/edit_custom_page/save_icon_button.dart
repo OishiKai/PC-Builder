@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../pages/dashboard.dart';
-import '../../providers/custom_repository.dart';
-import '../../providers/edit_custom.dart';
+import '../../../providers/custom_repository.dart';
+import '../../../providers/edit_custom.dart';
 
 class SaveIconButton extends ConsumerWidget {
   const SaveIconButton({super.key});

@@ -1,10 +1,10 @@
 import 'package:custom_pc/models/pc_parts.dart';
-import 'package:custom_pc/v2/providers/edit_custom.dart';
+import 'package:custom_pc/providers/edit_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../providers/searching_category.dart';
+import '../../../providers/searching_category.dart';
 
 class EditButtonWidget extends ConsumerWidget {
   const EditButtonWidget({super.key, required this.category});

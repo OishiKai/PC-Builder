@@ -1,15 +1,15 @@
 import 'package:clippy_flutter/arc.dart';
 import 'package:custom_pc/models/pc_parts.dart';
-import 'package:custom_pc/v2/providers/detail_page_usage.dart';
-import 'package:custom_pc/v2/providers/edit_custom.dart';
-import 'package:custom_pc/v2/providers/parts_list.dart';
+import 'package:custom_pc/providers/detail_page_usage.dart';
+import 'package:custom_pc/providers/edit_custom.dart';
+import 'package:custom_pc/providers/parts_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_segmented_control/material_segmented_control.dart';
 
 import '../config/size_config.dart';
-import '../v2/providers/custom_repository.dart';
+import '../providers/custom_repository.dart';
 import '../v2/widgets/parts_detail/edit_button_widget.dart';
 import '../v2/widgets/parts_detail/full_scale_image_slider.dart';
 import '../v2/widgets/parts_detail/select_for_create_button_widget.dart';
