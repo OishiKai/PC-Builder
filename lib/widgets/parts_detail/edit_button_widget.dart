@@ -49,7 +49,11 @@ class EditButtonWidget extends ConsumerWidget {
 
         ref.read(searchingCategoryProvider.notifier).update((state) => category);
         context.pop();
-        context.pushNamed('partsList', pathParameters: {'id': custom.id!});
+        if (custom.id == null) {
+          context.pushNamed('create_partsList');
+        } else {
+          context.pushNamed('partsList', pathParameters: {'id': custom.id!});
+        }
       },
       style: ElevatedButton.styleFrom(
         padding: EdgeInsets.zero,
