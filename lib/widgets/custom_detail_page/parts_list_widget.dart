@@ -1,4 +1,4 @@
-import 'package:custom_pc/providers/detail_page_usage.dart';
+import 'package:custom_pc/models/detail_page_usage.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
