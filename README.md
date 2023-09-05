@@ -4,9 +4,10 @@
  
 パーツを検索、選択して自作PCを構築、管理できます。
 
-<img width="200" alt="SCR-20230502-nedr" src="https://github.com/oishikai/PC-Builder/assets/61380681/eac81c3a-54c0-41d6-b65b-eb716167d6b2">
-<img width="200" alt="SCR-20230502-nedr" src="https://github.com/oishikai/PC-Builder/assets/61380681/080fa584-cee5-4cd2-b319-af9b30c0c6ca">
-<img width="200" alt="SCR-20230502-nedr" src="https://github.com/oishikai/PC-Builder/assets/61380681/529ae3c6-2256-49d0-b695-393f312dd666">
+
+<img width="200" alt="SCR-20230502-nedr" src="https://github.com/oishikai/PC-Builder/assets/61380681/5a428627-f27a-43a0-9057-9b9731ecb8f5">
+<img width="200" alt="SCR-20230502-nedr" src="https://github.com/oishikai/PC-Builder/assets/61380681/0a5f6c9c-99f3-4056-83ea-ec9d49087df3">
+<img width="200" alt="SCR-20230502-nedr" src="https://github.com/oishikai/PC-Builder/assets/61380681/17237ad8-234e-4131-855e-6b5b15b5d14a">
 
 ## Install
 
