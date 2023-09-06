@@ -1,3 +1,4 @@
+import 'package:custom_pc/domain/search_parameter_fetcher.dart';
 import 'package:custom_pc/models/category_search_parameter.dart';
 import 'package:custom_pc/models/pc_parts.dart';
 import 'package:custom_pc/providers/searching_category.dart';
@@ -16,9 +17,16 @@ class SearchParameterNotifier extends _$SearchParameterNotifier {
     state = params;
   }
 
-  void resetParams() {
-    final category = ref.watch(searchingCategoryProvider);
-    final reset = state![category]!.clearSelectedParameter();
-    state![category] = reset;
+  void toggleParameterSelect(String paramName, int index) {
+    final category = ref.read(searchingCategoryProvider);
+    final toggled = state![category]!.toggleParameterSelect(paramName, index);
+    final params = SearchParameterFetcher.copyWith(state!, category, toggled);
+    state = params;
+  }
+
+  void clearSelectedParameter() {
+    final category = ref.read(searchingCategoryProvider);
+    final newState = SearchParameterFetcher.copyWith(state!, category, null);
+    state = newState;
   }
 }

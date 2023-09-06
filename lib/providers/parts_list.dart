@@ -1,4 +1,4 @@
-import 'package:custom_pc/providers/search_parameters.dart';
+import 'package:custom_pc/providers/search_parameter.dart';
 import 'package:custom_pc/providers/searching_category.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -15,32 +15,21 @@ class PartsList extends _$PartsList {
   @override
   Future<List<PcParts>> build() {
     final searchingCategory = ref.watch(searchingCategoryProvider);
-    final searchParameter = ref.watch(searchParametersNotifierProvider);
+    final searchParameter = ref.watch(searchParameterNotifierProvider);
     final searchText = ref.watch(searchTextProvider);
 
-    return searchParameter.when(
-      data: (data) {
-        final selectedParams = data.selectedParameters();
-        final url = UrlBuilder.createURLWithParameters(
-          searchingCategory.basePartsListUrl(),
-          selectedParams,
-        );
-
-        if (searchText == '') return PartsListParser.fetch(url);
-
-        if (selectedParams.isNotEmpty) {
-          return PartsListParser.fetch('$url&pdf_kw=$searchText');
-        } else {
-          return PartsListParser.fetch('$url?pdf_kw=$searchText');
-        }
-      },
-      loading: () {
-        return Future.value([]);
-      },
-      error: (error, stackTrace) {
-        return Future.value([]);
-      },
+    final selectedParams = searchParameter![searchingCategory]!.selectedParameters();
+    final url = UrlBuilder.createURLWithParameters(
+      searchingCategory.basePartsListUrl(),
+      selectedParams,
     );
+
+    if (searchText == '') return PartsListParser.fetch(url);
+    if (selectedParams.isNotEmpty) {
+      return PartsListParser.fetch('$url&pdf_kw=$searchText');
+    } else {
+      return PartsListParser.fetch('$url?pdf_kw=$searchText');
+    }
   }
 
   Future<void> updateDetailPartsInfo(int index, PcParts parts) async {

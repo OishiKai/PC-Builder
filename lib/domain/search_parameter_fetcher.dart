@@ -49,4 +49,22 @@ class SearchParameterFetcher {
 
     return paramMap;
   }
+
+  // 検索条件の選択、クリアの際に利用する
+  static Map<PartsCategory, CategorySearchParameter> copyWith(
+    Map<PartsCategory, CategorySearchParameter> state,
+    PartsCategory category,
+    CategorySearchParameter? params,
+  ) {
+    final newState = Map<PartsCategory, CategorySearchParameter>.from(state);
+
+    if (params != null) {
+      newState[category] = params;
+    } else {
+      for (final cate in PartsCategory.values) {
+        newState[cate]!.clearSelectedParameter();
+      }
+    }
+    return newState;
+  }
 }
