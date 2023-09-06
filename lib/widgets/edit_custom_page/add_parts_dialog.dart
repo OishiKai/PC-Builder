@@ -1,4 +1,6 @@
+import 'package:custom_pc/domain/parameter_recommender.dart';
 import 'package:custom_pc/models/pc_parts.dart';
+import 'package:custom_pc/providers/search_parameter.dart';
 import 'package:custom_pc/providers/searching_category.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -31,7 +33,16 @@ class AddPartsDialog extends ConsumerWidget {
       children: [
         for (final category in PartsCategory.values)
           SimpleDialogOption(
-            onPressed: () => custom.id == null ? selectForCreate(category) : selectForEdit(category),
+            onPressed: () {
+              ref.read(searchingCategoryProvider.notifier).update((state) => category);
+              final params = ref.read(searchParameterNotifierProvider)![category]!;
+              final recommend = ParameterRecommender(custom, category, params);
+              if (recommend.recommendedParameters.isNotEmpty) {
+              } else {
+                context.pop();
+                custom.id == null ? context.pushNamed('create_partsList') : context.pushNamed('partsList', pathParameters: {'id': custom.id!});
+              }
+            },
             child: Row(
               children: [
                 Icon(
