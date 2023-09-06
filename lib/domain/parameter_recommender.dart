@@ -29,7 +29,6 @@ class ParameterRecommender {
         recommendedParameter = recommendParamsForMemory();
         break;
       case PartsCategory.motherboard:
-        print('motherBoard');
         recommendedParameter = recommendParamsForMotherBoard();
         break;
       case PartsCategory.graphicsCard:
@@ -109,7 +108,8 @@ class ParameterRecommender {
     // CPUのパラメータに選択中のマザーボードのソケット形状があるか確認
     // ある場合は、そのソケット形状のインデックスを返す
     print(socket);
-    final specIndex = getParamIndex('ソケット\n形状', socket);
+    final specIndex = getParamIndex('ソケット形状', socket);
+    print(specIndex);
     if (specIndex != null) {
       return [
         // "ソケット形状"は3番目のパラメータなので、3を指定
@@ -142,10 +142,11 @@ class ParameterRecommender {
     // CPUクーラーのパラメータに、選択中のCPUのソケット形状があるか確認
     int? specIndex;
     if (isIntel) {
-      specIndex = getParamIndex('intel\nソケット', socket);
+      specIndex = getParamIndex('intelソケット', socket);
     } else {
-      specIndex = getParamIndex('AMD\nソケット', socket);
+      specIndex = getParamIndex('AMDソケット', socket);
     }
+    print(specIndex);
     if (specIndex != null) {
       return [
         // intelソケットなら1番目のパラメータ、AMDソケットなら2番目のパラメータ
@@ -171,7 +172,7 @@ class ParameterRecommender {
     final memoryType = rawMemoryType.split(' ')[1];
 
     // メモリのパラメータに、選択中のマザーボードのメモリインターフェースとメモリタイプがあるか確認
-    final memoryInterfaceIndex = getParamIndex('インター\nフェース', memoryInterface);
+    final memoryInterfaceIndex = getParamIndex('インターフェース', memoryInterface);
     final memoryTypeIndex = getParamIndex('規格', memoryType);
 
     List<RecommendParameter> recs = [];
@@ -206,12 +207,12 @@ class ParameterRecommender {
         }
         print(socket);
         print(isIntel);
-        if (isIntel && getParamIndex('CPU\nソケット\n(intel)', socket) != null) {
-          recs.add(RecommendParameter(PartsCategory.motherboard, 0, socket, getParamIndex('CPU\nソケット\n(intel)', socket)!));
+        if (isIntel && getParamIndex('CPUソケット(intel)', socket) != null) {
+          recs.add(RecommendParameter(PartsCategory.motherboard, 0, socket, getParamIndex('CPUソケット(intel)', socket)!));
         }
 
-        if (!isIntel && getParamIndex('CPU\nソケット\n(AMD)', socket) != null) {
-          recs.add(RecommendParameter(PartsCategory.motherboard, 1, socket, getParamIndex('CPU\nソケット\n(AMD)', socket)!));
+        if (!isIntel && getParamIndex('CPUソケット(AMD)', socket) != null) {
+          recs.add(RecommendParameter(PartsCategory.motherboard, 1, socket, getParamIndex('CPUソケット(AMD)', socket)!));
         }
       }
     }
@@ -225,7 +226,7 @@ class ParameterRecommender {
         final memoryType = rawMemoryType.split(' ')[0];
 
         // マザーボードのパラメータに、選択中のメモリのメモリインターフェースとメモリタイプがあるか確認
-        final memoryTypeIndex = getParamIndex('メモリ\nタイプ', memoryType);
+        final memoryTypeIndex = getParamIndex('メモリタイプ', memoryType);
 
         if (memoryTypeIndex != null) {
           recs.add(RecommendParameter(PartsCategory.motherboard, 3, rawMemoryType, memoryTypeIndex));
