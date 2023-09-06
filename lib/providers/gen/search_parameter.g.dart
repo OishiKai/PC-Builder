@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'search_parameter.dart';
+part of '../search_parameter.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -29,23 +29,17 @@ class _SystemHash {
   }
 }
 
-String _$SearchParameterNotifierHash() =>
-    r'7b0c64f84fa026ec3d5261d1b71809c7196fb19a';
+String _$SearchParameterNotifierHash() => r'7b0c64f84fa026ec3d5261d1b71809c7196fb19a';
 
 /// See also [SearchParameterNotifier].
-final searchParameterNotifierProvider = NotifierProvider<
-    SearchParameterNotifier, Map<PartsCategory, CategorySearchParameter>?>(
+final searchParameterNotifierProvider = NotifierProvider<SearchParameterNotifier, Map<PartsCategory, CategorySearchParameter>?>(
   SearchParameterNotifier.new,
   name: r'searchParameterNotifierProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$SearchParameterNotifierHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$SearchParameterNotifierHash,
 );
-typedef SearchParameterNotifierRef
-    = NotifierProviderRef<Map<PartsCategory, CategorySearchParameter>?>;
+typedef SearchParameterNotifierRef = NotifierProviderRef<Map<PartsCategory, CategorySearchParameter>?>;
 
-abstract class _$SearchParameterNotifier
-    extends Notifier<Map<PartsCategory, CategorySearchParameter>?> {
+abstract class _$SearchParameterNotifier extends Notifier<Map<PartsCategory, CategorySearchParameter>?> {
   @override
   Map<PartsCategory, CategorySearchParameter>? build();
 }

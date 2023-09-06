@@ -3,7 +3,7 @@ import 'package:custom_pc/models/pc_parts.dart';
 import 'package:custom_pc/providers/searching_category.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'search_parameter.g.dart';
+part 'gen/search_parameter.g.dart';
 
 @Riverpod(keepAlive: true)
 class SearchParameterNotifier extends _$SearchParameterNotifier {
