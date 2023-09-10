@@ -4,7 +4,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../domain/compatibility_analyzer.dart';
 
-part 'custom.freezed.dart';
+part 'custom_old.freezed.dart';
 
 @freezed
 class CustomOld with _$CustomOld {
