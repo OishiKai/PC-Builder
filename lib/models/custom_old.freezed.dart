@@ -359,7 +359,7 @@ class __$$_CustomCopyWithImpl<$Res> extends _$CustomCopyWithImpl<$Res, _$_Custom
 
 /// @nodoc
 
-class _$_Custom implements _Custom {
+class _$_Custom implements _CustomOld {
   const _$_Custom({this.id, this.name, this.totalPrice, this.cpu, this.cpuCooler, this.memory, this.motherBoard, this.graphicsCard, this.ssd, this.pcCase, this.powerUnit, this.caseFan, this.date, final List<PartsCompatibility>? compatibilities}) : _compatibilities = compatibilities;
 
   @override
@@ -588,8 +588,8 @@ class _$_Custom implements _Custom {
   }
 }
 
-abstract class _Custom implements CustomOld {
-  const factory _Custom({final String? id, final String? name, final String? totalPrice, final PcPartsOld? cpu, final PcPartsOld? cpuCooler, final PcPartsOld? memory, final PcPartsOld? motherBoard, final PcPartsOld? graphicsCard, final PcPartsOld? ssd, final PcPartsOld? pcCase, final PcPartsOld? powerUnit, final PcPartsOld? caseFan, final String? date, final List<PartsCompatibility>? compatibilities}) = _$_Custom;
+abstract class _CustomOld implements CustomOld {
+  const factory _CustomOld({final String? id, final String? name, final String? totalPrice, final PcPartsOld? cpu, final PcPartsOld? cpuCooler, final PcPartsOld? memory, final PcPartsOld? motherBoard, final PcPartsOld? graphicsCard, final PcPartsOld? ssd, final PcPartsOld? pcCase, final PcPartsOld? powerUnit, final PcPartsOld? caseFan, final String? date, final List<PartsCompatibility>? compatibilities}) = _$_Custom;
 
   @override
   String? get id;

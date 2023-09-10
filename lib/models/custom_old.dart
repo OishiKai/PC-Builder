@@ -31,7 +31,7 @@ class CustomOld with _$CustomOld {
 
     // 互換性のリスト
     List<PartsCompatibility>? compatibilities,
-  }) = _Custom;
+  }) = _CustomOld;
 
   CustomOld updateCompatibilities() {
     List<PartsCompatibility> comps = [];
