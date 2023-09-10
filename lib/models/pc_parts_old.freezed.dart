@@ -200,7 +200,7 @@ class __$$_PcPartsCopyWithImpl<$Res> extends _$PcPartsCopyWithImpl<$Res, _$_PcPa
 
 /// @nodoc
 
-class _$_PcParts implements _PcParts {
+class _$_PcParts implements _PcPartsOld {
   const _$_PcParts({required this.maker, required this.isNew, required this.title, required this.star, required this.evaluation, required this.price, required this.ranked, required this.image, required this.detailUrl, final List<String>? fullScaleImages, final Map<String, String?>? specs, final List<PartsShop>? shops})
       : _fullScaleImages = fullScaleImages,
         _specs = specs,
@@ -273,8 +273,8 @@ class _$_PcParts implements _PcParts {
   _$$_PcPartsCopyWith<_$_PcParts> get copyWith => __$$_PcPartsCopyWithImpl<_$_PcParts>(this, _$identity);
 }
 
-abstract class _PcParts implements PcPartsOld {
-  const factory _PcParts({required final String maker, required final bool isNew, required final String title, required final int? star, required final String? evaluation, required final String price, required final String ranked, required final String image, required final String detailUrl, final List<String>? fullScaleImages, final Map<String, String?>? specs, final List<PartsShop>? shops}) = _$_PcParts;
+abstract class _PcPartsOld implements PcPartsOld {
+  const factory _PcPartsOld({required final String maker, required final bool isNew, required final String title, required final int? star, required final String? evaluation, required final String price, required final String ranked, required final String image, required final String detailUrl, final List<String>? fullScaleImages, final Map<String, String?>? specs, final List<PartsShop>? shops}) = _$_PcParts;
 
   @override
   String get maker;

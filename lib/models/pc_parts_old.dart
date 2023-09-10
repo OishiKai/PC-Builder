@@ -19,5 +19,5 @@ class PcPartsOld with _$PcPartsOld {
     List<String>? fullScaleImages,
     Map<String, String?>? specs,
     List<PartsShop>? shops,
-  }) = _PcParts;
+  }) = _PcPartsOld;
 }
