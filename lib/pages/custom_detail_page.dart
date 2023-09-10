@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../domain/search_parameter_fetcher.dart';
 import '../providers/edit_custom.dart';
+import '../providers/search_parameter.dart';
 import '../widgets/custom_detail_page/custom_summary_widget.dart';
 import '../widgets/custom_detail_page/delete_custom_dialog.dart';
 import 'dashboard.dart';
@@ -12,6 +14,21 @@ import 'dashboard.dart';
 class CustomDetailPage extends ConsumerWidget {
   const CustomDetailPage({super.key, required this.id});
   final String id;
+
+  void showProgressDialog(BuildContext context) {
+    showGeneralDialog(
+      context: context,
+      barrierDismissible: false,
+      barrierColor: Colors.black.withOpacity(0.5),
+      pageBuilder: (BuildContext context, Animation animation, Animation secondaryAnimation) {
+        return const Center(
+          child: CircularProgressIndicator(
+            valueColor: AlwaysStoppedAnimation<Color>(Colors.greenAccent),
+          ),
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -93,7 +110,15 @@ class CustomDetailPage extends ConsumerWidget {
             ],
           ),
           floatingActionButton: FloatingActionButton(
-            onPressed: () {
+            onPressed: () async {
+              // 初回のみ検索条件を取得する
+              if (ref.read(searchParameterNotifierProvider) == null) {
+                showProgressDialog(context);
+                final params = await SearchParameterFetcher.getAllParams();
+                ref.read(searchParameterNotifierProvider.notifier).set(params);
+                context.pop();
+              }
+
               // 表示中のカスタムを編集用Providerにセット
               ref.read(editCustomNotifierProvider.notifier).setCustom(custom);
               // bottomNavigationBarを非表示化

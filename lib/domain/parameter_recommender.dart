@@ -205,8 +205,6 @@ class ParameterRecommender {
         } else {
           socket = rawSocket.replaceAll('Socket', '').trim();
         }
-        print(socket);
-        print(isIntel);
         if (isIntel && getParamIndex('CPUソケット(intel)', socket) != null) {
           recs.add(RecommendParameter(PartsCategory.motherboard, 0, socket, getParamIndex('CPUソケット(intel)', socket)!));
         }
