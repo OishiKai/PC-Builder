@@ -16,18 +16,6 @@ class AddPartsDialog extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final custom = ref.watch(editCustomNotifierProvider);
 
-    void selectForCreate(PartsCategory category) {
-      ref.read(searchingCategoryProvider.notifier).update((state) => category);
-      context.pop();
-      context.pushNamed('create_partsList');
-    }
-
-    void selectForEdit(PartsCategory category) {
-      ref.read(searchingCategoryProvider.notifier).update((state) => category);
-      context.pop();
-      context.pushNamed('partsList', pathParameters: {'id': custom.id!});
-    }
-
     return SimpleDialog(
       backgroundColor: Theme.of(context).colorScheme.surface,
       title: const Text('カテゴリーを選択'),
@@ -46,6 +34,13 @@ class AddPartsDialog extends ConsumerWidget {
               // 選択中のパーツにあったパラメータを取得
               final recommend = ParameterRecommender(custom, category, params);
               if (recommend.recommendedParameters.isNotEmpty) {
+                // パラメータがある場合は、パラメータを選択状態にする
+                for (final rec in recommend.recommendedParameters) {
+                  ref.read(searchParameterNotifierProvider.notifier).toggleParameterSelect(
+                        params.alignParameters()[rec.paramSectionIndex].keys.join(''),
+                        rec.paramIndex,
+                      );
+                }
                 // このダイアログを閉じて、パラメータ選択ダイアログを開く
                 context.pop();
                 showDialog(context: context, builder: (context) => RecommendParametersDialog(recommend.recommendedParameters));

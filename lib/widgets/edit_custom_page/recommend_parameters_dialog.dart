@@ -1,11 +1,12 @@
 import 'package:custom_pc/models/recommend_parameter.dart';
+import 'package:custom_pc/providers/edit_custom.dart';
 import 'package:custom_pc/providers/search_parameter.dart';
 import 'package:custom_pc/providers/searching_category.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../models/category_search_parameter.dart';
-import '../../pages/parts_list_page.dart';
 
 class RecommendParametersDialog extends ConsumerStatefulWidget {
   const RecommendParametersDialog(this.recommendParameters, {super.key});
@@ -32,7 +33,6 @@ class _RecommendParametersDialogState extends ConsumerState<RecommendParametersD
     }
 
     return SimpleDialog(
-      //contentPadding: const EdgeInsets.all(0),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       title: Text(
         '選択中のパーツに適した条件',
@@ -56,7 +56,10 @@ class _RecommendParametersDialogState extends ConsumerState<RecommendParametersD
                         value: parseParams(rec.paramSectionIndex, rec.paramIndex).isSelect,
                         activeColor: Theme.of(context).colorScheme.primary,
                         onChanged: (bool? value) {
-                          ref.read(searchParameterNotifierProvider.notifier).toggleParameterSelect(params[category]!.alignParameters()[rec.paramSectionIndex].keys.join(''), rec.paramIndex);
+                          ref.read(searchParameterNotifierProvider.notifier).toggleParameterSelect(
+                                params[category]!.alignParameters()[rec.paramSectionIndex].keys.join(''),
+                                rec.paramIndex,
+                              );
                           setState(() {});
                         },
                       ),
@@ -112,8 +115,9 @@ class _RecommendParametersDialogState extends ConsumerState<RecommendParametersD
             const SizedBox(width: 8),
             ElevatedButton(
               onPressed: () {
-                Navigator.pop(context);
-                Navigator.push(context, MaterialPageRoute(builder: (context) => PartsListPage()));
+                final custom = ref.read(editCustomNotifierProvider);
+                context.pop();
+                custom.id == null ? context.pushNamed('create_partsList') : context.pushNamed('partsList', pathParameters: {'id': custom.id!});
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Theme.of(context).colorScheme.primary,
