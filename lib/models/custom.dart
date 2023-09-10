@@ -1,5 +1,3 @@
-import 'dart:math' as math;
-
 import 'package:custom_pc/models/parts_compatibility.dart';
 import 'package:custom_pc/models/pc_parts.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -9,8 +7,8 @@ import '../domain/compatibility_analyzer.dart';
 part 'custom.freezed.dart';
 
 @freezed
-class Custom with _$Custom {
-  const factory Custom({
+class CustomOld with _$CustomOld {
+  const factory CustomOld({
     String? id,
     // Custom名
     String? name,
@@ -34,7 +32,7 @@ class Custom with _$Custom {
     List<PartsCompatibility>? compatibilities,
   }) = _Custom;
 
-  Custom updateCompatibilities() {
+  CustomOld updateCompatibilities() {
     List<PartsCompatibility> comps = [];
     // 互換性チェック
     if (cpu != null && motherBoard != null) {

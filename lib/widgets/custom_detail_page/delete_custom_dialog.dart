@@ -7,7 +7,7 @@ import '../../../models/custom.dart';
 
 class DeleteCustomDialog extends ConsumerWidget {
   const DeleteCustomDialog({super.key, required this.custom});
-  final Custom custom;
+  final CustomOld custom;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

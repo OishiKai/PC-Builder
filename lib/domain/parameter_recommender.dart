@@ -5,7 +5,7 @@ import 'package:custom_pc/models/recommend_parameter.dart';
 import '../models/custom.dart';
 
 class ParameterRecommender {
-  late final Custom custom;
+  late final CustomOld custom;
   late final PartsCategory selectingCategory;
   late final CategorySearchParameter params;
 

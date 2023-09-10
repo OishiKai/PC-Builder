@@ -5,7 +5,7 @@ import '../models/custom.dart';
 import '../widgets/custom_detail_page/summary_info_cell.dart';
 
 class CustomSummarizer {
-  static List<SummaryInfoCell> getSummaryWidgets(Custom custom, Brightness brightness) {
+  static List<SummaryInfoCell> getSummaryWidgets(CustomOld custom, Brightness brightness) {
     // 各パーツのSummaryInfoCellを作成し、最後にnullを除く
     return [
       _summarizeCpu(custom.cpu, brightness),

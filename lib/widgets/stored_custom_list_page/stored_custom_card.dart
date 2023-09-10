@@ -4,7 +4,7 @@ import '../../../models/custom.dart';
 
 class StoredCustomCard extends StatelessWidget {
   const StoredCustomCard({super.key, required this.custom});
-  final Custom custom;
+  final CustomOld custom;
 
   @override
   Widget build(BuildContext context) {

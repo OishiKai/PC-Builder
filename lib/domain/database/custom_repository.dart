@@ -8,7 +8,7 @@ import '../../models/custom.dart';
 
 class CustomRepository {
   //Custom保存
-  static Future<int> insertCustom(Custom custom) async {
+  static Future<int> insertCustom(CustomOld custom) async {
     // custom_idを生成
     final customId = const Uuid().v4();
     // 含まれるパーツのidを保持するMap
@@ -47,12 +47,12 @@ class CustomRepository {
   }
 
   // Custom取得
-  static Future<Map<String, Custom>> getAllCustoms() async {
+  static Future<Map<String, CustomOld>> getAllCustoms() async {
     final db = await DataStoreUseCase.database;
     final stored = await db.query('custom');
     if (stored.isEmpty) return {};
 
-    final Map<String, Custom> customList = {};
+    final Map<String, CustomOld> customList = {};
     for (var custom in stored) {
       final id = custom['id'] as String;
       final name = custom['name'] as String;
@@ -69,7 +69,7 @@ class CustomRepository {
       final powerUnit = await PcPartsRepository.selectPcPartsById(custom['power_unit_id'] as int?);
       final caseFan = await PcPartsRepository.selectPcPartsById(custom['case_fan_id'] as int?);
 
-      customList[id] = Custom(
+      customList[id] = CustomOld(
         id: id,
         name: name,
         totalPrice: price,
@@ -100,7 +100,7 @@ class CustomRepository {
   }
 
   // Custom更新
-  static Future<void> updateCustom(String customId, Custom custom) async {
+  static Future<void> updateCustom(String customId, CustomOld custom) async {
     final db = await DataStoreUseCase.database;
     deleteIncludeParts(customId);
 
@@ -166,12 +166,12 @@ class CustomRepository {
   }
 
   // v2 Custom取得
-  static Future<List<Custom>> getAllCustomsV2() async {
+  static Future<List<CustomOld>> getAllCustomsV2() async {
     final db = await DataStoreUseCase.database;
     final stored = await db.query('custom');
     if (stored.isEmpty) return [];
 
-    final List<Custom> customList = [];
+    final List<CustomOld> customList = [];
     for (var custom in stored) {
       final id = custom['id'] as String;
       final name = custom['name'] as String;
@@ -188,7 +188,7 @@ class CustomRepository {
       final powerUnit = await PcPartsRepository.selectPcPartsById(custom['power_unit_id'] as int?);
       final caseFan = await PcPartsRepository.selectPcPartsById(custom['case_fan_id'] as int?);
 
-      customList.add(Custom(
+      customList.add(CustomOld(
         id: id,
         name: name,
         totalPrice: price,

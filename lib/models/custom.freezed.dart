@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError('It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$Custom {
+mixin _$CustomOld {
   String? get id => throw _privateConstructorUsedError; // Custom名
   String? get name => throw _privateConstructorUsedError; // 総額
   String? get totalPrice => throw _privateConstructorUsedError; // 各パーツ
@@ -31,12 +31,12 @@ mixin _$Custom {
   List<PartsCompatibility>? get compatibilities => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $CustomCopyWith<Custom> get copyWith => throw _privateConstructorUsedError;
+  $CustomCopyWith<CustomOld> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $CustomCopyWith<$Res> {
-  factory $CustomCopyWith(Custom value, $Res Function(Custom) then) = _$CustomCopyWithImpl<$Res, Custom>;
+  factory $CustomCopyWith(CustomOld value, $Res Function(CustomOld) then) = _$CustomCopyWithImpl<$Res, CustomOld>;
   @useResult
   $Res call({String? id, String? name, String? totalPrice, PcParts? cpu, PcParts? cpuCooler, PcParts? memory, PcParts? motherBoard, PcParts? graphicsCard, PcParts? ssd, PcParts? pcCase, PcParts? powerUnit, PcParts? caseFan, String? date, List<PartsCompatibility>? compatibilities});
 
@@ -52,7 +52,7 @@ abstract class $CustomCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$CustomCopyWithImpl<$Res, $Val extends Custom> implements $CustomCopyWith<$Res> {
+class _$CustomCopyWithImpl<$Res, $Val extends CustomOld> implements $CustomCopyWith<$Res> {
   _$CustomCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -562,7 +562,7 @@ class _$_Custom implements _Custom {
   }
 
   @override
-  Custom updateCompatibilities() {
+  CustomOld updateCompatibilities() {
     List<PartsCompatibility> comps = [];
     // 互換性チェック
     if (cpu != null && motherBoard != null) {
@@ -588,7 +588,7 @@ class _$_Custom implements _Custom {
   }
 }
 
-abstract class _Custom implements Custom {
+abstract class _Custom implements CustomOld {
   const factory _Custom({final String? id, final String? name, final String? totalPrice, final PcParts? cpu, final PcParts? cpuCooler, final PcParts? memory, final PcParts? motherBoard, final PcParts? graphicsCard, final PcParts? ssd, final PcParts? pcCase, final PcParts? powerUnit, final PcParts? caseFan, final String? date, final List<PartsCompatibility>? compatibilities}) = _$_Custom;
 
   @override

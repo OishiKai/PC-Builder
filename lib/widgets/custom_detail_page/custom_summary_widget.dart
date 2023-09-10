@@ -8,7 +8,7 @@ import '../../../models/custom.dart';
 /// CustomのSummaryを表示するWidget
 class CustomSummaryWidget extends StatefulWidget {
   const CustomSummaryWidget({super.key, required this.custom});
-  final Custom custom;
+  final CustomOld custom;
 
   @override
   State<CustomSummaryWidget> createState() => _CustomSummaryWidgetState();

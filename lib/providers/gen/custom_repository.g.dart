@@ -32,14 +32,14 @@ class _SystemHash {
 String _$CustomRepositoryNotifierHash() => r'8fcc284ed4c54faee9503577a08020923e561958';
 
 /// See also [CustomRepositoryNotifier].
-final customRepositoryNotifierProvider = AutoDisposeAsyncNotifierProvider<CustomRepositoryNotifier, List<Custom>>(
+final customRepositoryNotifierProvider = AutoDisposeAsyncNotifierProvider<CustomRepositoryNotifier, List<CustomOld>>(
   CustomRepositoryNotifier.new,
   name: r'customRepositoryNotifierProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$CustomRepositoryNotifierHash,
 );
-typedef CustomRepositoryNotifierRef = AutoDisposeAsyncNotifierProviderRef<List<Custom>>;
+typedef CustomRepositoryNotifierRef = AutoDisposeAsyncNotifierProviderRef<List<CustomOld>>;
 
-abstract class _$CustomRepositoryNotifier extends AutoDisposeAsyncNotifier<List<Custom>> {
+abstract class _$CustomRepositoryNotifier extends AutoDisposeAsyncNotifier<List<CustomOld>> {
   @override
-  FutureOr<List<Custom>> build();
+  FutureOr<List<CustomOld>> build();
 }

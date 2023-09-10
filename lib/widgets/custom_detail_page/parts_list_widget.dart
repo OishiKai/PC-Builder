@@ -7,7 +7,7 @@ import '../../../models/pc_parts.dart';
 
 class PartsListWidget extends StatelessWidget {
   const PartsListWidget({super.key, required this.custom});
-  final Custom custom;
+  final CustomOld custom;
 
   @override
   Widget build(BuildContext context) {

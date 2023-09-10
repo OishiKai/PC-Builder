@@ -9,7 +9,7 @@ part 'gen/custom_repository.g.dart';
 @riverpod
 class CustomRepositoryNotifier extends _$CustomRepositoryNotifier {
   @override
-  Future<List<Custom>> build() {
+  Future<List<CustomOld>> build() {
     return CustomRepository.getAllCustomsV2();
   }
 
@@ -20,7 +20,7 @@ class CustomRepositoryNotifier extends _$CustomRepositoryNotifier {
     });
   }
 
-  void addCustom(Custom custom) async {
+  void addCustom(CustomOld custom) async {
     if (custom.name == null) custom = custom.copyWith(name: 'タイトルなし');
     await CustomRepository.insertCustom(custom);
     refresh();
@@ -31,7 +31,7 @@ class CustomRepositoryNotifier extends _$CustomRepositoryNotifier {
     refresh();
   }
 
-  void updateCustom(Custom custom) async {
+  void updateCustom(CustomOld custom) async {
     // 更新なのでidはnullではない
     await CustomRepository.updateCustom(custom.id!, custom);
     refresh();

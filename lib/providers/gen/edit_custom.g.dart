@@ -32,14 +32,14 @@ class _SystemHash {
 String _$EditCustomNotifierHash() => r'0e958e09f416e1f97a707ec33c29ac126221bfe9';
 
 /// See also [EditCustomNotifier].
-final editCustomNotifierProvider = NotifierProvider<EditCustomNotifier, Custom>(
+final editCustomNotifierProvider = NotifierProvider<EditCustomNotifier, CustomOld>(
   EditCustomNotifier.new,
   name: r'editCustomNotifierProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$EditCustomNotifierHash,
 );
-typedef EditCustomNotifierRef = NotifierProviderRef<Custom>;
+typedef EditCustomNotifierRef = NotifierProviderRef<CustomOld>;
 
-abstract class _$EditCustomNotifier extends Notifier<Custom> {
+abstract class _$EditCustomNotifier extends Notifier<CustomOld> {
   @override
-  Custom build();
+  CustomOld build();
 }

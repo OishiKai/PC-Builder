@@ -10,17 +10,17 @@ part 'gen/edit_custom.g.dart';
 @Riverpod(keepAlive: true)
 class EditCustomNotifier extends _$EditCustomNotifier {
   @override
-  Custom build() {
-    return const Custom();
+  CustomOld build() {
+    return const CustomOld();
   }
 
   /// カスタムを新規作成する場合
   void createCustom() {
-    state = const Custom();
+    state = const CustomOld();
   }
 
   /// 保存済みのカスタムを編集する場合
-  void setCustom(Custom custom) {
+  void setCustom(CustomOld custom) {
     state = custom;
     updateCompatibilities();
   }
