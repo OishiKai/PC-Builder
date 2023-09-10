@@ -32,14 +32,14 @@ class _SystemHash {
 String _$PartsListHash() => r'2a5aedf4330b044d305bb948014bc0cecf183b5d';
 
 /// See also [PartsList].
-final partsListProvider = AsyncNotifierProvider<PartsList, List<PcParts>>(
+final partsListProvider = AsyncNotifierProvider<PartsList, List<PcPartsOld>>(
   PartsList.new,
   name: r'partsListProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$PartsListHash,
 );
-typedef PartsListRef = AsyncNotifierProviderRef<List<PcParts>>;
+typedef PartsListRef = AsyncNotifierProviderRef<List<PcPartsOld>>;
 
-abstract class _$PartsList extends AsyncNotifier<List<PcParts>> {
+abstract class _$PartsList extends AsyncNotifier<List<PcPartsOld>> {
   @override
-  FutureOr<List<PcParts>> build();
+  FutureOr<List<PcPartsOld>> build();
 }

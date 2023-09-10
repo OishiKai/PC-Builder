@@ -15,15 +15,15 @@ class CustomOld with _$CustomOld {
     // 総額
     String? totalPrice,
     // 各パーツ
-    PcParts? cpu,
-    PcParts? cpuCooler,
-    PcParts? memory,
-    PcParts? motherBoard,
-    PcParts? graphicsCard,
-    PcParts? ssd,
-    PcParts? pcCase,
-    PcParts? powerUnit,
-    PcParts? caseFan,
+    PcPartsOld? cpu,
+    PcPartsOld? cpuCooler,
+    PcPartsOld? memory,
+    PcPartsOld? motherBoard,
+    PcPartsOld? graphicsCard,
+    PcPartsOld? ssd,
+    PcPartsOld? pcCase,
+    PcPartsOld? powerUnit,
+    PcPartsOld? caseFan,
 
     // 保存日
     String? date,
@@ -116,7 +116,7 @@ class CustomOld with _$CustomOld {
     return cpu == null && cpuCooler == null && memory == null && motherBoard == null && graphicsCard == null && ssd == null && pcCase == null && powerUnit == null && caseFan == null;
   }
 
-  PcParts? get(PartsCategory category) {
+  PcPartsOld? get(PartsCategory category) {
     switch (category) {
       case PartsCategory.cpu:
         return cpu;
@@ -139,8 +139,8 @@ class CustomOld with _$CustomOld {
     }
   }
 
-  Map<PartsCategory, PcParts> align() {
-    Map<PartsCategory, PcParts> alignedParts = {};
+  Map<PartsCategory, PcPartsOld> align() {
+    Map<PartsCategory, PcPartsOld> alignedParts = {};
 
     if (cpu != null) {
       alignedParts[PartsCategory.cpu] = cpu!;

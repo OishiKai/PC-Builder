@@ -8,7 +8,7 @@ import '../../../models/pc_parts.dart';
 
 class SelectForCreateButtonWidget extends ConsumerWidget {
   const SelectForCreateButtonWidget({super.key, required this.parts});
-  final PcParts parts;
+  final PcPartsOld parts;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

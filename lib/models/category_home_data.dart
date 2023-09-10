@@ -14,21 +14,21 @@ class CategoryHomeData {
 class CpuHome {
   final List<String> intelChips;
   final List<String> amdChips;
-  final List<PcParts> popularParts;
+  final List<PcPartsOld> popularParts;
 
   CpuHome(this.intelChips, this.amdChips, this.popularParts);
 }
 
 class CpuCoolerHome {
   final List<String> makers;
-  final List<PcParts> popularParts;
+  final List<PcPartsOld> popularParts;
 
   CpuCoolerHome(this.makers, this.popularParts);
 }
 
 class MemoryHome {
   final Map<String, List<String>> memoryTypes;
-  final List<PcParts> popularParts;
+  final List<PcPartsOld> popularParts;
 
   MemoryHome(this.memoryTypes, this.popularParts);
 }
@@ -36,7 +36,7 @@ class MemoryHome {
 class MotherBoardHome {
   final List<String> intelSocket;
   final List<String> amdSocket;
-  final List<PcParts> popularParts;
+  final List<PcPartsOld> popularParts;
 
   MotherBoardHome(this.intelSocket, this.amdSocket, this.popularParts);
 }
@@ -44,7 +44,7 @@ class MotherBoardHome {
 class GraphicsCardHome {
   final List<String> nvidiaChips;
   final List<String> amdChips;
-  final List<PcParts> popularParts;
+  final List<PcPartsOld> popularParts;
 
   GraphicsCardHome(this.nvidiaChips, this.amdChips, this.popularParts);
 }
@@ -52,7 +52,7 @@ class GraphicsCardHome {
 class SsdHome {
   final List<String> capacityList = ['2000GB', '1000GB', '512GB', '256GB'];
   final List<String> typeList = ['M.2', '2.5インチ'];
-  final List<PcParts> popularParts;
+  final List<PcPartsOld> popularParts;
 
   SsdHome(this.popularParts);
 }

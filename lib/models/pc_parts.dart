@@ -5,8 +5,8 @@ import 'parts_shop.dart';
 part 'pc_parts.freezed.dart';
 
 @freezed
-class PcParts with _$PcParts {
-  const factory PcParts({
+class PcPartsOld with _$PcPartsOld {
+  const factory PcPartsOld({
     required String maker,
     required bool isNew,
     required String title,

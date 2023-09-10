@@ -31,7 +31,7 @@ class EditCustomNotifier extends _$EditCustomNotifier {
   }
 
   /// パーツを追加・変更
-  void setParts(PartsCategory category, PcParts parts) {
+  void setParts(PartsCategory category, PcPartsOld parts) {
     switch (category) {
       case PartsCategory.cpu:
         state = state.copyWith(cpu: parts);

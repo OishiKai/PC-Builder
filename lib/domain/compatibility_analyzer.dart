@@ -12,7 +12,7 @@ class CompatibilityAnalyzer {
     return specInfo;
   }
 
-  static PartsCompatibility analyzeCpuAndMotherBoard({required PcParts cpu, required PcParts motherBoard}) {
+  static PartsCompatibility analyzeCpuAndMotherBoard({required PcPartsOld cpu, required PcPartsOld motherBoard}) {
     // ソケット形状の比較
     String? cpuSocket = _extractSpec(cpu.specs!, 'ソケット形状');
     String? motherBoardSocket = _extractSpec(motherBoard.specs!, 'CPUソケット');
@@ -37,7 +37,7 @@ class CompatibilityAnalyzer {
     );
   }
 
-  static PartsCompatibility analyzeCpuCoolerAndMotherBoard({required PcParts cpuCooler, required PcParts motherBoard}) {
+  static PartsCompatibility analyzeCpuCoolerAndMotherBoard({required PcPartsOld cpuCooler, required PcPartsOld motherBoard}) {
     // ソケット形状の比較
     String? cpuCoolerIntelSocket = _extractSpec(cpuCooler.specs!, 'Intel対応ソケット');
     String? cpuCoolerAmdSocket = _extractSpec(cpuCooler.specs!, 'AMD対応ソケット');
@@ -91,7 +91,7 @@ class CompatibilityAnalyzer {
     );
   }
 
-  static PartsCompatibility analyzeMemoryAndMotherBoard({required PcParts memory, required PcParts motherBoard}) {
+  static PartsCompatibility analyzeMemoryAndMotherBoard({required PcPartsOld memory, required PcPartsOld motherBoard}) {
     // メモリの規格の比較
     String? memoryStandard = _extractSpec(memory.specs!, 'メモリ規格');
     String? motherBoardStandard = _extractSpec(motherBoard.specs!, '詳細メモリタイプ');
@@ -139,7 +139,7 @@ class CompatibilityAnalyzer {
     );
   }
 
-  static PartsCompatibility analyzeMotherBoardAndSsd({required PcParts motherBoard, required PcParts ssd}) {
+  static PartsCompatibility analyzeMotherBoardAndSsd({required PcPartsOld motherBoard, required PcPartsOld ssd}) {
     String? ssdStandardSize = _extractSpec(ssd.specs!, '規格サイズ');
 
     // サイズ不明

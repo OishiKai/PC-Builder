@@ -13,7 +13,7 @@ part 'gen/parts_list.g.dart';
 @Riverpod(keepAlive: true)
 class PartsList extends _$PartsList {
   @override
-  Future<List<PcParts>> build() {
+  Future<List<PcPartsOld>> build() {
     final searchingCategory = ref.watch(searchingCategoryProvider);
     final searchParameter = ref.watch(searchParameterNotifierProvider);
     final searchText = ref.watch(searchTextProvider);
@@ -32,7 +32,7 @@ class PartsList extends _$PartsList {
     }
   }
 
-  Future<void> updateDetailPartsInfo(int index, PcParts parts) async {
+  Future<void> updateDetailPartsInfo(int index, PcPartsOld parts) async {
     if (parts.fullScaleImages != null) return;
     final updatedParts = await PartsDetailParser.fetch(parts);
 

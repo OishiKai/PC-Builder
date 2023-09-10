@@ -18,15 +18,15 @@ mixin _$CustomOld {
   String? get id => throw _privateConstructorUsedError; // Custom名
   String? get name => throw _privateConstructorUsedError; // 総額
   String? get totalPrice => throw _privateConstructorUsedError; // 各パーツ
-  PcParts? get cpu => throw _privateConstructorUsedError;
-  PcParts? get cpuCooler => throw _privateConstructorUsedError;
-  PcParts? get memory => throw _privateConstructorUsedError;
-  PcParts? get motherBoard => throw _privateConstructorUsedError;
-  PcParts? get graphicsCard => throw _privateConstructorUsedError;
-  PcParts? get ssd => throw _privateConstructorUsedError;
-  PcParts? get pcCase => throw _privateConstructorUsedError;
-  PcParts? get powerUnit => throw _privateConstructorUsedError;
-  PcParts? get caseFan => throw _privateConstructorUsedError; // 保存日
+  PcPartsOld? get cpu => throw _privateConstructorUsedError;
+  PcPartsOld? get cpuCooler => throw _privateConstructorUsedError;
+  PcPartsOld? get memory => throw _privateConstructorUsedError;
+  PcPartsOld? get motherBoard => throw _privateConstructorUsedError;
+  PcPartsOld? get graphicsCard => throw _privateConstructorUsedError;
+  PcPartsOld? get ssd => throw _privateConstructorUsedError;
+  PcPartsOld? get pcCase => throw _privateConstructorUsedError;
+  PcPartsOld? get powerUnit => throw _privateConstructorUsedError;
+  PcPartsOld? get caseFan => throw _privateConstructorUsedError; // 保存日
   String? get date => throw _privateConstructorUsedError; // 互換性のリスト
   List<PartsCompatibility>? get compatibilities => throw _privateConstructorUsedError;
 
@@ -38,7 +38,7 @@ mixin _$CustomOld {
 abstract class $CustomCopyWith<$Res> {
   factory $CustomCopyWith(CustomOld value, $Res Function(CustomOld) then) = _$CustomCopyWithImpl<$Res, CustomOld>;
   @useResult
-  $Res call({String? id, String? name, String? totalPrice, PcParts? cpu, PcParts? cpuCooler, PcParts? memory, PcParts? motherBoard, PcParts? graphicsCard, PcParts? ssd, PcParts? pcCase, PcParts? powerUnit, PcParts? caseFan, String? date, List<PartsCompatibility>? compatibilities});
+  $Res call({String? id, String? name, String? totalPrice, PcPartsOld? cpu, PcPartsOld? cpuCooler, PcPartsOld? memory, PcPartsOld? motherBoard, PcPartsOld? graphicsCard, PcPartsOld? ssd, PcPartsOld? pcCase, PcPartsOld? powerUnit, PcPartsOld? caseFan, String? date, List<PartsCompatibility>? compatibilities});
 
   $PcPartsCopyWith<$Res>? get cpu;
   $PcPartsCopyWith<$Res>? get cpuCooler;
@@ -94,39 +94,39 @@ class _$CustomCopyWithImpl<$Res, $Val extends CustomOld> implements $CustomCopyW
       cpu: freezed == cpu
           ? _value.cpu
           : cpu // ignore: cast_nullable_to_non_nullable
-              as PcParts?,
+              as PcPartsOld?,
       cpuCooler: freezed == cpuCooler
           ? _value.cpuCooler
           : cpuCooler // ignore: cast_nullable_to_non_nullable
-              as PcParts?,
+              as PcPartsOld?,
       memory: freezed == memory
           ? _value.memory
           : memory // ignore: cast_nullable_to_non_nullable
-              as PcParts?,
+              as PcPartsOld?,
       motherBoard: freezed == motherBoard
           ? _value.motherBoard
           : motherBoard // ignore: cast_nullable_to_non_nullable
-              as PcParts?,
+              as PcPartsOld?,
       graphicsCard: freezed == graphicsCard
           ? _value.graphicsCard
           : graphicsCard // ignore: cast_nullable_to_non_nullable
-              as PcParts?,
+              as PcPartsOld?,
       ssd: freezed == ssd
           ? _value.ssd
           : ssd // ignore: cast_nullable_to_non_nullable
-              as PcParts?,
+              as PcPartsOld?,
       pcCase: freezed == pcCase
           ? _value.pcCase
           : pcCase // ignore: cast_nullable_to_non_nullable
-              as PcParts?,
+              as PcPartsOld?,
       powerUnit: freezed == powerUnit
           ? _value.powerUnit
           : powerUnit // ignore: cast_nullable_to_non_nullable
-              as PcParts?,
+              as PcPartsOld?,
       caseFan: freezed == caseFan
           ? _value.caseFan
           : caseFan // ignore: cast_nullable_to_non_nullable
-              as PcParts?,
+              as PcPartsOld?,
       date: freezed == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
@@ -252,7 +252,7 @@ abstract class _$$_CustomCopyWith<$Res> implements $CustomCopyWith<$Res> {
   factory _$$_CustomCopyWith(_$_Custom value, $Res Function(_$_Custom) then) = __$$_CustomCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? id, String? name, String? totalPrice, PcParts? cpu, PcParts? cpuCooler, PcParts? memory, PcParts? motherBoard, PcParts? graphicsCard, PcParts? ssd, PcParts? pcCase, PcParts? powerUnit, PcParts? caseFan, String? date, List<PartsCompatibility>? compatibilities});
+  $Res call({String? id, String? name, String? totalPrice, PcPartsOld? cpu, PcPartsOld? cpuCooler, PcPartsOld? memory, PcPartsOld? motherBoard, PcPartsOld? graphicsCard, PcPartsOld? ssd, PcPartsOld? pcCase, PcPartsOld? powerUnit, PcPartsOld? caseFan, String? date, List<PartsCompatibility>? compatibilities});
 
   @override
   $PcPartsCopyWith<$Res>? get cpu;
@@ -312,39 +312,39 @@ class __$$_CustomCopyWithImpl<$Res> extends _$CustomCopyWithImpl<$Res, _$_Custom
       cpu: freezed == cpu
           ? _value.cpu
           : cpu // ignore: cast_nullable_to_non_nullable
-              as PcParts?,
+              as PcPartsOld?,
       cpuCooler: freezed == cpuCooler
           ? _value.cpuCooler
           : cpuCooler // ignore: cast_nullable_to_non_nullable
-              as PcParts?,
+              as PcPartsOld?,
       memory: freezed == memory
           ? _value.memory
           : memory // ignore: cast_nullable_to_non_nullable
-              as PcParts?,
+              as PcPartsOld?,
       motherBoard: freezed == motherBoard
           ? _value.motherBoard
           : motherBoard // ignore: cast_nullable_to_non_nullable
-              as PcParts?,
+              as PcPartsOld?,
       graphicsCard: freezed == graphicsCard
           ? _value.graphicsCard
           : graphicsCard // ignore: cast_nullable_to_non_nullable
-              as PcParts?,
+              as PcPartsOld?,
       ssd: freezed == ssd
           ? _value.ssd
           : ssd // ignore: cast_nullable_to_non_nullable
-              as PcParts?,
+              as PcPartsOld?,
       pcCase: freezed == pcCase
           ? _value.pcCase
           : pcCase // ignore: cast_nullable_to_non_nullable
-              as PcParts?,
+              as PcPartsOld?,
       powerUnit: freezed == powerUnit
           ? _value.powerUnit
           : powerUnit // ignore: cast_nullable_to_non_nullable
-              as PcParts?,
+              as PcPartsOld?,
       caseFan: freezed == caseFan
           ? _value.caseFan
           : caseFan // ignore: cast_nullable_to_non_nullable
-              as PcParts?,
+              as PcPartsOld?,
       date: freezed == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
@@ -372,23 +372,23 @@ class _$_Custom implements _Custom {
   final String? totalPrice;
 // 各パーツ
   @override
-  final PcParts? cpu;
+  final PcPartsOld? cpu;
   @override
-  final PcParts? cpuCooler;
+  final PcPartsOld? cpuCooler;
   @override
-  final PcParts? memory;
+  final PcPartsOld? memory;
   @override
-  final PcParts? motherBoard;
+  final PcPartsOld? motherBoard;
   @override
-  final PcParts? graphicsCard;
+  final PcPartsOld? graphicsCard;
   @override
-  final PcParts? ssd;
+  final PcPartsOld? ssd;
   @override
-  final PcParts? pcCase;
+  final PcPartsOld? pcCase;
   @override
-  final PcParts? powerUnit;
+  final PcPartsOld? powerUnit;
   @override
-  final PcParts? caseFan;
+  final PcPartsOld? caseFan;
 // 保存日
   @override
   final String? date;
@@ -424,8 +424,8 @@ class _$_Custom implements _Custom {
   _$$_CustomCopyWith<_$_Custom> get copyWith => __$$_CustomCopyWithImpl<_$_Custom>(this, _$identity);
 
   @override
-  Map<PartsCategory, PcParts> align() {
-    Map<PartsCategory, PcParts> alignedParts = {};
+  Map<PartsCategory, PcPartsOld> align() {
+    Map<PartsCategory, PcPartsOld> alignedParts = {};
 
     if (cpu != null) {
       alignedParts[PartsCategory.cpu] = cpu!;
@@ -519,7 +519,7 @@ class _$_Custom implements _Custom {
   }
 
   @override
-  PcParts? get(PartsCategory category) {
+  PcPartsOld? get(PartsCategory category) {
     switch (category) {
       case PartsCategory.cpu:
         return cpu;
@@ -589,7 +589,7 @@ class _$_Custom implements _Custom {
 }
 
 abstract class _Custom implements CustomOld {
-  const factory _Custom({final String? id, final String? name, final String? totalPrice, final PcParts? cpu, final PcParts? cpuCooler, final PcParts? memory, final PcParts? motherBoard, final PcParts? graphicsCard, final PcParts? ssd, final PcParts? pcCase, final PcParts? powerUnit, final PcParts? caseFan, final String? date, final List<PartsCompatibility>? compatibilities}) = _$_Custom;
+  const factory _Custom({final String? id, final String? name, final String? totalPrice, final PcPartsOld? cpu, final PcPartsOld? cpuCooler, final PcPartsOld? memory, final PcPartsOld? motherBoard, final PcPartsOld? graphicsCard, final PcPartsOld? ssd, final PcPartsOld? pcCase, final PcPartsOld? powerUnit, final PcPartsOld? caseFan, final String? date, final List<PartsCompatibility>? compatibilities}) = _$_Custom;
 
   @override
   String? get id;
@@ -598,23 +598,23 @@ abstract class _Custom implements CustomOld {
   @override // 総額
   String? get totalPrice;
   @override // 各パーツ
-  PcParts? get cpu;
+  PcPartsOld? get cpu;
   @override
-  PcParts? get cpuCooler;
+  PcPartsOld? get cpuCooler;
   @override
-  PcParts? get memory;
+  PcPartsOld? get memory;
   @override
-  PcParts? get motherBoard;
+  PcPartsOld? get motherBoard;
   @override
-  PcParts? get graphicsCard;
+  PcPartsOld? get graphicsCard;
   @override
-  PcParts? get ssd;
+  PcPartsOld? get ssd;
   @override
-  PcParts? get pcCase;
+  PcPartsOld? get pcCase;
   @override
-  PcParts? get powerUnit;
+  PcPartsOld? get powerUnit;
   @override
-  PcParts? get caseFan;
+  PcPartsOld? get caseFan;
   @override // 保存日
   String? get date;
   @override // 互換性のリスト

@@ -94,7 +94,7 @@ class _PartsDetailPageState extends ConsumerState<PartsDetailPage> with SingleTi
     int selectedIndex = 0;
 
     // 用途がview,editの場合はcategoryを指定
-    Scaffold build(PcParts parts, PartsCategory? category) {
+    Scaffold build(PcPartsOld parts, PartsCategory? category) {
       return Scaffold(
         backgroundColor: Theme.of(context).colorScheme.background,
         body: Stack(

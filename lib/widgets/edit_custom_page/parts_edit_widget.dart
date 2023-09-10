@@ -282,5 +282,5 @@ class PartsEditWidget extends ConsumerWidget {
 class _PartsAndCategory {
   _PartsAndCategory(this.category, this.parts);
   final PartsCategory category;
-  final PcParts parts;
+  final PcPartsOld parts;
 }

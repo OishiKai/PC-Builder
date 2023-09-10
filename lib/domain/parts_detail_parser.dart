@@ -32,7 +32,7 @@ class PartsDetailParser {
   // パーツのスペックテーブル行
   static const _partsSpecLineSelector = '#mainLeft > table > tbody > tr';
 
-  static Future<PcParts> fetch(PcParts parts) async {
+  static Future<PcPartsOld> fetch(PcPartsOld parts) async {
     final doc = await DocumentRepository.fetchDocument(parts.detailUrl);
     final fullScaleImages = (await _getFullScaleImageUrls(parts.detailUrl)) ?? [parts.image];
     final partsShops = _getPartsShops(doc);

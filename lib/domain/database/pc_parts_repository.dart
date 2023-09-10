@@ -6,7 +6,7 @@ import 'datastore_use_case.dart';
 
 class PcPartsRepository {
   // PcParts保存
-  static Future<int> insertPcParts(PcParts pcParts, String customId) async {
+  static Future<int> insertPcParts(PcPartsOld pcParts, String customId) async {
     final map = {
       'custom_id': customId,
       'maker': pcParts.maker,
@@ -90,17 +90,17 @@ class PcPartsRepository {
   }
 
   // PcParts取得
-  static Future<List<PcParts>> getAllPcParts() async {
+  static Future<List<PcPartsOld>> getAllPcParts() async {
     final Database db = await DataStoreUseCase.database;
     final List<Map<String, dynamic>> maps = await db.query('pc_parts');
-    final List<PcParts> pcParts = [];
+    final List<PcPartsOld> pcParts = [];
     for (var map in maps) {
       // 店、スペック、画像情報取得
       final List<PartsShop> shops = await _selectPartsShopsById(map['id']);
       final Map<String, String?> specs = await _partsSpecs(map['id']);
       final List<String> images = await _selectFullScaleImagesById(map['id']);
       // PcPartsオブジェクト化
-      pcParts.add(PcParts(
+      pcParts.add(PcPartsOld(
         maker: map['maker'],
         isNew: map['is_new'] == 1 ? true : false,
         title: map['title'],
@@ -118,7 +118,7 @@ class PcPartsRepository {
     return pcParts;
   }
 
-  static Future<PcParts?> selectPcPartsById(int? id) async {
+  static Future<PcPartsOld?> selectPcPartsById(int? id) async {
     if (id == null) return null;
     final Database db = await DataStoreUseCase.database;
     final List<Map<String, dynamic>> maps = await db.query(
@@ -130,7 +130,7 @@ class PcPartsRepository {
     final List<PartsShop> shops = await _selectPartsShopsById(maps[0]['id']);
     final Map<String, String?> specs = await _partsSpecs(maps[0]['id']);
     final List<String> images = await _selectFullScaleImagesById(maps[0]['id']);
-    final i = PcParts(
+    final i = PcPartsOld(
       maker: maps[0]['maker'],
       isNew: maps[0]['is_new'] == 1 ? true : false,
       title: maps[0]['title'],

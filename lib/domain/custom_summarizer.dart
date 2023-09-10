@@ -18,7 +18,7 @@ class CustomSummarizer {
     ].whereType<SummaryInfoCell>().toList();
   }
 
-  static SummaryInfoCell? _summarizeCpu(PcParts? parts, Brightness brightness) {
+  static SummaryInfoCell? _summarizeCpu(PcPartsOld? parts, Brightness brightness) {
     if (parts == null) return null;
 
     const IconData icon = Icons.memory;
@@ -30,7 +30,7 @@ class CustomSummarizer {
     );
   }
 
-  static SummaryInfoCell? _summarizeCpuCooler(PcParts? parts, Brightness brightness) {
+  static SummaryInfoCell? _summarizeCpuCooler(PcPartsOld? parts, Brightness brightness) {
     if (parts == null) return null;
 
     final type = parts.specs!['タイプ']!;
@@ -52,7 +52,7 @@ class CustomSummarizer {
     );
   }
 
-  static SummaryInfoCell? _summarizeMemory(PcParts? parts, Brightness brightness) {
+  static SummaryInfoCell? _summarizeMemory(PcPartsOld? parts, Brightness brightness) {
     if (parts == null) return null;
     const IconData icon = Icons.straighten;
 
@@ -67,7 +67,7 @@ class CustomSummarizer {
     );
   }
 
-  static SummaryInfoCell? _summarizeMotherboard(PcParts? parts, Brightness brightness) {
+  static SummaryInfoCell? _summarizeMotherboard(PcPartsOld? parts, Brightness brightness) {
     if (parts == null) return null;
     const IconData icon = Icons.dashboard_outlined;
 
@@ -81,7 +81,7 @@ class CustomSummarizer {
     );
   }
 
-  static SummaryInfoCell? _summarizeGraphicsCard(PcParts? parts, Brightness brightness) {
+  static SummaryInfoCell? _summarizeGraphicsCard(PcPartsOld? parts, Brightness brightness) {
     if (parts == null) return null;
     const IconData icon = Icons.wallpaper;
 
@@ -92,7 +92,7 @@ class CustomSummarizer {
     );
   }
 
-  static SummaryInfoCell? _summarizeSsd(PcParts? parts, Brightness brightness) {
+  static SummaryInfoCell? _summarizeSsd(PcPartsOld? parts, Brightness brightness) {
     if (parts == null) return null;
     const IconData icon = Icons.sd_card_outlined;
 
@@ -106,7 +106,7 @@ class CustomSummarizer {
     );
   }
 
-  static SummaryInfoCell? _summarizePowerUnit(PcParts? parts, Brightness brightness) {
+  static SummaryInfoCell? _summarizePowerUnit(PcPartsOld? parts, Brightness brightness) {
     if (parts == null) return null;
     const IconData icon = Icons.power_outlined;
 

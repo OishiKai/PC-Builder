@@ -11,11 +11,10 @@ part of 'pc_parts.dart';
 
 T _$identity<T>(T value) => value;
 
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+final _privateConstructorUsedError = UnsupportedError('It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$PcParts {
+mixin _$PcPartsOld {
   String get maker => throw _privateConstructorUsedError;
   bool get isNew => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
@@ -30,32 +29,18 @@ mixin _$PcParts {
   List<PartsShop>? get shops => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $PcPartsCopyWith<PcParts> get copyWith => throw _privateConstructorUsedError;
+  $PcPartsCopyWith<PcPartsOld> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $PcPartsCopyWith<$Res> {
-  factory $PcPartsCopyWith(PcParts value, $Res Function(PcParts) then) =
-      _$PcPartsCopyWithImpl<$Res, PcParts>;
+  factory $PcPartsCopyWith(PcPartsOld value, $Res Function(PcPartsOld) then) = _$PcPartsCopyWithImpl<$Res, PcPartsOld>;
   @useResult
-  $Res call(
-      {String maker,
-      bool isNew,
-      String title,
-      int? star,
-      String? evaluation,
-      String price,
-      String ranked,
-      String image,
-      String detailUrl,
-      List<String>? fullScaleImages,
-      Map<String, String?>? specs,
-      List<PartsShop>? shops});
+  $Res call({String maker, bool isNew, String title, int? star, String? evaluation, String price, String ranked, String image, String detailUrl, List<String>? fullScaleImages, Map<String, String?>? specs, List<PartsShop>? shops});
 }
 
 /// @nodoc
-class _$PcPartsCopyWithImpl<$Res, $Val extends PcParts>
-    implements $PcPartsCopyWith<$Res> {
+class _$PcPartsCopyWithImpl<$Res, $Val extends PcPartsOld> implements $PcPartsCopyWith<$Res> {
   _$PcPartsCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -134,32 +119,15 @@ class _$PcPartsCopyWithImpl<$Res, $Val extends PcParts>
 
 /// @nodoc
 abstract class _$$_PcPartsCopyWith<$Res> implements $PcPartsCopyWith<$Res> {
-  factory _$$_PcPartsCopyWith(
-          _$_PcParts value, $Res Function(_$_PcParts) then) =
-      __$$_PcPartsCopyWithImpl<$Res>;
+  factory _$$_PcPartsCopyWith(_$_PcParts value, $Res Function(_$_PcParts) then) = __$$_PcPartsCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String maker,
-      bool isNew,
-      String title,
-      int? star,
-      String? evaluation,
-      String price,
-      String ranked,
-      String image,
-      String detailUrl,
-      List<String>? fullScaleImages,
-      Map<String, String?>? specs,
-      List<PartsShop>? shops});
+  $Res call({String maker, bool isNew, String title, int? star, String? evaluation, String price, String ranked, String image, String detailUrl, List<String>? fullScaleImages, Map<String, String?>? specs, List<PartsShop>? shops});
 }
 
 /// @nodoc
-class __$$_PcPartsCopyWithImpl<$Res>
-    extends _$PcPartsCopyWithImpl<$Res, _$_PcParts>
-    implements _$$_PcPartsCopyWith<$Res> {
-  __$$_PcPartsCopyWithImpl(_$_PcParts _value, $Res Function(_$_PcParts) _then)
-      : super(_value, _then);
+class __$$_PcPartsCopyWithImpl<$Res> extends _$PcPartsCopyWithImpl<$Res, _$_PcParts> implements _$$_PcPartsCopyWith<$Res> {
+  __$$_PcPartsCopyWithImpl(_$_PcParts _value, $Res Function(_$_PcParts) _then) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -233,19 +201,7 @@ class __$$_PcPartsCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_PcParts implements _PcParts {
-  const _$_PcParts(
-      {required this.maker,
-      required this.isNew,
-      required this.title,
-      required this.star,
-      required this.evaluation,
-      required this.price,
-      required this.ranked,
-      required this.image,
-      required this.detailUrl,
-      final List<String>? fullScaleImages,
-      final Map<String, String?>? specs,
-      final List<PartsShop>? shops})
+  const _$_PcParts({required this.maker, required this.isNew, required this.title, required this.star, required this.evaluation, required this.price, required this.ranked, required this.image, required this.detailUrl, final List<String>? fullScaleImages, final Map<String, String?>? specs, final List<PartsShop>? shops})
       : _fullScaleImages = fullScaleImages,
         _specs = specs,
         _shops = shops;
@@ -305,63 +261,20 @@ class _$_PcParts implements _PcParts {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_PcParts &&
-            (identical(other.maker, maker) || other.maker == maker) &&
-            (identical(other.isNew, isNew) || other.isNew == isNew) &&
-            (identical(other.title, title) || other.title == title) &&
-            (identical(other.star, star) || other.star == star) &&
-            (identical(other.evaluation, evaluation) ||
-                other.evaluation == evaluation) &&
-            (identical(other.price, price) || other.price == price) &&
-            (identical(other.ranked, ranked) || other.ranked == ranked) &&
-            (identical(other.image, image) || other.image == image) &&
-            (identical(other.detailUrl, detailUrl) ||
-                other.detailUrl == detailUrl) &&
-            const DeepCollectionEquality()
-                .equals(other._fullScaleImages, _fullScaleImages) &&
-            const DeepCollectionEquality().equals(other._specs, _specs) &&
-            const DeepCollectionEquality().equals(other._shops, _shops));
+    return identical(this, other) || (other.runtimeType == runtimeType && other is _$_PcParts && (identical(other.maker, maker) || other.maker == maker) && (identical(other.isNew, isNew) || other.isNew == isNew) && (identical(other.title, title) || other.title == title) && (identical(other.star, star) || other.star == star) && (identical(other.evaluation, evaluation) || other.evaluation == evaluation) && (identical(other.price, price) || other.price == price) && (identical(other.ranked, ranked) || other.ranked == ranked) && (identical(other.image, image) || other.image == image) && (identical(other.detailUrl, detailUrl) || other.detailUrl == detailUrl) && const DeepCollectionEquality().equals(other._fullScaleImages, _fullScaleImages) && const DeepCollectionEquality().equals(other._specs, _specs) && const DeepCollectionEquality().equals(other._shops, _shops));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      maker,
-      isNew,
-      title,
-      star,
-      evaluation,
-      price,
-      ranked,
-      image,
-      detailUrl,
-      const DeepCollectionEquality().hash(_fullScaleImages),
-      const DeepCollectionEquality().hash(_specs),
-      const DeepCollectionEquality().hash(_shops));
+  int get hashCode => Object.hash(runtimeType, maker, isNew, title, star, evaluation, price, ranked, image, detailUrl, const DeepCollectionEquality().hash(_fullScaleImages), const DeepCollectionEquality().hash(_specs), const DeepCollectionEquality().hash(_shops));
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PcPartsCopyWith<_$_PcParts> get copyWith =>
-      __$$_PcPartsCopyWithImpl<_$_PcParts>(this, _$identity);
+  _$$_PcPartsCopyWith<_$_PcParts> get copyWith => __$$_PcPartsCopyWithImpl<_$_PcParts>(this, _$identity);
 }
 
-abstract class _PcParts implements PcParts {
-  const factory _PcParts(
-      {required final String maker,
-      required final bool isNew,
-      required final String title,
-      required final int? star,
-      required final String? evaluation,
-      required final String price,
-      required final String ranked,
-      required final String image,
-      required final String detailUrl,
-      final List<String>? fullScaleImages,
-      final Map<String, String?>? specs,
-      final List<PartsShop>? shops}) = _$_PcParts;
+abstract class _PcParts implements PcPartsOld {
+  const factory _PcParts({required final String maker, required final bool isNew, required final String title, required final int? star, required final String? evaluation, required final String price, required final String ranked, required final String image, required final String detailUrl, final List<String>? fullScaleImages, final Map<String, String?>? specs, final List<PartsShop>? shops}) = _$_PcParts;
 
   @override
   String get maker;
@@ -389,6 +302,5 @@ abstract class _PcParts implements PcParts {
   List<PartsShop>? get shops;
   @override
   @JsonKey(ignore: true)
-  _$$_PcPartsCopyWith<_$_PcParts> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$_PcPartsCopyWith<_$_PcParts> get copyWith => throw _privateConstructorUsedError;
 }
