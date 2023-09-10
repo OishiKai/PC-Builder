@@ -1,8 +1,9 @@
 import 'package:custom_pc/domain/search_parameter_fetcher.dart';
 import 'package:custom_pc/models/category_search_parameter.dart';
-import 'package:custom_pc/models/pc_parts.dart';
 import 'package:custom_pc/providers/searching_category.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+import '../models/parts_category.dart';
 
 part 'gen/search_parameter.g.dart';
 

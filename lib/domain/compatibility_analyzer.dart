@@ -1,6 +1,8 @@
 import 'package:custom_pc/models/parts_compatibility.dart';
 import 'package:custom_pc/models/pc_parts.dart';
 
+import '../models/parts_category.dart';
+
 class CompatibilityAnalyzer {
   static String? _extractSpec(Map<String, String?> specs, String key) {
     String? specInfo;

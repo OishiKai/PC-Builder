@@ -1,5 +1,6 @@
-import 'package:custom_pc/models/pc_parts.dart';
 import 'package:flutter/material.dart';
+
+import '../../models/parts_category.dart';
 
 /// 詳細画面で表示する、パーツの概要を表示するセル
 class SummaryInfoCell extends StatelessWidget {

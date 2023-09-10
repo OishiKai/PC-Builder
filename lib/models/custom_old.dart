@@ -1,3 +1,4 @@
+import 'package:custom_pc/models/parts_category.dart';
 import 'package:custom_pc/models/parts_compatibility.dart';
 import 'package:custom_pc/models/pc_parts.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';

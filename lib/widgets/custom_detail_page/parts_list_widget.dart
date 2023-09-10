@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../models/custom_old.dart';
 import '../../../models/pc_parts.dart';
+import '../../models/parts_category.dart';
 
 class PartsListWidget extends StatelessWidget {
   const PartsListWidget({super.key, required this.custom});

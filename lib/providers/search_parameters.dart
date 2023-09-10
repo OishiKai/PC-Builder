@@ -11,7 +11,7 @@ import '../domain/search_parameter_parser/pc_case_search_parameter_parser.dart';
 import '../domain/search_parameter_parser/power_unit_search_parameter_parser.dart';
 import '../domain/search_parameter_parser/ssd_search_parameter_parser.dart';
 import '../models/category_search_parameter.dart';
-import '../models/pc_parts.dart';
+import '../models/parts_category.dart';
 
 part 'gen/search_parameters.g.dart';
 

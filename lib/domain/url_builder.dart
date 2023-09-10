@@ -1,6 +1,6 @@
 import 'package:euc/jis.dart';
 
-import '../models/pc_parts.dart';
+import '../models/parts_category.dart';
 
 class UrlBuilder {
   static String standardPartsList(PartsCategory category) {

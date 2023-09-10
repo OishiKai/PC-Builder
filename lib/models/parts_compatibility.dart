@@ -1,4 +1,4 @@
-import 'package:custom_pc/models/pc_parts.dart';
+import 'package:custom_pc/models/parts_category.dart';
 
 class PartsCompatibility {
   // 互換性を検証するパーツのペア

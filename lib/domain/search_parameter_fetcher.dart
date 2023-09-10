@@ -9,7 +9,7 @@ import 'package:custom_pc/domain/search_parameter_parser/power_unit_search_param
 import 'package:custom_pc/domain/search_parameter_parser/ssd_search_parameter_parser.dart';
 import 'package:custom_pc/models/category_search_parameter.dart';
 
-import '../models/pc_parts.dart';
+import '../models/parts_category.dart';
 
 class SearchParameterFetcher {
   static Future<Map<PartsCategory, CategorySearchParameter>> getAllParams() async {

@@ -2,6 +2,7 @@ import 'package:custom_pc/models/pc_parts.dart';
 import 'package:flutter/material.dart';
 
 import '../models/custom_old.dart';
+import '../models/parts_category.dart';
 import '../widgets/custom_detail_page/summary_info_cell.dart';
 
 class CustomSummarizer {

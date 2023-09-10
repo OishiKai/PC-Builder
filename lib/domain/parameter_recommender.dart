@@ -1,8 +1,8 @@
 import 'package:custom_pc/models/category_search_parameter.dart';
-import 'package:custom_pc/models/pc_parts.dart';
 import 'package:custom_pc/models/recommend_parameter.dart';
 
 import '../models/custom_old.dart';
+import '../models/parts_category.dart';
 
 class ParameterRecommender {
   late final CustomOld custom;

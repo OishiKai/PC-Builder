@@ -9,6 +9,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_segmented_control/material_segmented_control.dart';
 
 import '../config/size_config.dart';
+import '../models/parts_category.dart';
 import '../providers/custom_repository.dart';
 import '../widgets/parts_detail/edit_button_widget.dart';
 import '../widgets/parts_detail/full_scale_image_slider.dart';
