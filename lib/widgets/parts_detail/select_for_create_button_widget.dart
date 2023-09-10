@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../models/pc_parts.dart';
+import '../../../models/pc_parts_old.dart';
 
 class SelectForCreateButtonWidget extends ConsumerWidget {
   const SelectForCreateButtonWidget({super.key, required this.parts});

@@ -1,4 +1,4 @@
-import 'package:custom_pc/models/pc_parts.dart';
+import 'package:custom_pc/models/pc_parts_old.dart';
 import 'package:sqflite/sqflite.dart';
 
 import '../../models/parts_shop.dart';

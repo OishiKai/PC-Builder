@@ -2,7 +2,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'parts_shop.dart';
 
-part 'pc_parts.freezed.dart';
+part 'pc_parts_old.freezed.dart';
 
 @freezed
 class PcPartsOld with _$PcPartsOld {

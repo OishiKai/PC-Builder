@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../models/custom_old.dart';
-import '../../../models/pc_parts.dart';
+import '../../../models/pc_parts_old.dart';
 import '../../models/parts_category.dart';
 
 class PartsListWidget extends StatelessWidget {

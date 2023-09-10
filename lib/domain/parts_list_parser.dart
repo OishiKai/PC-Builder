@@ -1,6 +1,6 @@
 import 'package:html/dom.dart';
 
-import '../models/pc_parts.dart';
+import '../models/pc_parts_old.dart';
 import 'document_repository.dart';
 
 class PartsListParser {

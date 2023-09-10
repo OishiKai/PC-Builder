@@ -5,7 +5,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../domain/parts_detail_parser.dart';
 import '../domain/parts_list_parser.dart';
 import '../domain/url_builder.dart';
-import '../models/pc_parts.dart';
+import '../models/pc_parts_old.dart';
 import '../widgets/parts_list_page/parts_search_app_bar.dart';
 
 part 'gen/parts_list.g.dart';

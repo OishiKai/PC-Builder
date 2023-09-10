@@ -4,7 +4,7 @@ import '../domain/compatibility_analyzer.dart';
 import '../models/custom_old.dart';
 import '../models/parts_category.dart';
 import '../models/parts_compatibility.dart';
-import '../models/pc_parts.dart';
+import '../models/pc_parts_old.dart';
 
 part 'gen/edit_custom.g.dart';
 

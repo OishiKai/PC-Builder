@@ -2,7 +2,7 @@ import 'package:custom_pc/domain/document_repository.dart';
 import 'package:custom_pc/models/parts_shop.dart';
 import 'package:html/dom.dart';
 
-import '../models/pc_parts.dart';
+import '../models/pc_parts_old.dart';
 
 class PartsDetailParser {
   static const _fullScaleImageSelector = '#main > div.alignC > div > table > tbody > tr > td > a > img';
