@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../models/custom.dart';
+import '../../../models/custom_old.dart';
 
 class StoredCustomCard extends StatelessWidget {
   const StoredCustomCard({super.key, required this.custom});

@@ -1,7 +1,7 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../domain/database/custom_repository.dart';
-import '../models/custom.dart';
+import '../models/custom_old.dart';
 import '../widgets/sort_icon_button.dart';
 
 part 'gen/custom_repository.g.dart';

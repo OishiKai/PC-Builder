@@ -4,7 +4,7 @@ import 'package:custom_pc/models/pc_parts.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:uuid/uuid.dart';
 
-import '../../models/custom.dart';
+import '../../models/custom_old.dart';
 
 class CustomRepository {
   //Custom保存
