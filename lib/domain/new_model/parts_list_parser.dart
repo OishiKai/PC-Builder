@@ -3,8 +3,6 @@ import 'package:custom_pc/models/pc_parts.dart';
 import 'package:html/dom.dart';
 
 import '../document_repository.dart';
-import '../models/pc_parts_old.dart';
-import 'document_repository.dart';
 
 class PartsListParserNM {
   static const _partsListSelector = '#compTblList > tbody > tr.tr-border';
@@ -18,7 +16,7 @@ class PartsListParserNM {
 
   static Future<List<PcParts>> fetch(String url) async {
     final document = await DocumentRepository.fetchDocument(url);
-    final partsList = _parsePartsList(document);
+    final partsList = _parsePartsList(document, url);
     return partsList;
   }
 
@@ -34,10 +32,6 @@ class PartsListParserNM {
       final title = combined.replaceFirst(maker, '');
       final isNew = partsListElement[i].querySelectorAll(_partsNewSelector).isNotEmpty;
       var imageUrl = partsListElement[i + 1].querySelectorAll(_partsImageUrlSelector)[0].attributes['src']!.replaceFirst('/m/', '/ll/');
-
-      // if (imageUrl!.contains('https://img1.kakaku.k-img.com/images/productimage/m/')) {
-      //   imageUrl.replaceFirst('m/', 'll/');
-      // }
 
       final id = partsListElement[i + 1].querySelectorAll(_partsDetailUrlSelector)[0].attributes['href']!.split('/item/')[1].replaceAll('/', '');
       final price = partsListElement[i + 1].querySelectorAll(_partsPriceSelector)[0].text;
@@ -66,7 +60,18 @@ class PartsListParserNM {
           star = doubleStar * 100 ~/ 10;
         }
       }
-      partsList.add(PcParts(id: id, category: category, maker: maker, isNew: isNew, title: title, star: star, evaluation: evaluation, price: price, ranked: ranked, image: imageUrl, detailUrl: detailUrl!, fullScaleImageCount: null));
+      partsList.add(PcParts(
+        id: id,
+        category: category,
+        maker: maker,
+        isNew: isNew,
+        title: title,
+        star: star,
+        evaluation: evaluation,
+        price: price,
+        ranked: ranked,
+        image: imageUrl,
+      ));
     }
     return partsList;
   }
