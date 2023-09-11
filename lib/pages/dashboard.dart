@@ -31,6 +31,7 @@ class Dashboard extends ConsumerWidget {
             items: const [
               BottomNavigationBarItem(icon: Icon(Icons.library_books_rounded), label: 'ライブラリ'),
               BottomNavigationBarItem(icon: Icon(Icons.settings), label: '設定'),
+              BottomNavigationBarItem(icon: Icon(Icons.queue_play_next_outlined), label: '新モデル'),
             ],
             onTap: _onTap,
           ),

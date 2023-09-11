@@ -1,6 +1,7 @@
 import 'package:custom_pc/pages/custom_detail_page.dart';
 import 'package:custom_pc/pages/dashboard.dart';
 import 'package:custom_pc/pages/edit_custom_page.dart';
+import 'package:custom_pc/pages/new_models/parts_list_page_nm.dart';
 import 'package:custom_pc/pages/parts_detail_page.dart';
 import 'package:custom_pc/pages/parts_list_page.dart';
 import 'package:custom_pc/pages/setting_page.dart';
@@ -149,6 +150,16 @@ final routerProvider = Provider<GoRouter>((ref) {
                 path: '/setting',
                 builder: (context, state) {
                   return const SettingPage();
+                },
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: '/new_model',
+                builder: (context, state) {
+                  return const PartsListPageNM();
                 },
               ),
             ],
