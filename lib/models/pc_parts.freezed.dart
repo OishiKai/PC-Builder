@@ -26,7 +26,7 @@ mixin _$PcParts {
   String get price => throw _privateConstructorUsedError;
   String get ranked => throw _privateConstructorUsedError;
   String get image => throw _privateConstructorUsedError;
-  int get fullScaleImageCount => throw _privateConstructorUsedError;
+  int? get fullScaleImageCount => throw _privateConstructorUsedError;
   Map<String, String?>? get specs => throw _privateConstructorUsedError;
   List<PartsShop>? get shops => throw _privateConstructorUsedError;
 
@@ -50,7 +50,7 @@ abstract class $PcPartsCopyWith<$Res> {
       String price,
       String ranked,
       String image,
-      int fullScaleImageCount,
+      int? fullScaleImageCount,
       Map<String, String?>? specs,
       List<PartsShop>? shops});
 }
@@ -78,7 +78,7 @@ class _$PcPartsCopyWithImpl<$Res, $Val extends PcParts>
     Object? price = null,
     Object? ranked = null,
     Object? image = null,
-    Object? fullScaleImageCount = null,
+    Object? fullScaleImageCount = freezed,
     Object? specs = freezed,
     Object? shops = freezed,
   }) {
@@ -123,10 +123,10 @@ class _$PcPartsCopyWithImpl<$Res, $Val extends PcParts>
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as String,
-      fullScaleImageCount: null == fullScaleImageCount
+      fullScaleImageCount: freezed == fullScaleImageCount
           ? _value.fullScaleImageCount
           : fullScaleImageCount // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       specs: freezed == specs
           ? _value.specs
           : specs // ignore: cast_nullable_to_non_nullable
@@ -157,7 +157,7 @@ abstract class _$$_PcPartsCopyWith<$Res> implements $PcPartsCopyWith<$Res> {
       String price,
       String ranked,
       String image,
-      int fullScaleImageCount,
+      int? fullScaleImageCount,
       Map<String, String?>? specs,
       List<PartsShop>? shops});
 }
@@ -182,7 +182,7 @@ class __$$_PcPartsCopyWithImpl<$Res>
     Object? price = null,
     Object? ranked = null,
     Object? image = null,
-    Object? fullScaleImageCount = null,
+    Object? fullScaleImageCount = freezed,
     Object? specs = freezed,
     Object? shops = freezed,
   }) {
@@ -227,10 +227,10 @@ class __$$_PcPartsCopyWithImpl<$Res>
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as String,
-      fullScaleImageCount: null == fullScaleImageCount
+      fullScaleImageCount: freezed == fullScaleImageCount
           ? _value.fullScaleImageCount
           : fullScaleImageCount // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       specs: freezed == specs
           ? _value._specs
           : specs // ignore: cast_nullable_to_non_nullable
@@ -257,7 +257,7 @@ class _$_PcParts extends _PcParts {
       required this.price,
       required this.ranked,
       required this.image,
-      required this.fullScaleImageCount,
+      this.fullScaleImageCount,
       final Map<String, String?>? specs,
       final List<PartsShop>? shops})
       : _specs = specs,
@@ -285,7 +285,7 @@ class _$_PcParts extends _PcParts {
   @override
   final String image;
   @override
-  final int fullScaleImageCount;
+  final int? fullScaleImageCount;
   final Map<String, String?>? _specs;
   @override
   Map<String, String?>? get specs {
@@ -370,7 +370,7 @@ abstract class _PcParts extends PcParts {
       required final String price,
       required final String ranked,
       required final String image,
-      required final int fullScaleImageCount,
+      final int? fullScaleImageCount,
       final Map<String, String?>? specs,
       final List<PartsShop>? shops}) = _$_PcParts;
   const _PcParts._() : super._();
@@ -396,7 +396,7 @@ abstract class _PcParts extends PcParts {
   @override
   String get image;
   @override
-  int get fullScaleImageCount;
+  int? get fullScaleImageCount;
   @override
   Map<String, String?>? get specs;
   @override

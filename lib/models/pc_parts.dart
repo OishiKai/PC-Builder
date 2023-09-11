@@ -20,7 +20,7 @@ class PcParts with _$PcParts {
     required String price,
     required String ranked,
     required String image,
-    required int fullScaleImageCount,
+    int? fullScaleImageCount,
     Map<String, String?>? specs,
     List<PartsShop>? shops,
   }) = _PcParts;

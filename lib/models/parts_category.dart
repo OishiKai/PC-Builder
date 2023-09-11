@@ -42,4 +42,29 @@ enum PartsCategory {
         throw Exception('PartsCategory.fromCategoryName: $categoryName is not found.');
     }
   }
+
+  static PartsCategory fromCategoryParameter(String categoryParameter) {
+    switch (categoryParameter) {
+      case 'cpu':
+        return PartsCategory.cpu;
+      case 'cpu-cooler':
+        return PartsCategory.cpuCooler;
+      case 'pc-memory':
+        return PartsCategory.memory;
+      case 'motherboard':
+        return PartsCategory.motherboard;
+      case 'videocard':
+        return PartsCategory.graphicsCard;
+      case 'ssd':
+        return PartsCategory.ssd;
+      case 'pc-case':
+        return PartsCategory.pcCase;
+      case 'power-supply':
+        return PartsCategory.powerUnit;
+      case 'case-fan':
+        return PartsCategory.caseFan;
+      default:
+        throw Exception('PartsCategory.fromCategoryParameter: $categoryParameter is not found.');
+    }
+  }
 }
