@@ -17,7 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$PcParts {
   String get id => throw _privateConstructorUsedError;
-  String get category => throw _privateConstructorUsedError;
+  PartsCategory get category => throw _privateConstructorUsedError;
   String get maker => throw _privateConstructorUsedError;
   bool get isNew => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
@@ -41,7 +41,7 @@ abstract class $PcPartsCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
-      String category,
+      PartsCategory category,
       String maker,
       bool isNew,
       String title,
@@ -90,7 +90,7 @@ class _$PcPartsCopyWithImpl<$Res, $Val extends PcParts>
       category: null == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
-              as String,
+              as PartsCategory,
       maker: null == maker
           ? _value.maker
           : maker // ignore: cast_nullable_to_non_nullable
@@ -148,7 +148,7 @@ abstract class _$$_PcPartsCopyWith<$Res> implements $PcPartsCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
-      String category,
+      PartsCategory category,
       String maker,
       bool isNew,
       String title,
@@ -194,7 +194,7 @@ class __$$_PcPartsCopyWithImpl<$Res>
       category: null == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
-              as String,
+              as PartsCategory,
       maker: null == maker
           ? _value.maker
           : maker // ignore: cast_nullable_to_non_nullable
@@ -267,7 +267,7 @@ class _$_PcParts extends _PcParts {
   @override
   final String id;
   @override
-  final String category;
+  final PartsCategory category;
   @override
   final String maker;
   @override
@@ -361,7 +361,7 @@ class _$_PcParts extends _PcParts {
 abstract class _PcParts extends PcParts {
   const factory _PcParts(
       {required final String id,
-      required final String category,
+      required final PartsCategory category,
       required final String maker,
       required final bool isNew,
       required final String title,
@@ -378,7 +378,7 @@ abstract class _PcParts extends PcParts {
   @override
   String get id;
   @override
-  String get category;
+  PartsCategory get category;
   @override
   String get maker;
   @override

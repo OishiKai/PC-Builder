@@ -1,3 +1,4 @@
+import 'package:custom_pc/models/parts_category.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'parts_shop.dart';
@@ -10,7 +11,7 @@ class PcParts with _$PcParts {
 
   const factory PcParts({
     required String id,
-    required String category,
+    required PartsCategory category,
     required String maker,
     required bool isNew,
     required String title,
