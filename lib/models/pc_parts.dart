@@ -32,7 +32,7 @@ class PcParts with _$PcParts {
   List<String> getFullScaleImageUrls() {
     if (fullScaleImageCount == null) return [image];
     List<String> imageUrls = [];
-    for (final i = 0; i < fullScaleImageCount!; i++) {
+    for (int i = 0; i < fullScaleImageCount!; i++) {
       if (i == 0) {
         imageUrls.add('https://kakaku.com/item/$id/images/');
       } else {
