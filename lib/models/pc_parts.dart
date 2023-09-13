@@ -24,4 +24,21 @@ class PcParts with _$PcParts {
     Map<String, String?>? specs,
     List<PartsShop>? shops,
   }) = _PcParts;
+
+  String getDetailUrl() {
+    return 'https://kakaku.com/item/$id/';
+  }
+
+  List<String> getFullScaleImageUrls() {
+    if (fullScaleImageCount == null) return [image];
+    List<String> imageUrls = [];
+    for (final i = 0; i < fullScaleImageCount!; i++) {
+      if (i == 0) {
+        imageUrls.add('https://kakaku.com/item/$id/images/');
+      } else {
+        imageUrls.add('https://kakaku.com/item/$id/images/page=ka_$i/');
+      }
+    }
+    return imageUrls;
+  }
 }
