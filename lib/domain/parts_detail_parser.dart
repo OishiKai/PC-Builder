@@ -99,9 +99,19 @@ class PartsDetailParser {
     int adjustIndex = 2;
     while (true) {
       final shopNodeIndex = parsedShopCount + adjustIndex;
-      final rank = listElements[shopNodeIndex].querySelectorAll(_partsShopRankSelector)[0].text;
+
+      // 販売店のランクがない場合がある為、空文字を入れる
+      final rawRank = listElements[shopNodeIndex].querySelectorAll(_partsShopRankSelector);
+      String rank = '';
+      if (rawRank.isNotEmpty) rank = rawRank[0].text;
+
       final price = listElements[shopNodeIndex].querySelectorAll(_partsShopPriceSelector)[0].text;
-      final diff = listElements[shopNodeIndex].querySelectorAll(_partsShopBestPriceDiffSelector)[0].text;
+
+      // 販売店の最安値との差がない場合、空文字を入れる
+      final rawDiff = listElements[shopNodeIndex].querySelectorAll(_partsShopBestPriceDiffSelector);
+      String diff = '';
+      if (rawDiff.isNotEmpty) diff = rawDiff[0].text;
+
       final shopName = listElements[shopNodeIndex].querySelectorAll(_partsShopNameSelector)[0].text;
       final shopPageUrl = listElements[shopNodeIndex].querySelectorAll(_partsShopPageUrlSelector)[0].attributes['href'];
       partsShopList.add(PartsShop(rank, price, diff, shopName, shopPageUrl!));
