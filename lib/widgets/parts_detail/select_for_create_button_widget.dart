@@ -21,27 +21,27 @@ class SelectForCreateButtonWidget extends ConsumerWidget {
       },
       style: ElevatedButton.styleFrom(
         padding: EdgeInsets.zero,
-        backgroundColor: const Color.fromRGBO(60, 130, 80, 1),
+        backgroundColor: Theme.of(context).colorScheme.primary,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(40),
         ),
-        side: const BorderSide(
-          color: Colors.green,
-          width: 5,
-        ),
+        // side: BorderSide(
+        //   color: Theme.of(context).colorScheme.secondary,
+        //   width: 5,
+        // ),
       ),
-      child: const Row(
+      child: Row(
         children: [
-          Spacer(),
+          const Spacer(),
           Text(
             "このパーツを選択する",
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
-              color: Colors.white,
+              color: Theme.of(context).colorScheme.onSecondary,
             ),
           ),
-          Spacer(),
+          const Spacer(),
         ],
       ),
     );

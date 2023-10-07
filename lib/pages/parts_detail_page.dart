@@ -4,7 +4,6 @@ import 'package:custom_pc/models/pc_parts_old.dart';
 import 'package:custom_pc/providers/edit_custom.dart';
 import 'package:custom_pc/providers/parts_list.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_segmented_control/material_segmented_control.dart';
 
@@ -37,10 +36,6 @@ class PartsDetailPage extends ConsumerStatefulWidget {
 }
 
 class _PartsDetailPageState extends ConsumerState<PartsDetailPage> with SingleTickerProviderStateMixin {
-  late AnimationController _animationController;
-  late Animation<double> _height;
-  late ScrollController _scrollController;
-
   bool isHidden = false;
   int activeIndex = 0;
 
@@ -51,40 +46,6 @@ class _PartsDetailPageState extends ConsumerState<PartsDetailPage> with SingleTi
       child: Text('詳細スペック'),
     ),
   };
-
-  @override
-  void initState() {
-    super.initState();
-
-    _animationController = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 200),
-    );
-
-    _height = Tween<double>(begin: 0, end: SizeConfig.blockSizeVertical * 10).animate(_animationController);
-
-    _scrollController = ScrollController()
-      ..addListener(() {
-        if (_scrollController.position.userScrollDirection == ScrollDirection.reverse) {
-          if (!isHidden) {
-            _animationController.forward();
-            isHidden = true;
-          }
-        } else {
-          if (isHidden) {
-            _animationController.reverse();
-            isHidden = false;
-          }
-        }
-      });
-  }
-
-  @override
-  void dispose() {
-    _animationController.dispose();
-    _scrollController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +65,6 @@ class _PartsDetailPageState extends ConsumerState<PartsDetailPage> with SingleTi
               index: selectedIndex,
               children: [
                 ListView(
-                  controller: _scrollController,
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(16),
@@ -226,13 +186,13 @@ class _PartsDetailPageState extends ConsumerState<PartsDetailPage> with SingleTi
                               if (activeIndex == 0) ShopsWidget(parts.shops!),
                               if (activeIndex == 1) SpecsWidgets(parts.specs!),
                               const SizedBox(
-                                height: 50,
+                                height: 120,
                               ),
                             ],
                           ),
                         ),
                       ),
-                    )
+                    ),
                   ],
                 )
               ],
@@ -241,25 +201,17 @@ class _PartsDetailPageState extends ConsumerState<PartsDetailPage> with SingleTi
               bottom: 0,
               left: 0,
               right: 0,
-              child: AnimatedBuilder(
-                animation: _height,
-                builder: (BuildContext context, Widget? child) {
-                  return Transform.translate(
-                    offset: Offset(0, _height.value),
-                    child: Container(
-                      padding: const EdgeInsets.only(right: 20, left: 20),
-                      height: SizeConfig.blockSizeVertical * 10,
-                      width: double.infinity,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          if (usage == DetailPageUsage.create) SelectForCreateButtonWidget(parts: parts),
-                          if (usage == DetailPageUsage.edit) EditButtonWidget(category: category!),
-                        ],
-                      ),
-                    ),
-                  );
-                },
+              child: Container(
+                padding: const EdgeInsets.only(right: 20, left: 20),
+                height: SizeConfig.blockSizeVertical * 10,
+                width: double.infinity,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    if (usage == DetailPageUsage.create) SelectForCreateButtonWidget(parts: parts),
+                    if (usage == DetailPageUsage.edit) EditButtonWidget(category: category!),
+                  ],
+                ),
               ),
             ),
           ],
