@@ -2,6 +2,7 @@
  <img width="200" alt="SCR-20230502-nedr" src="https://github.com/OishiKai/PC-Builder/assets/146968279/0a88f976-bca6-4b19-97d9-3cff4cc80ef7">
 
 パーツを検索、選択して自作PCを構築、管理できます。
+各アプリストアで配信中です。
 
 
 <img width="200" alt="SCR-20230502-nedr" src="https://github.com/OishiKai/PC-Builder/assets/146968279/ad2dd2ee-6fe1-47b8-8874-fe6f172d820a">
