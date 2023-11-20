@@ -24,10 +24,14 @@ class PartsList extends _$PartsList {
       selectedParams,
     );
 
+    // 検索ワードがない場合
     if (searchText == '') return PartsListParser.fetch(url);
+
     if (selectedParams.isNotEmpty) {
+      // 検索ワードと絞り込み条件がある場合
       return PartsListParser.fetch('$url&pdf_kw=$searchText');
     } else {
+      // 検索ワードのみの場合
       return PartsListParser.fetch('$url?pdf_kw=$searchText');
     }
   }
