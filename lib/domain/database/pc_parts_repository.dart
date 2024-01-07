@@ -18,6 +18,7 @@ class PcPartsRepository {
       'ranked': pcParts.ranked,
       'image': pcParts.image,
       'detail_url': pcParts.detailUrl,
+      'category': pcParts.category?.categoryName,
     };
     final Database db = await DataStoreUseCase.database;
     final partsId = await db.insert(
@@ -100,7 +101,8 @@ class PcPartsRepository {
       final Map<String, String?> specs = await _partsSpecs(map['id']);
       final List<String> images = await _selectFullScaleImagesById(map['id']);
       // PcPartsオブジェクト化
-      pcParts.add(PcParts(
+
+      var parts = PcParts(
         maker: map['maker'],
         isNew: map['is_new'] == 1 ? true : false,
         title: map['title'],
@@ -113,12 +115,16 @@ class PcPartsRepository {
         shops: shops,
         specs: specs,
         fullScaleImages: images,
-      ));
+      );
+      if (map['category'] != null) {
+        parts = parts.copyWith(category: PartsCategory.fromCategoryName(map['category']));
+      }
+      pcParts.add(parts);
     }
     return pcParts;
   }
 
-  static Future<PcParts?> selectPcPartsById(int? id) async {
+  static Future<PcParts?> selectPcPartsById(int? id, PartsCategory category) async {
     if (id == null) return null;
     final Database db = await DataStoreUseCase.database;
     final List<Map<String, dynamic>> maps = await db.query(
@@ -143,6 +149,7 @@ class PcPartsRepository {
       shops: shops,
       specs: specs,
       fullScaleImages: images,
+      category: category,
     );
     return i;
   }

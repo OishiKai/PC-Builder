@@ -1,7 +1,7 @@
 import 'package:html/dom.dart';
 
-import 'document_repository.dart';
 import '../models/pc_parts.dart';
+import 'document_repository.dart';
 
 class PartsListParser {
   static const _partsListSelector = '#compTblList > tbody > tr.tr-border';
@@ -13,13 +13,13 @@ class PartsListParser {
   static const _partsPriceSelector = 'td.td-price > ul > li.pryen > a';
   static const _patsRankedSelector = 'td.swrank2 > span';
 
-  static Future<List<PcParts>> fetch(String url) async {
+  static Future<List<PcParts>> fetch(String url, PartsCategory category) async {
     final document = await DocumentRepository.fetchDocument(url);
-    final partsList = _parsePartsList(document);
+    final partsList = _parsePartsList(document, category);
     return partsList;
   }
 
-  static List<PcParts> _parsePartsList(Document document) {
+  static List<PcParts> _parsePartsList(Document document, PartsCategory category) {
     final List<PcParts> partsList = [];
     final partsListElement = document.querySelectorAll(_partsListSelector);
 
@@ -62,7 +62,7 @@ class PartsListParser {
           star = doubleStar * 100 ~/ 10;
         }
       }
-      partsList.add(PcParts(maker: maker, isNew: isNew, title: title, star: star, evaluation: evaluation, price: price, ranked: ranked, image: imageUrl, detailUrl: detailUrl!));
+      partsList.add(PcParts(maker: maker, isNew: isNew, title: title, star: star, evaluation: evaluation, price: price, ranked: ranked, image: imageUrl, detailUrl: detailUrl!, category: category));
     }
     return partsList;
   }

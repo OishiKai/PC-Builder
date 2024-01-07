@@ -37,6 +37,7 @@ class DataStoreUseCase {
         price TEXT NOT NULL,ranked TEXT NOT NULL,
         image TEXT NOT NULL,
         detail_url TEXT NOT NULL,
+        category TEXT,
         FOREIGN KEY (custom_id) REFERENCES custom(id) ON DELETE CASCADE)''',
       );
       // 店情報テーブル

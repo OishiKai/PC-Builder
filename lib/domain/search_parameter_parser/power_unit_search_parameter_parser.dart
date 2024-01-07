@@ -13,8 +13,8 @@ class PowerUnitSearchParameterParser {
   static Future<PowerUnitSearchParameter> fetchSearchParameter() async {
     _document = await DocumentRepository.fetchDocument(standardPage);
     final supportTypes = _parseSupportTypes()!;
-    final powerSupplyCapacitys = _parsePowerSupplyCapacitys()!;
-    return PowerUnitSearchParameter(supportTypes, powerSupplyCapacitys);
+    final powerSupplyCapacity = _parsePowerSupplyCapacity()!;
+    return PowerUnitSearchParameter(supportTypes, powerSupplyCapacity);
   }
 
   static List<PartsSearchParameter>? _parseSupportTypes() {
@@ -22,7 +22,7 @@ class PowerUnitSearchParameterParser {
       return null;
     }
     List<PartsSearchParameter> supportTypeList = [];
-    final specListElement = _document!.querySelectorAll(_parameterSelector)[4].querySelectorAll('ul');
+    final specListElement = _document!.querySelectorAll(_parameterSelector)[5].querySelectorAll('ul');
 
     for (var element in specListElement) {
       final supportTypeName = element.text.split('（')[0].replaceFirst('\n', '');
@@ -39,12 +39,12 @@ class PowerUnitSearchParameterParser {
     return supportTypeList;
   }
 
-  static List<PartsSearchParameter>? _parsePowerSupplyCapacitys() {
+  static List<PartsSearchParameter>? _parsePowerSupplyCapacity() {
     if (_document == null) {
       return null;
     }
     List<PartsSearchParameter> powerSupplyCapacityList = [];
-    final specListElement = _document!.querySelectorAll(_parameterSelector)[5].querySelectorAll('ul');
+    final specListElement = _document!.querySelectorAll(_parameterSelector)[6].querySelectorAll('ul');
     final powerSupplyCapacityListElement = specListElement[0].querySelectorAll('li');
 
     for (var element in powerSupplyCapacityListElement) {

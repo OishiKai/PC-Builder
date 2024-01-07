@@ -59,15 +59,15 @@ class CustomRepository {
       final price = custom['price'] as String;
       final date = custom['date'] as String;
 
-      final cpu = await PcPartsRepository.selectPcPartsById(custom['cpu_id'] as int?);
-      final cpuCooler = await PcPartsRepository.selectPcPartsById(custom['cpu_cooler_id'] as int?);
-      final memory = await PcPartsRepository.selectPcPartsById(custom['memory_id'] as int?);
-      final motherBoard = await PcPartsRepository.selectPcPartsById(custom['mother_board_id'] as int?);
-      final graphicsCard = await PcPartsRepository.selectPcPartsById(custom['graphics_card_id'] as int?);
-      final ssd = await PcPartsRepository.selectPcPartsById(custom['ssd_id'] as int?);
-      final pcCase = await PcPartsRepository.selectPcPartsById(custom['pc_case_id'] as int?);
-      final powerUnit = await PcPartsRepository.selectPcPartsById(custom['power_unit_id'] as int?);
-      final caseFan = await PcPartsRepository.selectPcPartsById(custom['case_fan_id'] as int?);
+      final cpu = await PcPartsRepository.selectPcPartsById(custom['cpu_id'] as int?, PartsCategory.cpu);
+      final cpuCooler = await PcPartsRepository.selectPcPartsById(custom['cpu_cooler_id'] as int?, PartsCategory.cpuCooler);
+      final memory = await PcPartsRepository.selectPcPartsById(custom['memory_id'] as int?, PartsCategory.memory);
+      final motherBoard = await PcPartsRepository.selectPcPartsById(custom['mother_board_id'] as int?, PartsCategory.motherboard);
+      final graphicsCard = await PcPartsRepository.selectPcPartsById(custom['graphics_card_id'] as int?, PartsCategory.graphicsCard);
+      final ssd = await PcPartsRepository.selectPcPartsById(custom['ssd_id'] as int?, PartsCategory.ssd);
+      final pcCase = await PcPartsRepository.selectPcPartsById(custom['pc_case_id'] as int?, PartsCategory.pcCase);
+      final powerUnit = await PcPartsRepository.selectPcPartsById(custom['power_unit_id'] as int?, PartsCategory.powerUnit);
+      final caseFan = await PcPartsRepository.selectPcPartsById(custom['case_fan_id'] as int?, PartsCategory.caseFan);
 
       customList[id] = Custom(
         id: id,
@@ -178,15 +178,15 @@ class CustomRepository {
       final price = custom['price'] as String;
       final date = custom['date'] as String;
 
-      final cpu = await PcPartsRepository.selectPcPartsById(custom['cpu_id'] as int?);
-      final cpuCooler = await PcPartsRepository.selectPcPartsById(custom['cpu_cooler_id'] as int?);
-      final memory = await PcPartsRepository.selectPcPartsById(custom['memory_id'] as int?);
-      final motherBoard = await PcPartsRepository.selectPcPartsById(custom['mother_board_id'] as int?);
-      final graphicsCard = await PcPartsRepository.selectPcPartsById(custom['graphics_card_id'] as int?);
-      final ssd = await PcPartsRepository.selectPcPartsById(custom['ssd_id'] as int?);
-      final pcCase = await PcPartsRepository.selectPcPartsById(custom['pc_case_id'] as int?);
-      final powerUnit = await PcPartsRepository.selectPcPartsById(custom['power_unit_id'] as int?);
-      final caseFan = await PcPartsRepository.selectPcPartsById(custom['case_fan_id'] as int?);
+      final cpu = await PcPartsRepository.selectPcPartsById(custom['cpu_id'] as int?, PartsCategory.cpu);
+      final cpuCooler = await PcPartsRepository.selectPcPartsById(custom['cpu_cooler_id'] as int?, PartsCategory.cpuCooler);
+      final memory = await PcPartsRepository.selectPcPartsById(custom['memory_id'] as int?, PartsCategory.memory);
+      final motherBoard = await PcPartsRepository.selectPcPartsById(custom['mother_board_id'] as int?, PartsCategory.motherboard);
+      final graphicsCard = await PcPartsRepository.selectPcPartsById(custom['graphics_card_id'] as int?, PartsCategory.graphicsCard);
+      final ssd = await PcPartsRepository.selectPcPartsById(custom['ssd_id'] as int?, PartsCategory.ssd);
+      final pcCase = await PcPartsRepository.selectPcPartsById(custom['pc_case_id'] as int?, PartsCategory.pcCase);
+      final powerUnit = await PcPartsRepository.selectPcPartsById(custom['power_unit_id'] as int?, PartsCategory.powerUnit);
+      final caseFan = await PcPartsRepository.selectPcPartsById(custom['case_fan_id'] as int?, PartsCategory.caseFan);
 
       customList.add(Custom(
         id: id,

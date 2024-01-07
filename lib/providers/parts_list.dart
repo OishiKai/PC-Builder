@@ -25,14 +25,14 @@ class PartsList extends _$PartsList {
     );
 
     // 検索ワードがない場合
-    if (searchText == '') return PartsListParser.fetch(url);
+    if (searchText == '') return PartsListParser.fetch(url, searchingCategory);
 
     if (selectedParams.isNotEmpty) {
       // 検索ワードと絞り込み条件がある場合
-      return PartsListParser.fetch('$url&pdf_kw=$searchText');
+      return PartsListParser.fetch('$url&pdf_kw=$searchText', searchingCategory);
     } else {
       // 検索ワードのみの場合
-      return PartsListParser.fetch('$url?pdf_kw=$searchText');
+      return PartsListParser.fetch('$url?pdf_kw=$searchText', searchingCategory);
     }
   }
 
