@@ -1,5 +1,6 @@
 import 'package:html/dom.dart';
 
+import '../models/parts_category.dart';
 import '../models/pc_parts.dart';
 import 'document_repository.dart';
 

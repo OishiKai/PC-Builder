@@ -1,13 +1,13 @@
-import 'package:custom_pc/domain/parameter_recommender.dart';
-import 'package:custom_pc/models/pc_parts.dart';
-import 'package:custom_pc/providers/search_parameter.dart';
-import 'package:custom_pc/providers/searching_category.dart';
-import 'package:custom_pc/widgets/edit_custom_page/recommend_parameters_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../providers/edit_custom.dart';
+import '../../domain/parameter_recommender.dart';
+import '../../models/parts_category.dart';
+import '../../providers/search_parameter.dart';
+import '../../providers/searching_category.dart';
+import '../edit_custom_page/recommend_parameters_dialog.dart';
 
 class AddPartsDialog extends ConsumerWidget {
   const AddPartsDialog({Key? key}) : super(key: key);

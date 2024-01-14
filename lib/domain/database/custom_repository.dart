@@ -1,10 +1,10 @@
 import 'package:custom_pc/domain/database/datastore_use_case.dart';
 import 'package:custom_pc/domain/database/pc_parts_repository.dart';
-import 'package:custom_pc/models/pc_parts.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../models/custom.dart';
+import '../../models/parts_category.dart';
 
 class CustomRepository {
   //Custom保存

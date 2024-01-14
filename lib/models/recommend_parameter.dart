@@ -1,4 +1,4 @@
-import 'package:custom_pc/models/pc_parts.dart';
+import 'parts_category.dart';
 
 class RecommendParameter {
   final PartsCategory category;

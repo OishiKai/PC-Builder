@@ -1,6 +1,7 @@
 import 'package:custom_pc/models/pc_parts.dart';
 import 'package:sqflite/sqflite.dart';
 
+import '../../models/parts_category.dart';
 import '../../models/parts_shop.dart';
 import 'datastore_use_case.dart';
 

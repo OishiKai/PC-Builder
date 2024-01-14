@@ -1,4 +1,3 @@
-import 'package:custom_pc/providers/searching_category.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../domain/search_parameter_parser/case_fan_search_parameter_parser.dart';
@@ -11,7 +10,8 @@ import '../domain/search_parameter_parser/pc_case_search_parameter_parser.dart';
 import '../domain/search_parameter_parser/power_unit_search_parameter_parser.dart';
 import '../domain/search_parameter_parser/ssd_search_parameter_parser.dart';
 import '../models/category_search_parameter.dart';
-import '../models/pc_parts.dart';
+import '../models/parts_category.dart';
+import '../providers/searching_category.dart';
 
 part 'gen/search_parameters.g.dart';
 

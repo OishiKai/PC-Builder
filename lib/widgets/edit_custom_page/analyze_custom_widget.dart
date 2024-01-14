@@ -1,7 +1,8 @@
-import 'package:custom_pc/providers/edit_custom.dart';
-import 'package:custom_pc/widgets/edit_custom_page/parts_compatibility_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../../providers/edit_custom.dart';
+import '../edit_custom_page/parts_compatibility_widget.dart';
 
 class AnalyzeCustomWidget extends ConsumerWidget {
   const AnalyzeCustomWidget({super.key});

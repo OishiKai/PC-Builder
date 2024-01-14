@@ -1,14 +1,14 @@
-import 'package:custom_pc/providers/custom_repository.dart';
-import 'package:custom_pc/widgets/custom_detail_page/parts_list_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../domain/search_parameter_fetcher.dart';
+import '../providers/custom_repository.dart';
 import '../providers/edit_custom.dart';
 import '../providers/search_parameter.dart';
 import '../widgets/custom_detail_page/custom_summary_widget.dart';
 import '../widgets/custom_detail_page/delete_custom_dialog.dart';
+import '../widgets/custom_detail_page/parts_list_widget.dart';
 import 'dashboard.dart';
 
 class CustomDetailPage extends ConsumerWidget {

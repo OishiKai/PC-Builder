@@ -1,7 +1,8 @@
-import 'package:custom_pc/models/pc_parts.dart';
 import 'package:flutter/material.dart';
 
 import '../models/custom.dart';
+import '../models/parts_category.dart';
+import '../models/pc_parts.dart';
 import '../widgets/custom_detail_page/summary_info_cell.dart';
 
 class CustomSummarizer {

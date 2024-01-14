@@ -1,9 +1,10 @@
-import 'package:custom_pc/models/detail_page_usage.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../models/custom.dart';
 import '../../../models/pc_parts.dart';
+import '../../models/detail_page_usage.dart';
+import '../../models/parts_category.dart';
 
 class PartsListWidget extends StatelessWidget {
   const PartsListWidget({super.key, required this.custom});
