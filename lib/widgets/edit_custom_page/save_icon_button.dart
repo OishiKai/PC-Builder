@@ -61,7 +61,7 @@ class SaveIconButton extends ConsumerWidget {
     return IconButton(
       onPressed: () {
         // パーツが選択されていない場合
-        if (custom.isEmpty()) {
+        if (custom.parts == null) {
           showDialog(
             context: context,
             builder: (context) {

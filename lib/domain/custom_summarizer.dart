@@ -9,13 +9,13 @@ class CustomSummarizer {
   static List<SummaryInfoCell> getSummaryWidgets(Custom custom, Brightness brightness) {
     // 各パーツのSummaryInfoCellを作成し、最後にnullを除く
     return [
-      _summarizeCpu(custom.cpu, brightness),
-      _summarizeCpuCooler(custom.cpuCooler, brightness),
-      _summarizeMemory(custom.memory, brightness),
-      _summarizeMotherboard(custom.motherBoard, brightness),
-      _summarizeGraphicsCard(custom.graphicsCard, brightness),
-      _summarizeSsd(custom.ssd, brightness),
-      _summarizePowerUnit(custom.powerUnit, brightness),
+      _summarizeCpu(custom.get(PartsCategory.cpu), brightness),
+      _summarizeCpuCooler(custom.get(PartsCategory.cpuCooler), brightness),
+      _summarizeMemory(custom.get(PartsCategory.memory), brightness),
+      _summarizeMotherboard(custom.get(PartsCategory.motherboard), brightness),
+      _summarizeGraphicsCard(custom.get(PartsCategory.graphicsCard), brightness),
+      _summarizeSsd(custom.get(PartsCategory.ssd), brightness),
+      _summarizePowerUnit(custom.get(PartsCategory.powerUnit), brightness),
     ].whereType<SummaryInfoCell>().toList();
   }
 

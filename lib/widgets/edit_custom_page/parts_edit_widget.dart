@@ -15,7 +15,7 @@ class PartsEditWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final custom = ref.watch(editCustomNotifierProvider);
-    final partsList = custom.align().entries.map((e) => _PartsAndCategory(e.key, e.value)).toList();
+    final partsList = custom.parts ?? [];
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -77,7 +77,7 @@ class PartsEditWidget extends ConsumerWidget {
                         color: Theme.of(context).colorScheme.secondary,
                       ),
                       Text(
-                        p.category.categoryName,
+                        p.category!.categoryName,
                         style: TextStyle(
                           color: Theme.of(context).colorScheme.secondary,
                           fontSize: 12,
@@ -95,7 +95,7 @@ class PartsEditWidget extends ConsumerWidget {
                           'create_partsDetail_selecting',
                           pathParameters: {
                             'usage': DetailPageUsage.edit.value,
-                            'categoryName': p.category.categoryName,
+                            'categoryName': p.category!.categoryName,
                           },
                         );
                       } else {
@@ -105,7 +105,7 @@ class PartsEditWidget extends ConsumerWidget {
                           pathParameters: {
                             'id': custom.id!,
                             'usage': DetailPageUsage.edit.value,
-                            'categoryName': p.category.categoryName,
+                            'categoryName': p.category!.categoryName,
                           },
                         );
                       }
@@ -122,7 +122,7 @@ class PartsEditWidget extends ConsumerWidget {
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(10),
                             child: Image.network(
-                              p.parts.image,
+                              p.image,
                               fit: BoxFit.cover,
                               colorBlendMode: BlendMode.darken,
                             ),
@@ -137,7 +137,7 @@ class PartsEditWidget extends ConsumerWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                p.parts.maker,
+                                p.maker,
                                 style: TextStyle(
                                   color: Theme.of(context).colorScheme.secondary,
                                   fontSize: 12,
@@ -145,7 +145,7 @@ class PartsEditWidget extends ConsumerWidget {
                                 ),
                               ),
                               Text(
-                                p.parts.title,
+                                p.title,
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
@@ -158,7 +158,7 @@ class PartsEditWidget extends ConsumerWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    p.parts.price,
+                                    p.price,
                                     style: TextStyle(
                                       color: Theme.of(context).colorScheme.error,
                                       fontSize: 12,
@@ -169,7 +169,7 @@ class PartsEditWidget extends ConsumerWidget {
                                   TextButton(
                                     onPressed: () {
                                       // 検索対象のカテゴリを変更
-                                      ref.read(searchingCategoryProvider.notifier).update((state) => p.category);
+                                      ref.read(searchingCategoryProvider.notifier).update((state) => p.category!);
 
                                       if (custom.id == null) {
                                         // 新規作成時
@@ -200,10 +200,10 @@ class PartsEditWidget extends ConsumerWidget {
                                   // co/
                                   TextButton(
                                     onPressed: () {
-                                      ref.read(editCustomNotifierProvider.notifier).removeParts(p.category);
+                                      ref.read(editCustomNotifierProvider.notifier).removeParts(p.category!);
                                       ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(
-                                          content: Text('${p.parts.title}を削除しました'),
+                                          content: Text('${p.title}を削除しました'),
                                           duration: const Duration(seconds: 1),
                                         ),
                                       );

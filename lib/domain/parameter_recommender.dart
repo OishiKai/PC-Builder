@@ -91,12 +91,12 @@ class ParameterRecommender {
   }
 
   List<RecommendParameter> recommendParamsForCpu() {
-    if (custom.motherBoard == null) {
+    if (custom.get(PartsCategory.motherboard) == null) {
       return [];
     }
 
     // マザーボードのソケット形状を取得
-    final motherBoard = custom.motherBoard!;
+    final motherBoard = custom.get(PartsCategory.motherboard)!;
     final rawSocket = _extractSpec(motherBoard.specs!, 'CPUソケット');
     if (rawSocket == null) {
       return [];
@@ -119,12 +119,12 @@ class ParameterRecommender {
   }
 
   List<RecommendParameter> recommendParamsForCpuCooler() {
-    if (custom.motherBoard == null) {
+    if (custom.get(PartsCategory.motherboard) == null) {
       return [];
     }
 
     // マザーボードのソケット形状を取得
-    final motherBoard = custom.motherBoard!;
+    final motherBoard = custom.get(PartsCategory.motherboard)!;
     final rawSocket = _extractSpec(motherBoard.specs!, 'CPUソケット');
     if (rawSocket == null) {
       return [];
@@ -156,12 +156,12 @@ class ParameterRecommender {
   }
 
   List<RecommendParameter> recommendParamsForMemory() {
-    if (custom.motherBoard == null) {
+    if (custom.get(PartsCategory.motherboard) == null) {
       return [];
     }
 
     // マザーボードのメモリタイプを取得
-    final motherBoard = custom.motherBoard!;
+    final motherBoard = custom.get(PartsCategory.motherboard)!;
     final rawMemoryType = _extractSpec(motherBoard.specs!, '詳細メモリタイプ');
     if (rawMemoryType == null) {
       return [];
@@ -185,15 +185,15 @@ class ParameterRecommender {
   }
 
   List<RecommendParameter> recommendParamsForMotherBoard() {
-    if (custom.cpu == null && custom.memory == null) {
+    if (custom.get(PartsCategory.cpu) == null && custom.get(PartsCategory.memory) == null) {
       return [];
     }
 
     List<RecommendParameter> recs = [];
 
-    if (custom.cpu != null) {
+    if (custom.get(PartsCategory.cpu) != null) {
       // CPUのソケット形状を取得
-      final cpu = custom.cpu!;
+      final cpu = custom.get(PartsCategory.cpu)!;
       final rawSocket = _extractSpec(cpu.specs!, 'ソケット形状');
       if (rawSocket != null) {
         bool isIntel = false;
@@ -214,9 +214,9 @@ class ParameterRecommender {
       }
     }
 
-    if (custom.memory != null) {
+    if (custom.get(PartsCategory.memory) != null) {
       // メモリの規格を取得
-      final memory = custom.memory!;
+      final memory = custom.get(PartsCategory.memory)!;
       final rawMemoryType = _extractSpec(memory.specs!, 'メモリ規格');
       if (rawMemoryType != null) {
         // メモリタイプ(DDR4など)に分割

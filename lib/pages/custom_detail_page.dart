@@ -1,7 +1,9 @@
+import 'package:custom_pc/models/custom.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../domain/price.dart';
 import '../domain/search_parameter_fetcher.dart';
 import '../providers/custom_repository.dart';
 import '../providers/edit_custom.dart';
@@ -94,7 +96,7 @@ class CustomDetailPage extends ConsumerWidget {
                     ),
                     const Spacer(),
                     Text(
-                      custom.formatPrice(),
+                      Price.intToString(custom.calculateTotalPrice()),
                       style: TextStyle(
                         fontSize: 24,
                         color: Theme.of(context).colorScheme.error,

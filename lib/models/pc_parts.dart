@@ -8,6 +8,8 @@ part 'pc_parts.freezed.dart';
 @freezed
 class PcParts with _$PcParts {
   const factory PcParts({
+    required PartsCategory category,
+    required String id,
     required String maker,
     required bool isNew,
     required String title,
@@ -20,6 +22,5 @@ class PcParts with _$PcParts {
     List<String>? fullScaleImages,
     Map<String, String?>? specs,
     List<PartsShop>? shops,
-    PartsCategory? category,
   }) = _PcParts;
 }

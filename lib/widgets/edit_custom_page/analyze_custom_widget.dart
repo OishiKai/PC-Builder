@@ -1,6 +1,8 @@
+import 'package:custom_pc/models/custom.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../domain/price.dart';
 import '../../providers/edit_custom.dart';
 import '../edit_custom_page/parts_compatibility_widget.dart';
 
@@ -28,7 +30,7 @@ class AnalyzeCustomWidget extends ConsumerWidget {
               ),
               const Spacer(),
               Text(
-                custom.formatPrice(),
+                Price.intToString(custom.calculateTotalPrice()),
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,

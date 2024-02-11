@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../providers/edit_custom.dart';
 import '../../domain/parameter_recommender.dart';
+import '../../models/custom.dart';
 import '../../models/parts_category.dart';
 import '../../providers/search_parameter.dart';
 import '../../providers/searching_category.dart';

@@ -63,7 +63,8 @@ class PartsListParser {
           star = doubleStar * 100 ~/ 10;
         }
       }
-      partsList.add(PcParts(maker: maker, isNew: isNew, title: title, star: star, evaluation: evaluation, price: price, ranked: ranked, image: imageUrl, detailUrl: detailUrl!, category: category));
+      final partsId = detailUrl!.split('item/').last.split('/').first;
+      partsList.add(PcParts(id: partsId, maker: maker, isNew: isNew, title: title, star: star, evaluation: evaluation, price: price, ranked: ranked, image: imageUrl, detailUrl: detailUrl!, category: category));
     }
     return partsList;
   }

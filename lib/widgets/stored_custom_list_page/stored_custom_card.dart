@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../models/custom.dart';
+import '../../domain/price.dart';
 
 class StoredCustomCard extends StatelessWidget {
   const StoredCustomCard({super.key, required this.custom});
@@ -25,7 +26,7 @@ class StoredCustomCard extends StatelessWidget {
                   child: ClipRRect(
                       borderRadius: BorderRadius.circular(10),
                       child: Image.network(
-                        custom.getMainPartsImage(),
+                        custom.mainPartsImage(),
                         fit: BoxFit.cover,
                         colorBlendMode: BlendMode.darken,
                       ))),
@@ -47,7 +48,7 @@ class StoredCustomCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Text(
-                    custom.formatPrice(),
+                    Price.intToString(custom.calculateTotalPrice()),
                     style: TextStyle(
                       color: Theme.of(context).colorScheme.secondary,
                       fontSize: 16,

@@ -9,8 +9,8 @@ class PcPartsRepositoryV2 {
   // PcParts保存
   static Future<int> insertPcParts(PcParts pcParts, String customId) async {
     final map = {
-      'custom_id': customId,
-      'category': pcParts.category?.categoryName,
+      'id': pcParts.id,
+      'category': pcParts.category.categoryName,
       'maker': pcParts.maker,
       'is_new': pcParts.isNew ? 1 : 0,
       'title': pcParts.title,
@@ -22,16 +22,16 @@ class PcPartsRepositoryV2 {
       'detail_url': pcParts.detailUrl,
     };
     final Database db = await DataStoreUseCase.databaseV2;
-    final partsId = await db.insert(
+    await db.insert(
       'pc_parts',
       map,
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
 
     // 店情報、スペック情報、画像情報を保存
-    await _insertPartsShops(pcParts.shops, partsId);
-    await _insertPartsSpecs(pcParts.specs, partsId);
-    await _insertFullScaleImages(pcParts.fullScaleImages, partsId);
+    await _insertPartsShops(pcParts.shops, pcParts.id);
+    await _insertPartsSpecs(pcParts.specs, pcParts.id);
+    await _insertFullScaleImages(pcParts.fullScaleImages, pcParts.id);
     return partsId;
   }
 

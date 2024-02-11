@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../models/custom.dart';
-import '../../../models/pc_parts.dart';
 import '../../models/detail_page_usage.dart';
-import '../../models/parts_category.dart';
 
 class PartsListWidget extends StatelessWidget {
   const PartsListWidget({super.key, required this.custom});
@@ -13,7 +11,7 @@ class PartsListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // {カテゴリー: PcParts}のMapをListに変換
-    final partsList = custom.align().entries.map((e) => _PartsAndCategory(e.key, e.value)).toList();
+    final partsList = custom.parts ?? [];
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12),
       child: Column(
@@ -31,7 +29,7 @@ class PartsListWidget extends StatelessWidget {
                       color: Theme.of(context).colorScheme.secondary,
                     ),
                     Text(
-                      p.category.categoryName,
+                      p.category!.categoryName,
                       style: TextStyle(
                         color: Theme.of(context).colorScheme.secondary,
                         fontSize: 12,
@@ -45,7 +43,7 @@ class PartsListWidget extends StatelessWidget {
                   onTap: () {
                     // パーツ詳細ページ(閲覧モード)に遷移
                     context.push(
-                      '/home/parts/${DetailPageUsage.view.value}/${custom.id}/${p.category.categoryName}',
+                      '/home/parts/${DetailPageUsage.view.value}/${custom.id}/${p.category!.categoryName}',
                     );
                   },
                   child: Row(
@@ -59,7 +57,7 @@ class PartsListWidget extends StatelessWidget {
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(10),
                           child: Image.network(
-                            p.parts.image,
+                            p.image,
                             fit: BoxFit.cover,
                             colorBlendMode: BlendMode.darken,
                           ),
@@ -74,7 +72,7 @@ class PartsListWidget extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              p.parts.maker,
+                              p.maker,
                               style: TextStyle(
                                 color: Theme.of(context).colorScheme.secondary,
                                 fontSize: 12,
@@ -82,7 +80,7 @@ class PartsListWidget extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              p.parts.title,
+                              p.title,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
@@ -92,7 +90,7 @@ class PartsListWidget extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              p.parts.price,
+                              p.price,
                               style: TextStyle(
                                 color: Theme.of(context).colorScheme.error,
                                 fontSize: 12,
@@ -119,8 +117,8 @@ class PartsListWidget extends StatelessWidget {
   }
 }
 
-class _PartsAndCategory {
-  _PartsAndCategory(this.category, this.parts);
-  final PartsCategory category;
-  final PcParts parts;
-}
+// class _PartsAndCategory {
+//   _PartsAndCategory(this.category, this.parts);
+//   final PartsCategory category;
+//   final PcParts parts;
+// }

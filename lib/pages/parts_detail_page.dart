@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_segmented_control/material_segmented_control.dart';
 
 import '../config/size_config.dart';
+import '../models/custom.dart';
 import '../models/detail_page_usage.dart';
 import '../models/parts_category.dart';
 import '../models/pc_parts.dart';

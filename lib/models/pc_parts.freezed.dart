@@ -16,6 +16,8 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$PcParts {
+  PartsCategory get category => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
   String get maker => throw _privateConstructorUsedError;
   bool get isNew => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
@@ -28,7 +30,6 @@ mixin _$PcParts {
   List<String>? get fullScaleImages => throw _privateConstructorUsedError;
   Map<String, String?>? get specs => throw _privateConstructorUsedError;
   List<PartsShop>? get shops => throw _privateConstructorUsedError;
-  PartsCategory? get category => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PcPartsCopyWith<PcParts> get copyWith => throw _privateConstructorUsedError;
@@ -40,7 +41,9 @@ abstract class $PcPartsCopyWith<$Res> {
       _$PcPartsCopyWithImpl<$Res, PcParts>;
   @useResult
   $Res call(
-      {String maker,
+      {PartsCategory category,
+      String id,
+      String maker,
       bool isNew,
       String title,
       int? star,
@@ -51,8 +54,7 @@ abstract class $PcPartsCopyWith<$Res> {
       String detailUrl,
       List<String>? fullScaleImages,
       Map<String, String?>? specs,
-      List<PartsShop>? shops,
-      PartsCategory? category});
+      List<PartsShop>? shops});
 }
 
 /// @nodoc
@@ -68,6 +70,8 @@ class _$PcPartsCopyWithImpl<$Res, $Val extends PcParts>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? category = null,
+    Object? id = null,
     Object? maker = null,
     Object? isNew = null,
     Object? title = null,
@@ -80,9 +84,16 @@ class _$PcPartsCopyWithImpl<$Res, $Val extends PcParts>
     Object? fullScaleImages = freezed,
     Object? specs = freezed,
     Object? shops = freezed,
-    Object? category = freezed,
   }) {
     return _then(_value.copyWith(
+      category: null == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as PartsCategory,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       maker: null == maker
           ? _value.maker
           : maker // ignore: cast_nullable_to_non_nullable
@@ -131,10 +142,6 @@ class _$PcPartsCopyWithImpl<$Res, $Val extends PcParts>
           ? _value.shops
           : shops // ignore: cast_nullable_to_non_nullable
               as List<PartsShop>?,
-      category: freezed == category
-          ? _value.category
-          : category // ignore: cast_nullable_to_non_nullable
-              as PartsCategory?,
     ) as $Val);
   }
 }
@@ -147,7 +154,9 @@ abstract class _$$PcPartsImplCopyWith<$Res> implements $PcPartsCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String maker,
+      {PartsCategory category,
+      String id,
+      String maker,
       bool isNew,
       String title,
       int? star,
@@ -158,8 +167,7 @@ abstract class _$$PcPartsImplCopyWith<$Res> implements $PcPartsCopyWith<$Res> {
       String detailUrl,
       List<String>? fullScaleImages,
       Map<String, String?>? specs,
-      List<PartsShop>? shops,
-      PartsCategory? category});
+      List<PartsShop>? shops});
 }
 
 /// @nodoc
@@ -173,6 +181,8 @@ class __$$PcPartsImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? category = null,
+    Object? id = null,
     Object? maker = null,
     Object? isNew = null,
     Object? title = null,
@@ -185,9 +195,16 @@ class __$$PcPartsImplCopyWithImpl<$Res>
     Object? fullScaleImages = freezed,
     Object? specs = freezed,
     Object? shops = freezed,
-    Object? category = freezed,
   }) {
     return _then(_$PcPartsImpl(
+      category: null == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as PartsCategory,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       maker: null == maker
           ? _value.maker
           : maker // ignore: cast_nullable_to_non_nullable
@@ -236,10 +253,6 @@ class __$$PcPartsImplCopyWithImpl<$Res>
           ? _value._shops
           : shops // ignore: cast_nullable_to_non_nullable
               as List<PartsShop>?,
-      category: freezed == category
-          ? _value.category
-          : category // ignore: cast_nullable_to_non_nullable
-              as PartsCategory?,
     ));
   }
 }
@@ -248,7 +261,9 @@ class __$$PcPartsImplCopyWithImpl<$Res>
 
 class _$PcPartsImpl implements _PcParts {
   const _$PcPartsImpl(
-      {required this.maker,
+      {required this.category,
+      required this.id,
+      required this.maker,
       required this.isNew,
       required this.title,
       required this.star,
@@ -259,12 +274,15 @@ class _$PcPartsImpl implements _PcParts {
       required this.detailUrl,
       final List<String>? fullScaleImages,
       final Map<String, String?>? specs,
-      final List<PartsShop>? shops,
-      this.category})
+      final List<PartsShop>? shops})
       : _fullScaleImages = fullScaleImages,
         _specs = specs,
         _shops = shops;
 
+  @override
+  final PartsCategory category;
+  @override
+  final String id;
   @override
   final String maker;
   @override
@@ -314,11 +332,8 @@ class _$PcPartsImpl implements _PcParts {
   }
 
   @override
-  final PartsCategory? category;
-
-  @override
   String toString() {
-    return 'PcParts(maker: $maker, isNew: $isNew, title: $title, star: $star, evaluation: $evaluation, price: $price, ranked: $ranked, image: $image, detailUrl: $detailUrl, fullScaleImages: $fullScaleImages, specs: $specs, shops: $shops, category: $category)';
+    return 'PcParts(category: $category, id: $id, maker: $maker, isNew: $isNew, title: $title, star: $star, evaluation: $evaluation, price: $price, ranked: $ranked, image: $image, detailUrl: $detailUrl, fullScaleImages: $fullScaleImages, specs: $specs, shops: $shops)';
   }
 
   @override
@@ -326,6 +341,9 @@ class _$PcPartsImpl implements _PcParts {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$PcPartsImpl &&
+            (identical(other.category, category) ||
+                other.category == category) &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.maker, maker) || other.maker == maker) &&
             (identical(other.isNew, isNew) || other.isNew == isNew) &&
             (identical(other.title, title) || other.title == title) &&
@@ -340,14 +358,14 @@ class _$PcPartsImpl implements _PcParts {
             const DeepCollectionEquality()
                 .equals(other._fullScaleImages, _fullScaleImages) &&
             const DeepCollectionEquality().equals(other._specs, _specs) &&
-            const DeepCollectionEquality().equals(other._shops, _shops) &&
-            (identical(other.category, category) ||
-                other.category == category));
+            const DeepCollectionEquality().equals(other._shops, _shops));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      category,
+      id,
       maker,
       isNew,
       title,
@@ -359,8 +377,7 @@ class _$PcPartsImpl implements _PcParts {
       detailUrl,
       const DeepCollectionEquality().hash(_fullScaleImages),
       const DeepCollectionEquality().hash(_specs),
-      const DeepCollectionEquality().hash(_shops),
-      category);
+      const DeepCollectionEquality().hash(_shops));
 
   @JsonKey(ignore: true)
   @override
@@ -371,7 +388,9 @@ class _$PcPartsImpl implements _PcParts {
 
 abstract class _PcParts implements PcParts {
   const factory _PcParts(
-      {required final String maker,
+      {required final PartsCategory category,
+      required final String id,
+      required final String maker,
       required final bool isNew,
       required final String title,
       required final int? star,
@@ -382,9 +401,12 @@ abstract class _PcParts implements PcParts {
       required final String detailUrl,
       final List<String>? fullScaleImages,
       final Map<String, String?>? specs,
-      final List<PartsShop>? shops,
-      final PartsCategory? category}) = _$PcPartsImpl;
+      final List<PartsShop>? shops}) = _$PcPartsImpl;
 
+  @override
+  PartsCategory get category;
+  @override
+  String get id;
   @override
   String get maker;
   @override
@@ -409,8 +431,6 @@ abstract class _PcParts implements PcParts {
   Map<String, String?>? get specs;
   @override
   List<PartsShop>? get shops;
-  @override
-  PartsCategory? get category;
   @override
   @JsonKey(ignore: true)
   _$$PcPartsImplCopyWith<_$PcPartsImpl> get copyWith =>

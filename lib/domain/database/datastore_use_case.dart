@@ -92,8 +92,7 @@ class DataStoreUseCase {
       // パーツテーブル
       db.execute(
         '''CREATE TABLE pc_parts (
-        id INTEGER PRIMARY KEY,
-        custom_id TEXT NOT NULL,
+        id TEXT PRIMARY KEY,
         category TEXT NOT NULL,
         maker TEXT NOT NULL,
         is_new INTEGER NOT NULL,
@@ -109,7 +108,7 @@ class DataStoreUseCase {
       db.execute(
         '''CREATE TABLE parts_shops (
         id INTEGER,
-        parts_id INTEGER,
+        parts_id TEXT,
         rank TEXT NOT NULL,
         price INTEGER NOT NULL,
         best_price_diff TEXT NOT NULL,
@@ -122,7 +121,7 @@ class DataStoreUseCase {
       db.execute(
         '''CREATE TABLE parts_specs (
         id INTEGER,
-        parts_id INTEGER,
+        parts_id TEXT,
         spec_name TEXT NOT NULL,
         spec_value TEXT,
         PRIMARY KEY (id, parts_id),
@@ -132,7 +131,7 @@ class DataStoreUseCase {
       db.execute(
         '''CREATE TABLE full_scale_images (
         id INTEGER,
-        parts_id INTEGER,
+        parts_id TEXT,
         image_url TEXT NOT NULL,
         PRIMARY KEY (id, parts_id),
         FOREIGN KEY (parts_id) REFERENCES pc_parts(id) ON DELETE CASCADE)''',
