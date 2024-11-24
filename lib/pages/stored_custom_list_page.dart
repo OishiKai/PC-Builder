@@ -53,7 +53,7 @@ class StoredCustomListPage extends StatelessWidget {
             )
           ],
         ),
-        leading: SortIconButton(),
+        leading: const SortIconButton(),
         actions: [
           IconButton(
             onPressed: () {

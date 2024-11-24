@@ -83,6 +83,16 @@ class SearchResultPartsListWidget extends ConsumerWidget {
                               width: 120,
                               height: 120,
                               fit: BoxFit.contain,
+                              errorBuilder: (context, object, stackTrace) {
+                                return Padding(
+                                  padding: const EdgeInsets.all(20),
+                                  child: Icon(
+                                    Icons.image_not_supported,
+                                    size: 80,
+                                    color: Colors.grey[300],
+                                  ),
+                                );
+                              },
                             ),
                           ),
                           const SizedBox(width: 16),

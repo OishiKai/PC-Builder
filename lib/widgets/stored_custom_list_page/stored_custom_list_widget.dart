@@ -18,32 +18,35 @@ class StoredCustomListWidget extends ConsumerWidget {
           child: Text('保存済みのカスタムはありません'),
         );
       }
-      return Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: NotificationListener<OverscrollIndicatorNotification>(
-          onNotification: (OverscrollIndicatorNotification notification) {
-            notification.disallowIndicator();
-            return false;
-          },
-          child: ListView.builder(
-            // 保存済みカスタムの最後に余白を作るために+1
-            itemCount: data.length + 1,
-            itemBuilder: (context, index) {
-              if (index == data.length) {
-                return const SizedBox(
-                  height: 80,
-                );
-              }
-              return InkWell(
-                onTap: () {
-                  // 詳細画面(CustomDetailPage)へ遷移
-                  context.push('/home/detail/${data[index].id}');
-                },
-                child: StoredCustomCard(
-                  custom: data[index],
-                ),
-              );
+      return Container(
+        color: Colors.white,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: NotificationListener<OverscrollIndicatorNotification>(
+            onNotification: (OverscrollIndicatorNotification notification) {
+              notification.disallowIndicator();
+              return false;
             },
+            child: ListView.builder(
+              // 保存済みカスタムの最後に余白を作るために+1
+              itemCount: data.length + 1,
+              itemBuilder: (context, index) {
+                if (index == data.length) {
+                  return const SizedBox(
+                    height: 80,
+                  );
+                }
+                return InkWell(
+                  onTap: () {
+                    // 詳細画面(CustomDetailPage)へ遷移
+                    context.push('/home/detail/${data[index].id}');
+                  },
+                  child: StoredCustomCard(
+                    custom: data[index],
+                  ),
+                );
+              },
+            ),
           ),
         ),
       );

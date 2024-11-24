@@ -166,9 +166,9 @@ class _PartsDetailPageState extends ConsumerState<PartsDetailPage> with SingleTi
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  const Padding(
+                                  Padding(
                                     padding: EdgeInsets.only(bottom: 2),
-                                    child: StarWidget(45),
+                                    child: StarWidget(parts.star),
                                   ),
                                   const Expanded(child: SizedBox()),
                                   Text(
