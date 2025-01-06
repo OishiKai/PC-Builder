@@ -26,7 +26,8 @@ Future<void> main() async {
 class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
-  static const Map<TargetPlatform, PageTransitionsBuilder> _defaultBuilders = <TargetPlatform, PageTransitionsBuilder>{
+  static const Map<TargetPlatform, PageTransitionsBuilder> _defaultBuilders =
+      <TargetPlatform, PageTransitionsBuilder>{
     TargetPlatform.android: CupertinoPageTransitionsBuilder(),
     TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
   };
@@ -36,7 +37,8 @@ class MyApp extends ConsumerWidget {
       useMaterial3: true,
       colorScheme: colorScheme,
       fontFamily: 'NotoSansJP',
-      pageTransitionsTheme: const PageTransitionsTheme(builders: _defaultBuilders),
+      pageTransitionsTheme:
+          const PageTransitionsTheme(builders: _defaultBuilders),
     );
   }
 
@@ -53,7 +55,9 @@ class MyApp extends ConsumerWidget {
         themeData = createTheme(darkColorScheme);
         break;
       case ThemeMode.system:
-        MediaQuery.platformBrightnessOf(context) == Brightness.dark ? themeData = createTheme(darkColorScheme) : themeData = createTheme(lightColorScheme);
+        MediaQuery.platformBrightnessOf(context) == Brightness.dark
+            ? themeData = createTheme(darkColorScheme)
+            : themeData = createTheme(lightColorScheme);
         break;
     }
 

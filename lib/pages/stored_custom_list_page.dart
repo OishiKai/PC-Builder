@@ -29,7 +29,7 @@ class StoredCustomListPage extends StatelessWidget {
     WidgetsBinding.instance.addPostFrameCallback((_) => _showTutorial(context));
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.background,
+        backgroundColor: Theme.of(context).colorScheme.surface,
         elevation: 0,
         centerTitle: true,
         title: Column(

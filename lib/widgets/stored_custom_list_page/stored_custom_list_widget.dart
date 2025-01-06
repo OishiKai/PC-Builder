@@ -19,7 +19,7 @@ class StoredCustomListWidget extends ConsumerWidget {
         );
       }
       return Container(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.surface,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: NotificationListener<OverscrollIndicatorNotification>(
