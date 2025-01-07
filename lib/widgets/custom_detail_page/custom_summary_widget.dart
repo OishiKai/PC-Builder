@@ -21,7 +21,8 @@ class _CustomSummaryWidgetState extends State<CustomSummaryWidget> {
   @override
   Widget build(BuildContext context) {
     // SummaryInfoCellのリストを取得
-    final cells = CustomSummarizer.getSummaryWidgets(widget.custom, MediaQuery.platformBrightnessOf(context));
+    final cells = CustomSummarizer.getSummaryWidgets(
+        widget.custom, MediaQuery.platformBrightnessOf(context));
 
     double carouselHeight = 0;
     if (cells.length > 2) {
@@ -45,13 +46,21 @@ class _CustomSummaryWidgetState extends State<CustomSummaryWidget> {
               },
             ),
             // 1ページあたり最大4つのSummaryInfoCellを表示
-            itemCount: cells.length % 4 == 0 ? cells.length ~/ 4 : cells.length ~/ 4 + 1,
+            itemCount: cells.length % 4 == 0
+                ? cells.length ~/ 4
+                : cells.length ~/ 4 + 1,
             itemBuilder: (context, index, realIndex) {
               return GridView.count(
                 physics: const NeverScrollableScrollPhysics(),
                 crossAxisCount: 2,
                 children: [
-                  for (int i = index * 4; i < (index * 4 + 4 > cells.length ? cells.length : index * 4 + 4); i++) cells[i],
+                  for (int i = index * 4;
+                      i <
+                          (index * 4 + 4 > cells.length
+                              ? cells.length
+                              : index * 4 + 4);
+                      i++)
+                    cells[i],
                 ],
               );
             },
@@ -60,7 +69,9 @@ class _CustomSummaryWidgetState extends State<CustomSummaryWidget> {
           if (cells.length > 4)
             AnimatedSmoothIndicator(
               activeIndex: activeIndex,
-              count: cells.length % 4 == 0 ? cells.length ~/ 4 : cells.length ~/ 4 + 1,
+              count: cells.length % 4 == 0
+                  ? cells.length ~/ 4
+                  : cells.length ~/ 4 + 1,
               effect: JumpingDotEffect(
                 dotHeight: 10,
                 dotWidth: 10,
