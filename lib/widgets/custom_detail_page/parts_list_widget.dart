@@ -12,7 +12,11 @@ class PartsListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // {カテゴリー: PcParts}のMapをListに変換
-    final partsList = custom.align().entries.map((e) => _PartsAndCategory(e.key, e.value)).toList();
+    final partsList = custom
+        .align()
+        .entries
+        .map((e) => _PartsAndCategory(e.key, e.value))
+        .toList();
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12),
       child: Column(
