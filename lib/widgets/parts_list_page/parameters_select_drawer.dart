@@ -11,11 +11,14 @@ class ParametersSelectDrawer extends ConsumerStatefulWidget {
   ParametersSelectDrawerState createState() => ParametersSelectDrawerState();
 }
 
-class ParametersSelectDrawerState extends ConsumerState<ParametersSelectDrawer> {
+class ParametersSelectDrawerState
+    extends ConsumerState<ParametersSelectDrawer> {
   @override
   Widget build(BuildContext context) {
     final category = ref.watch(searchingCategoryProvider);
-    final alignParams = ref.watch(searchParameterNotifierProvider)![category]!.alignParameters();
+    final alignParams = ref
+        .watch(searchParameterNotifierProvider)![category]!
+        .alignParameters();
 
     return Drawer(
       child: Column(
@@ -57,7 +60,10 @@ class ParametersSelectDrawerState extends ConsumerState<ParametersSelectDrawer> 
                             value: param.values.first[i].isSelect,
                             onChanged: (checked) {
                               // 選択した条件をURLのパラメータに追加して再検索
-                              ref.read(searchParameterNotifierProvider.notifier).toggleParameterSelect(param.keys.first, i);
+                              ref
+                                  .read(
+                                      searchParameterNotifierProvider.notifier)
+                                  .toggleParameterSelect(param.keys.first, i);
                               setState(() {});
                             },
                           ),
@@ -79,7 +85,9 @@ class ParametersSelectDrawerState extends ConsumerState<ParametersSelectDrawer> 
                   ),
                   onPressed: () {
                     // 選択した条件を全てクリア
-                    ref.read(searchParameterNotifierProvider.notifier).clearSelectedParameter();
+                    ref
+                        .read(searchParameterNotifierProvider.notifier)
+                        .clearSelectedParameter();
                     setState(() {});
                   },
                   child: const Text('選択中の条件をクリア'),
@@ -87,8 +95,10 @@ class ParametersSelectDrawerState extends ConsumerState<ParametersSelectDrawer> 
                 // 戻るボタン
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    foregroundColor: Theme.of(context).colorScheme.onSurfaceVariant,
-                    backgroundColor: Theme.of(context).colorScheme.surfaceVariant,
+                    foregroundColor:
+                        Theme.of(context).colorScheme.onSurfaceVariant,
+                    backgroundColor:
+                        Theme.of(context).colorScheme.surfaceContainerHighest,
                   ),
                   onPressed: () {
                     Navigator.pop(context);

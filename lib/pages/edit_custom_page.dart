@@ -17,7 +17,7 @@ class EditCustomPage extends StatelessWidget {
         length: 2,
         child: Scaffold(
           appBar: AppBar(
-            backgroundColor: Theme.of(context).colorScheme.background,
+            backgroundColor: Theme.of(context).colorScheme.surface,
             title: Text(
               'カスタムエディタ',
               style: TextStyle(

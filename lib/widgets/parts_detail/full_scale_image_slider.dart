@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class FullScaleImageSlider extends StatefulWidget {
-  FullScaleImageSlider(this.imageUrlList, {Key? key}) : super(key: key);
-  List<String> imageUrlList;
+  const FullScaleImageSlider(this.imageUrlList, {Key? key}) : super(key: key);
+  final List<String> imageUrlList;
   @override
   State<FullScaleImageSlider> createState() => _FullScaleImageSliderState();
 }
@@ -37,7 +37,7 @@ class _FullScaleImageSliderState extends State<FullScaleImageSlider> {
             alignment: Alignment.center,
             child: Column(
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 300,
                 ),
                 buildIndicator(),
@@ -65,6 +65,10 @@ class _FullScaleImageSliderState extends State<FullScaleImageSlider> {
   Widget buildIndicator() => AnimatedSmoothIndicator(
         activeIndex: activeIndex,
         count: widget.imageUrlList.length ?? 0,
-        effect: const JumpingDotEffect(dotHeight: 10, dotWidth: 10, activeDotColor: Color.fromRGBO(60, 130, 80, 1), dotColor: Colors.black12),
+        effect: const JumpingDotEffect(
+            dotHeight: 10,
+            dotWidth: 10,
+            activeDotColor: Color.fromRGBO(60, 130, 80, 1),
+            dotColor: Colors.black12),
       );
 }

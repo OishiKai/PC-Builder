@@ -4,18 +4,21 @@ import '../models/pc_parts.dart';
 
 class UrlBuilder {
   static String standardPartsList(PartsCategory category) {
-    String url = 'https://kakaku.com/search_results/?category=0001%${category.categoryParameter}';
+    String url =
+        'https://kakaku.com/search_results/?category=0001%${category.categoryParameter}';
     return url;
   }
 
   static String searchPartsList(PartsCategory category, String searchText) {
     final percent = Uri.encodeQueryComponent(searchText, encoding: ShiftJIS());
-    final url = 'https://kakaku.com/search_results/$percent/?category=0001%${category.categoryParameter}';
+    final url =
+        'https://kakaku.com/search_results/$percent/?category=0001%${category.categoryParameter}';
     return url;
   }
 
   static String buildSearchUrl(PartsCategory category, String parameter) {
-    final url = 'https://kakaku.com/pc/${category.categoryParameter}/itemlist.aspx?${parameter}';
+    final url =
+        'https://kakaku.com/pc/${category.categoryParameter}/itemlist.aspx?$parameter';
     return url;
   }
 
@@ -26,7 +29,8 @@ class UrlBuilder {
   ・複数のパラメータの文字列部分が同じ場合  → "pdf_{文字列}={数字A},{数字B}"
   ・複数のパラメータの文字列部分が異なる場合 → "pdf_{文字列A}={数字A}&pdf_{文字列B}={数字B}"
    */
-  static String createURLWithParameters(String baseURL, List<String> parameters) {
+  static String createURLWithParameters(
+      String baseURL, List<String> parameters) {
     StringBuffer urlBuffer = StringBuffer(baseURL);
     // パラメーターが渡されている
     if (parameters.isNotEmpty) {

@@ -15,7 +15,7 @@ class ShopsWidget extends StatelessWidget {
     return Container(
       //height: 500,
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surfaceVariant,
+        color: Theme.of(context).colorScheme.surfaceContainerHighest,
         borderRadius: BorderRadius.circular(25),
       ),
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
@@ -37,7 +37,8 @@ class ShopsWidget extends StatelessWidget {
                   height: 70,
                   width: SizeConfig.blockSizeHorizontal * 90,
                   decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.surfaceVariant,
+                    color:
+                        Theme.of(context).colorScheme.surfaceContainerHighest,
                     borderRadius: BorderRadius.circular(25),
                   ),
                   child: Row(

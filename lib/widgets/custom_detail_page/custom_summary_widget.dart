@@ -76,7 +76,7 @@ class _CustomSummaryWidgetState extends State<CustomSummaryWidget> {
                 dotHeight: 10,
                 dotWidth: 10,
                 activeDotColor: Theme.of(context).colorScheme.primary,
-                dotColor: Theme.of(context).colorScheme.surfaceVariant,
+                dotColor: Theme.of(context).colorScheme.surfaceContainerHighest,
               ),
             ),
         ],

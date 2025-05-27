@@ -4,7 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final searchTextProvider = StateProvider<String>((ref) => '');
 
-class PartsSearchAppBar extends ConsumerStatefulWidget implements PreferredSizeWidget {
+class PartsSearchAppBar extends ConsumerStatefulWidget
+    implements PreferredSizeWidget {
   const PartsSearchAppBar({super.key});
 
   @override
@@ -19,7 +20,7 @@ class PartsSearchAppBarState extends ConsumerState<PartsSearchAppBar> {
   Widget build(BuildContext context) {
     final category = ref.watch(searchingCategoryProvider);
     return AppBar(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       title: TextField(
         controller: TextEditingController(text: ref.watch(searchTextProvider)),
         decoration: InputDecoration(

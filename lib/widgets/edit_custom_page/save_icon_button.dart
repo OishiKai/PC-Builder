@@ -17,7 +17,9 @@ class SaveIconButton extends ConsumerWidget {
       // 編集中のカスタムを保存
       ref.read(customRepositoryNotifierProvider.notifier).addCustom(custom);
       // bottomNavigationBarを表示
-      ref.read(bottomNavigationBarVisibilityProvider.notifier).update((state) => true);
+      ref
+          .read(bottomNavigationBarVisibilityProvider.notifier)
+          .update((state) => true);
       Navigator.of(context).pop();
       // SnackBarを表示
       ScaffoldMessenger.of(context).showSnackBar(
@@ -29,7 +31,8 @@ class SaveIconButton extends ConsumerWidget {
               fontFamily: 'NotoSansJP',
             ),
           ),
-          backgroundColor: Theme.of(context).colorScheme.surfaceVariant,
+          backgroundColor:
+              Theme.of(context).colorScheme.surfaceContainerHighest,
           duration: const Duration(seconds: 1),
         ),
       );
@@ -40,7 +43,9 @@ class SaveIconButton extends ConsumerWidget {
       // 編集中のカスタムを保存
       ref.read(customRepositoryNotifierProvider.notifier).updateCustom(custom);
       // bottomNavigationBarを表示
-      ref.read(bottomNavigationBarVisibilityProvider.notifier).update((state) => true);
+      ref
+          .read(bottomNavigationBarVisibilityProvider.notifier)
+          .update((state) => true);
       Navigator.of(context).pop();
       // SnackBarを表示
       ScaffoldMessenger.of(context).showSnackBar(
@@ -52,7 +57,8 @@ class SaveIconButton extends ConsumerWidget {
               fontFamily: 'NotoSansJP',
             ),
           ),
-          backgroundColor: Theme.of(context).colorScheme.surfaceVariant,
+          backgroundColor:
+              Theme.of(context).colorScheme.surfaceContainerHighest,
           duration: const Duration(seconds: 1),
         ),
       );

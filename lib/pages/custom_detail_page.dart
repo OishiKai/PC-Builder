@@ -20,7 +20,8 @@ class CustomDetailPage extends ConsumerWidget {
       context: context,
       barrierDismissible: false,
       barrierColor: Colors.black.withOpacity(0.5),
-      pageBuilder: (BuildContext context, Animation animation, Animation secondaryAnimation) {
+      pageBuilder: (BuildContext context, Animation animation,
+          Animation secondaryAnimation) {
         return const Center(
           child: CircularProgressIndicator(
             valueColor: AlwaysStoppedAnimation<Color>(Colors.greenAccent),
@@ -45,7 +46,7 @@ class CustomDetailPage extends ConsumerWidget {
         final custom = data.firstWhere((element) => element.id == id);
         return Scaffold(
           appBar: AppBar(
-            backgroundColor: Theme.of(context).colorScheme.background,
+            backgroundColor: Theme.of(context).colorScheme.surface,
             title: Text(
               custom.name!,
               style: TextStyle(
@@ -122,7 +123,9 @@ class CustomDetailPage extends ConsumerWidget {
               // 表示中のカスタムを編集用Providerにセット
               ref.read(editCustomNotifierProvider.notifier).setCustom(custom);
               // bottomNavigationBarを非表示化
-              ref.read(bottomNavigationBarVisibilityProvider.notifier).update((state) => false);
+              ref
+                  .read(bottomNavigationBarVisibilityProvider.notifier)
+                  .update((state) => false);
               context.goNamed('edit', pathParameters: {'id': id});
             },
             backgroundColor: Theme.of(context).colorScheme.primary,

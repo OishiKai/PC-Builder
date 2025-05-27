@@ -31,7 +31,8 @@ class DeleteCustomDialog extends ConsumerWidget {
                 Navigator.pop(context);
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: Theme.of(context).colorScheme.surfaceVariant,
+                backgroundColor:
+                    Theme.of(context).colorScheme.surfaceContainerHighest,
                 foregroundColor: Theme.of(context).colorScheme.onSurfaceVariant,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
@@ -51,7 +52,9 @@ class DeleteCustomDialog extends ConsumerWidget {
                 context.pop();
 
                 // カスタム削除
-                ref.read(customRepositoryNotifierProvider.notifier).deleteCustom(custom.id!);
+                ref
+                    .read(customRepositoryNotifierProvider.notifier)
+                    .deleteCustom(custom.id!);
                 // SnackBar表示
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
@@ -61,7 +64,8 @@ class DeleteCustomDialog extends ConsumerWidget {
                         color: Theme.of(context).colorScheme.onSurface,
                       ),
                     ),
-                    backgroundColor: Theme.of(context).colorScheme.surfaceVariant,
+                    backgroundColor:
+                        Theme.of(context).colorScheme.surfaceContainerHighest,
                     duration: const Duration(seconds: 1),
                   ),
                 );

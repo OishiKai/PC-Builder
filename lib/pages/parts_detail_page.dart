@@ -35,7 +35,8 @@ class PartsDetailPage extends ConsumerStatefulWidget {
   ConsumerState<PartsDetailPage> createState() => _PartsDetailPageState();
 }
 
-class _PartsDetailPageState extends ConsumerState<PartsDetailPage> with SingleTickerProviderStateMixin {
+class _PartsDetailPageState extends ConsumerState<PartsDetailPage>
+    with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _height;
   late ScrollController _scrollController;
@@ -60,11 +61,13 @@ class _PartsDetailPageState extends ConsumerState<PartsDetailPage> with SingleTi
       duration: const Duration(milliseconds: 200),
     );
 
-    _height = Tween<double>(begin: 0, end: SizeConfig.blockSizeVertical * 10).animate(_animationController);
+    _height = Tween<double>(begin: 0, end: SizeConfig.blockSizeVertical * 10)
+        .animate(_animationController);
 
     _scrollController = ScrollController()
       ..addListener(() {
-        if (_scrollController.position.userScrollDirection == ScrollDirection.reverse) {
+        if (_scrollController.position.userScrollDirection ==
+            ScrollDirection.reverse) {
           if (!isHidden) {
             _animationController.forward();
             isHidden = true;
@@ -96,7 +99,7 @@ class _PartsDetailPageState extends ConsumerState<PartsDetailPage> with SingleTi
     // 用途がview,editの場合はcategoryを指定
     Scaffold build(PcParts parts, PartsCategory? category) {
       return Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.background,
+        backgroundColor: Theme.of(context).colorScheme.surface,
         body: Stack(
           children: <Widget>[
             IndexedStack(
@@ -129,7 +132,9 @@ class _PartsDetailPageState extends ConsumerState<PartsDetailPage> with SingleTi
                       height: 30,
                       child: Container(
                         width: double.infinity,
-                        color: Theme.of(context).colorScheme.surfaceVariant,
+                        color: Theme.of(context)
+                            .colorScheme
+                            .surfaceContainerHighest,
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20),
                           child: Column(
@@ -142,12 +147,14 @@ class _PartsDetailPageState extends ConsumerState<PartsDetailPage> with SingleTi
                                   style: TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.bold,
-                                    color: Theme.of(context).colorScheme.primary,
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
                                   ),
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(top: 8, bottom: 16),
+                                padding:
+                                    const EdgeInsets.only(top: 8, bottom: 16),
                                 child: Row(
                                   children: [
                                     Flexible(
@@ -156,7 +163,9 @@ class _PartsDetailPageState extends ConsumerState<PartsDetailPage> with SingleTi
                                         style: TextStyle(
                                           fontSize: 28,
                                           fontWeight: FontWeight.bold,
-                                          color: Theme.of(context).colorScheme.primary,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .primary,
                                         ),
                                       ),
                                     ),
@@ -167,7 +176,7 @@ class _PartsDetailPageState extends ConsumerState<PartsDetailPage> with SingleTi
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   Padding(
-                                    padding: EdgeInsets.only(bottom: 2),
+                                    padding: const EdgeInsets.only(bottom: 2),
                                     child: StarWidget(parts.star),
                                   ),
                                   const Expanded(child: SizedBox()),
@@ -193,25 +202,34 @@ class _PartsDetailPageState extends ConsumerState<PartsDetailPage> with SingleTi
                                 alignment: Alignment.center,
                                 width: double.infinity,
                                 decoration: BoxDecoration(
-                                  color: Theme.of(context).colorScheme.surfaceVariant,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .surfaceContainerHighest,
                                 ),
                                 child: MaterialSegmentedControl(
                                   children: _children,
                                   selectionIndex: activeIndex,
-                                  selectedColor: Theme.of(context).colorScheme.primary,
-                                  borderColor: Theme.of(context).colorScheme.primary,
+                                  selectedColor:
+                                      Theme.of(context).colorScheme.primary,
+                                  borderColor:
+                                      Theme.of(context).colorScheme.primary,
                                   borderWidth: 2,
                                   selectedTextStyle: TextStyle(
-                                    color: Theme.of(context).colorScheme.onPrimary,
+                                    color:
+                                        Theme.of(context).colorScheme.onPrimary,
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,
                                   ),
                                   unselectedTextStyle: TextStyle(
-                                    color: Theme.of(context).colorScheme.onSurfaceVariant,
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onSurfaceVariant,
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,
                                   ),
-                                  unselectedColor: Theme.of(context).colorScheme.surfaceVariant,
+                                  unselectedColor: Theme.of(context)
+                                      .colorScheme
+                                      .surfaceContainerHighest,
                                   onSegmentChosen: (index) {
                                     setState(() {
                                       activeIndex = index;
@@ -252,8 +270,10 @@ class _PartsDetailPageState extends ConsumerState<PartsDetailPage> with SingleTi
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          if (usage == DetailPageUsage.create) SelectForCreateButtonWidget(parts: parts),
-                          if (usage == DetailPageUsage.edit) EditButtonWidget(category: category!),
+                          if (usage == DetailPageUsage.create)
+                            SelectForCreateButtonWidget(parts: parts),
+                          if (usage == DetailPageUsage.edit)
+                            EditButtonWidget(category: category!),
                         ],
                       ),
                     ),
@@ -272,7 +292,8 @@ class _PartsDetailPageState extends ConsumerState<PartsDetailPage> with SingleTi
 
       return customs.when(
         data: (data) {
-          final custom = data.firstWhere((element) => element.id == widget.customId);
+          final custom =
+              data.firstWhere((element) => element.id == widget.customId);
           final parts = custom.get(category)!;
           return build(parts, category);
         },
