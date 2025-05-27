@@ -13,10 +13,12 @@ class RecommendParametersDialog extends ConsumerStatefulWidget {
   final List<RecommendParameter> recommendParameters;
 
   @override
-  _RecommendParametersDialogState createState() => _RecommendParametersDialogState();
+  ConsumerState<RecommendParametersDialog> createState() =>
+      _RecommendParametersDialogState();
 }
 
-class _RecommendParametersDialogState extends ConsumerState<RecommendParametersDialog> {
+class _RecommendParametersDialogState
+    extends ConsumerState<RecommendParametersDialog> {
   @override
   Widget build(BuildContext context) {
     final params = ref.watch(searchParameterNotifierProvider)!;
@@ -25,11 +27,10 @@ class _RecommendParametersDialogState extends ConsumerState<RecommendParametersD
 
     // List<PartsSearchParameter>を取り出す工程が煩雑ため、ここから取り出す
     PartsSearchParameter parseParams(int sectionIndex, int paramIndex) {
-      return alignParams[sectionIndex].values.expand((element) => element).toList()[paramIndex];
-    }
-
-    String sectionName(int paramIndex, int sectionIndex) {
-      return alignParams[paramIndex].keys.toList()[sectionIndex];
+      return alignParams[sectionIndex]
+          .values
+          .expand((element) => element)
+          .toList()[paramIndex];
     }
 
     return SimpleDialog(
@@ -53,11 +54,18 @@ class _RecommendParametersDialogState extends ConsumerState<RecommendParametersD
                   Row(
                     children: [
                       Checkbox(
-                        value: parseParams(rec.paramSectionIndex, rec.paramIndex).isSelect,
+                        value:
+                            parseParams(rec.paramSectionIndex, rec.paramIndex)
+                                .isSelect,
                         activeColor: Theme.of(context).colorScheme.primary,
                         onChanged: (bool? value) {
-                          ref.read(searchParameterNotifierProvider.notifier).toggleParameterSelect(
-                                params[category]!.alignParameters()[rec.paramSectionIndex].keys.join(''),
+                          ref
+                              .read(searchParameterNotifierProvider.notifier)
+                              .toggleParameterSelect(
+                                params[category]!
+                                    .alignParameters()[rec.paramSectionIndex]
+                                    .keys
+                                    .join(''),
                                 rec.paramIndex,
                               );
                           setState(() {});
@@ -70,18 +78,23 @@ class _RecommendParametersDialogState extends ConsumerState<RecommendParametersD
                             style: TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.bold,
-                              color: Theme.of(context).colorScheme.onSurfaceVariant,
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .onSurfaceVariant,
                             ),
                           ),
                           const SizedBox(
                             width: 8,
                           ),
                           Text(
-                            parseParams(rec.paramSectionIndex, rec.paramIndex).name,
+                            parseParams(rec.paramSectionIndex, rec.paramIndex)
+                                .name,
                             style: TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.bold,
-                              color: Theme.of(context).colorScheme.onSurfaceVariant,
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .onSurfaceVariant,
                             ),
                           ),
                         ],
@@ -117,7 +130,10 @@ class _RecommendParametersDialogState extends ConsumerState<RecommendParametersD
               onPressed: () {
                 final custom = ref.read(editCustomNotifierProvider);
                 context.pop();
-                custom.id == null ? context.pushNamed('create_partsList') : context.pushNamed('partsList', pathParameters: {'id': custom.id!});
+                custom.id == null
+                    ? context.pushNamed('create_partsList')
+                    : context.pushNamed('partsList',
+                        pathParameters: {'id': custom.id!});
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Theme.of(context).colorScheme.primary,

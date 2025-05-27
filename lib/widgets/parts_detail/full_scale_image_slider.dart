@@ -64,7 +64,7 @@ class _FullScaleImageSliderState extends State<FullScaleImageSlider> {
 
   Widget buildIndicator() => AnimatedSmoothIndicator(
         activeIndex: activeIndex,
-        count: widget.imageUrlList.length ?? 0,
+        count: widget.imageUrlList.length,
         effect: const JumpingDotEffect(
             dotHeight: 10,
             dotWidth: 10,
